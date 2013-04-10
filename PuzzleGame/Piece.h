@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include <sstream>
 
 class Piece
 {
@@ -15,6 +16,7 @@ public:
 
 	int GetValue();
 	sf::Vector2i GetPosition();
+	sf::Sprite* GetSprite();
 
 	void SetValue(int value);
 	void SetPosition(int posX, int posY);
@@ -22,5 +24,8 @@ public:
 private:
 	int m_value;
 	sf::Vector2i m_position;
+
+	sf::Texture* m_pieceTexture;
+	sf::Sprite* m_pieceSprite;
 };
 
