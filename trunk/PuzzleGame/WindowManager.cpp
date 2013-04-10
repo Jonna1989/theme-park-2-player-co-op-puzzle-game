@@ -32,7 +32,9 @@ WindowManager::~WindowManager()
 
 	void WindowManager::Initialize()
 	{
-		m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Saints Tears");
+		m_window = new sf::RenderWindow();
+		m_window->create(sf::VideoMode(1920, 1080), "Puzzle Prototype", sf::Style::Fullscreen);
+		m_window->setMouseCursorVisible(false);
 	}
 
 	void WindowManager::Cleanup()
