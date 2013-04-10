@@ -35,7 +35,7 @@ void PlayerPiece::Cleanup()
 	delete m_pieceTwo;
 }
 
-void PlayerPiece::RotateBlock(int dir)
+void PlayerPiece::RotatePiece(int dir)
 {
 	if (dir == 1)
 	{
@@ -47,9 +47,9 @@ void PlayerPiece::RotateBlock(int dir)
 	}
 }
 
-void PlayerPiece::MoveBlock()
+void PlayerPiece::MovePiece()
 {
-
+	
 }
 
 void PlayerPiece::SetPieces(int valueOne, int valueTwo)

@@ -12,9 +12,9 @@ public:
 	void Update();
 	void Cleanup();
 
-	void RotateBlock(int dir);
+	void RotatePiece(int dir);
 
-	void MoveBlock();
+	void MovePiece();
 
 	void SetPieces(int valueOne,int valueTwo);
 
