@@ -1,10 +1,8 @@
 #include "Base.h"
 
-
 Base::Base()
 {
 }
-
 
 Base::~Base()
 {
@@ -15,19 +13,9 @@ void Base::Initialize()
 	FrameTime::Instance()->Initialize();
 
 	m_window = new sf::RenderWindow();
-	m_window->create(sf::VideoMode(1280, 720), "Caged");
-
-	m_loadingTexture = new sf::Texture();
-	m_loadingSprite = new sf::Sprite();
-
-	m_loadingTexture->loadFromFile("Assets/Graphics/Backgrounds/LoadingScreen.png");
-	m_loadingSprite->setTexture(*m_loadingTexture);
-
-	m_window->draw(*m_loadingSprite);
-	m_window->display();
+	m_window->create(sf::VideoMode(1920, 1080), "Puzzle Prototype");
 
 	m_game = new Game();
-
 	m_game->Initialize(m_window);
 }
 
@@ -47,9 +35,6 @@ void Base::Update()
 
 void Base::Cleanup()
 {
-	delete m_loadingTexture;
-	delete m_loadingSprite;
-
 	m_game->Cleanup();
 	delete m_game;
 
