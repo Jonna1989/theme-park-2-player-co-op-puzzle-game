@@ -49,7 +49,9 @@ void PlayerPiece::RotatePiece(int dir)
 
 void PlayerPiece::MovePiece()
 {
-	
+	float speed = 200*DeltaTime;
+	m_pieceOne->GetSprite()->move(0,speed);
+	m_pieceTwo->GetSprite()->move(0,speed);
 }
 
 void PlayerPiece::SetPieces(int valueOne, int valueTwo)
