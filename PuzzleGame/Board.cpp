@@ -14,18 +14,22 @@ Board::~Board()
 void Board::Initialize()
 {
 	CreateBoard();
-	PrintBoardToConsole();
 	m_playerPiece = new PlayerPiece;
 	m_playerPiece->Initialize();
+	SetPlayerPieceTo2dVector();
+	PrintBoardToConsole();
+	
 }
 void Board::Update()
 {
+	SetPlayerPieceTo2dVector();
 	m_playerPiece->MovePiece();
 
 	Window->clear();
 	Window->draw(*m_playerPiece->GetPieceOne()->GetSprite());
 	Window->draw(*m_playerPiece->GetPieceTwo()->GetSprite());
 	Window->display();
+
 }
 void Board::Cleanup()
 {
@@ -61,9 +65,10 @@ void Board::PrintBoardToConsole()
 	}
 	std::cout << "-----------------------------------------------------------" << std::endl;
 }
-PlayerPiece* Board::ReturnPlayerPiece()
+void Board::SetPlayerPieceTo2dVector()
 {
-
+	(*(*m_Board2dVector)[m_playerPiece->GetPieceOne()->GetPosition().y])[m_playerPiece->GetPieceOne()->GetPosition().x] = m_playerPiece->GetPieceOne()->GetValue();
+	(*(*m_Board2dVector)[m_playerPiece->GetPieceTwo()->GetPosition().y])[m_playerPiece->GetPieceTwo()->GetPosition().x] = m_playerPiece->GetPieceTwo()->GetValue();
 }
 void PlacePiece()
 {

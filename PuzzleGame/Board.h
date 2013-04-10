@@ -31,7 +31,7 @@ private:
 	void CreateBoard();
 	void PrintBoardToConsole();
 	void DropPiece();
-	PlayerPiece* ReturnPlayerPiece();
+	void SetPlayerPieceTo2dVector();
 	PlayerPiece* m_playerPiece;
 
 	
