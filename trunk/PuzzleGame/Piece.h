@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include <cstdlib>
 #include <sstream>
 
 class Piece
