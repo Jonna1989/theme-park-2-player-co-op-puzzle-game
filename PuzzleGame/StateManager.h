@@ -6,8 +6,7 @@
 class StateManager
 {
 public:	
-	enum TypeOfState {MainMenu, InGame, EndMenu, Pong, DeathState, 
-		Intro, Boss};
+	enum TypeOfState {MainMenu, InGame};
 	static StateManager* Instance();
 
 	void Initialize();

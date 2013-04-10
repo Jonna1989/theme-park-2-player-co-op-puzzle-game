@@ -12,7 +12,8 @@ Game::~Game()
 
 void Game::Initialize()
 {
-
+	m_board = new Board;
+	m_board->Initialize();
 }
 
 void Game::Update()

@@ -11,22 +11,19 @@ Base::~Base()
 void Base::Initialize()
 {
 	FrameTime::Instance()->Initialize();
-
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
-// 	m_game = new Game();
-// 	m_game->Initialize(m_window);
 }
 
 void Base::Update()
 {
-	while(m_window->isOpen())
+	while(WindowManager::Instance()->GetWindow()->isOpen())
 	{
 		sf::Event events;
-		while(m_window->pollEvent(events))
+		while(WindowManager::Instance()->GetWindow()->pollEvent(events))
 		{
 			if(events.type == sf::Event::Closed)
-			{ m_window->close(); }
+			{ WindowManager::Instance()->GetWindow()->close(); }
 		}
 		StateManager::Instance()->Update();
 	}
