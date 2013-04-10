@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Piece.h"
-
+#include "FrameTime.h"
+#include <iostream>
 class PlayerPiece
 {
 public:

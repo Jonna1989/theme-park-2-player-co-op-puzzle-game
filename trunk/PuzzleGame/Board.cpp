@@ -20,7 +20,12 @@ void Board::Initialize()
 }
 void Board::Update()
 {
+	m_playerPiece->MovePiece();
 
+	Window->clear();
+	Window->draw(*m_playerPiece->GetPieceOne()->GetSprite());
+	Window->draw(*m_playerPiece->GetPieceTwo()->GetSprite());
+	Window->display();
 }
 void Board::Cleanup()
 {

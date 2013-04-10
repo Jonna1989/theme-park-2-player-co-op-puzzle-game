@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
+#define Window WindowManager::Instance()->GetWindow()
 class WindowManager
 {
 private:
