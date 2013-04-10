@@ -22,7 +22,6 @@ void Board::Initialize()
 }
 void Board::Update()
 {
-	m_playerPiece->Update();
 	SetPlayerPieceTo2dVector();
 	m_playerPiece->MovePiece();
 
@@ -30,13 +29,17 @@ void Board::Update()
 	Window->draw(*m_playerPiece->GetPieceOne()->GetSprite());
 	Window->draw(*m_playerPiece->GetPieceTwo()->GetSprite());
 	Window->display();
-	PrintBoardToConsole();
 
 }
 void Board::Cleanup()
 {
 	delete m_Board2dVector;
 	delete m_playerPiece;
+}
+
+PlayerPiece* Board::GetPlayerPiece()
+{
+	return m_playerPiece;
 }
 #pragma endregion
 #pragma region Privates
@@ -70,10 +73,7 @@ void Board::PrintBoardToConsole()
 void Board::SetPlayerPieceTo2dVector()
 {
 	(*(*m_Board2dVector)[m_playerPiece->GetPieceOne()->GetPosition().y])[m_playerPiece->GetPieceOne()->GetPosition().x] = m_playerPiece->GetPieceOne()->GetValue();
- 	(*(*m_Board2dVector)[m_playerPiece->GetPieceTwo()->GetPosition().y])[m_playerPiece->GetPieceTwo()->GetPosition().x] = m_playerPiece->GetPieceTwo()->GetValue();
-
-// 	(*(*m_Board2dVector)[2])[2] = m_playerPiece->GetPieceOne()->GetValue();
-// 	(*(*m_Board2dVector)[3])[2] = m_playerPiece->GetPieceTwo()->GetValue();
+	(*(*m_Board2dVector)[m_playerPiece->GetPieceTwo()->GetPosition().y])[m_playerPiece->GetPieceTwo()->GetPosition().x] = m_playerPiece->GetPieceTwo()->GetValue();
 }
 void PlacePiece()
 {
