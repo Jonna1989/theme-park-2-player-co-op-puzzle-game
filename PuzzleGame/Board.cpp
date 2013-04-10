@@ -15,6 +15,8 @@ void Board::Initialize()
 {
 	CreateBoard();
 	PrintBoardToConsole();
+	m_playerPiece = new PlayerPiece;
+	m_playerPiece->Initialize();
 }
 void Board::Update()
 {
@@ -23,6 +25,7 @@ void Board::Update()
 void Board::Cleanup()
 {
 	delete m_Board2dVector;
+	delete m_playerPiece;
 }
 #pragma endregion
 #pragma region Privates
@@ -48,9 +51,17 @@ void Board::PrintBoardToConsole()
 		{
 			std::cout<< std::setw ( 2 ) << (*(*m_Board2dVector)[i])[j] <<' ';
 		}
-
+		
 		std::cout<<'\n';
 	}
 	std::cout << "-----------------------------------------------------------" << std::endl;
+}
+PlayerPiece* Board::ReturnPlayerPiece()
+{
+
+}
+void PlacePiece()
+{
+
 }
 #pragma endregion

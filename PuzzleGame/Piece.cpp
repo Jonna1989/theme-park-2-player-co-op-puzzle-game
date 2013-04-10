@@ -17,7 +17,7 @@ Piece::~Piece()
 
 void Piece::Initialize()
 {
-	srand(time((0)));
+	srand((int)time((0)));
 
 	m_value = rand () % (5 - 1 + 1);
 	m_position = sf::Vector2i(0,0);
