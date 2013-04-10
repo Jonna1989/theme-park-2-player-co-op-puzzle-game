@@ -33,6 +33,7 @@ void Base::Update()
 			{ WindowManager::Instance()->GetWindow()->close(); }
 		}
 		StateManager::Instance()->Update();
+		FrameTime::Instance()->Update();
 	}
 }
 

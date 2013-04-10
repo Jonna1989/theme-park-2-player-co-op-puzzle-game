@@ -18,7 +18,7 @@ void Game::Initialize()
 
 void Game::Update()
 {
-
+	m_board->Update();
 }
 
 void Game::Cleanup()

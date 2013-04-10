@@ -19,7 +19,7 @@ void Piece::Initialize()
 {
 	srand((int)time((0)));
 
-	m_value = rand () % (5 - 1 + 1);
+	m_value = rand () % ((5 - 1) + 1);
 	m_position = sf::Vector2i(0,0);
 
 	m_pieceTexture = new sf::Texture();
