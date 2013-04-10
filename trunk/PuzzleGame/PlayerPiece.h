@@ -14,8 +14,8 @@ public:
 	void Cleanup();
 
 	void RotatePiece(int dir);
-
-	void MovePiece();
+	void MovePiece(int xDirection);
+	void DropPiece();
 
 	void SetPieces(int valueOne,int valueTwo);
 
