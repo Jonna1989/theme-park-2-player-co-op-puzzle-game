@@ -36,7 +36,6 @@ void Piece::Update()
 {
 	m_position.x = (int)m_pieceSprite->getPosition().x/100;
 	m_position.y = (int)m_pieceSprite->getPosition().y/100;
-	std::cout << m_position.x << m_position.y << std::endl;
 }
 
 void Piece::Cleanup()
