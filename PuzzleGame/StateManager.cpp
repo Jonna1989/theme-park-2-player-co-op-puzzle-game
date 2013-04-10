@@ -31,25 +31,7 @@ StateManager* StateManager::Instance()
 #pragma region Initalize
 void StateManager::Initialize()
 {
-	State* newState = new StartMenu();
-	m_listOfStates.push_back(newState);
-
-	newState = new Game;
-	m_listOfStates.push_back(newState);
-
-	newState = new Highscore();
-	m_listOfStates.push_back(newState);
-
-	newState = new FriendPong();
-	m_listOfStates.push_back(newState);
-
-	newState = new Death();
-	m_listOfStates.push_back(newState);
-	
-	newState = new IntroState();
-	m_listOfStates.push_back(newState);
-
-	newState = new BossStage();
+	State* newState = new Game();
 	m_listOfStates.push_back(newState);
 
 	m_currentState = MainMenu;
@@ -105,31 +87,6 @@ std::string StateManager::GetName()
 		case InGame:
 			{
 				answer = "InGame";
-				break;
-			}
-		case EndMenu:
-			{
-				answer = "EndMenu";
-				break;
-			}
-		case Pong:
-			{
-				answer = "Pong";
-				break;
-			}
-		case DeathState:
-			{
-				answer = "DeathState";
-				break;
-			}
-		case Intro:
-			{
-				answer = "Intro";
-				break;
-			}
-		case Boss:
-			{
-				answer = "Boss";
 				break;
 			}
 	}
