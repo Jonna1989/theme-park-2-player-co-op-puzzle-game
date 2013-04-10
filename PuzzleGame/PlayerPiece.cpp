@@ -22,6 +22,7 @@ void PlayerPiece::Initialize()
 
 	m_pieceTwo = new Piece();
 	m_pieceTwo->Initialize();
+	m_pieceTwo->GetSprite()->setPosition(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y-100);
 }
 
 void PlayerPiece::Update()
