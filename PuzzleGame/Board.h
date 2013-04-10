@@ -5,8 +5,8 @@
 #include <iomanip>
 #include "PlayerPiece.h"
 #include "WindowManager.h"
-static unsigned int BOARD_HEIGHT = 20;
-static unsigned int BOARD_WIDTH	 = 20;
+static unsigned int BOARD_HEIGHT = 15;
+static unsigned int BOARD_WIDTH	 = 10;
 class Board
 {
 public:

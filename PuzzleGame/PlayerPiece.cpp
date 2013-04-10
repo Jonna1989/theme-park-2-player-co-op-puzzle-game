@@ -19,10 +19,12 @@ void PlayerPiece::Initialize()
 {
 	m_pieceOne = new Piece();
 	m_pieceOne->Initialize();
+	m_pieceOne->GetSprite()->setPosition(0,200);
+
 
 	m_pieceTwo = new Piece();
 	m_pieceTwo->Initialize();
-	m_pieceTwo->GetSprite()->setPosition(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y-100);
+	m_pieceTwo->GetSprite()->setPosition(0,100);
 }
 
 void PlayerPiece::Update()
