@@ -27,7 +27,8 @@ void PlayerPiece::Initialize()
 
 void PlayerPiece::Update()
 {
-
+	m_pieceOne->Update();
+	m_pieceTwo->Update();
 }
 
 void PlayerPiece::Cleanup()
