@@ -1,5 +1,5 @@
 #include "Base.h"
-
+#include "StateManager.h"
 Base::Base()
 {
 }
@@ -13,9 +13,9 @@ void Base::Initialize()
 	FrameTime::Instance()->Initialize();
 
 	WindowManager::Instance()->Initialize();
-
-	m_game = new Game();
-	m_game->Initialize(m_window);
+	StateManager::Instance()->Initialize();
+// 	m_game = new Game();
+// 	m_game->Initialize(m_window);
 }
 
 void Base::Update()
@@ -28,14 +28,12 @@ void Base::Update()
 			if(events.type == sf::Event::Closed)
 			{ m_window->close(); }
 		}
-		m_game->Update();
+		StateManager::Instance()->Update();
 	}
 }
 
 void Base::Cleanup()
 {
-	m_game->Cleanup();
-	delete m_game;
-
-	delete m_window;
+	StateManager::Instance()->Cleanup();
+	WindowManager::Instance()->Cleanup();
 }

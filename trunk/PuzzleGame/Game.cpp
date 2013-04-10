@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "StateManager.h"
 
 Game::Game()
 {
@@ -10,7 +10,7 @@ Game::~Game()
 {
 }
 
-void Game::Initialize(sf::RenderWindow* window)
+void Game::Initialize()
 {
 
 }

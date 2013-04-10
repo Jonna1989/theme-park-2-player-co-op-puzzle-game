@@ -1,14 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "StartMenu.h"
+#include <iostream>
 #include "Game.h"
-#include "Highscore.h"
-#include "FriendPong.h"
-#include "Death.h"
-#include "IntroState.h"
-#include "BossStage.h"
-
 class StateManager
 {
 public:	
