@@ -1,5 +1,8 @@
 #include "Base.h"
 #include "StateManager.h"
+
+#pragma region Base
+
 Base::Base()
 {
 }
@@ -7,6 +10,10 @@ Base::Base()
 Base::~Base()
 {
 }
+
+#pragma endregion
+
+#pragma region Publics
 
 void Base::Initialize()
 {
@@ -34,3 +41,5 @@ void Base::Cleanup()
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
 }
+
+#pragma endregion
