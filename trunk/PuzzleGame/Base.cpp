@@ -12,8 +12,7 @@ void Base::Initialize()
 {
 	FrameTime::Instance()->Initialize();
 
-	m_window = new sf::RenderWindow();
-	m_window->create(sf::VideoMode(1920, 1080), "Puzzle Prototype");
+	WindowManager::Instance()->Initialize();
 
 	m_game = new Game();
 	m_game->Initialize(m_window);
