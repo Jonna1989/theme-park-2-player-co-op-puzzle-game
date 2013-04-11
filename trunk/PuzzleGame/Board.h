@@ -5,8 +5,11 @@
 #include <iomanip>
 #include "PlayerPiece.h"
 #include "WindowManager.h"
-static unsigned int BOARD_HEIGHT = 20;
-static unsigned int BOARD_WIDTH	 = 20;
+
+static unsigned int BOARD_HEIGHT = 15;
+static unsigned int BOARD_WIDTH	 = 10;
+
+
 class Board
 {
 public:
@@ -32,8 +35,13 @@ private:
 	std::vector< std::vector<int>* >* m_Board2dVector;
 	void CreateBoard();
 	void PrintBoardToConsole();
+	void KeyCommand_PrintBoardToConsole();
 	void DropPiece();
-	void SetPlayerPieceTo2dVector();
+	void AddPlayer1PieceTo2dVector();
+	void Gravity();
+	void UseTimedFunctions();
+	sf::Clock* GravityClock;
+	sf::Time*   GravityTime;
 	PlayerPiece* m_playerPiece;
 
 	
