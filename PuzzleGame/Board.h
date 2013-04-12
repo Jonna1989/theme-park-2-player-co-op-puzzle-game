@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <vector>
 #include <iostream>
@@ -37,6 +38,8 @@ public:
 	int	 GetBoardVectorX(int y, int x);
 	int	 GetBoardVectorY(int y, int x);
 	PlayerPiece* GetPlayerPiece();
+	bool IsTileVacant(int x, int y);
+
 private:
 	std::vector< std::vector<sf::Vector2i>* >* m_Board2dVector;
 	void CreateBoard();
@@ -64,3 +67,4 @@ private:
 
 };
 
+#endif
