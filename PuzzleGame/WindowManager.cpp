@@ -33,7 +33,7 @@ WindowManager::~WindowManager()
 	void WindowManager::Initialize()
 	{
 		m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Puzzle Prototype", sf::Style::Default);
-		m_window->setMouseCursorVisible(false);
+		m_window->setMouseCursorVisible(true);
 	}
 
 	void WindowManager::Cleanup()

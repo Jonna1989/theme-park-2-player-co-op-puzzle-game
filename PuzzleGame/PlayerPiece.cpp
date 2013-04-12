@@ -19,14 +19,16 @@ void PlayerPiece::Initialize()
 {
 	m_pieceOne = new Piece();
 	m_pieceOne->Initialize();
-
+	m_pieceOne->SetPosition(0,0);
 	m_pieceTwo = new Piece();
 	m_pieceTwo->Initialize();
+	m_pieceTwo->SetPosition(0,100);
 	m_pieceTwo->GetSprite()->setPosition(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y-100);
 }
 
 void PlayerPiece::Update()
 {
+
 	m_pieceOne->Update();
 	m_pieceTwo->Update();
 }
