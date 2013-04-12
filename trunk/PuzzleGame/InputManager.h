@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
 #include "Board.h"
-#include "StateManager.h"
 class InputManager
 {
 

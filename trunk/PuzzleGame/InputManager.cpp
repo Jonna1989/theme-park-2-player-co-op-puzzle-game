@@ -1,4 +1,3 @@
-
 #include "InputManager.h"
 
 InputManager::InputManager()
@@ -21,12 +20,10 @@ void InputManager::Update(bool singlePlayer, int state)
 {
 	switch(state)
 	{
-	case StateManager::MainMenu: //Game
+	case 0: //Game
 		CheckPlayerOneInput();
 		break;
-	case StateManager::InGame: //
-		break;
-	case 2: //??
+	case 1: //
 		break;
 	}
 }
@@ -67,8 +64,8 @@ void InputManager::CheckPlayerOneInput()
 
 	if ((!m_keyboard->isKeyPressed(sf::Keyboard::A)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::D)) 
-		&&(!m_keyboard->isKeyPressed(sf::Keyboard::Q)) 
-		&&(!m_keyboard->isKeyPressed(sf::Keyboard::E)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Q)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::E)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::S)))
 	{
 		m_keyPressed = false;
