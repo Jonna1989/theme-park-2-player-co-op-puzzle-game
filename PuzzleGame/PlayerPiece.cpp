@@ -55,10 +55,16 @@ void PlayerPiece::RotatePiece(int dir)
 
 void PlayerPiece::MovePiece(int xDirection)
 {
-	float xSpeed = xDirection * 200 * DeltaTime;
-	float ySpeed = 0*DeltaTime;
-	m_pieceOne->GetSprite()->move(xSpeed,ySpeed);
-	m_pieceTwo->GetSprite()->move(xSpeed,ySpeed);
+	if (xDirection == 1)
+	{
+		m_pieceOne->SetPosition(m_pieceOne->GetPosition().x+1,m_pieceOne->GetPosition().y);
+		m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x+1,m_pieceTwo->GetPosition().y);
+	}
+	else if (xDirection == -1)
+	{
+		m_pieceOne->SetPosition(m_pieceOne->GetPosition().x-1,m_pieceOne->GetPosition().y);
+		m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x-1,m_pieceTwo->GetPosition().y);
+	}
 }
 
 void PlayerPiece::DropPiece()
