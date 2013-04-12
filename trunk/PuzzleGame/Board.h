@@ -34,7 +34,8 @@ public:
 	void Initialize();
 	void Update();
 	void Cleanup();
-
+	int	 GetBoardVectorX(int y, int x);
+	int	 GetBoardVectorY(int y, int x);
 	PlayerPiece* GetPlayerPiece();
 private:
 	std::vector< std::vector<sf::Vector2i>* >* m_Board2dVector;
@@ -50,8 +51,8 @@ private:
 	void AddPlayer1PieceTo2dVector();
 	void Gravity();
 	void UseTimedFunctions();
-	int	 GetBoardVector(int y, int x);
-	void SetBoardVector(int y, int x, int newValue);
+	void SetBoardVectorX(int y, int x, int newValue);
+	void SetBoardVectorY(int y, int x, int newValue);
 	sf::Vector2i VectorFill;
 	sf::Clock*	GravityClock;
 	sf::Time*   GravityTime;

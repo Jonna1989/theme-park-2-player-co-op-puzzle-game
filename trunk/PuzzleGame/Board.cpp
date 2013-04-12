@@ -13,7 +13,7 @@ Board::~Board()
 #pragma region Publics
 void Board::Initialize()
 {
-	VectorFill.x = BLUE_SPACE;
+	VectorFill.x = EMPTY_SPACE;
 	VectorFill.y = PASSIVE;
 	CreateBoard();
 	m_playerPiece = new PlayerPiece;
@@ -44,16 +44,18 @@ void Board::Cleanup()
 	delete GravityClock;
 	delete GravityTime;
 }
-
+int Board::GetBoardVectorX(int y, int x)
+{
+	return (*(*m_Board2dVector)[y])[x].x;
+}
+int Board::GetBoardVectorY(int y, int x)
+{
+	return (*(*m_Board2dVector)[y])[x].y;
+}
 PlayerPiece* Board::GetPlayerPiece()
 {
 	return m_playerPiece;
 }
-
-// std::vector< std::vector<sf::Vector2i>* >* Board::GetVector()
-// {
-// 	return m_Board2dVector;
-// }
 #pragma endregion
 #pragma region Privates
 void Board::CreateBoard()
@@ -77,7 +79,7 @@ void Board::PrintBoardToConsole()
 	{
 		for ( unsigned int x = 0; x < BOARD_WIDTH; x++ )
 		{
-			std::cout<< std::setw ( 2 ) << GetBoardVector(y,x) <<' ';
+			std::cout<< std::setw ( 2 ) << GetBoardVectorX(y,x) <<' ';
 		}
 		
 		std::cout<<'\n';
@@ -112,69 +114,34 @@ void Board::KeyCommand_ClearBottomRow()
 	{
 		for (int x = 0; x < (int)BOARD_WIDTH; x++)
 		{
-			SetBoardVector(BOARD_HEIGHT-1,x,EMPTY_SPACE);
+			SetBoardVectorX(BOARD_HEIGHT-1,x,EMPTY_SPACE);
 		}
 	}
 }
 #pragma endregion
 void Board::AddPlayer1PieceTo2dVector()
 {
-	(*(*m_Board2dVector)[m_playerPiece->GetPieceOne()->GetPosition().y/100])[m_playerPiece->GetPieceOne()->GetPosition().x].x = m_playerPiece->GetPieceOne()->GetValue();
-	(*(*m_Board2dVector)[m_playerPiece->GetPieceTwo()->GetPosition().y/100])[m_playerPiece->GetPieceTwo()->GetPosition().x].x = m_playerPiece->GetPieceTwo()->GetValue();
+	SetBoardVectorX(m_playerPiece->GetPieceOne()->GetPosition().y,m_playerPiece->GetPieceOne()->GetPosition().x,m_playerPiece->GetPieceOne()->GetValue());
+	SetBoardVectorX(m_playerPiece->GetPieceTwo()->GetPosition().y,m_playerPiece->GetPieceTwo()->GetPosition().x,m_playerPiece->GetPieceTwo()->GetValue());
+	SetBoardVectorY(m_playerPiece->GetPieceOne()->GetPosition().y,m_playerPiece->GetPieceOne()->GetPosition().x,PLAYER_ONE);
+	SetBoardVectorY(m_playerPiece->GetPieceTwo()->GetPosition().y,m_playerPiece->GetPieceTwo()->GetPosition().x,PLAYER_ONE);
 }
 void Board::Gravity()
 {
-// 	for ( unsigned int x = 0; x < BOARD_WIDTH; x++ )
-// 	{
-// 		for (unsigned int y = 9; y >= 1; y-- ) 
-// 		{
-// 			if ((GetBoardVector(y+1,x) == EMPTY_SPACE) || (y = 9) )
-// 			{
-// 				int temp = 0;
-// 				temp = GetBoardVector(y,x);
-// 				SetBoardVector(y,x,EMPTY_SPACE);
-// 				SetBoardVector(y+1,x,temp);
-// 			}
-// 		}
-// 	}
-// 	
-// 	for ( unsigned int y = 0; y < BOARD_HEIGHT; y++ ) 
-// 	{
-// 		for ( unsigned int x = 0; x < BOARD_WIDTH; x++ )
-// 		{
-// 			if (GetBoardVector(y,x) != EMPTY_SPACE)
-// 			{
-// 				if (y+1 >= BOARD_HEIGHT)
-// 				{
-// 					break;
-// 				}
-// 				else if(GetBoardVector(y+1,x) == EMPTY_SPACE)
-// 				{
-// 					SetBoardVector(y+1,x,GetBoardVector(y,x));
-// 					if (y-1 < 0)
-// 					{
-// 						break;
-// 					}
-// 					else if (GetBoardVector(y-1,x) != EMPTY_SPACE)
-// 					{
-// 						SetBoardVector(y,x,GetBoardVector(y-1,x));
-// 						SetBoardVector(y-1,x,EMPTY_SPACE); 
-// 					}
-// 					y++;					
-// 				}
-// 			}
-// 		}
-// 	}
 	for ( unsigned int y = BOARD_HEIGHT -1; y >= 1; y-- ) 
 	{
 		for ( unsigned int x = 0; x < BOARD_WIDTH; x++ )
 		{
-			if ( (GetBoardVector(y,x) == EMPTY_SPACE) && GetBoardVector(y-1,x) )
+			if ( (GetBoardVectorX(y,x) == EMPTY_SPACE) && GetBoardVectorX(y-1,x) )
 			{
-				int temp = 0;
-				temp = GetBoardVector(y-1,x);
-				SetBoardVector(y-1,x,EMPTY_SPACE);
-				SetBoardVector(y,x,temp); 
+				int tempX = 0;
+				tempX = GetBoardVectorX(y-1,x);
+				SetBoardVectorX(y-1,x,EMPTY_SPACE);
+				SetBoardVectorX(y,x,tempX); 
+				int tempY = 0;
+				tempY = GetBoardVectorX(y-1,x);
+				SetBoardVectorY(y-1,x,PASSIVE);
+				SetBoardVectorY(y,x,tempY);
 			}
 		}
 	}
@@ -189,12 +156,12 @@ void Board::UseTimedFunctions()
 		GravityClock->restart();
 	}
 }
-int Board::GetBoardVector(int y, int x)
-{
-	return (*(*m_Board2dVector)[y])[x].x;
-}
-void Board::SetBoardVector(int y, int x, int newValue)
+void Board::SetBoardVectorX(int y, int x, int newValue)
 {
 	(*(*m_Board2dVector)[y])[x].x = newValue;
+}
+void Board::SetBoardVectorY(int y, int x, int newValue)
+{
+	(*(*m_Board2dVector)[y])[x].y = newValue;
 }
 #pragma endregion

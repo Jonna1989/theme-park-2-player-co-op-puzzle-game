@@ -22,8 +22,7 @@ void PlayerPiece::Initialize()
 	m_pieceOne->SetPosition(0,0);
 	m_pieceTwo = new Piece();
 	m_pieceTwo->Initialize();
-	m_pieceTwo->SetPosition(0,100);
-	m_pieceTwo->GetSprite()->setPosition(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y-100);
+	m_pieceTwo->SetPosition(0,1);
 }
 
 void PlayerPiece::Update()
@@ -31,6 +30,7 @@ void PlayerPiece::Update()
 
 	m_pieceOne->Update();
 	m_pieceTwo->Update();
+	MovePiece(0);
 }
 
 void PlayerPiece::Cleanup()
@@ -54,14 +54,14 @@ void PlayerPiece::RotatePiece(int dir)
 void PlayerPiece::MovePiece(int xDirection)
 {
 	float xSpeed = xDirection * 200 * DeltaTime;
-	float ySpeed = 200*DeltaTime;
+	float ySpeed = 0*DeltaTime;
 	m_pieceOne->GetSprite()->move(xSpeed,ySpeed);
 	m_pieceTwo->GetSprite()->move(xSpeed,ySpeed);
 }
 
 void PlayerPiece::DropPiece()
 {
-	//-------------------------------------Write This, Idiots!---------------------------------
+	//-------------------------------------Write This, Idiots!--------------------------------- WHAT???
 }
 
 void PlayerPiece::SetPieces(int valueOne, int valueTwo)
