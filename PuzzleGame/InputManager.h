@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
 #include "Board.h"
-
+#include "StateManager.h"
 class InputManager
 {
 
@@ -24,5 +24,6 @@ public:
 private:
 	sf::Keyboard* m_keyboard;
 	Board* m_board;
+	bool m_keyPressed;
 };
 
