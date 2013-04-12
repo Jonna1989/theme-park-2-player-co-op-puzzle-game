@@ -57,7 +57,6 @@ private:
 	void UpdatePlayer1PlayerPiece();
 	void UpdatePlayer1VectorPos();
 	void SpaceDrawer();
-//	void CheckIf
 	void UseTimedFunctions();
 	void SetBoardVectorX(int y, int x, int newValue);
 	void SetBoardVectorY(int y, int x, int newValue);
@@ -72,9 +71,6 @@ private:
 	sf::Texture* m_yellow;
 	sf::Sprite*  m_pieceSprite;
 	PlayerPiece* m_playerPiece;
-	
-	
-
 };
 
 #endif
