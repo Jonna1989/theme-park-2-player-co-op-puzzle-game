@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "StateManager.h"
 
 InputManager::InputManager()
 {
@@ -7,6 +8,12 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
+}
+
+void InputManager::Initialize()
+{
+	m_keyboard = new sf::Keyboard;
+	m_keyPressed = true;
 }
 
 void InputManager::Initialize(Board* board)
@@ -20,10 +27,17 @@ void InputManager::Update(bool singlePlayer, int state)
 {
 	switch(state)
 	{
-	case 0: //Game
-		CheckPlayerOneInput();
+	case 0: //Menu
+		std::cout << "Does this even5451" << std::endl;
+		if (m_keyboard->isKeyPressed(sf::Keyboard::Return))
+		{
+			std::cout << "Does this even" << std::endl;
+			StateManager::Instance()->SetState(StateManager::InGame);
+			break;
+		}
 		break;
-	case 1: //
+	case 1: //Game
+		CheckPlayerOneInput();
 		break;
 	}
 }

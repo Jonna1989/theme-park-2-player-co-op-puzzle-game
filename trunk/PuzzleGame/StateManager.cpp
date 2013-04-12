@@ -31,13 +31,13 @@ StateManager* StateManager::Instance()
 #pragma region Initalize
 void StateManager::Initialize()
 {
-	State* newState = new Game();
+	State* newState = new StartMenu();
+	m_listOfStates.push_back(newState);
+	newState = new Game();
 	m_listOfStates.push_back(newState);
 
 	m_currentState = MainMenu;
 	m_listOfStates[m_currentState]->Initialize();
-
-	
 }
 #pragma endregion
 #pragma region Update

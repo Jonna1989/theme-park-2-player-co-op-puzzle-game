@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "Game.h"
+#include "StartMenu.h"
 class StateManager
 {
 public:	
