@@ -24,17 +24,17 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, floa
 	SpriteToUse->setTexture(*TextureToSetFrom);
 	SpriteToUse->setPosition(x,y);
 }
-void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom)
-{
-	SpriteToUse = new sf::Sprite();
-	SpriteToUse = AnimationToSetFrom->GetSprite();
-}
-void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom, float x, float y)
-{
-	SpriteToUse = new sf::Sprite();
-	SpriteToUse = AnimationToSetFrom->GetSprite();
-	SpriteToUse->setPosition(x,y);
-}
+// void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom)
+// {
+// 	SpriteToUse = new sf::Sprite();
+// 	SpriteToUse = AnimationToSetFrom->GetSprite();
+// }
+// void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom, float x, float y)
+// {
+// 	SpriteToUse = new sf::Sprite();
+// 	SpriteToUse = AnimationToSetFrom->GetSprite();
+// 	SpriteToUse->setPosition(x,y);
+// }
 void Clean(sf::Texture* &TextureToDelete)
 {
 	delete TextureToDelete;
@@ -44,14 +44,14 @@ void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete)
 	delete SpriteToDelete;
 	delete TextureToDelete;
 }
-void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
-{
-	delete AnimationToDelete;
-	delete SpriteToDelete;
-	delete TextureToDelete;
-}
-void Clean(sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
-{
-	delete AnimationToDelete;
-	delete SpriteToDelete;
-}
+// void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
+// {
+// 	delete AnimationToDelete;
+// 	delete SpriteToDelete;
+// 	delete TextureToDelete;
+// }
+// void Clean(sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
+// {
+// 	delete AnimationToDelete;
+// 	delete SpriteToDelete;
+// }

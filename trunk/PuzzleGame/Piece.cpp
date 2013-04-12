@@ -66,6 +66,7 @@ void Piece::SetValue(int value)
 void Piece::SetPosition(int posX, int posY)
 {
 	m_position = sf::Vector2i(posX,posY);
+	m_pieceSprite->setPosition(posX*50,posY*50);
 }
 
 #pragma endregion
