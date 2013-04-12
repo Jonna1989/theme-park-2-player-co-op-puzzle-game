@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BASE_H
+#define BASE_H
 
 #include "Game.h"
 #include "FrameTime.h"
@@ -19,3 +20,5 @@ public:
 private:
 	Game* m_game;
 };
+
+#endif

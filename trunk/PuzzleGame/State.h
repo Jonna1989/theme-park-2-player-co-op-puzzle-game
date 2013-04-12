@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STATE_H
+#define STATE_H
 
 #include <iostream>
 
@@ -9,3 +10,5 @@ public:
 	virtual void Update() = 0;
 	virtual void Cleanup() = 0;
 };
+
+#endif

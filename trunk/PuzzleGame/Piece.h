@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PIECE_H
+#define PIECE_H
 
 #include <SFML/Graphics.hpp>
 #include <ctime>
@@ -30,3 +31,4 @@ private:
 	sf::Sprite* m_pieceSprite;
 };
 
+#endif
