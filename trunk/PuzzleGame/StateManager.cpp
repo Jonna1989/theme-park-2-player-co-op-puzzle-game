@@ -54,6 +54,8 @@ void StateManager::Cleanup()
 	{
 		delete m_listOfStates[i];
 	}
+
+	delete m_instance;
 }
 #pragma endregion
 #pragma region SetState

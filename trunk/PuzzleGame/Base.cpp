@@ -41,6 +41,7 @@ void Base::Cleanup()
 {
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
+	FrameTime::Instance()->Cleanup();
 }
 
 #pragma endregion
