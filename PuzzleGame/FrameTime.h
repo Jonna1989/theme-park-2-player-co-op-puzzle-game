@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FRAME_TIME_H
+#define FRAME_TIME_H
 
 #include <SFML/Graphics.hpp>
 #define DeltaTime FrameTime::Instance()->GetDelta()
@@ -25,3 +26,4 @@ private:
 	float m_delta;
 };
 
+#endif
