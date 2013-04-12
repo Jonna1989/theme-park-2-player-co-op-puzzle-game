@@ -28,7 +28,7 @@ void Piece::Initialize()
 	std::stringstream ballStream;
 	ballStream << m_value;
 
-	m_pieceTexture->loadFromFile("Assets/GraphicalAssets/Art/ball"+ballStream.str()+".png");
+	m_pieceTexture->loadFromFile("Assets/GraphicalAssets/TempArt/ball"+ballStream.str()+".png");
 	m_pieceSprite->setTexture(*m_pieceTexture);
 }
 

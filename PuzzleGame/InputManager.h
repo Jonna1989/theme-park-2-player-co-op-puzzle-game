@@ -11,6 +11,7 @@ public:
 	InputManager();
 	~InputManager();
 
+	void Initialize();
 	void Initialize(Board* board);
 	void Update(bool singlePlayer, int state);
 	void Cleanup();

@@ -21,7 +21,7 @@ void Game::Initialize()
 void Game::Update()
 {
 	m_board->Update();
-	m_input->Update(true,0);
+	m_input->Update(true,1);
 }
 
 void Game::Cleanup()

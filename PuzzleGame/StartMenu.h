@@ -1,18 +1,21 @@
 #pragma once
 #include "State.h"
 #include "InputManager.h"
+#include "WindowManager.h"
 class StateManager;
-class Game:public State
+class StartMenu:public State
 {
 public:
-	Game();
-	~Game();
+	StartMenu();
+	~StartMenu();
 
 	void Initialize();
 	void Update();
 	void Cleanup();
 private:
-	Board* m_board;
+	sf::Texture* m_backgroundTexture;
+	sf::Sprite* m_backgroundSprite;
+
 	InputManager* m_input;
 };
 
