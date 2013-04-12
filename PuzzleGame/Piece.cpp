@@ -1,5 +1,5 @@
 #include "Piece.h"
-#include <iostream>
+
 #pragma region Base
 
 Piece::Piece()
