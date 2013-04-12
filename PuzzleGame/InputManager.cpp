@@ -35,25 +35,25 @@ void InputManager::Cleanup()
 
 void InputManager::CheckPlayerOneInput()
 {
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::A)) 
+	if(m_keyboard->isKeyPressed(sf::Keyboard::A)) 
 	{
 		m_board->GetPlayerPiece()->MovePiece(-1);
 	}
-	else if(m_keyboard->isKeyPressed(sf::Keyboard::Key::D))
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::D))
 	{
 		m_board->GetPlayerPiece()->MovePiece(1);	
 	}
 
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Q))
+	if(m_keyboard->isKeyPressed(sf::Keyboard::Q))
 	{
 		m_board->GetPlayerPiece()->RotatePiece(-1);
 	}
-	else if(m_keyboard->isKeyPressed(sf::Keyboard::Key::E))
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::E))
 	{
 		m_board->GetPlayerPiece()->RotatePiece(1);
 	}
 
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::S))
+	if(m_keyboard->isKeyPressed(sf::Keyboard::S))
 	{
 		m_board->GetPlayerPiece()->DropPiece();
 	}
@@ -61,25 +61,25 @@ void InputManager::CheckPlayerOneInput()
 
 void InputManager::CheckPlayerTwoInput()
 {
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Num4)) 
+	if(m_keyboard->isKeyPressed(sf::Keyboard::Num4)) 
 	{
 		m_board->GetPlayerPiece()->MovePiece(-1);
 	}
-	else if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Num6))
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::Num6))
 	{
 		m_board->GetPlayerPiece()->MovePiece(1);	
 	}
 
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Num7))
+	if(m_keyboard->isKeyPressed(sf::Keyboard::Num7))
 	{
 		m_board->GetPlayerPiece()->RotatePiece(-1);
 	}
-	else if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Num9))
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::Num9))
 	{
 		m_board->GetPlayerPiece()->RotatePiece(1);
 	}
 
-	if(m_keyboard->isKeyPressed(sf::Keyboard::Key::Num5))
+	if(m_keyboard->isKeyPressed(sf::Keyboard::Num5))
 	{
 		m_board->GetPlayerPiece()->DropPiece();
 	}
