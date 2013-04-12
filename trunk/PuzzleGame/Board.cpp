@@ -27,15 +27,12 @@ void Board::Initialize()
 }
 void Board::Update()
 {
-	//m_playerPiece->MovePiece(0);
-	//AddPlayer1PieceTo2dVector();
 	UseTimedFunctions();
 	KeyCommands();
 	Window->clear();
 	Window->draw(*m_playerPiece->GetPieceOne()->GetSprite());
 	Window->draw(*m_playerPiece->GetPieceTwo()->GetSprite());
 	Window->display();
-
 }
 void Board::Cleanup()
 {
@@ -144,6 +141,7 @@ void Board::Gravity()
 				tempY = GetBoardVectorX(y-1,x);
 				SetBoardVectorY(y-1,x,PASSIVE);
 				SetBoardVectorY(y,x,tempY);
+				m_playerPiece->GetPieceOne()->SetPosition(tempX,tempY);
 			}
 		}
 	}
