@@ -40,9 +40,11 @@ void Board::Update()
 void Board::Cleanup()
 {
 	delete m_Board2dVector;
+	m_playerPiece->Cleanup();
 	delete m_playerPiece;
 	delete GravityClock;
-	delete GravityTime;
+//	Memory Leak "Fix"
+//	delete GravityTime; _BLOCK_TYPE_IS_VALID(pHead->nBlockUse)
 }
 int Board::GetBoardVectorX(int y, int x)
 {

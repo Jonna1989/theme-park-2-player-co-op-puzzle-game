@@ -35,7 +35,9 @@ void PlayerPiece::Update()
 
 void PlayerPiece::Cleanup()
 {
+	m_pieceOne->Cleanup();
 	delete m_pieceOne;
+	m_pieceTwo->Cleanup();
 	delete m_pieceTwo;
 }
 
