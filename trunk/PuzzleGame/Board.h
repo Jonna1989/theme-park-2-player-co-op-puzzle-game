@@ -46,7 +46,7 @@ private:
 	void KeyCommand_PrintBoardToConsole();
 	void KeyCommand_DropNewPiece();
 	void KeyCommand_ClearBottomRow();
-#pragma endregion
+#pragma endregion All the KeyCommands
 	void DropPiece();
 	void AddPlayer1PieceTo2dVector();
 	void Gravity();
