@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_PIECE_H
+#define PLAYER_PIECE_H
 
 #include "Piece.h"
 #include "FrameTime.h"
@@ -9,7 +10,7 @@ public:
 	PlayerPiece();
 	~PlayerPiece();
 
-	void Initialize();
+	void Initialize(int boardHeight, int boardWidth);
 	void Update();
 	void Cleanup();
 
@@ -25,5 +26,9 @@ public:
 private:
 	Piece* m_pieceOne;
 	Piece* m_pieceTwo;
+
+	int m_boardHeight;
+	int m_boardWidth;
 };
 
+#endif

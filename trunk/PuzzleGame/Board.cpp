@@ -17,7 +17,7 @@ void Board::Initialize()
 	VectorFill.y = PASSIVE;
 	CreateBoard();
 	m_playerPiece = new PlayerPiece;
-	m_playerPiece->Initialize();
+	m_playerPiece->Initialize(BOARD_HEIGHT, BOARD_WIDTH);
 	AddPlayer1PieceTo2dVector();
 	PrintBoardToConsole();
 	GravityClock = new sf::Clock;
@@ -36,6 +36,11 @@ void Board::Update()
 }
 void Board::Cleanup()
 {
+	for(unsigned int i = 0; i < m_Board2dVector->size(); i++)
+	{
+		delete m_Board2dVector->at(i);	
+	}
+
 	delete m_Board2dVector;
 	m_playerPiece->Cleanup();
 	delete m_playerPiece;
@@ -54,6 +59,16 @@ int Board::GetBoardVectorY(int y, int x)
 PlayerPiece* Board::GetPlayerPiece()
 {
 	return m_playerPiece;
+}
+
+bool Board::IsTileVacant(int x, int y)
+{
+	if(GetBoardVectorX(y, x) == EMPTY_SPACE)
+	{
+		return true;
+	}
+
+	return false;
 }
 #pragma endregion
 #pragma region Privates
@@ -74,6 +89,7 @@ void Board::CreateBoard()
 #pragma region PrintBoardToConsole
 void Board::PrintBoardToConsole()
 {
+	std::system("cls");
 	for ( unsigned int y = 0; y < BOARD_HEIGHT; y++ ) 
 	{
 		for ( unsigned int x = 0; x < BOARD_WIDTH; x++ )
@@ -83,7 +99,6 @@ void Board::PrintBoardToConsole()
 		
 		std::cout<<'\n';
 	}
-	std::cout << "---------------------------------------------" << std::endl;
 }
 #pragma endregion
 #pragma region KeyCommands

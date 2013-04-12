@@ -15,7 +15,7 @@ PlayerPiece::~PlayerPiece()
 
 #pragma region Publics
 
-void PlayerPiece::Initialize()
+void PlayerPiece::Initialize(int boardHeight, int boardWidth)
 {
 	m_pieceOne = new Piece();
 	m_pieceOne->Initialize();
@@ -23,6 +23,8 @@ void PlayerPiece::Initialize()
 	m_pieceTwo = new Piece();
 	m_pieceTwo->Initialize();
 	m_pieceTwo->SetPosition(0,1);
+	m_boardHeight = boardHeight;
+	m_boardWidth = boardWidth;
 }
 
 void PlayerPiece::Update()
@@ -45,11 +47,53 @@ void PlayerPiece::RotatePiece(int dir)
 {
 	if (dir == 1)
 	{
-		//ROTATE RIGHT, MORE LIKE MOVE THE SECOND BLOCK IN A FASHIONABLE WAY TO THE RIGHT WAY AROUND THE FIRST BLOCK
+		if(m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x) //Aligned vertically
+		{
+			if((m_pieceOne->GetPosition().y > m_pieceTwo->GetPosition().y) && (m_pieceOne->GetPosition().x < m_boardWidth - 1)) //Piece one below
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y + 1);
+			}
+			else if((m_pieceOne->GetPosition().y < m_pieceTwo->GetPosition().y) && m_pieceOne->GetPosition().x > 0) //Piece one above
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y - 1);
+			}
+		}
+		else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y) //Aligned horisontally
+		{
+			if(m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x) //Piece one to the right
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y - 1);
+			}
+			else if((m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x) && (m_pieceOne->GetPosition().y < m_boardHeight - 1)) //Piece one to the left
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y + 1);
+			}
+		}
 	}
 	else if (dir == -1)
 	{
-		//ROTATE LEFT, MORE LIKE MOVE THE SECOND BLOCK IN A FASHIONABLE WAY TO THE LEFT WAY AROUND THE FIRST BLOCK
+		if(m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x) //Aligned vertically
+		{
+			if((m_pieceOne->GetPosition().y > m_pieceTwo->GetPosition().y) && (m_pieceOne->GetPosition().x > 0)) //Piece one below
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y + 1);
+			}
+			else if((m_pieceOne->GetPosition().y < m_pieceTwo->GetPosition().y) && m_pieceOne->GetPosition().x < m_boardWidth - 1) //Piece one above
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y - 1);
+			}
+		}
+		else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y) //Aligned horisontally
+		{
+			if((m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x) && (m_pieceOne->GetPosition().y < m_boardHeight - 1)) //Piece one to the right
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y + 1);
+			}
+			else if(m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x) //Piece one to the left
+			{
+				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y - 1);
+			}
+		}
 	}
 }
 
