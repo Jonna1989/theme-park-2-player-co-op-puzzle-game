@@ -22,15 +22,6 @@ void Piece::Initialize(int owner)
 	m_color = (rand () % (5 - 1) + 1);
 	m_position = sf::Vector2i(-1, -1);
 
-	m_pieceTexture = new sf::Texture();
-	m_pieceSprite = new sf::Sprite();
-
-	std::stringstream ballStream;
-	ballStream << m_color;
-
-	m_pieceTexture->loadFromFile("Assets/GraphicalAssets/TempArt/ball"+ballStream.str()+".png");
-	m_pieceSprite->setTexture(*m_pieceTexture);
-
 	m_board = Board::Instance();
 	m_owner = owner;
 }
@@ -42,8 +33,6 @@ void Piece::Update()
 
 void Piece::Cleanup()
 {
-	delete m_pieceTexture;
-	delete m_pieceSprite;
 }
 
 int Piece::GetColor()
@@ -83,7 +72,6 @@ void Piece::SetPosition(int posX, int posY)
 	m_position.y = posY;
 	m_board->SetOwner(m_position.x, m_position.y, m_owner);
 	m_board->SetColor(m_position.x, m_position.y, m_color);
-	m_pieceSprite->setPosition((float)posX*50,(float)posY*50);
 }
 
 void Piece::SetOwner(int owner)

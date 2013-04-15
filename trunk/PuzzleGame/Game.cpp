@@ -26,8 +26,8 @@ void Game::Initialize()
 
 void Game::Update()
 {
-	m_board->Update();
 	UseTimedFunctions();
+	m_board->Update();	
 	KeyCommands();
 }
 
@@ -59,8 +59,21 @@ void Game::SetGravityInterval(int milliSeconds)
 
 void Game::Gravity()
 {
-	m_player1->GetPlayerPiece()->DropPiece();
-	m_player2->GetPlayerPiece()->DropPiece();
+	if((!m_player1->GetPlayerPiece()->DropPiece()) || (!m_player2->GetPlayerPiece()->DropPiece()))
+	{
+		BoardGravity();
+	}
+}
+
+void Game::BoardGravity()
+{
+	for(int y = BOARD_HEIGHT - 2; y >= 0; y--) //Can't move the last row any further down so start checking the row above
+	{
+		for(int x = 0; x < BOARD_WIDTH; x++)
+		{
+			m_board->DropTile(x, y);
+		}
+	}
 }
 
 void Game::UseTimedFunctions()
