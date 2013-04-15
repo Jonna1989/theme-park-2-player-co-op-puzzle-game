@@ -115,40 +115,48 @@ void InputManager::CheckPlayer1Input()
 
 void InputManager::CheckPlayer2Input()
 {
-	if((m_keyboard->isKeyPressed(sf::Keyboard::Num4)) && (!m_keyPressedPlayer2))
+	do
 	{
-		m_player2->GetPlayerPiece()->MovePiece(-1);
-		m_keyPressedPlayer2 = true;
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::Num6)) && (!m_keyPressedPlayer2))
-	{
-		m_player2->GetPlayerPiece()->MovePiece(1);
-		m_keyPressedPlayer2 = true;	
-	}
+		if (event2.type == sf::Event::KeyPressed)
+		{
+			if (event2.key.code == sf::Keyboard::Num4 && !m_keyPressedPlayer2)
+			{
+				std::cout << "A" << std::endl;
+				m_player2->GetPlayerPiece()->MovePiece(-1);
+				m_keyPressedPlayer2 = true;
+			}
+			else if (event2.key.code == sf::Keyboard::Num6 && !m_keyPressedPlayer2)
+			{
+				m_player2->GetPlayerPiece()->MovePiece(1);
+				m_keyPressedPlayer2 = true;
+			}
 
-	if((m_keyboard->isKeyPressed(sf::Keyboard::Num7)) && (!m_keyPressedPlayer2))
-	{
-		m_player2->GetPlayerPiece()->RotatePiece(-1);
-		m_keyPressedPlayer2 = true;
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::Num9)) && (!m_keyPressedPlayer2))
-	{
-		m_player2->GetPlayerPiece()->RotatePiece(1);
-		m_keyPressedPlayer2 = true;
-	}
+			if (event2.key.code == sf::Keyboard::Num7 && !m_keyPressedPlayer2)
+			{
+				m_player2->GetPlayerPiece()->RotatePiece(-1);
+				m_keyPressedPlayer2 = true;
+			}
+			else if (event2.key.code == sf::Keyboard::Num9 && !m_keyPressedPlayer2)
+			{
+				m_player2->GetPlayerPiece()->MovePiece(1);
+				m_keyPressedPlayer2 = true;
+			}
 
-	if((m_keyboard->isKeyPressed(sf::Keyboard::Num5)) && (!m_keyPressedPlayer2))
-	{
-		m_player2->GetPlayerPiece()->DropPieceQuickly();
-		m_keyPressedPlayer2 = true;
-	}
+			if (event2.key.code == sf::Keyboard::Num5 && !m_keyPressedPlayer2)
+			{
+				m_player2->GetPlayerPiece()->DropPieceQuickly();
+				m_keyPressedPlayer2 = true;
+			}
 
-	if((!m_keyboard->isKeyPressed(sf::Keyboard::Num4)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Num6)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Num7)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Num9)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Num5)))
-	{
-		m_keyPressedPlayer2 = false;
-	}
+			if ((event2.key.code == sf::Keyboard::Escape) || (event2.type == sf::Event::Closed))
+			{
+				Window->close();
+			}
+		}
+		else
+		{
+			m_keyPressedPlayer2 = false;
+		}
+	} while (Window->pollEvent(event2));
+	
 }
