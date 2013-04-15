@@ -33,14 +33,18 @@ void InputManager::Update(bool singlePlayer, int state)
 {
 	switch(state)
 	{
-	case StateManager::MainMenu: //Menu
-		if (m_keyboard->isKeyPressed(sf::Keyboard::Return))
+	case 0: //Menu
+		sf::Event event;
+		while (Window->pollEvent(event))
 		{
-			StateManager::Instance()->SetState(StateManager::InGame);
-			break;
+			if (event.key.code == sf::Keyboard::Return)
+			{
+				StateManager::Instance()->SetState(StateManager::InGame);
+				break;
+			}
 		}
 		break;
-	case StateManager::InGame: //Game
+	case 1: //Game
 		CheckPlayerOneInput();
 		break;
 	}
@@ -52,42 +56,50 @@ void InputManager::Cleanup()
 
 void InputManager::CheckPlayerOneInput()
 {
-	if((m_keyboard->isKeyPressed(sf::Keyboard::A)) && (!m_keyPressedPlayer1))
+	sf::Event event;
+	do
 	{
-		m_player1->GetPlayerPiece()->MovePiece(-1);
-		m_keyPressedPlayer1 = true;
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::D)) && (!m_keyPressedPlayer1))
-	{
-		m_player1->GetPlayerPiece()->MovePiece(1);
-		m_keyPressedPlayer1 = true;
-	}
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::A && !m_keyPressedPlayer1)
+			{
+				std::cout << "A" << std::endl;
+				//m_player1->GetPlayerPiece()->MovePiece(-1);
+				m_keyPressedPlayer1 = true;
+			}
+			else if (event.key.code == sf::Keyboard::D && !m_keyPressedPlayer1)
+			{
+				m_player1->GetPlayerPiece()->MovePiece(1);
+				m_keyPressedPlayer1 = true;
+			}
 
-	if((m_keyboard->isKeyPressed(sf::Keyboard::Q)) && (!m_keyPressedPlayer1))
-	{
-		m_player1->GetPlayerPiece()->RotatePiece(-1);
-		m_keyPressedPlayer1 = true;
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::E)) && (!m_keyPressedPlayer1))
-	{
-		m_player1->GetPlayerPiece()->RotatePiece(1);
-		m_keyPressedPlayer1 = true;
-	}
+			if (event.key.code == sf::Keyboard::Q && !m_keyPressedPlayer1)
+			{
+				m_player1->GetPlayerPiece()->RotatePiece(-1);
+				m_keyPressedPlayer1 = true;
+			}
+			else if (event.key.code == sf::Keyboard::E && !m_keyPressedPlayer1)
+			{
+				m_player1->GetPlayerPiece()->MovePiece(1);
+				m_keyPressedPlayer1 = true;
+			}
 
-	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
-	{
-		m_player1->GetPlayerPiece()->DropPieceQuickly();
-		m_keyPressedPlayer1 = true;
-	}
+			if (event.key.code == sf::Keyboard::S && !m_keyPressedPlayer1)
+			{
+				m_player1->GetPlayerPiece()->DropPieceQuickly();
+				m_keyPressedPlayer1 = true;
+			}
 
-	if((!m_keyboard->isKeyPressed(sf::Keyboard::A)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::D)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::Q)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::E)) 
-		&& (!m_keyboard->isKeyPressed(sf::Keyboard::S)))
-	{
-		m_keyPressedPlayer1 = false;
-	}
+			if ((event.key.code == sf::Keyboard::Escape) || (event.type == sf::Event::Closed))
+			{
+				Window->close();
+			}
+		}
+		else
+		{
+			m_keyPressedPlayer1 = false;
+		}
+	} while (Window->pollEvent(event));
 }
 
 void InputManager::CheckPlayerTwoInput()
