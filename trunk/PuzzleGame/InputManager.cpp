@@ -70,38 +70,38 @@ void InputManager::CheckPlayer1Input()
 {
 	do
 	{
-		if (event.type == sf::Event::KeyPressed)
+		if (event1.type == sf::Event::KeyPressed)
 		{
-			if (event.key.code == sf::Keyboard::A && !m_keyPressedPlayer1)
+			if (event1.key.code == sf::Keyboard::A && !m_keyPressedPlayer1)
 			{
 				std::cout << "A" << std::endl;
 				m_player1->GetPlayerPiece()->MovePiece(-1);
 				m_keyPressedPlayer1 = true;
 			}
-			else if (event.key.code == sf::Keyboard::D && !m_keyPressedPlayer1)
+			else if (event1.key.code == sf::Keyboard::D && !m_keyPressedPlayer1)
 			{
 				m_player1->GetPlayerPiece()->MovePiece(1);
 				m_keyPressedPlayer1 = true;
 			}
 
-			if (event.key.code == sf::Keyboard::Q && !m_keyPressedPlayer1)
+			if (event1.key.code == sf::Keyboard::Q && !m_keyPressedPlayer1)
 			{
 				m_player1->GetPlayerPiece()->RotatePiece(-1);
 				m_keyPressedPlayer1 = true;
 			}
-			else if (event.key.code == sf::Keyboard::E && !m_keyPressedPlayer1)
+			else if (event1.key.code == sf::Keyboard::E && !m_keyPressedPlayer1)
 			{
 				m_player1->GetPlayerPiece()->MovePiece(1);
 				m_keyPressedPlayer1 = true;
 			}
 
-			if (event.key.code == sf::Keyboard::S && !m_keyPressedPlayer1)
+			if (event1.key.code == sf::Keyboard::S && !m_keyPressedPlayer1)
 			{
 				m_player1->GetPlayerPiece()->DropPieceQuickly();
 				m_keyPressedPlayer1 = true;
 			}
 
-			if ((event.key.code == sf::Keyboard::Escape) || (event.type == sf::Event::Closed))
+			if ((event1.key.code == sf::Keyboard::Escape) || (event1.type == sf::Event::Closed))
 			{
 				Window->close();
 			}
@@ -110,7 +110,7 @@ void InputManager::CheckPlayer1Input()
 		{
 			m_keyPressedPlayer1 = false;
 		}
-	} while (Window->pollEvent(event));
+	} while (Window->pollEvent(event1));
 }
 
 void InputManager::CheckPlayer2Input()

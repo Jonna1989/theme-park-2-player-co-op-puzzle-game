@@ -37,7 +37,7 @@ private:
 	Player* m_player1;
 	Player* m_player2;
 	bool m_keyPressedPlayer1;
-	sf::Event event;
+	sf::Event event1;
 	sf::Event event2;
 	bool m_keyPressedPlayer2;
 };
