@@ -4,73 +4,69 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-#include "PlayerPiece.h"
-#include "WindowManager.h"
-#include "Load.h"
 
-static unsigned int BOARD_HEIGHT = 10;
-static unsigned int BOARD_WIDTH	 = 20;
+#include "WindowManager.h"
+#include "Tile.h"
+
+static int BOARD_HEIGHT = 10;
+static int BOARD_WIDTH	 = 15;
+static unsigned int TILE_SIZE_X = 50;
+static unsigned int TILE_SIZE_Y = 50;
+
 class Board
 {
 public:
-	Board();
-	~Board();
 	enum SPACE
 	{
-		EMPTY_SPACE = 0, 
+		EMPTY_SPACE, 
 		GREEN_SPACE, 
 		BLUE_SPACE, 
 		PURPLE_SPACE, 
 		RED_SPACE, 
 		YELLOW_SPACE 
 	};
+
 	enum PLAYER
 	{
 		PASSIVE		= 0,
-		PLAYER_ONE_PIECE_ONE	= 10,
-		PLAYER_ONE_PIECE_TWO	= 11,
+		PLAYER_ONE	= 10,
 		PLAYER_TWO	= 20,
 		
 	};
+
+	static Board* Instance();
+
 	void Initialize();
 	void Update();
 	void Cleanup();
-	int	 GetBoardVectorX(int y, int x);
-	int	 GetBoardVectorY(int y, int x);
-	PlayerPiece* GetPlayerPiece();
+	
+	std::vector<std::vector<Tile>> GetBoard();
+	Tile* GetTile(int x, int y);
+
+	int GetColor(int x, int y);
+	int GetOwner(int x, int y);
+
+	void SetColor(int x, int y, int color);
+	void SetOwner(int x, int y, int owner);
+
 	bool IsTileVacant(int x, int y);
 
+	void PrintBoardToConsole();	
+
 private:
-	std::vector< std::vector<sf::Vector2i>* >* m_Board2dVector;
+	Board();
+	~Board();
+	
+	static Board* m_instance;
+
+	std::vector<std::vector<Tile>> m_board;
+	/*sf::Clock*	m_gravityClock;
+	sf::Time*   m_gravityTime;
+	int			m_gravityInterval;*/
+
 	void CreateBoard();
-	void PrintBoardToConsole();
-	void PrintPlayerOnePlayerPiecePositionsToConsole();
-#pragma region KeyCommands
-	void KeyCommands();
-	void KeyCommand_PrintBoardToConsole();
-	void KeyCommand_DropNewPiece();
-	void KeyCommand_ClearBottomRow();
-#pragma endregion All the KeyCommands
-	void DropPiece();
-	void AddPlayer1PieceTo2dVector();
-	void Gravity();
-	void UpdatePlayer1PlayerPiece();
-	void UpdatePlayer1VectorPos();
-	void SpaceDrawer();
-	void UseTimedFunctions();
-	void SetBoardVectorX(int y, int x, int newValue);
-	void SetBoardVectorY(int y, int x, int newValue);
-	sf::Vector2i VectorFill;
-	sf::Clock*	GravityClock;
-	sf::Time*   GravityTime;
-	int			GravityInterval;
-	sf::Texture* m_green;
-	sf::Texture* m_blue;
-	sf::Texture* m_purple;
-	sf::Texture* m_red;
-	sf::Texture* m_yellow;
-	sf::Sprite*  m_pieceSprite;
-	PlayerPiece* m_playerPiece;
+	/*void Gravity();
+	void UseTimedFunctions();*/
 };
 
 #endif
