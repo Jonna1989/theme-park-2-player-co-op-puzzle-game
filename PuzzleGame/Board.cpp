@@ -31,6 +31,7 @@ void Board::Initialize()
 void Board::Update()
 {
 	Window->clear();
+
 	Window->display();
 }
 
