@@ -45,7 +45,8 @@ void InputManager::Update(bool singlePlayer, int state)
 		}
 		break;
 	case StateManager::InGame: //Game
-		CheckPlayerOneInput();
+		CheckPlayer1Input();
+		CheckPlayer2Input();
 		break;
 	}
 }
@@ -54,7 +55,7 @@ void InputManager::Cleanup()
 	delete m_keyboard;
 }
 
-void InputManager::CheckPlayerOneInput()
+void InputManager::CheckPlayer1Input()
 {
 	do
 	{
@@ -63,7 +64,7 @@ void InputManager::CheckPlayerOneInput()
 			if (event.key.code == sf::Keyboard::A && !m_keyPressedPlayer1)
 			{
 				std::cout << "A" << std::endl;
-				//m_player1->GetPlayerPiece()->MovePiece(-1);
+				m_player1->GetPlayerPiece()->MovePiece(-1);
 				m_keyPressedPlayer1 = true;
 			}
 			else if (event.key.code == sf::Keyboard::D && !m_keyPressedPlayer1)
@@ -101,7 +102,7 @@ void InputManager::CheckPlayerOneInput()
 	} while (Window->pollEvent(event));
 }
 
-void InputManager::CheckPlayerTwoInput()
+void InputManager::CheckPlayer2Input()
 {
 	if((m_keyboard->isKeyPressed(sf::Keyboard::Num4)) && (!m_keyPressedPlayer2))
 	{

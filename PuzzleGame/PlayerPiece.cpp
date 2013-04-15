@@ -123,16 +123,36 @@ void PlayerPiece::MovePiece(int xDirection)
 	{
 		if((m_pieceOne->GetPosition().x < BOARD_WIDTH - 1) && m_pieceTwo->GetPosition().x < BOARD_WIDTH - 1)
 		{
-			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x+1,m_pieceOne->GetPosition().y);
-			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x+1,m_pieceTwo->GetPosition().y);
+			if((m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x)
+				|| (m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x)) //If piece one is to the right or if the pieces are vertically aligned
+			{
+				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+			}
+			else //If piece one is to the left
+			{
+				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+
+			}
 		}
 	}
 	else if (xDirection == -1)
 	{
 		if((m_pieceOne->GetPosition().x > 0) && m_pieceTwo->GetPosition().x > 0)
 		{
-			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x-1,m_pieceOne->GetPosition().y);
-			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x-1,m_pieceTwo->GetPosition().y);
+			if((m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x)
+				|| (m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x)) //If piece one is to the left or if the pieces are vertically aligned
+			{
+				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+			}
+			else //If piece one is to the right
+			{
+				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+
+			}
 		}
 	}
 }
