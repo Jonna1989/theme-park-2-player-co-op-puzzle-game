@@ -119,30 +119,30 @@ void InputManager::CheckPlayer2Input()
 	{
 		if (event2.type == sf::Event::KeyPressed)
 		{
-			if (event2.key.code == sf::Keyboard::Num4 && !m_keyPressedPlayer2)
+			if (event2.key.code == sf::Keyboard::H && !m_keyPressedPlayer2)
 			{
 				std::cout << "A" << std::endl;
 				m_player2->GetPlayerPiece()->MovePiece(-1);
 				m_keyPressedPlayer2 = true;
 			}
-			else if (event2.key.code == sf::Keyboard::Num6 && !m_keyPressedPlayer2)
+			else if (event2.key.code == sf::Keyboard::K && !m_keyPressedPlayer2)
 			{
 				m_player2->GetPlayerPiece()->MovePiece(1);
 				m_keyPressedPlayer2 = true;
 			}
 
-			if (event2.key.code == sf::Keyboard::Num7 && !m_keyPressedPlayer2)
+			if (event2.key.code == sf::Keyboard::Y && !m_keyPressedPlayer2)
 			{
 				m_player2->GetPlayerPiece()->RotatePiece(-1);
 				m_keyPressedPlayer2 = true;
 			}
-			else if (event2.key.code == sf::Keyboard::Num9 && !m_keyPressedPlayer2)
+			else if (event2.key.code == sf::Keyboard::I && !m_keyPressedPlayer2)
 			{
 				m_player2->GetPlayerPiece()->MovePiece(1);
 				m_keyPressedPlayer2 = true;
 			}
 
-			if (event2.key.code == sf::Keyboard::Num5 && !m_keyPressedPlayer2)
+			if (event2.key.code == sf::Keyboard::J && !m_keyPressedPlayer2)
 			{
 				m_player2->GetPlayerPiece()->DropPieceQuickly();
 				m_keyPressedPlayer2 = true;
