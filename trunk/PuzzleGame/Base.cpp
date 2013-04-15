@@ -1,5 +1,4 @@
 #include "Base.h"
-#include "StateManager.h"
 
 #pragma region Base
 
@@ -11,15 +10,13 @@ Base::~Base()
 {
 }
 
-#pragma endregion
-
-#pragma region Publics
-
 void Base::Initialize()
 {
 	FrameTime::Instance()->Initialize();
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
+	m_input = new InputManager();
+	m_input->Initialize();
 }
 
 void Base::Update()
@@ -30,15 +27,20 @@ void Base::Update()
 		while(WindowManager::Instance()->GetWindow()->pollEvent(events))
 		{
 			if(events.type == sf::Event::Closed)
-			{ WindowManager::Instance()->GetWindow()->close(); }
+			{
+				WindowManager::Instance()->GetWindow()->close();
+			}
 		}
 		StateManager::Instance()->Update();
 		FrameTime::Instance()->Update();
+		m_input->Update(false, StateManager::Instance()->GetState());
 	}
 }
 
 void Base::Cleanup()
 {
+	m_input->Cleanup();
+	delete m_input;
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
 	FrameTime::Instance()->Cleanup();

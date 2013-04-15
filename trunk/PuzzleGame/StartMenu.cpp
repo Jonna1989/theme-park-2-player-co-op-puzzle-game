@@ -1,5 +1,4 @@
 #include "StartMenu.h"
-#include "StateManager.h"
 
 #pragma region Base
 
@@ -22,9 +21,6 @@ void StartMenu::Initialize()
 	m_backgroundSprite = new sf::Sprite();
 	m_backgroundTexture->loadFromFile("Assets/GraphicalAssets/TempArt/menu.png");
 	m_backgroundSprite->setTexture(*m_backgroundTexture);
-
-	m_input = new InputManager();
-	m_input->Initialize();
 }
 
 void StartMenu::Update()
@@ -32,14 +28,12 @@ void StartMenu::Update()
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
 	Window->display();
-
-	m_input->Update(true,0);
 }
 
 void StartMenu::Cleanup()
 {
-	m_input->Cleanup();
-	delete m_input;
+	delete m_backgroundSprite;
+	delete m_backgroundTexture;
 }
 
 #pragma endregion
