@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Game.h"
 #include "StartMenu.h"
+
 class StateManager
 {
 public:	
@@ -15,8 +16,8 @@ public:
 	void Update();
 	void Cleanup();
 
-	void SetState(TypeOfState newState);
 	StateManager::TypeOfState GetState();
+	void SetState(TypeOfState newState);
 
 private:
 	StateManager();
@@ -26,8 +27,8 @@ private:
 
 	std::vector<State*> m_listOfStates;
 	TypeOfState m_currentState;
-	std::string GetName();
 
+	std::string GetName();
 };
 
 #endif

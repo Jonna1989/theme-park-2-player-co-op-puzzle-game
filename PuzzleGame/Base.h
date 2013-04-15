@@ -1,11 +1,13 @@
 #ifndef BASE_H
 #define BASE_H
 
-#include "Game.h"
-#include "FrameTime.h"
-#include "WindowManager.h"
-
 #include <SFML/Graphics.hpp>
+
+#include "FrameTime.h"
+//#include "WindowManager.h"
+#include "StateManager.h"
+#include "InputManager.h"
+#include "Board.h"
 
 class Base
 {
@@ -18,7 +20,7 @@ public:
 	void Cleanup();
 
 private:
-	Game* m_game;
+	InputManager* m_input;
 };
 
 #endif

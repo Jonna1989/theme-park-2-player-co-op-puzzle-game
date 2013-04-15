@@ -43,6 +43,7 @@ void FrameTime::Update()
 void FrameTime::Cleanup()
 {
 	delete m_clock;
+	delete m_instance;
 }
 
 float FrameTime::GetDelta()

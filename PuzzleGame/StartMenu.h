@@ -1,7 +1,11 @@
-#pragma once
+#ifndef START_MENU_H
+#define START_MENU_H
+
 #include "State.h"
 #include "InputManager.h"
 #include "WindowManager.h"
+#include "StateManager.h"
+
 class StateManager;
 class StartMenu:public State
 {
@@ -16,6 +20,7 @@ private:
 	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
 
-	InputManager* m_input;
+	//InputManager* m_input;
 };
 
+#endif
