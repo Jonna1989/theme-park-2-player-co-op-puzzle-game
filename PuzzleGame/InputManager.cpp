@@ -33,14 +33,14 @@ void InputManager::Update(bool singlePlayer, int state)
 {
 	switch(state)
 	{
-	case 0: //Menu
+	case StateManager::MainMenu: //Menu
 		if (m_keyboard->isKeyPressed(sf::Keyboard::Return))
 		{
 			StateManager::Instance()->SetState(StateManager::InGame);
 			break;
 		}
 		break;
-	case 1: //Game
+	case StateManager::InGame: //Game
 		CheckPlayerOneInput();
 		break;
 	}
