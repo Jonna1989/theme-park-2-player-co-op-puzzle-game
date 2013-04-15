@@ -26,14 +26,14 @@ void Game::Initialize()
 void Game::Update()
 {
 	UseTimedFunctions();
-	m_board->Update();	
+	Board::Instance()->Update();	
 	KeyCommands();
 }
 
 void Game::Cleanup()
 {
 	delete m_gravityClock;
-	m_board->Cleanup();
+	Board::Instance()->Cleanup();
 }
 
 #pragma endregion
@@ -70,7 +70,7 @@ void Game::BoardGravity()
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
-			m_board->DropTile(x, y);
+			Board::Instance()->DropTile(x, y);
 		}
 	}
 }
@@ -99,7 +99,7 @@ void Game::KeyCommand_PrintBoardToConsole()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
 	{
-		m_board->PrintBoardToConsole();
+		Board::Instance()->PrintBoardToConsole();
 	}
 }
 void Game::KeyCommand_DropNewPiece()
@@ -117,7 +117,7 @@ void Game::KeyCommand_ClearBottomRow()
 	{
 		for (int x = 0; x < (int)BOARD_WIDTH; x++)
 		{
-			m_board->GetTile(x, BOARD_HEIGHT - 1)->ClearTile();
+			Board::Instance()->GetTile(x, BOARD_HEIGHT - 1)->ClearTile();
 		}
 	}
 }

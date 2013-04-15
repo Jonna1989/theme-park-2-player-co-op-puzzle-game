@@ -149,8 +149,6 @@ void Board::CreateBoard()
 
 void Board::DrawBoard()
 {
-	int color = 0;
-
 	for(int y = 0; y < BOARD_HEIGHT; y++)
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)

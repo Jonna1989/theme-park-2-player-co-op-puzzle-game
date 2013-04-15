@@ -22,7 +22,6 @@ public:
 	void SetGravityInterval(int milliSeconds);
 
 private:
-	Board* m_board;
 	Player* m_player1;
 	Player* m_player2;
 
