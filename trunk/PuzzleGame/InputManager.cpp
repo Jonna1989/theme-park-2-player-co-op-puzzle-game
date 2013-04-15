@@ -34,10 +34,8 @@ void InputManager::Update(bool singlePlayer, int state)
 	switch(state)
 	{
 	case 0: //Menu
-		std::cout << "Does this even5451" << std::endl;
 		if (m_keyboard->isKeyPressed(sf::Keyboard::Return))
 		{
-			std::cout << "Does this even" << std::endl;
 			StateManager::Instance()->SetState(StateManager::InGame);
 			break;
 		}
