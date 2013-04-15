@@ -83,7 +83,7 @@ void Piece::SetPosition(int posX, int posY)
 	m_position.y = posY;
 	m_board->SetOwner(m_position.x, m_position.y, m_owner);
 	m_board->SetColor(m_position.x, m_position.y, m_color);
-	m_pieceSprite->setPosition(posX*50,posY*50);
+	m_pieceSprite->setPosition((float)posX*50,(float)posY*50);
 }
 
 void Piece::SetOwner(int owner)
