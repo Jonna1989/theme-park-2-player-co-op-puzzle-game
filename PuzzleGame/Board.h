@@ -12,11 +12,11 @@ static int BOARD_HEIGHT = 10;
 static int BOARD_WIDTH	 = 15;
 static unsigned int TILE_SIZE_X = 50;
 static unsigned int TILE_SIZE_Y = 50;
-std::string SHEET_PATH_GREEN = "Assets/GraphicalAssets/TempArt/ball1.png";
-std::string SHEET_PATH_BLUE = "Assets/GraphicalAssets/TempArt/ball2.png";
-std::string SHEET_PATH_PURPLE = "Assets/GraphicalAssets/TempArt/ball3.png";
-std::string SHEET_PATH_RED = "Assets/GraphicalAssets/TempArt/ball4.png";
-std::string SHEET_PATH_YELLOW = "Assets/GraphicalAssets/TempArt/ball5.png";
+static std::string SHEET_PATH_GREEN = "Assets/GraphicalAssets/TempArt/ball1.png";
+static std::string SHEET_PATH_BLUE = "Assets/GraphicalAssets/TempArt/ball2.png";
+static std::string SHEET_PATH_PURPLE = "Assets/GraphicalAssets/TempArt/ball3.png";
+static std::string SHEET_PATH_RED = "Assets/GraphicalAssets/TempArt/ball4.png";
+static std::string SHEET_PATH_YELLOW = "Assets/GraphicalAssets/TempArt/ball5.png";
 
 class Board
 {
