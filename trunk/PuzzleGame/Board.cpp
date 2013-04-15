@@ -23,6 +23,7 @@ Board* Board::Instance()
 
 void Board::Initialize()
 {
+	m_sprite = new sf::Sprite();
 	CreateBoard();
 
 	PrintBoardToConsole();
@@ -84,9 +85,12 @@ void Board::SetOwner(int x, int y, int owner)
 
 bool Board::IsTileVacant(int x, int y)
 {
-	if(m_board.at(y).at(x).GetContent() == EMPTY_SPACE)
+	if((0 <= x && x < BOARD_WIDTH) && (0 <= y && y < BOARD_HEIGHT))
 	{
-		return true;
+		if(m_board.at(y).at(x).GetContent() == EMPTY_SPACE)
+		{
+			return true;
+		}
 	}
 
 	return false;
@@ -106,6 +110,24 @@ void Board::CreateBoard()
 		{
 			m_board.at(y).push_back(Tile());
 			m_board.at(y).at(x).Initialize(TILE_SIZE_X, TILE_SIZE_Y, x, y);
+		}
+	}
+}
+
+void Board::DrawBoard()
+{
+	for(int y = 0; y < BOARD_HEIGHT; y++)
+	{
+		for(int x = 0; x < BOARD_WIDTH; x++)
+		{
+	//		/*m_pieceTexture = new sf::Texture();
+	//m_pieceSprite = new sf::Sprite();*/
+
+	//std::stringstream ballStream;
+	//ballStream << m_color;
+
+	//m_pieceTexture->loadFromFile("Assets/GraphicalAssets/TempArt/ball"+ballStream.str()+".png");
+	//m_pieceSprite->setTexture(*m_pieceTexture);
 		}
 	}
 }
