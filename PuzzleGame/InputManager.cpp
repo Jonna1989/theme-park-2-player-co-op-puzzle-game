@@ -33,7 +33,7 @@ void InputManager::Update(bool singlePlayer, int state)
 {
 	switch(state)
 	{
-	case 0: //Menu
+	case StateManager::MainMenu: //Menu
 		sf::Event event;
 		while (Window->pollEvent(event))
 		{
@@ -44,7 +44,7 @@ void InputManager::Update(bool singlePlayer, int state)
 			}
 		}
 		break;
-	case 1: //Game
+	case StateManager::InGame: //Game
 		CheckPlayerOneInput();
 		break;
 	}
@@ -56,7 +56,6 @@ void InputManager::Cleanup()
 
 void InputManager::CheckPlayerOneInput()
 {
-	sf::Event event;
 	do
 	{
 		if (event.type == sf::Event::KeyPressed)
