@@ -12,12 +12,9 @@ class InputManager
 {
 
 public:
-	InputManager();
-	~InputManager();
+	static InputManager* Instance();
 
 	void Initialize();
-	void Initialize(Player* player1);
-	void Initialize(Player* player1, Player* player2);
 	void Update(bool singlePlayer, int state);
 	void Cleanup();
 	
@@ -26,10 +23,15 @@ public:
 	void SetPlayers(Player* player1);
 	void SetPlayers(Player* player1, Player* player2);
 
-	void CheckPlayerOneInput();
-	void CheckPlayerTwoInput();
+	void CheckPlayer1Input();
+	void CheckPlayer2Input();
 
 private:
+	InputManager();
+	~InputManager();
+
+	static InputManager* m_instance;
+
 	sf::Keyboard* m_keyboard;
 	Board* m_board;
 	Player* m_player1;

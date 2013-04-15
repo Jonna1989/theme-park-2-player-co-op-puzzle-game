@@ -13,13 +13,12 @@ Game::~Game()
 
 void Game::Initialize()
 {
-	m_board = Board::Instance();
-	m_board->Initialize();
+	Board::Instance()->Initialize();
 	m_player1 = new Player();
 	m_player1->Initialize(10);
 	m_player2 = new Player();
 	m_player2->Initialize(20);
-
+	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	m_gravityClock = new sf::Clock;
 	m_gravityInterval = 2000;
 }

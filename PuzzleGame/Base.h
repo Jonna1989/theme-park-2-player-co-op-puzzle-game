@@ -4,10 +4,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "FrameTime.h"
-//#include "WindowManager.h"
 #include "StateManager.h"
 #include "InputManager.h"
-#include "Board.h"
+#include "Player.h"
 
 class Base
 {
@@ -20,7 +19,6 @@ public:
 	void Cleanup();
 
 private:
-	InputManager* m_input;
 };
 
 #endif

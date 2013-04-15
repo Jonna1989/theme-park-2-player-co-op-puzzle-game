@@ -15,8 +15,7 @@ void Base::Initialize()
 	FrameTime::Instance()->Initialize();
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
-	m_input = new InputManager();
-	m_input->Initialize();
+	InputManager::Instance()->Initialize();
 }
 
 void Base::Update()
@@ -33,14 +32,13 @@ void Base::Update()
 		}
 		StateManager::Instance()->Update();
 		FrameTime::Instance()->Update();
-		m_input->Update(false, StateManager::Instance()->GetState());
+		InputManager::Instance()->Update(false, StateManager::Instance()->GetState());
 	}
 }
 
 void Base::Cleanup()
 {
-	m_input->Cleanup();
-	delete m_input;
+	InputManager::Instance()->Cleanup();
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
 	FrameTime::Instance()->Cleanup();
