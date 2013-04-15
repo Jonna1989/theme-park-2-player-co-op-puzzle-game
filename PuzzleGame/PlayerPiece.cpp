@@ -141,26 +141,51 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 {
 	bool dropped = false;
 
-	//Piece one drop if possible
-	if(m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
+	if(m_pieceOne->GetPosition().x != m_pieceTwo->GetPosition().x) //Piece aligned horisontally
 	{
-		m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
-		dropped = true;
-	}
-	else
-	{
-		m_pieceOne->SetOwner(0);
-	}
+		//Piece one drop if possible
+		if(m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
+		{
+			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+			dropped = true;
+		}
+		else
+		{
+			m_pieceOne->SetOwner(0);
+		}
 
-	//Piece two drop if possible
-	if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
-	{
-		m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
-		dropped = true;
+		//Piece two drop if possible
+		if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
+		{
+			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+			dropped = true;
+		}
+		else
+		{
+			m_pieceTwo->SetOwner(0);
+		}
 	}
-	else
+	else //Piece aligned vertically
 	{
-		m_pieceTwo->SetOwner(0);
+		if((m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)) 
+			&& (m_pieceTwo->GetPosition().y == m_pieceOne->GetPosition().y - 1)) //Piece one lowest
+		{
+			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+			dropped = true;
+		}
+		else if((m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)) 
+			&& (m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y - 1)) //Piece two lowest
+		{
+			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+			dropped = true;
+		}
+		else
+		{
+			m_pieceOne->SetOwner(0);
+			m_pieceTwo->SetOwner(0);
+		}
 	}
 
 	return dropped;

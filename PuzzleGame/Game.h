@@ -30,6 +30,7 @@ private:
 	int			m_gravityInterval;
 
 	void Gravity();
+	void BoardGravity();
 	void UseTimedFunctions();
 
 	void KeyCommands();

@@ -23,7 +23,7 @@ Board* Board::Instance()
 
 void Board::Initialize()
 {
-	m_sprite = new sf::Sprite();
+	InitializeSprites();
 	CreateBoard();
 
 	PrintBoardToConsole();
@@ -32,7 +32,7 @@ void Board::Initialize()
 void Board::Update()
 {
 	Window->clear();
-
+	DrawBoard();
 	Window->display();
 }
 
@@ -87,7 +87,7 @@ bool Board::IsTileVacant(int x, int y)
 {
 	if((0 <= x && x < BOARD_WIDTH) && (0 <= y && y < BOARD_HEIGHT))
 	{
-		if(m_board.at(y).at(x).GetContent() == EMPTY_SPACE)
+		if(GetTile(x, y)->GetContent() == EMPTY_SPACE)
 		{
 			return true;
 		}
@@ -96,9 +96,37 @@ bool Board::IsTileVacant(int x, int y)
 	return false;
 }
 
+void Board::DropTile(int x, int y)
+{
+	if(y < BOARD_HEIGHT - 1)
+	{
+		if(IsTileVacant(x, y + 1))
+		{
+			GetTile(x, y + 1)->SetContent(GetTile(x, y)->GetContent());
+			GetTile(x, y + 1)->SetOwner(GetTile(x, y)->GetOwner());
+			GetTile(x, y)->SetContent(0);
+			GetTile(x, y)->SetOwner(0);
+		}
+	}
+}
+
 #pragma endregion
 
 #pragma region Privates
+
+void Board::InitializeSprites()
+{
+	for(int i = 0; i < 5; i++)
+	{
+		m_sprites.push_back(new sf::Sprite());
+	}
+	
+	m_sprites.at(0)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_GREEN));
+	m_sprites.at(1)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_BLUE));
+	m_sprites.at(2)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_PURPLE));
+	m_sprites.at(3)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_RED));
+	m_sprites.at(4)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_YELLOW));
+}
 
 void Board::CreateBoard()
 {
@@ -116,19 +144,25 @@ void Board::CreateBoard()
 
 void Board::DrawBoard()
 {
+	int color = 0;
+
 	for(int y = 0; y < BOARD_HEIGHT; y++)
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
-	//		/*m_pieceTexture = new sf::Texture();
-	//m_pieceSprite = new sf::Sprite();*/
-
-	//std::stringstream ballStream;
-	//ballStream << m_color;
-
-	//m_pieceTexture->loadFromFile("Assets/GraphicalAssets/TempArt/ball"+ballStream.str()+".png");
-	//m_pieceSprite->setTexture(*m_pieceTexture);
+			DrawTile(x, y);
 		}
+	}
+}
+
+void Board::DrawTile(int x, int y)
+{
+	int color = m_board.at(y).at(x).GetContent();
+
+	if(0 < color)
+	{
+		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 	}
 }
 
