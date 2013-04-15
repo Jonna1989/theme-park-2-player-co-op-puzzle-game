@@ -9,24 +9,24 @@ InputManager::~InputManager()
 {
 }
 
+InputManager* InputManager::m_instance = 0;
+
+InputManager* InputManager::Instance()
+{
+	if(m_instance == 0)
+	{
+		m_instance = new InputManager();
+	}
+
+	return m_instance;
+}
+
 void InputManager::Initialize()
 {
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
 	m_board = Board::Instance();
-}
-
-void InputManager::Initialize(Player* player1)
-{
-	Initialize();
-	m_player1 = player1;
-}
-
-void InputManager::Initialize(Player* player1, Player* player2)
-{
-	Initialize(player1);
-	m_player2 = player2;
 }
 
 void InputManager::Update(bool singlePlayer, int state)
@@ -53,6 +53,17 @@ void InputManager::Update(bool singlePlayer, int state)
 void InputManager::Cleanup()
 {
 	delete m_keyboard;
+}
+
+void InputManager::SetPlayers(Player* player)
+{
+	m_player1 = player;
+}
+
+void InputManager::SetPlayers(Player* player1, Player* player2)
+{
+	m_player1 = player1;
+	m_player2 = player2;
 }
 
 void InputManager::CheckPlayer1Input()
