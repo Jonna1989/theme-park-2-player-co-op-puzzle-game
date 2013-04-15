@@ -38,6 +38,11 @@ void Board::Update()
 
 void Board::Cleanup()
 {
+	for(unsigned int i = 0; i < m_sprites.size(); i++)
+	{
+		delete m_sprites.at(i);
+	}
+
 	delete m_instance;
 }
 
