@@ -27,7 +27,6 @@ private:
 	Player* m_player2;
 
 	sf::Clock*	m_gravityClock;
-	sf::Time*   m_gravityTime;
 	int			m_gravityInterval;
 
 	void Gravity();

@@ -21,7 +21,6 @@ void Game::Initialize()
 	m_player2->Initialize(20);
 
 	m_gravityClock = new sf::Clock;
-	m_gravityTime = new sf::Time;
 	m_gravityInterval = 2000;
 }
 
@@ -34,7 +33,6 @@ void Game::Update()
 
 void Game::Cleanup()
 {
-	delete m_gravityTime;
 	delete m_gravityClock;
 	m_board->Cleanup();
 }
@@ -67,8 +65,7 @@ void Game::Gravity()
 
 void Game::UseTimedFunctions()
 {
-	m_gravityTime = &m_gravityClock->getElapsedTime();
-	if (m_gravityTime->asMilliseconds() >= m_gravityInterval)
+	if (m_gravityClock->getElapsedTime().asMilliseconds() >= m_gravityInterval)
 	{
 		Gravity();
 		Board::Instance()->PrintBoardToConsole();
