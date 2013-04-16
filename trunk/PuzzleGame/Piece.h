@@ -19,7 +19,7 @@ public:
 
 	int GetColor();
 	sf::Vector2i GetPosition();
-	//sf::Sprite* GetSprite();
+	int GetOwner();
 
 	void SetColor(int color);
 	void SetPosition(int posX, int posY);

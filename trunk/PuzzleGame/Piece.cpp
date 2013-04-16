@@ -43,10 +43,10 @@ sf::Vector2i Piece::GetPosition()
 	return m_position;
 }
 
-//sf::Sprite* Piece::GetSprite()
-//{
-//	return m_pieceSprite;
-//}
+int Piece::GetOwner()
+{
+	return m_owner;
+}
 
 void Piece::SetColor(int color)
 {
