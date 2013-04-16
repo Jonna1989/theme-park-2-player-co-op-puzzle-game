@@ -19,20 +19,19 @@ public:
 
 	int GetColor();
 	sf::Vector2i GetPosition();
-	sf::Sprite* GetSprite();
+	//sf::Sprite* GetSprite();
 
 	void SetColor(int color);
 	void SetPosition(int posX, int posY);
 	void SetOwner(int owner);
+
+	void RandomizeColor();
 
 private:
 	Board* m_board;
 	int m_color;
 	int m_owner;
 	sf::Vector2i m_position;
-
-	sf::Texture* m_pieceTexture;
-	sf::Sprite* m_pieceSprite;
 };
 
 #endif

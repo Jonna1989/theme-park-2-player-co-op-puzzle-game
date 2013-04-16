@@ -108,7 +108,6 @@ void Game::KeyCommand_DropNewPiece()
 	{
 		m_player1->GetPlayerPiece()->DropPieceQuickly();
 		m_player1->GetPlayerPiece()->RandomizeNewPiece();
-		m_player1->GetPlayerPiece()->SetPositions(0, 0, 0, 1);
 	}
 }
 void Game::KeyCommand_ClearBottomRow()

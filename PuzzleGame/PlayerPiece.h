@@ -31,15 +31,22 @@ public:
 	sf::Vector2i GetPositionPieceOne();
 	sf::Vector2i GetPositionPieceTwo();
 	int GetOwner();
+	sf::Vector2i GetSpawnPointOne();
+	sf::Vector2i GetSpawnPointTwo();
 
 	void SetColors(int colorOne,int colorTwo);
 	void SetPositions(int oneX, int oneY, int twoX, int twoY);
 	void SetOwner(int owner);
+	void SetPositionToSpawn();
+	void SetSpawnPointOne(int x, int y);
+	void SetSpawnPointTwo(int x, int y);
 
 private:
 	Piece* m_pieceOne;
 	Piece* m_pieceTwo;
 	int m_owner;
+	sf::Vector2i m_spawnPointOne; //For piece one
+	sf::Vector2i m_spawnPointTwo; //For piece two
 
 	Board* m_board;
 };

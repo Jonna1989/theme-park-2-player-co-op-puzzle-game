@@ -11,10 +11,6 @@ PlayerPiece::~PlayerPiece()
 {
 }
 
-#pragma endregion
-
-#pragma region Publics
-
 void PlayerPiece::Initialize(int owner)
 {
 	m_board = Board::Instance();
@@ -24,19 +20,28 @@ void PlayerPiece::Initialize(int owner)
 	{
 		m_pieceOne = new Piece();
 		m_pieceOne->Initialize(m_owner);
-		m_pieceOne->SetPosition(0 , 0);
+		m_spawnPointOne.x = 0;
+		m_spawnPointOne.y = 0;
+		
 		m_pieceTwo = new Piece();
 		m_pieceTwo->Initialize(m_owner);
-		m_pieceTwo->SetPosition(0, 1);
+		m_spawnPointTwo.x = 0;
+		m_spawnPointTwo.y = 1;
+		
+		SetPositionToSpawn();
 	}
 	else if(m_owner == 20)
 	{
 		m_pieceOne = new Piece();
 		m_pieceOne->Initialize(m_owner);
-		m_pieceOne->SetPosition(BOARD_WIDTH - 1 , 0);
+		m_spawnPointOne.x = 5;
+		m_spawnPointOne.y = 0;
+
 		m_pieceTwo = new Piece();
 		m_pieceTwo->Initialize(m_owner);
-		m_pieceTwo->SetPosition(BOARD_WIDTH - 1, 1);
+		m_spawnPointTwo.x = 5;
+		m_spawnPointTwo.y = 1;
+		SetPositionToSpawn();
 	}
 }
 
@@ -54,6 +59,10 @@ void PlayerPiece::Cleanup()
 	m_pieceTwo->Cleanup();
 	delete m_pieceTwo;
 }
+
+#pragma endregion
+
+#pragma region Rotate
 
 void PlayerPiece::RotatePiece(int dir)
 {
@@ -117,45 +126,215 @@ void PlayerPiece::RotatePiece(int dir)
 	}
 }
 
+#pragma endregion
+
+#pragma region Move
+
 void PlayerPiece::MovePiece(int xDirection)
 {
-	if (xDirection == 1)
+	if (xDirection == 1) //Move right
 	{
-		if((m_pieceOne->GetPosition().x < BOARD_WIDTH - 1) && m_pieceTwo->GetPosition().x < BOARD_WIDTH - 1)
+		if((m_pieceOne->GetPosition().x < BOARD_WIDTH - 1) && (m_pieceTwo->GetPosition().x < BOARD_WIDTH - 1))
 		{
-			if((m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x)
-				|| (m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x)) //If piece one is to the right or if the pieces are vertically aligned
+			if(m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x) //If piece one is to the right
 			{
-				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
-				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+				if(m_board->IsTileVacant(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)) //Adjacent tile is vacant
+				{
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+				}
+				else if(m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
+				{
+					if((m_pieceOne->GetPosition().x + 3 < BOARD_WIDTH)
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y))) //Skip one column if the next two are vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
+					}
+					else if(m_board->GetTile(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two adjacent tiles are owned by other player
+					{
+						if((m_pieceOne->GetPosition().x + 4 < BOARD_WIDTH)
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 4, m_pieceOne->GetPosition().y))) //Skip two columns if next two are vacant and within the board
+						{
+							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 4, m_pieceOne->GetPosition().y);
+							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 4, m_pieceTwo->GetPosition().y);
+						}
+					}					
+				}
 			}
-			else //If piece one is to the left
+			else if(m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x) //The pieces are vertically aligned
 			{
-				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
-				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
-
+				if((m_board->IsTileVacant(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y))) //Adjacent tiles are vacant
+				{
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+				}
+				else if((m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0)) //Both adjacent tile is owned by other player
+				{
+					if((m_pieceOne->GetPosition().x + 2 < BOARD_WIDTH) && (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y))) //Skip one column if the next one is vacant and within the board 
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 2,m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 2,m_pieceTwo->GetPosition().y);
+					}				
+				}
+				else if(((m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetContent() == 0))
+					|| ((m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetContent() == 0))) //One adjacent tile is owned by the other player and the other one is vacant
+				{
+					if((m_pieceOne->GetPosition().x + 2 < BOARD_WIDTH) && (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y))) //Skip one column if the next one is vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y);
+					}
+					else if((m_pieceOne->GetPosition().x + 3 < BOARD_WIDTH) && ((m_board->IsTileVacant(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y)))) //Skip two columns if the next one is vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
+					}					
+				}
+			}
+			else if(m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x) //If piece one is to the left
+			{
+				if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)) //Adjacent tile is vacant
+				{
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+				}
+				else if(m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
+				{
+					if((m_pieceTwo->GetPosition().x + 3 < BOARD_WIDTH)
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y))) //Skip one column if the next two are vacant and within the board
+					{
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);						
+					}
+					else if(m_board->GetTile(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Two columns of tiles are owned by other player
+					{
+						if((m_pieceTwo->GetPosition().x + 4 < BOARD_WIDTH)
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x + 4, m_pieceTwo->GetPosition().y))) //Skip two columns if next two are vacant and within the board
+						{
+							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 4, m_pieceTwo->GetPosition().y);
+							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 4, m_pieceOne->GetPosition().y);							
+						}
+					}	
+				}
 			}
 		}
 	}
-	else if (xDirection == -1)
+	else if (xDirection == -1) //Move left
 	{
 		if((m_pieceOne->GetPosition().x > 0) && m_pieceTwo->GetPosition().x > 0)
 		{
-			if((m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x)
-				|| (m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x)) //If piece one is to the left or if the pieces are vertically aligned
+			if(m_pieceOne->GetPosition().x > m_pieceTwo->GetPosition().x) //If piece one is to the right
 			{
-				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
-				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+				if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 1, m_pieceTwo->GetPosition().y)) //Adjacent tile is vacant
+				{
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+				}
+				else if(m_board->GetTile(m_pieceTwo->GetPosition().x - 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
+				{
+					if((m_pieceTwo->GetPosition().x - 3 >= 0)
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 2, m_pieceTwo->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y))) //Skip one column if the next two are vacant and within the board
+					{
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);						
+					}
+					else if(m_board->GetTile(m_pieceTwo->GetPosition().x - 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two adjacent tiles are owned by other player
+					{
+						if((m_pieceTwo->GetPosition().x - 4 >= 0)
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 4, m_pieceTwo->GetPosition().y))) //Skip two columns if next two are vacant and within the board
+						{
+							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 4, m_pieceTwo->GetPosition().y);
+							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 4, m_pieceOne->GetPosition().y);							
+						}
+					}					
+				}
 			}
-			else //If piece one is to the right
+			else if(m_pieceOne->GetPosition().x == m_pieceTwo->GetPosition().x) //The pieces are vertically aligned
 			{
-				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
-				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
-
+				if((m_board->IsTileVacant(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 1, m_pieceTwo->GetPosition().y))) //Adjacent tiles are vacant
+				{
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+				}
+				else if((m_board->GetTile(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceTwo->GetPosition().x - 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0)) //Both adjacent tile is owned by other player
+				{
+					if((m_pieceOne->GetPosition().x - 2 >= 0) && (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 2, m_pieceTwo->GetPosition().y))) //Skip one column if the next one is vacant and within the board 
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 2,m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 2,m_pieceTwo->GetPosition().y);
+					}				
+				}
+				else if(((m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetContent() == 0))
+					|| ((m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0)
+					&& (m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetContent() == 0))) //One adjacent tile is owned by the other player and the other one is vacant
+				{
+					if((m_pieceOne->GetPosition().x - 2 >= 0) && (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y))
+					&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 2, m_pieceTwo->GetPosition().y))) //Skip one column if the next one is vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 2, m_pieceTwo->GetPosition().y);
+					}
+					else if((m_pieceOne->GetPosition().x - 3 >= 0) && ((m_board->IsTileVacant(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y)))) //Skip two columns if the next one is vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);
+					}					
+				}
+			}
+			else if(m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x) //If piece one is to the left
+			{
+				if(m_board->IsTileVacant(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y)) //Adjacent tile is vacant
+				{
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+				}
+				else if(m_board->GetTile(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
+				{
+					if((m_pieceOne->GetPosition().x - 3 >= 0)
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y))) //Skip one column if the next two are vacant and within the board
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);												
+					}
+					else if(m_board->GetTile(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two columns of tiles are owned by other player
+					{
+						if((m_pieceOne->GetPosition().x - 4 >= 0)
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y))
+						&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 4, m_pieceOne->GetPosition().y))) //Skip two columns if next two are vacant and within the board
+						{
+							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 4, m_pieceOne->GetPosition().y);
+							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 4, m_pieceTwo->GetPosition().y);														
+						}
+					}	
+				}
 			}
 		}
 	}
 }
+
+#pragma endregion
+
+#pragma region Actions
 
 bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 {
@@ -213,18 +392,25 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 
 void PlayerPiece::DropPieceQuickly()
 {
-	while(DropPiece())
+	bool pieceDropped = true;
+	
+	do
 	{
+		pieceDropped = DropPiece();
 	}
+	while(pieceDropped);
 }
 
 void PlayerPiece::RandomizeNewPiece()
 {
-	m_pieceOne->Initialize(m_owner);
-	m_pieceOne->SetPosition(-1 , -1);
-	m_pieceTwo->Initialize(m_owner);
-	m_pieceTwo->SetPosition(-1, -1);
+	m_pieceOne->RandomizeColor();
+	m_pieceTwo->RandomizeColor();
+	SetPositionToSpawn();
 }
+
+#pragma endregion
+
+#pragma region Getters
 
 Piece* PlayerPiece::GetPieceOne()
 {
@@ -261,6 +447,20 @@ int PlayerPiece::GetOwner()
 	return m_owner;
 }
 
+sf::Vector2i PlayerPiece::GetSpawnPointOne()
+{
+	return m_spawnPointOne;
+}
+
+sf::Vector2i PlayerPiece::GetSpawnPointTwo()
+{
+	return m_spawnPointTwo;
+}
+
+#pragma endregion
+
+#pragma region Setters
+
 void PlayerPiece::SetColors(int colorOne, int colorTwo)
 {
 	m_pieceOne->SetColor(colorOne);
@@ -278,6 +478,23 @@ void PlayerPiece::SetOwner(int owner)
 	m_owner = owner;
 	m_pieceOne->SetOwner(m_owner);
 	m_pieceTwo->SetOwner(m_owner);
+}
+
+void PlayerPiece::SetPositionToSpawn()
+{
+	SetPositions(m_spawnPointOne.x, m_spawnPointOne.y, m_spawnPointTwo.x, m_spawnPointTwo.y);
+}
+
+void PlayerPiece::SetSpawnPointOne(int x, int y)
+{
+	m_spawnPointOne.x = x;
+	m_spawnPointOne.y = y;
+}
+
+void PlayerPiece::SetSpawnPointTwo(int x, int y)
+{
+	m_spawnPointTwo.x = x;
+	m_spawnPointTwo.y = y;
 }
 
 #pragma endregion

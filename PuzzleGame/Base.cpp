@@ -16,6 +16,8 @@ void Base::Initialize()
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
+
+	srand((int)time((0)));
 }
 
 void Base::Update()
