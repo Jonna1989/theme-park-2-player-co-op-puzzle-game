@@ -26,6 +26,8 @@ public:
 	void SetOwner(int owner);
 
 	void RandomizeColor();
+	int NrOfAdjacentSameColor();
+	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor();
 
 private:
 	Board* m_board;
