@@ -115,6 +115,84 @@ void Board::DropTile(int x, int y)
 	}
 }
 
+int Board::NrOfAdjacentSameColor(int x, int y)
+{
+	int sameColor = 0; 
+
+	if(m_board.at(y - 1).at(x).GetPositionVector().y >= 0)
+	{
+		if(m_board.at(y - 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColor++;
+		}
+	}
+
+	if(m_board.at(y).at(x + 1).GetPositionVector().x < BOARD_WIDTH)
+	{
+		if(m_board.at(y).at(x + 1).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColor++;
+		}
+	}
+
+	if(m_board.at(y + 1).at(x).GetPositionVector().y < BOARD_HEIGHT)
+	{
+		if(m_board.at(y + 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColor++;
+		}
+	}
+
+	if(m_board.at(y).at(x - 1).GetPositionVector().x >= 0)
+	{
+		if(m_board.at(y).at(x - 1).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColor++;
+		}
+	}
+
+	return sameColor;
+}
+
+std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
+{
+	std::vector<sf::Vector2i> sameColorPositions; 
+
+	if(m_board.at(y - 1).at(x).GetPositionVector().y >= 0)
+	{
+		if(m_board.at(y - 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColorPositions.push_back(m_board.at(y - 1).at(x).GetPositionVector());
+		}
+	}
+
+	if(m_board.at(y).at(x + 1).GetPositionVector().x < BOARD_WIDTH)
+	{
+		if(m_board.at(y).at(x + 1).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColorPositions.push_back(m_board.at(y).at(x + 1).GetPositionVector());
+		}
+	}
+
+	if(m_board.at(y + 1).at(x).GetPositionVector().y < BOARD_HEIGHT)
+	{
+		if(m_board.at(y + 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColorPositions.push_back(m_board.at(y + 1).at(x).GetPositionVector());
+		}
+	}
+
+	if(m_board.at(y).at(x - 1).GetPositionVector().x >= 0)
+	{
+		if(m_board.at(y).at(x - 1).GetContent() == m_board.at(y).at(x).GetContent())
+		{
+			sameColorPositions.push_back(m_board.at(y).at(x + 1).GetPositionVector());
+		}
+	}
+
+	return sameColorPositions;
+}
+
 #pragma endregion
 
 #pragma region Privates

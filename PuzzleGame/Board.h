@@ -57,6 +57,8 @@ public:
 
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
+	int NrOfAdjacentSameColor(int x, int y);
+	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor(int x, int y);
 
 	void PrintBoardToConsole();	
 
