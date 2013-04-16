@@ -17,9 +17,7 @@ Piece::~Piece()
 
 void Piece::Initialize(int owner)
 {
-	srand((int)time((0)));
-
-	m_color = (rand () % (5 - 1) + 1);
+	RandomizeColor();
 	m_position = sf::Vector2i(-1, -1);
 
 	m_board = Board::Instance();
@@ -45,10 +43,10 @@ sf::Vector2i Piece::GetPosition()
 	return m_position;
 }
 
-sf::Sprite* Piece::GetSprite()
-{
-	return m_pieceSprite;
-}
+//sf::Sprite* Piece::GetSprite()
+//{
+//	return m_pieceSprite;
+//}
 
 void Piece::SetColor(int color)
 {
@@ -78,6 +76,15 @@ void Piece::SetOwner(int owner)
 {
 	m_owner = owner;
 	m_board->SetOwner(m_position.x, m_position.y, m_owner);
+}
+
+#pragma endregion
+
+#pragma region Publics
+
+void Piece::RandomizeColor()
+{
+	m_color = (rand () % (5 - 1) + 1);
 }
 
 #pragma endregion
