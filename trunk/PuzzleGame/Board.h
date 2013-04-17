@@ -58,8 +58,14 @@ public:
 
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
+
+	//Only the tiles above, below, to the right and to the left. Doesn't count the tile making the call
 	int NrOfAdjacentSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor(int x, int y);
+	
+	//All connected tiles, branching out to tiles connected to other connected tiles. Doesn't count the original tile making the cal
+	int NrOfConnectedSameColor(int x, int y);
+	std::vector<sf::Vector2i> PositionsOfConnectedSameColor(int x, int y);
 
 	void PrintBoardToConsole();
 
