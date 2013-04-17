@@ -39,6 +39,7 @@ void InputManager::Update(bool singlePlayer, int state)
 		{
 			if (event.key.code == sf::Keyboard::Return)
 			{
+				Soundeffects::Instance()->PlaySound(0,0);
 				StateManager::Instance()->SetState(StateManager::InGame);
 				break;
 			}
