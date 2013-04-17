@@ -1,5 +1,7 @@
 #include "InputManager.h"
 
+#define m_board Board::Instance()
+
 InputManager::InputManager()
 {
 	
@@ -30,7 +32,6 @@ void InputManager::Initialize()
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
-	m_board = Board::Instance();
 }
 
 void InputManager::Update(bool singlePlayer, int state)

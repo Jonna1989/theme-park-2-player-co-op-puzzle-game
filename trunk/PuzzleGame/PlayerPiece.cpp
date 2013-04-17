@@ -21,12 +21,12 @@ void PlayerPiece::Initialize(int owner)
 		m_pieceOne = new Piece();
 		m_pieceOne->Initialize(m_owner);
 		m_spawnPointOne.x = 0;
-		m_spawnPointOne.y = 0;
+		m_spawnPointOne.y = 1;
 		
 		m_pieceTwo = new Piece();
 		m_pieceTwo->Initialize(m_owner);
 		m_spawnPointTwo.x = 0;
-		m_spawnPointTwo.y = 1;
+		m_spawnPointTwo.y = 0;
 		
 		SetPositionToSpawn();
 	}
@@ -35,12 +35,12 @@ void PlayerPiece::Initialize(int owner)
 		m_pieceOne = new Piece();
 		m_pieceOne->Initialize(m_owner);
 		m_spawnPointOne.x = 5;
-		m_spawnPointOne.y = 0;
+		m_spawnPointOne.y = 1;
 
 		m_pieceTwo = new Piece();
 		m_pieceTwo->Initialize(m_owner);
 		m_spawnPointTwo.x = 5;
-		m_spawnPointTwo.y = 1;
+		m_spawnPointTwo.y = 0;
 		SetPositionToSpawn();
 	}
 }
