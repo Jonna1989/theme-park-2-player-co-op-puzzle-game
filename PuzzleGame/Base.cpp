@@ -16,7 +16,7 @@ void Base::Initialize()
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
-
+	Soundeffects::Instance()->Initialize();
 	srand((int)time((0)));
 }
 

@@ -7,6 +7,7 @@
 #include "StateManager.h"
 #include "InputManager.h"
 #include "Player.h"
+#include "Soundeffects.h"
 
 class Base
 {
