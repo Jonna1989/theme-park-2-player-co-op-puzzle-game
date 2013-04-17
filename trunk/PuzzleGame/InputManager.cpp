@@ -43,7 +43,7 @@ void InputManager::Update(bool singlePlayer, int state)
 		{
 			if (event.key.code == sf::Keyboard::Return)
 			{
-				Soundeffects::Instance()->PlaySound(0,0);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1);
 				StateManager::Instance()->SetState(StateManager::InGame);
 				break;
 			}
@@ -76,28 +76,33 @@ void InputManager::CheckPlayer1Input()
 	if((m_keyboard->isKeyPressed(sf::Keyboard::A)) && (!m_keyPressedPlayer1))
 	{
 		m_player1->GetPlayerPiece()->MovePiece(-1);
+		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
 		m_keyPressedPlayer1 = true;
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::D)) && (!m_keyPressedPlayer1))
 	{
 		m_player1->GetPlayerPiece()->MovePiece(1);
+		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
 		m_keyPressedPlayer1 = true;
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::Q)) && (!m_keyPressedPlayer1))
 	{
 		m_player1->GetPlayerPiece()->RotatePiece(-1);
+		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
 		m_keyPressedPlayer1 = true;
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::E)) && (!m_keyPressedPlayer1))
 	{
 		m_player1->GetPlayerPiece()->RotatePiece(1);
+		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
 		m_keyPressedPlayer1 = true;
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
 		m_player1Gravity = m_gravityBase/8;
+		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
 		m_keyPressedPlayer1 = true;
 	}
 	else if (!m_keyboard->isKeyPressed(sf::Keyboard::S) && m_player1Gravity != m_gravityBase)

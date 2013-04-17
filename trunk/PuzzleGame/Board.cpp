@@ -276,6 +276,7 @@ void Board::PrintBoardToConsole()
 		
 		std::cout<<'\n';
 	}
+	std::cout << "------------------------------------------------" << std::endl;
 }
 
 #pragma endregion
