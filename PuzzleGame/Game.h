@@ -29,6 +29,9 @@ private:
 	sf::Clock*	m_gravityClock;
 	int			m_gravityInterval;
 
+	sf::Clock*	m_player1Clock;
+	sf::Clock*	m_player2Clock;
+
 	void Gravity();
 	void BoardGravity();
 	void UseTimedFunctions();

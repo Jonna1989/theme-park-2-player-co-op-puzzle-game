@@ -8,6 +8,7 @@
 #include "StateManager.h"
 #include "Player.h"
 #include "Soundeffects.h"
+#include "Game.h"
 
 class InputManager
 {
@@ -24,6 +25,11 @@ public:
 	void SetPlayers(Player* player1);
 	void SetPlayers(Player* player1, Player* player2);
 
+	void SetGravity(int gravity);
+	int GetGravity();
+	int GetPlayer1Gravity();
+	int GetPlayer2Gravity();
+
 	void CheckPlayer1Input();
 	void CheckPlayer2Input();
 
@@ -32,6 +38,11 @@ private:
 	~InputManager();
 
 	static InputManager* m_instance;
+
+	int m_gravityBase;
+	int m_gravity;
+	int m_player1Gravity;
+	int m_player2Gravity;
 
 	sf::Keyboard* m_keyboard;
 	Board* m_board;

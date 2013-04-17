@@ -112,7 +112,7 @@ void Board::DropTile(int x, int y)
 {
 	if(y < BOARD_HEIGHT - 1)
 	{
-		if(IsTileVacant(x, y + 1))
+		if(IsTileVacant(x, y + 1) && GetTile(x,y)->GetOwner() == 0)
 		{
 			GetTile(x, y + 1)->SetContent(GetTile(x, y)->GetContent());
 			GetTile(x, y + 1)->SetOwner(GetTile(x, y)->GetOwner());

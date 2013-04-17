@@ -21,6 +21,9 @@ void Game::Initialize()
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	m_gravityClock = new sf::Clock;
 	m_gravityInterval = 2000;
+	m_player1Clock = new sf::Clock();
+	m_player2Clock = new sf::Clock();
+	InputManager::Instance()->SetGravity(m_gravityInterval);
 }
 
 void Game::Update()
@@ -33,6 +36,8 @@ void Game::Update()
 void Game::Cleanup()
 {
 	delete m_gravityClock;
+	delete m_player1Clock;
+	delete m_player2Clock;
 	Board::Instance()->Cleanup();
 }
 
@@ -58,10 +63,10 @@ void Game::SetGravityInterval(int milliSeconds)
 
 void Game::Gravity()
 {
-	if((!m_player1->GetPlayerPiece()->DropPiece()) || (!m_player2->GetPlayerPiece()->DropPiece()))
-	{
+	//if((!m_player1->GetPlayerPiece()->DropPiece()) || (!m_player2->GetPlayerPiece()->DropPiece()))
+	//{
 		BoardGravity();
-	}
+	//}
 }
 
 void Game::BoardGravity()
@@ -77,12 +82,22 @@ void Game::BoardGravity()
 
 void Game::UseTimedFunctions()
 {
-	if (m_gravityClock->getElapsedTime().asMilliseconds() >= m_gravityInterval)
+	if (m_gravityClock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetGravity())
 	{
 		Gravity();
-		Board::Instance()->PrintBoardToConsole();
 		m_gravityClock->restart();
 	}
+	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity())
+	{
+		m_player1->GetPlayerPiece()->DropPiece();
+		m_player1Clock->restart();
+	}
+	if (m_player2Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer2Gravity())
+	{
+		m_player2->GetPlayerPiece()->DropPiece();
+		m_player2Clock->restart();
+	}
+	Board::Instance()->PrintBoardToConsole();
 }
 
 #pragma endregion

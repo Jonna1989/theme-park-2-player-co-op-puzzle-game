@@ -23,6 +23,10 @@ InputManager* InputManager::Instance()
 
 void InputManager::Initialize()
 {
+	m_gravityBase = 2000;
+	m_gravity = m_gravityBase;
+	m_player1Gravity = m_gravityBase;
+	m_player2Gravity = m_gravityBase;
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
@@ -69,49 +73,6 @@ void InputManager::SetPlayers(Player* player1, Player* player2)
 
 void InputManager::CheckPlayer1Input()
 {
-// 	do
-// 	{
-// 		if (event1.type == sf::Event::KeyPressed)
-// 		{
-// 			if (event1.key.code == sf::Keyboard::A && !m_keyPressedPlayer1)
-// 			{
-// 				std::cout << "A" << std::endl;
-// 				m_player1->GetPlayerPiece()->MovePiece(-1);
-// 				m_keyPressedPlayer1 = true;
-// 			}
-// 			else if (event1.key.code == sf::Keyboard::D && !m_keyPressedPlayer1)
-// 			{
-// 				m_player1->GetPlayerPiece()->MovePiece(1);
-// 				m_keyPressedPlayer1 = true;
-// 			}
-// 
-// 			if (event1.key.code == sf::Keyboard::Q && !m_keyPressedPlayer1)
-// 			{
-// 				m_player1->GetPlayerPiece()->RotatePiece(-1);
-// 				m_keyPressedPlayer1 = true;
-// 			}
-// 			else if (event1.key.code == sf::Keyboard::E && !m_keyPressedPlayer1)
-// 			{
-// 				m_player1->GetPlayerPiece()->MovePiece(1);
-// 				m_keyPressedPlayer1 = true;
-// 			}
-// 
-// 			if (event1.key.code == sf::Keyboard::S && !m_keyPressedPlayer1)
-// 			{
-// 				m_player1->GetPlayerPiece()->DropPieceQuickly();
-// 				m_keyPressedPlayer1 = true;
-// 			}
-// 
-// 			if ((event1.key.code == sf::Keyboard::Escape) || (event1.type == sf::Event::Closed))
-// 			{
-// 				Window->close();
-// 			}
-// 		}
-// 		else
-// 		{
-// 			m_keyPressedPlayer1 = false;
-// 		}
-// 	} while (Window->pollEvent(event1));
 	if((m_keyboard->isKeyPressed(sf::Keyboard::A)) && (!m_keyPressedPlayer1))
 	{
 		m_player1->GetPlayerPiece()->MovePiece(-1);
@@ -136,8 +97,12 @@ void InputManager::CheckPlayer1Input()
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
-		m_player1->GetPlayerPiece()->DropPieceQuickly();
+		m_player1Gravity = m_gravityBase/8;
 		m_keyPressedPlayer1 = true;
+	}
+	else if (!m_keyboard->isKeyPressed(sf::Keyboard::S) && m_player1Gravity != m_gravityBase)
+	{
+		m_player1Gravity = m_gravityBase;
 	}
 
 	if((!m_keyboard->isKeyPressed(sf::Keyboard::A)) 
@@ -152,49 +117,6 @@ void InputManager::CheckPlayer1Input()
 
 void InputManager::CheckPlayer2Input()
 {
-// 	do
-// 	{
-// 		if (event2.type == sf::Event::KeyPressed)
-// 		{
-// 			if (event2.key.code == sf::Keyboard::H && !m_keyPressedPlayer2)
-// 			{
-// 				std::cout << "A" << std::endl;
-// 				m_player2->GetPlayerPiece()->MovePiece(-1);
-// 				m_keyPressedPlayer2 = true;
-// 			}
-// 			else if (event2.key.code == sf::Keyboard::K && !m_keyPressedPlayer2)
-// 			{
-// 				m_player2->GetPlayerPiece()->MovePiece(1);
-// 				m_keyPressedPlayer2 = true;
-// 			}
-// 
-// 			if (event2.key.code == sf::Keyboard::Y && !m_keyPressedPlayer2)
-// 			{
-// 				m_player2->GetPlayerPiece()->RotatePiece(-1);
-// 				m_keyPressedPlayer2 = true;
-// 			}
-// 			else if (event2.key.code == sf::Keyboard::I && !m_keyPressedPlayer2)
-// 			{
-// 				m_player2->GetPlayerPiece()->MovePiece(1);
-// 				m_keyPressedPlayer2 = true;
-// 			}
-// 
-// 			if (event2.key.code == sf::Keyboard::J && !m_keyPressedPlayer2)
-// 			{
-// 				m_player2->GetPlayerPiece()->DropPieceQuickly();
-// 				m_keyPressedPlayer2 = true;
-// 			}
-// 
-// 			if ((event2.key.code == sf::Keyboard::Escape) || (event2.type == sf::Event::Closed))
-// 			{
-// 				Window->close();
-// 			}
-// 		}
-// 		else
-// 		{
-// 			m_keyPressedPlayer2 = false;
-// 		}
-// 	} while (Window->pollEvent(event2));
 	if((m_keyboard->isKeyPressed(sf::Keyboard::J)) && (!m_keyPressedPlayer2))
 	{
 		m_player2->GetPlayerPiece()->MovePiece(-1);
@@ -219,8 +141,12 @@ void InputManager::CheckPlayer2Input()
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::K)) && (!m_keyPressedPlayer2))
 	{
-		m_player2->GetPlayerPiece()->DropPieceQuickly();
+		m_player2Gravity = m_gravityBase/8;
 		m_keyPressedPlayer2 = true;
+	}
+	else if (!m_keyboard->isKeyPressed(sf::Keyboard::K) && m_player2Gravity != m_gravityBase)
+	{
+		m_player2Gravity = m_gravityBase;
 	}
 
 	if((!m_keyboard->isKeyPressed(sf::Keyboard::J)) 
@@ -231,4 +157,25 @@ void InputManager::CheckPlayer2Input()
 	{
 		m_keyPressedPlayer2 = false;
 	}
+}
+
+void InputManager::SetGravity(int gravity)
+{
+	m_gravityBase = gravity;
+	m_gravity = m_gravityBase;
+}
+
+int InputManager::GetGravity()
+{
+	return m_gravity;
+}
+
+int InputManager::GetPlayer1Gravity()
+{
+	return m_player1Gravity;
+}
+
+int InputManager::GetPlayer2Gravity()
+{
+	return m_player2Gravity;
 }
