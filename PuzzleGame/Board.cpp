@@ -124,41 +124,7 @@ void Board::DropTile(int x, int y)
 
 int Board::NrOfAdjacentSameColor(int x, int y)
 {
-	int sameColor = 0; 
-
-	if(m_board.at(y - 1).at(x).GetPositionVector().y >= 0)
-	{
-		if(m_board.at(y - 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
-		{
-			sameColor++;
-		}
-	}
-
-	if(m_board.at(y).at(x + 1).GetPositionVector().x < BOARD_WIDTH)
-	{
-		if(m_board.at(y).at(x + 1).GetContent() == m_board.at(y).at(x).GetContent())
-		{
-			sameColor++;
-		}
-	}
-
-	if(m_board.at(y + 1).at(x).GetPositionVector().y < BOARD_HEIGHT)
-	{
-		if(m_board.at(y + 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
-		{
-			sameColor++;
-		}
-	}
-
-	if(m_board.at(y).at(x - 1).GetPositionVector().x >= 0)
-	{
-		if(m_board.at(y).at(x - 1).GetContent() == m_board.at(y).at(x).GetContent())
-		{
-			sameColor++;
-		}
-	}
-
-	return sameColor;
+	return PositionsOfAdjacentSameColor(x, y).size();
 }
 
 std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
@@ -198,6 +164,48 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 	}
 
 	return sameColorPositions;
+}
+
+int Board::NrOfConnectedSameColor(int x, int y)
+{
+	return PositionsOfConnectedSameColor(x, y).size();
+}
+
+std::vector<sf::Vector2i> Board::PositionsOfConnectedSameColor(int x, int y)
+{
+	std::vector<sf::Vector2i> positions = PositionsOfAdjacentSameColor(x, y);
+	std::vector<sf::Vector2i> additionalPositions;
+	bool identical = false;
+
+	for(unsigned int i = 0; i < positions.size(); i++)
+	{
+		additionalPositions.clear();
+		additionalPositions = PositionsOfAdjacentSameColor(positions.at(i).x, positions.at(i).y);
+
+		if(additionalPositions.size() > 1)
+		{
+			for(unsigned int j = 0; j < additionalPositions.size(); j++)
+			{
+				identical = false; 
+
+				for(unsigned int k = 0; k < positions.size(); k++)
+				{
+					if(additionalPositions.at(j) == positions.at(k))
+					{
+						identical = true;
+						break;
+					}
+				}
+
+				if(!identical)
+				{
+					positions.push_back(additionalPositions.at(j));
+				}
+			}
+		}
+	}	
+
+	return positions;
 }
 
 #pragma endregion
