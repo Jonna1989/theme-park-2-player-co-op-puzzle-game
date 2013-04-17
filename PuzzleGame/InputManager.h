@@ -45,7 +45,6 @@ private:
 	int m_player2Gravity;
 
 	sf::Keyboard* m_keyboard;
-	Board* m_board;
 	Player* m_player1;
 	Player* m_player2;
 	bool m_keyPressedPlayer1;
