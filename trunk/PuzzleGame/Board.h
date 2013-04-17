@@ -8,11 +8,12 @@
 #include "WindowManager.h"
 #include "Tile.h"
 #include "TextureProvider.h"
+#include "ParticleEffect.h"
 
 static int BOARD_HEIGHT = 10;
-static int BOARD_WIDTH	 = 15;
-static unsigned int TILE_SIZE_X = 50;
-static unsigned int TILE_SIZE_Y = 50;
+static int BOARD_WIDTH	 = 20;
+static unsigned int TILE_SIZE_X = 96;
+static unsigned int TILE_SIZE_Y = 108;
 static const std::string SHEET_PATH_GREEN = "Assets/GraphicalAssets/TempArt/ball1.png";
 static const std::string SHEET_PATH_BLUE = "Assets/GraphicalAssets/TempArt/ball2.png";
 static const std::string SHEET_PATH_PURPLE = "Assets/GraphicalAssets/TempArt/ball3.png";
@@ -60,7 +61,7 @@ public:
 	int NrOfAdjacentSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor(int x, int y);
 
-	void PrintBoardToConsole();	
+	void PrintBoardToConsole();
 
 private:
 	Board();
@@ -76,6 +77,8 @@ private:
 
 	void DrawBoard();
 	void DrawTile(int x, int y);
+
+	ParticleEffect* m_particleEffect;
 };
 
 #endif

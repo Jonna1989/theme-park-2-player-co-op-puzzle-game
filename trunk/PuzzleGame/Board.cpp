@@ -27,17 +27,24 @@ void Board::Initialize()
 	CreateBoard();
 
 	PrintBoardToConsole();
+
+	m_particleEffect = new ParticleEffect();
+	m_particleEffect->Initialize();
 }
 
 void Board::Update()
 {
 	Window->clear();
 	DrawBoard();
+	m_particleEffect->Update();
+	
 	Window->display();
 }
 
 void Board::Cleanup()
 {
+	m_particleEffect->Cleanup();
+	delete m_particleEffect;
 	for(unsigned int i = 0; i < m_sprites.size(); i++)
 	{
 		delete m_sprites.at(i);
@@ -227,6 +234,8 @@ void Board::CreateBoard()
 
 void Board::DrawBoard()
 {
+	int color = 0;
+
 	for(int y = 0; y < BOARD_HEIGHT; y++)
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
@@ -249,7 +258,7 @@ void Board::DrawTile(int x, int y)
 
 void Board::PrintBoardToConsole()
 {
-	std::system("cls");
+	//std::system("cls");
 	for(int y = 0; y < BOARD_HEIGHT; y++) 
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
