@@ -29,7 +29,7 @@ void Base::Update()
 		{
 			if(events.type == sf::Event::Closed)
 			{
-				WindowManager::Instance()->GetWindow()->close();
+				Window->close();
 			}
 		}
 		StateManager::Instance()->Update();

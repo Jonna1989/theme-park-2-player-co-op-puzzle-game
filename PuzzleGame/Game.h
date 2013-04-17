@@ -4,6 +4,7 @@
 #include "State.h"
 #include "InputManager.h"
 #include "Player.h"
+#include "ParticleEffect.h"
 
 class StateManager;
 
