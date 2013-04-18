@@ -12,7 +12,6 @@ Player::~Player()
 
 void Player::Initialize(int owner)
 {
-	m_board = Board::Instance();
 	m_piece = new PlayerPiece();
 	m_piece->Initialize(owner);
 
@@ -32,11 +31,6 @@ void Player::Cleanup()
 #pragma endregion
 
 #pragma region Getters
-
-Board* Player::GetBoard()
-{
-	return m_board;
-}
 
 PlayerPiece* Player::GetPlayerPiece()
 {

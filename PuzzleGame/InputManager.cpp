@@ -76,35 +76,51 @@ void InputManager::CheckPlayer1Input()
 {
 	if((m_keyboard->isKeyPressed(sf::Keyboard::A)) && (!m_keyPressedPlayer1))
 	{
-		m_player1->GetPlayerPiece()->MovePiece(-1);
-		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
-		m_keyPressedPlayer1 = true;
+		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
+		{
+			std::cout << "m_player1's owner is " << m_player1->GetPlayerPiece()->GetOwner() << std::endl;
+			m_player1->GetPlayerPiece()->MovePiece(-1);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			m_keyPressedPlayer1 = true;
+		}
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::D)) && (!m_keyPressedPlayer1))
 	{
-		m_player1->GetPlayerPiece()->MovePiece(1);
-		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
-		m_keyPressedPlayer1 = true;
+		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player1->GetPlayerPiece()->MovePiece(1);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			m_keyPressedPlayer1 = true;
+		}
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::Q)) && (!m_keyPressedPlayer1))
 	{
-		m_player1->GetPlayerPiece()->RotatePiece(-1);
-		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
-		m_keyPressedPlayer1 = true;
+		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player1->GetPlayerPiece()->RotatePiece(-1);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			m_keyPressedPlayer1 = true;
+		}
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::E)) && (!m_keyPressedPlayer1))
 	{
-		m_player1->GetPlayerPiece()->RotatePiece(1);
-		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
-		m_keyPressedPlayer1 = true;
+		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player1->GetPlayerPiece()->RotatePiece(1);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			m_keyPressedPlayer1 = true;
+		}
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
-		m_player1Gravity = m_gravityBase/8;
-		Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
-		m_keyPressedPlayer1 = true;
+		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player1Gravity = m_gravityBase/8;
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			m_keyPressedPlayer1 = true;
+		}
 	}
 	else if (!m_keyboard->isKeyPressed(sf::Keyboard::S) && m_player1Gravity != m_gravityBase)
 	{
@@ -125,30 +141,45 @@ void InputManager::CheckPlayer2Input()
 {
 	if((m_keyboard->isKeyPressed(sf::Keyboard::J)) && (!m_keyPressedPlayer2))
 	{
-		m_player2->GetPlayerPiece()->MovePiece(-1);
-		m_keyPressedPlayer2 = true;
+		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player2->GetPlayerPiece()->MovePiece(-1);
+			m_keyPressedPlayer2 = true;
+		}
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::L)) && (!m_keyPressedPlayer2))
 	{
-		m_player2->GetPlayerPiece()->MovePiece(1);
-		m_keyPressedPlayer2 = true;	
+		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player2->GetPlayerPiece()->MovePiece(1);
+			m_keyPressedPlayer2 = true;
+		}
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::U)) && (!m_keyPressedPlayer2))
 	{
-		m_player2->GetPlayerPiece()->RotatePiece(-1);
-		m_keyPressedPlayer2 = true;
+		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player2->GetPlayerPiece()->RotatePiece(-1);
+			m_keyPressedPlayer2 = true;
+		}
 	}
 	else if((m_keyboard->isKeyPressed(sf::Keyboard::O)) && (!m_keyPressedPlayer2))
 	{
-		m_player2->GetPlayerPiece()->RotatePiece(1);
-		m_keyPressedPlayer2 = true;
+		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player2->GetPlayerPiece()->RotatePiece(1);
+			m_keyPressedPlayer2 = true;
+		}
 	}
 
 	if((m_keyboard->isKeyPressed(sf::Keyboard::K)) && (!m_keyPressedPlayer2))
 	{
-		m_player2Gravity = m_gravityBase/8;
-		m_keyPressedPlayer2 = true;
+		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
+		{
+			m_player2Gravity = m_gravityBase/8;
+			m_keyPressedPlayer2 = true;
+		}
 	}
 	else if (!m_keyboard->isKeyPressed(sf::Keyboard::K) && m_player2Gravity != m_gravityBase)
 	{
