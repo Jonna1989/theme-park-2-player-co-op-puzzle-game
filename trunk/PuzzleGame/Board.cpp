@@ -131,7 +131,7 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 {
 	std::vector<sf::Vector2i> sameColorPositions; 
 
-	if(m_board.at(y - 1).at(x).GetPositionVector().y >= 0)
+	if(y - 1 >= 0)
 	{
 		if(m_board.at(y - 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
 		{
@@ -139,7 +139,7 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 		}
 	}
 
-	if(m_board.at(y).at(x + 1).GetPositionVector().x < BOARD_WIDTH)
+	if(x + 1 < BOARD_WIDTH)
 	{
 		if(m_board.at(y).at(x + 1).GetContent() == m_board.at(y).at(x).GetContent())
 		{
@@ -147,7 +147,7 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 		}
 	}
 
-	if(m_board.at(y + 1).at(x).GetPositionVector().y < BOARD_HEIGHT)
+	if(y + 1 < BOARD_HEIGHT)
 	{
 		if(m_board.at(y + 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
 		{
@@ -155,7 +155,7 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 		}
 	}
 
-	if(m_board.at(y).at(x - 1).GetPositionVector().x >= 0)
+	if(x - 1 >= 0)
 	{
 		if(m_board.at(y).at(x - 1).GetContent() == m_board.at(y).at(x).GetContent())
 		{
