@@ -4,6 +4,8 @@
 #include <iostream>
 #include "ConfigReader.h"
 
+const float PITCH_SPEED = 0.1f;
+
 class Music
 {
 public:
@@ -26,7 +28,9 @@ public:
 	void IncreasePitch();
 	void DecreasePitch();
 
-
+	sf::Music* GetMusic();
+	void ResetPitchVariable();
+	float GetPitchVariable();
 
 private:
 	Music();

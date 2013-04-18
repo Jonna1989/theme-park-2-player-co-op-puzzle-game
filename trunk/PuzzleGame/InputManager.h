@@ -33,6 +33,8 @@ public:
 	void CheckPlayer1Input();
 	void CheckPlayer2Input();
 
+
+
 private:
 	InputManager();
 	~InputManager();
@@ -51,6 +53,8 @@ private:
 	sf::Event event1;
 	sf::Event event2;
 	bool m_keyPressedPlayer2;
+
+	void CheckMusicKeys();
 };
 
 #endif

@@ -10,6 +10,7 @@
 const int NUMBER_OF_UI_SOUNDS = 7;
 const std::string SHEET_PATH_TO_SOUND_EFFECTS = "Assets/AudioAssets/SoundEffects/";
 const std::string PATH_UI = "UiSounds/UiSound";
+const float DEFAULT_PITCH = 1.0f;
 
 class Soundeffects
 {
@@ -26,7 +27,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void PlaySound(int SoundCategory,int SoundNumber);
+	void PlaySound(int SoundCategory,int SoundNumber, float Pitch);
 	void PlaySound(int SoundNumber);
 	void StopSound(int SoundNumber);
 
@@ -58,7 +59,7 @@ void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::strin
 void LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename);
 void LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, std::vector<std::string> filenameVector);
 void SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, float initialPitch);
-void SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber, sf::Sound* &SoundToUse);
+void SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber, sf::Sound* &SoundToUse, float Pitch);
 };
 
 

@@ -44,15 +44,20 @@ void InputManager::Update(bool singlePlayer, int state)
 		{
 			if (event.key.code == sf::Keyboard::Return)
 			{
-				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH);
 				StateManager::Instance()->SetState(StateManager::InGame);
 				break;
+			}
+			else
+			{
+				CheckMusicKeys();
 			}
 		}
 		break;
 	case StateManager::InGame: //Game
 		CheckPlayer1Input();
 		CheckPlayer2Input();
+		CheckMusicKeys();
 		break;
 	}
 }
@@ -80,7 +85,7 @@ void InputManager::CheckPlayer1Input()
 		{
 			std::cout << "m_player1's owner is " << m_player1->GetPlayerPiece()->GetOwner() << std::endl;
 			m_player1->GetPlayerPiece()->MovePiece(-1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -89,7 +94,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->MovePiece(1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5, DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -99,7 +104,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->RotatePiece(-1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,1.25f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -108,7 +113,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->RotatePiece(1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,1.25f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -118,7 +123,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1Gravity = m_gravityBase/8;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,2.0f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -215,4 +220,24 @@ int InputManager::GetPlayer1Gravity()
 int InputManager::GetPlayer2Gravity()
 {
 	return m_player2Gravity;
+}
+
+void InputManager::CheckMusicKeys()
+{
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+	{
+		Music::Instance()->IncreasePitch();
+		std::cout << Music::Instance()->GetPitchVariable() << std::endl;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+	{
+		Music::Instance()->DecreasePitch();
+		std::cout << Music::Instance()->GetPitchVariable() << std::endl;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+	{
+		Music::Instance()->ResetPitchVariable();
+		Music::Instance()->GetMusic()->setPitch(Music::Instance()->GetPitchVariable());
+	}
 }

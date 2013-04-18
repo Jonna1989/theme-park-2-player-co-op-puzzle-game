@@ -29,7 +29,6 @@ void StartMenu::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
-	Music::Instance()->Update();
 	Window->display();
 }
 

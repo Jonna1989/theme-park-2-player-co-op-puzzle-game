@@ -32,7 +32,6 @@ void Game::Update()
 {
 	UseTimedFunctions();
 	Board::Instance()->Update();	
-	Music::Instance()->Update();
 	KeyCommands();
 }
 
