@@ -4,7 +4,7 @@
 #include <iostream>
 #include "ConfigReader.h"
 
-const float PITCH_SPEED = 0.1f;
+const float PITCH_SPEED = 0.5f;
 
 class Music
 {
