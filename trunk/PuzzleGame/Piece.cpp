@@ -84,7 +84,7 @@ void Piece::SetOwner(int owner)
 
 void Piece::RandomizeColor()
 {
-	m_color = (rand () % (5 - 1) + 1);
+	m_color = (rand () % (6 - 1) + 1);
 }
 
 int Piece::NrOfAdjacentSameColor()

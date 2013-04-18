@@ -26,6 +26,8 @@ private:
 	Player* m_player1;
 	Player* m_player2;
 
+	bool m_playerYPressed;
+
 	sf::Clock*	m_gravityClock;
 	int			m_gravityInterval;
 
