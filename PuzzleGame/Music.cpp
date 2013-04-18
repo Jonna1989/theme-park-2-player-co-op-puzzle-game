@@ -53,20 +53,6 @@ void Music::Initialize(int TrackNumber)
 void Music::Update()
 {
 	SetAllVolume();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-	{
-		Music::Instance()->IncreasePitch();
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-	{
-		Music::Instance()->DecreasePitch();
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-	{
-		pitch = 1;
-		m_music->setPitch(1);
-	}
 }
 #pragma endregion
 #pragma region Cleanup
@@ -97,7 +83,7 @@ void Music::IncreasePitch()
 	}
 	else
 	{
-		pitch+= 0.005f;
+		pitch+= PITCH_SPEED *DeltaTime;
 	}
 	m_music->setPitch(pitch);
 }
@@ -110,9 +96,21 @@ void Music::DecreasePitch()
 	}
 	else
 	{
-		pitch-= 0.005f;
+		pitch-= PITCH_SPEED*DeltaTime;
 	}
 	m_music->setPitch(pitch);
+}
+sf::Music* Music::GetMusic()
+{
+    return	m_music;
+}
+void Music::ResetPitchVariable()
+{
+	pitch = 1;
+}
+float Music::GetPitchVariable()
+{
+	return pitch;
 }
 #pragma endregion
 

@@ -73,12 +73,12 @@ void Soundeffects::PlaySound(int SoundNumber)
 {
 	
 }
-void Soundeffects::PlaySound(int SoundCategory, int SoundNumber)
+void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch)
 {
 	switch (SoundCategory)
 	{
 	case UISOUND:
-		SetBufferToSoundAndPlay(m_uiBuffers,SoundNumber,m_uiSound);
+		SetBufferToSoundAndPlay(m_uiBuffers,SoundNumber,m_uiSound, Pitch);
 			 break;
 	}
 }
@@ -184,10 +184,11 @@ void Soundeffects::SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Soun
 	Sound->setBuffer(*Buffer);
 	Sound->setPitch(initialPitch);
 }
-void Soundeffects::SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber,sf::Sound* &SoundToUse)
+void Soundeffects::SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber,sf::Sound* &SoundToUse, float Pitch)
 {
 	SoundToUse->stop();
 	SoundToUse->setBuffer(*VectorToUse[BufferNumber]);
+	SoundToUse->setPitch(Pitch);
 	SoundToUse->play();
 }
 #pragma endregion
