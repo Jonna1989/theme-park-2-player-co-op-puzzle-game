@@ -39,11 +39,13 @@ void Music::Initialize(int TrackNumber)
 	switch (TrackNumber)
 	{
 	case MenuMusic1:
-
-	#pragma region Load Menu Music 1
 		LoadMusic(m_music,"Assets/AudioAssets/Music/can.ogg");
 		break;
+	case LevelMusic1:
+		LoadMusic(m_music,"Assets/AudioAssets/Music/chicken.ogg");
+		break;
 	}
+
 	pitch = 1;
 }
 #pragma endregion

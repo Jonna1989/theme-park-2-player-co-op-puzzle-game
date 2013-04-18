@@ -4,24 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ConfigReader.h"
+#include <sstream>
+#include <stdlib.h>
 
-const int NUMBER_OF_UI_SOUNDS = 10;
-const std::string SHEET_PATH_TO_SOUND_ASSETS_UI = "Assets/AudioAssets/SoundEffects/UiSounds/UiSound";
-const std::string SHEET_PATH_ARRAY_UI[NUMBER_OF_UI_SOUNDS] =
-	{
-#pragma region Herp
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"0.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"1.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"2.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"3.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"4.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"5.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"6.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"7.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"8.wav",
-		SHEET_PATH_TO_SOUND_ASSETS_UI+"9.wav"
-#pragma endregion
-	};
+const int NUMBER_OF_UI_SOUNDS = 7;
+const std::string SHEET_PATH_TO_SOUND_EFFECTS = "Assets/AudioAssets/SoundEffects/";
+const std::string PATH_UI = "UiSounds/UiSound";
 
 class Soundeffects
 {
@@ -50,9 +38,7 @@ private:
 	Soundeffects();
 	~Soundeffects();
 	
-
-#pragma endregion
-
+	std::vector<std::string> m_sheetPathVectorUi;
 	static Soundeffects*	m_instance;
 
 	sf::Sound* m_uiSound;
@@ -64,11 +50,13 @@ private:
 	bool m_soundon;
 #pragma endregion
 
-void CleanupVector(std::vector<sf::Sound*> &vectorToClean);
+std::vector<std::string> DeclareSheetPathArray(std::vector<std::string> &m_sheetPathVectorUi, int NumberOfSoundsInArray, const std::string Path); 
+
+void CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean);
 void PlaySingleSound(sf::Sound* &soundToPlay);
 void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string filename, float initialPitch);
 void LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename);
-void LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, const std::string filenameArray[]);
+void LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, std::vector<std::string> filenameVector);
 void SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, float initialPitch);
 void SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber, sf::Sound* &SoundToUse);
 };

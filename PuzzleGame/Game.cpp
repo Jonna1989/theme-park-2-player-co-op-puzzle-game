@@ -19,6 +19,8 @@ void Game::Initialize()
 	m_player2 = new Player();
 	m_player2->Initialize(20);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
+	Music::Instance()->Initialize(Music::LevelMusic1);
+	Music::Instance()->StartMusic();
 	m_gravityClock = new sf::Clock;
 	m_gravityInterval = 2000;
 	m_player1Clock = new sf::Clock();
@@ -30,6 +32,7 @@ void Game::Update()
 {
 	UseTimedFunctions();
 	Board::Instance()->Update();	
+	Music::Instance()->Update();
 	KeyCommands();
 }
 

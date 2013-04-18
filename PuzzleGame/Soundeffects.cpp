@@ -31,6 +31,14 @@ Soundeffects* Soundeffects::Instance()
 #pragma region Initialize
 void Soundeffects::Initialize()
 {
+	DeclareSheetPathArray(m_sheetPathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
+// 	for (int i = 0; i < NUMBER_OF_UI_SOUNDS ; i++)
+// 	{
+// 		std::ostringstream	s;
+// 		s << i;
+// 		std::string i_as_string(s.str());
+// 		SHEET_PATH_ARRAY_UI[i] = SHEET_PATH_TO_SOUND_ASSETS_UI+i_as_string+".wav";
+// 	}
 #pragma region Volume
 	if(!m_soundconfig.load("options.txt"))
 	{
@@ -41,7 +49,7 @@ void Soundeffects::Initialize()
 #pragma endregion
 	for (int i = 0; i < NUMBER_OF_UI_SOUNDS ; i++)
 	{
-		LoadSoundFile(m_uiBuffers,i,SHEET_PATH_ARRAY_UI);
+		LoadSoundFile(m_uiBuffers,i,m_sheetPathVectorUi);
 	}
 	m_uiSound = new sf::Sound();
 }
@@ -55,7 +63,8 @@ void Soundeffects::Update()
 #pragma region Cleanup
 void Soundeffects::Cleanup()
 {
-
+	delete m_uiSound;
+	CleanupVector(m_uiBuffers);
 }
 #pragma endregion
 
@@ -101,8 +110,25 @@ void Soundeffects::SetSoundvol()
 #pragma endregion
 
 #pragma region Privates
-void Soundeffects::CleanupVector(std::vector<sf::Sound*> &vectorToClean)
+
+std::vector<std::string> Soundeffects::DeclareSheetPathArray(std::vector<std::string> &m_sheetPathVectorUi, int NumberOfSoundsInArray, const std::string Path)
 {
+	for (int i = 1; i <= NumberOfSoundsInArray ; i++)
+	{
+		std::ostringstream	s;
+		s << i;
+		std::string i_as_string(s.str());
+		m_sheetPathVectorUi.push_back(SHEET_PATH_TO_SOUND_EFFECTS+Path+i_as_string+".wav");
+	}
+	return m_sheetPathVectorUi;
+}
+
+void Soundeffects::CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean)
+{
+	for (unsigned int i = 0; i < vectorToClean.size() ; i++)
+	{
+		delete vectorToClean[i];
+	}
 	vectorToClean.clear();
 }
 void Soundeffects::PlaySingleSound(sf::Sound* &soundToPlay)
@@ -128,16 +154,16 @@ void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, co
 	Sound->setPitch(initialPitch);
 	Sound->setVolume(m_soundvol);
 }
-void Soundeffects::LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, const std::string filenameArray[])
+void Soundeffects::LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, std::vector<std::string> filenameVector)
 {
-	m_uiBuffers.push_back(new sf::SoundBuffer);
-	if (BufferVector[vectorPosition]->loadFromFile(filenameArray[vectorPosition]))
+	BufferVector.push_back(new sf::SoundBuffer);
+	if (BufferVector[vectorPosition]->loadFromFile(filenameVector[vectorPosition]))
 	{
-		std::cout << "Loaded sound: " << filenameArray[vectorPosition] << std::endl;
+		std::cout << "Loaded sound: " << filenameVector[vectorPosition] << std::endl;
 	}
-	else if (!BufferVector[vectorPosition]->loadFromFile(filenameArray[vectorPosition]))
+	else if (!BufferVector[vectorPosition]->loadFromFile(filenameVector[vectorPosition]))
 	{
-		std::cout << "Failed to load sound: " << filenameArray[vectorPosition] << std::endl;
+		std::cout << "Failed to load sound: " << filenameVector[vectorPosition] << std::endl;
 	}
 }
 void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename)
