@@ -14,7 +14,6 @@ public:
 	void Update();
 	void Cleanup();
 
-	Board* GetBoard();
 	PlayerPiece* GetPlayerPiece();
 	int GetScore();
 
@@ -23,7 +22,6 @@ public:
 	void setScore(int newScore);
 
 private:
-	Board* m_board;
 	PlayerPiece* m_piece;
 
 	int m_score;

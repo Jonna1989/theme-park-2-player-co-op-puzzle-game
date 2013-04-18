@@ -405,35 +405,72 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		//Piece one drop if possible
 		if(m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
 		{
-			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
-			dropped = true;
+			if ((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT))
+			{
+				if (m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+					dropped = true;
+				}
+			}
 		}
 		else
 		{
-			m_pieceOne->SetOwner(0);
+			if (m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT)
+			{
+				if (m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					SetOwner(0);
+				}
+			}
+			else if (m_pieceOne->GetPosition().y == BOARD_HEIGHT-1)
+			{
+				SetOwner(0);
+			}
 		}
 
 		//Piece two drop if possible
-		if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
+		if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)
+			&& m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 		{
-			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
-			dropped = true;
+			if ((0 <= m_pieceTwo->GetPosition().y + 1 && m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT))
+			{
+				if (m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+					dropped = true;
+				}
+			}
 		}
 		else
 		{
-			m_pieceTwo->SetOwner(0);
+			if (m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT)
+			{
+				if (m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					SetOwner(0);
+				}
+			}
+			else if (m_pieceTwo->GetPosition().y == BOARD_HEIGHT-1)
+			{
+				SetOwner(0);
+			}
 		}
 	}
 	else //Piece aligned vertically
 	{
-		if((m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)) 
+		if((m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
+			//&& (m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+			//&& (m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			&& (m_pieceTwo->GetPosition().y == m_pieceOne->GetPosition().y - 1)) //Piece one lowest
 		{
 			m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
 			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
 			dropped = true;
 		}
-		else if((m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)) 
+		else if((m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
+			//&& (m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+			//&& (m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0) 
 			&& (m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y - 1)) //Piece two lowest
 		{
 			m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
@@ -442,8 +479,24 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		}
 		else
 		{
-			m_pieceOne->SetOwner(0);
-			m_pieceTwo->SetOwner(0);
+			if ((m_pieceTwo->GetPosition().y == BOARD_HEIGHT-1) || (m_pieceOne->GetPosition().y == BOARD_HEIGHT-1))
+			{
+				SetOwner(0);
+			}
+			else if (m_pieceOne->GetPosition().y < m_pieceTwo->GetPosition().y && m_pieceTwo->GetPosition().y+1 < BOARD_HEIGHT)
+			{
+				if (m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					SetOwner(0);
+				}
+			}
+			else if (m_pieceTwo->GetPosition().y < m_pieceOne->GetPosition().y && m_pieceOne->GetPosition().y+1 < BOARD_HEIGHT)
+			{
+				if (m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+				{
+					SetOwner(0);
+				}
+			}
 		}
 	}
 

@@ -86,18 +86,20 @@ void Game::UseTimedFunctions()
 	{
 		Gravity();
 		m_gravityClock->restart();
+		Board::Instance()->PrintBoardToConsole();
 	}
 	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity())
 	{
 		m_player1->GetPlayerPiece()->DropPiece();
 		m_player1Clock->restart();
+		Board::Instance()->PrintBoardToConsole();
 	}
 	if (m_player2Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer2Gravity())
 	{
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
+		Board::Instance()->PrintBoardToConsole();
 	}
-	Board::Instance()->PrintBoardToConsole();
 }
 
 #pragma endregion
