@@ -400,6 +400,9 @@ void PlayerPiece::MovePiece(int xDirection)
 bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 {
 	bool dropped = false;
+	
+	bool pieceOneDropped = false;
+	bool pieceTwoDropped = false;
 
 	if(m_pieceOne->GetPosition().x != m_pieceTwo->GetPosition().x) //Piece aligned horizontally
 	{
@@ -410,6 +413,7 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			{
 				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
 				dropped = true;
+				pieceOneDropped = true;
 			}
 			else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 			{
@@ -430,6 +434,7 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			{
 				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
 				dropped = true;
+				pieceTwoDropped = true;
 			}
 			else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			{
@@ -438,6 +443,11 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			}
 		}
 		else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
+		{
+			SetOwner(0);
+			SetNewPlayerPieces();
+		}
+		if ((pieceOneDropped && !pieceTwoDropped) || (!pieceOneDropped && pieceTwoDropped))
 		{
 			SetOwner(0);
 			SetNewPlayerPieces();

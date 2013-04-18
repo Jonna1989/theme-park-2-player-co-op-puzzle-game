@@ -121,7 +121,7 @@ void InputManager::CheckPlayer1Input()
 	{
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
-			m_player1Gravity = m_gravityBase/8;
+			m_player1Gravity = 100;
 			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,0.5f);
 			m_keyPressedPlayer1 = true;
 		}
@@ -181,7 +181,7 @@ void InputManager::CheckPlayer2Input()
 	{
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
 		{
-			m_player2Gravity = m_gravityBase/8;
+			m_player2Gravity = 100;
 			m_keyPressedPlayer2 = true;
 		}
 	}
@@ -202,8 +202,8 @@ void InputManager::CheckPlayer2Input()
 
 void InputManager::SetGravity(int gravity)
 {
-	m_gravityBase = gravity;
-	m_gravity = m_gravityBase;
+	m_gravity = gravity;
+	m_gravityBase = gravity*5;
 }
 
 int InputManager::GetGravity()
