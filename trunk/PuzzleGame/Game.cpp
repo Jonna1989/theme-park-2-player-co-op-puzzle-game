@@ -26,7 +26,6 @@ void Game::Initialize()
 	m_player1Clock = new sf::Clock();
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
-	m_playerYPressed = true;
 }
 
 void Game::Update()
@@ -111,7 +110,6 @@ void Game::UseTimedFunctions()
 
 void Game::KeyCommands()
 {
-	KeyCommand_DropNewPiece();
 	KeyCommand_PrintBoardToConsole();
 	KeyCommand_ClearBottomRow();
 }
@@ -122,28 +120,7 @@ void Game::KeyCommand_PrintBoardToConsole()
 		Board::Instance()->PrintBoardToConsole();
 	}
 }
-void Game::KeyCommand_DropNewPiece()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y) && !m_playerYPressed)
-	{
-		m_playerYPressed = true;
-		int oneValue = Board::Instance()->GetTile(m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x,m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().y)->GetContent();
-		int twoValue = Board::Instance()->GetTile(m_player1->GetPlayerPiece()->GetPieceTwo()->GetPosition().x,m_player1->GetPlayerPiece()->GetPieceTwo()->GetPosition().y)->GetContent();
-		int onePosX = m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x;
-		int onePosY = m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().y;
-		int twoPosX = m_player1->GetPlayerPiece()->GetPieceTwo()->GetPosition().x;
-		int twoPosY = m_player1->GetPlayerPiece()->GetPieceTwo()->GetPosition().y;
-		//m_player1->GetPlayerPiece()->DropPieceQuickly();
-		m_player1->GetPlayerPiece()->RandomizeNewPiece();
-		m_player1->GetPlayerPiece()->SetOwner(10);
-		Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
-		Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
-	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
-	{
-		m_playerYPressed = false;
-	}
-}
+
 void Game::KeyCommand_ClearBottomRow()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))

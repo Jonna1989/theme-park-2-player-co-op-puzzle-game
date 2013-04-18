@@ -41,6 +41,8 @@ public:
 	void SetSpawnPointOne(int x, int y);
 	void SetSpawnPointTwo(int x, int y);
 
+	void SetNewPlayerPieces();
+
 private:
 	Piece* m_pieceOne;
 	Piece* m_pieceTwo;
