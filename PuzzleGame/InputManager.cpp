@@ -83,7 +83,6 @@ void InputManager::CheckPlayer1Input()
 	{
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
-			std::cout << "m_player1's owner is " << m_player1->GetPlayerPiece()->GetOwner() << std::endl;
 			m_player1->GetPlayerPiece()->MovePiece(-1);
 			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;

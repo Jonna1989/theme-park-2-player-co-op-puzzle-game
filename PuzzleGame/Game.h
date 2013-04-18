@@ -26,8 +26,6 @@ private:
 	Player* m_player1;
 	Player* m_player2;
 
-	bool m_playerYPressed;
-
 	sf::Clock*	m_gravityClock;
 	int			m_gravityInterval;
 
@@ -40,7 +38,6 @@ private:
 
 	void KeyCommands();
 	void KeyCommand_PrintBoardToConsole();
-	void KeyCommand_DropNewPiece();
 	void KeyCommand_ClearBottomRow();
 };
 

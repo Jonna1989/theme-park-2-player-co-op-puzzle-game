@@ -41,6 +41,7 @@ void PlayerPiece::Initialize(int owner)
 		m_pieceTwo->Initialize(m_owner);
 		m_spawnPointTwo.x = 5;
 		m_spawnPointTwo.y = 0;
+
 		SetPositionToSpawn();
 	}
 }
@@ -413,11 +414,13 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
+				SetNewPlayerPieces();
 			}
 		}
 		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
+			SetNewPlayerPieces();
 		}
 
 		//Piece two drop if possible
@@ -431,11 +434,13 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
+				SetNewPlayerPieces();
 			}
 		}
 		else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
+			SetNewPlayerPieces();
 		}
 	}
 	else //Piece aligned vertically
@@ -454,10 +459,12 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
+					SetNewPlayerPieces();
 				}
 				else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
+					SetNewPlayerPieces();
 				}
 			}
 			else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y - 1) //Piece two lowest
@@ -471,16 +478,19 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
+					SetNewPlayerPieces();
 				}
 				else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
+					SetNewPlayerPieces();
 				}
 			}
 		}
 		else if((m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1) || (m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1))
 		{
 			SetOwner(0);
+			SetNewPlayerPieces();
 		}
 	}
 
@@ -592,6 +602,20 @@ void PlayerPiece::SetSpawnPointTwo(int x, int y)
 {
 	m_spawnPointTwo.x = x;
 	m_spawnPointTwo.y = y;
+}
+
+void PlayerPiece::SetNewPlayerPieces()
+{
+	int oneValue = Board::Instance()->GetTile(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y)->GetContent();
+	int twoValue = Board::Instance()->GetTile(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y)->GetContent();
+	int onePosX = m_pieceOne->GetPosition().x;
+	int onePosY = m_pieceOne->GetPosition().y;
+	int twoPosX = m_pieceTwo->GetPosition().x;
+	int twoPosY = m_pieceTwo->GetPosition().y;
+	RandomizeNewPiece();
+	SetOwner(10);
+	Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
+	Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
 }
 
 #pragma endregion
