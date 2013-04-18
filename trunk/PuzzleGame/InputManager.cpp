@@ -123,7 +123,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1Gravity = m_gravityBase/8;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,2.0f);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,0.5f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
