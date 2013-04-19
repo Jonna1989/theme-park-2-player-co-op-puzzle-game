@@ -26,6 +26,7 @@ void Game::Initialize()
 	m_player1Clock = new sf::Clock();
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
+	m_printBoardInterval = new sf::Clock();
 }
 
 void Game::Update()
@@ -88,21 +89,23 @@ void Game::UseTimedFunctions()
 	{
 		Gravity();
 		m_gravityClock->restart();
-		Board::Instance()->PrintBoardToConsole();
 	}
 	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity())
 	{
 		m_player1->GetPlayerPiece()->DropPiece();
 		m_player1Clock->restart();
-		Board::Instance()->PrintBoardToConsole();
 	}
 	if (m_player2Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer2Gravity())
 	{
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
-		Board::Instance()->PrintBoardToConsole();
-	}
 
+	}
+	if (m_printBoardInterval->getElapsedTime().asSeconds() >= 5)
+	{
+		Board::Instance()->PrintBoardToConsole();
+		m_printBoardInterval->restart();
+	}
 }
 
 #pragma endregion
