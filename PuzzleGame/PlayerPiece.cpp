@@ -75,11 +75,13 @@ void PlayerPiece::RotatePiece(int dir)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y))) //Piece one below
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 			else if((m_pieceOne->GetPosition().y < m_pieceTwo->GetPosition().y) && (m_pieceOne->GetPosition().x > 0)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y))) //Piece one above
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 		}
 		else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y) //Aligned horizontally
@@ -88,11 +90,13 @@ void PlayerPiece::RotatePiece(int dir)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y - 1))) //Piece one to the right
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y - 1);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 			else if((m_pieceOne->GetPosition().x < m_pieceTwo->GetPosition().x) && (m_pieceOne->GetPosition().y < BOARD_HEIGHT - 1)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))) //Piece one to the left
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 		}
 	}
@@ -104,11 +108,13 @@ void PlayerPiece::RotatePiece(int dir)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y))) //Piece one below
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 			else if((m_pieceOne->GetPosition().y < m_pieceTwo->GetPosition().y) && (m_pieceOne->GetPosition().x < BOARD_WIDTH - 1)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y))) //Piece one above
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 		}
 		else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y) //Aligned horizontally
@@ -117,11 +123,13 @@ void PlayerPiece::RotatePiece(int dir)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))) //Piece one to the right
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 			else if(m_pieceOne->GetPosition().x < (m_pieceTwo->GetPosition().x)
 				&& (m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y - 1))) //Piece one to the left
 			{
 				m_pieceTwo->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y - 1);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			}
 		}
 	}
@@ -145,6 +153,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if(m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
@@ -157,6 +166,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if(m_board->GetTile(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two adjacent tiles are owned by other player
@@ -169,6 +179,7 @@ void PlayerPiece::MovePiece(int xDirection)
 							{
 								m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 4, m_pieceOne->GetPosition().y);
 								m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 4, m_pieceTwo->GetPosition().y);
+								Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 							}
 						}
 					}					
@@ -183,6 +194,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if((m_board->GetTile(m_pieceOne->GetPosition().x + 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
@@ -195,6 +207,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 2,m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 2,m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}				
 				}
@@ -210,6 +223,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 2, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if((m_pieceOne->GetPosition().x + 3 < BOARD_WIDTH) && ((m_board->IsTileVacant(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y))
@@ -219,6 +233,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}					
 				}
@@ -231,6 +246,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 1,m_pieceTwo->GetPosition().y);
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 1,m_pieceOne->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if(m_board->GetTile(m_pieceTwo->GetPosition().x + 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
@@ -243,6 +259,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 3, m_pieceTwo->GetPosition().y);
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 3, m_pieceOne->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if(m_board->GetTile(m_pieceTwo->GetPosition().x + 2, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Two columns of tiles are owned by other player
@@ -255,6 +272,7 @@ void PlayerPiece::MovePiece(int xDirection)
 							{
 								m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x + 4, m_pieceTwo->GetPosition().y);
 								m_pieceOne->SetPosition(m_pieceOne->GetPosition().x + 4, m_pieceOne->GetPosition().y);
+								Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 							}
 						}
 					}	
@@ -274,6 +292,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if(m_board->GetTile(m_pieceTwo->GetPosition().x - 1, m_pieceTwo->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
@@ -286,6 +305,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if(m_board->GetTile(m_pieceTwo->GetPosition().x - 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two adjacent tiles are owned by other player
@@ -298,6 +318,7 @@ void PlayerPiece::MovePiece(int xDirection)
 							{
 								m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 4, m_pieceTwo->GetPosition().y);
 								m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 4, m_pieceOne->GetPosition().y);
+								Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 							}
 						}
 					}					
@@ -312,6 +333,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if((m_board->GetTile(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y)->GetOwner() != 0)
@@ -324,6 +346,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 2,m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 2,m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}				
 				}
@@ -339,6 +362,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 2, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if((m_pieceOne->GetPosition().x - 3 >= 0) && ((m_board->IsTileVacant(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y))
@@ -348,6 +372,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}					
 				}
@@ -360,6 +385,7 @@ void PlayerPiece::MovePiece(int xDirection)
 					{
 						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 1,m_pieceOne->GetPosition().y);
 						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 1,m_pieceTwo->GetPosition().y);
+						Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 					}
 				}
 				else if(m_board->GetTile(m_pieceOne->GetPosition().x - 1, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Adjacent tile is owned by other player
@@ -372,6 +398,7 @@ void PlayerPiece::MovePiece(int xDirection)
 						{
 							m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 3, m_pieceOne->GetPosition().y);
 							m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 3, m_pieceTwo->GetPosition().y);
+							Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 						}
 					}
 					else if(m_board->GetTile(m_pieceOne->GetPosition().x - 2, m_pieceOne->GetPosition().y)->GetOwner() != 0) //Two columns of tiles are owned by other player
@@ -384,6 +411,7 @@ void PlayerPiece::MovePiece(int xDirection)
 							{
 								m_pieceOne->SetPosition(m_pieceOne->GetPosition().x - 4, m_pieceOne->GetPosition().y);
 								m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x - 4, m_pieceTwo->GetPosition().y);
+								Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 							}
 						}
 					}	
@@ -418,12 +446,14 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
+				Board::Instance()->CheckForMatch();
 				SetNewPlayerPieces();
 			}
 		}
 		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
+			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
 		}
 
@@ -439,17 +469,20 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
+				Board::Instance()->CheckForMatch();
 				SetNewPlayerPieces();
 			}
 		}
 		else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
+			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
 		}
 		if ((pieceOneDropped && !pieceTwoDropped) || (!pieceOneDropped && pieceTwoDropped))
 		{
 			SetOwner(0);
+			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
 		}
 	}
@@ -469,11 +502,13 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
+					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
 				}
 				else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
+					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
 				}
 			}
@@ -488,11 +523,13 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
+					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
 				}
 				else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
+					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
 				}
 			}
@@ -500,6 +537,7 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		else if((m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1) || (m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1))
 		{
 			SetOwner(0);
+			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
 		}
 	}

@@ -84,7 +84,6 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->MovePiece(-1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -93,7 +92,6 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->MovePiece(1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5, DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -103,7 +101,6 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->RotatePiece(-1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,1.25f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -112,7 +109,6 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1->GetPlayerPiece()->RotatePiece(1);
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,1.25f);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -122,7 +118,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1Gravity = 100;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,0.5f);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -182,6 +178,7 @@ void InputManager::CheckPlayer2Input()
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player2Gravity = 100;
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
 			m_keyPressedPlayer2 = true;
 		}
 	}

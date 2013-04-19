@@ -6,6 +6,7 @@
 #include "FrameTime.h"
 #include "Piece.h"
 #include "Board.h"
+#include "Soundeffects.h"
 
 class PlayerPiece
 {

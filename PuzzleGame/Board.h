@@ -63,12 +63,13 @@ public:
 	int NrOfAdjacentSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor(int x, int y);
 	
-	//All connected tiles, branching out to tiles connected to other connected tiles. Doesn't count the original tile making the cal
+	//All connected tiles, branching out to tiles connected to other connected tiles. Doesn't count the original tile making the call
 	int NrOfConnectedSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfConnectedSameColor(int x, int y);
 
 	void PrintBoardToConsole();
 
+	void CheckForMatch();
 private:
 	Board();
 	~Board();
