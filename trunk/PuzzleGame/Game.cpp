@@ -89,6 +89,7 @@ void Game::UseTimedFunctions()
 	{
 		Gravity();
 		m_gravityClock->restart();
+		Board::Instance()->CheckForMatch();
 	}
 	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity())
 	{
@@ -99,7 +100,6 @@ void Game::UseTimedFunctions()
 	{
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
-
 	}
 	if (m_printBoardInterval->getElapsedTime().asSeconds() >= 5)
 	{
