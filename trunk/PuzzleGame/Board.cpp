@@ -26,8 +26,6 @@ void Board::Initialize()
 	InitializeSprites();
 	CreateBoard();
 
-	PrintBoardToConsole();
-
 	m_particleEffect = new ParticleEffect();
 	m_particleEffect->Initialize();
 }

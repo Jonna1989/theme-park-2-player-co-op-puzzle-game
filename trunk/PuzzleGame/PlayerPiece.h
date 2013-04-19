@@ -8,6 +8,9 @@
 #include "Board.h"
 #include "Soundeffects.h"
 
+
+const int SPAWN_PLAYER_1X = 4;
+const int SPAWN_PLAYER_2X = 14;
 class PlayerPiece
 {
 public:

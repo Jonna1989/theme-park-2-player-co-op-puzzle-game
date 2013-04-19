@@ -52,19 +52,19 @@ sf::Texture* TextureProvider::GetTexture(std::string sheetPath)
 	 if(m_interator == m_textures.end())
     {
         sf::Texture* m_texture = new sf::Texture();
-		m_texture->loadFromFile(sheetPath);	
+		LoadTexture(m_texture,sheetPath);
 		
 		m_textures.insert(std::pair<std::string,sf::Texture* >(sheetPath,m_texture));
 		
-		 std::cout << "Texture lista size" << m_textures.size() << std::endl;
+		//std::cout << "Texture lista size" << m_textures.size() << std::endl;
         return m_textures.at(sheetPath);
     }
     else
     {
-         std::cout << "Texture lista size" << m_textures.size() << std::endl;
+        //std::cout << "Texture lista size" << m_textures.size() << std::endl;
         return m_textures.at(sheetPath);
     }
-	 std::cout << "Texture lista size" << m_textures.size() << std::endl;
+	//std::cout << "Texture lista size" << m_textures.size() << std::endl;
 
 }
 
