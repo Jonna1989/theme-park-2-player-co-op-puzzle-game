@@ -94,7 +94,6 @@ void Board::SetOwner(int x, int y, int owner)
 #pragma region Publics
 void Board::CheckForMatch()
 {
-	
 	for (int x = 0; x < BOARD_WIDTH; x++)
 	{
 		for (int y = 0; y < BOARD_HEIGHT; y++)
@@ -110,7 +109,6 @@ void Board::CheckForMatch()
 			}
 		}
 	}
-
 }
 bool Board::IsTileVacant(int x, int y)
 {
@@ -238,11 +236,20 @@ void Board::InitializeSprites()
 		m_sprites.push_back(new sf::Sprite());
 	}
 	
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_GREEN,m_sprites.at(0));
+	for (int i = 0; i < NUMBER_OF_BUBBLES; i++)
+	{
+		std::ostringstream	s;
+		s << i+1;
+		std::string i_as_string(s.str());
+		SHEET_PATH_TO_BUBBLES.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
+		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
+	}
+
+	/*TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(0));
 	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_BLUE,m_sprites.at(1));
 	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_PURPLE,m_sprites.at(2));
 	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_RED,m_sprites.at(3));
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_YELLOW,m_sprites.at(4));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_YELLOW,m_sprites.at(4));*/
 }
 
 void Board::CreateBoard()
@@ -278,11 +285,123 @@ void Board::DrawTile(int x, int y)
 
 	if(0 < color)
 	{
+		bool above = false;
+		bool right = false;
+		bool below = false;
+		bool left = false;
+		int pos = 0;
+		
+		for (int i = 0; i < NrOfAdjacentSameColor(x,y); i++)
+		{
+			if (PositionsOfAdjacentSameColor(x,y).at(i).y == y-1)
+			{
+				above = true;
+			}
+			if (PositionsOfAdjacentSameColor(x,y).at(i).x < BOARD_WIDTH)
+			{
+				if (PositionsOfAdjacentSameColor(x,y).at(i).x == x+1)
+				{
+					right = true;
+				}
+			}
+			if (PositionsOfAdjacentSameColor(x,y).at(i).y < BOARD_HEIGHT)
+			{
+				if (PositionsOfAdjacentSameColor(x,y).at(i).y == y+1)
+				{
+					below = true;
+				}
+			}
+			if (PositionsOfAdjacentSameColor(x,y).at(i).x == x-1)
+			{
+				left = true;
+			}
+		}
+#pragma region BubbleChecking
+		if (!above && !right && !below && !left) // Normal Bubble
+		{
+			pos = 0;
+		}
+		else if (!above && right && !below && !left) // Right-Connected Bubble
+		{
+			pos = 1;
+		}
+		else if (!above && !right && !below && left) // Left-Connected Bubble
+		{
+			pos = 2;
+		}
+		else if (!above && !right && below && !left) // Down-Connected Bubble
+		{
+			pos = 3;
+		}
+		else if (above && !right && !below && !left) // Up-Connected Bubble
+		{
+			pos = 4;
+		}
+		else if (!above && right && !below && left) // Right/Left-Connected Bubble
+		{
+			pos = 5;
+		}
+		else if (!above && right && below && left) // Right/Left/Down-Connected Bubble
+		{
+			pos = 6;
+		}
+		else if (above && right && below && left) // Right/Left/Down/Up-Connected Bubble
+		{
+			pos = 7;
+		}
+		else if (above && right && !below && left) // Right/Left/Up-Connected Bubble
+		{
+			pos = 8;
+		}
+		else if (above && right && below && !left) // Right/Down/Up-Connected Bubble
+		{
+			pos = 9;
+		}
+		else if (above && right && !below && !left) // Right/Up-Connected Bubble
+		{
+			pos = 10;
+		}
+		else if (!above && right && below && !left) // Right/Down-Connected Bubble
+		{
+			pos = 11;
+		}
+		else if (above && !right && below && left) // Left/Down/Up-Connected Bubble
+		{
+			pos = 12;
+		}
+		else if (!above && !right && below && left) // Left/Down-Connected Bubble
+		{
+			pos = 13;
+		}
+		else if (above && !right && !below && left) // Left/Up-Connected Bubble
+		{
+			pos = 14;
+		}
+		else if (above && !right && below && !left) // Down/Up-Connected Bubble
+		{
+			pos = 15;
+		}
+#pragma endregion
+		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0)
+		{
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i(pos*50,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+		}
+		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0)
+		{
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-6)*50,50),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+		}
+		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0)
+		{
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*50,100),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+		}
+		else if (NrOfAdjacentSameColor(x,y) == 0)
+		{
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+		}
 		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
 		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 	}
 }
-
 void Board::PrintBoardToConsole()
 {
 	//std::system("cls");
