@@ -231,7 +231,7 @@ std::vector<sf::Vector2i> Board::PositionsOfConnectedSameColor(int x, int y)
 
 void Board::InitializeSprites()
 {
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 7; i++)
 	{
 		m_sprites.push_back(new sf::Sprite());
 	}
@@ -244,6 +244,9 @@ void Board::InitializeSprites()
 		SHEET_PATH_TO_BUBBLES.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
 		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
 	}
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura.png",m_sprites.at(5));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura2.png",m_sprites.at(6));
+
 }
 
 void Board::CreateBoard()
@@ -276,7 +279,7 @@ void Board::DrawBoard()
 void Board::DrawTile(int x, int y)
 {
 	int color = m_board.at(y).at(x).GetContent();
-
+	int owner = m_board.at(y).at(x).GetOwner();
 	if(0 < color)
 	{
 		bool above = false;
@@ -394,6 +397,17 @@ void Board::DrawTile(int x, int y)
 		}
 		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
 		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
+		if (owner == 10)
+		{
+//			std::cout << "Aura?" << std::endl;
+			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(5));
+		}
+		else if(owner == 20)
+		{
+			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(6));
+		}
 	}
 }
 void Board::PrintBoardToConsole()

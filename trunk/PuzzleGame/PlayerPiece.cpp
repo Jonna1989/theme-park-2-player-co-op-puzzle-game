@@ -24,7 +24,7 @@ void PlayerPiece::Initialize(int owner)
 		m_spawnPointOne.y = 1;
 		
 		m_pieceTwo = new Piece();
-		m_pieceTwo->Initialize(m_owner);
+		m_pieceTwo->Initialize(m_owner+1);
 		m_spawnPointTwo.x = SPAWN_PLAYER_1X;
 		m_spawnPointTwo.y = 0;
 		
@@ -38,7 +38,7 @@ void PlayerPiece::Initialize(int owner)
 		m_spawnPointOne.y = 1;
 
 		m_pieceTwo = new Piece();
-		m_pieceTwo->Initialize(m_owner);
+		m_pieceTwo->Initialize(m_owner+1);
 		m_spawnPointTwo.x = SPAWN_PLAYER_2X;
 		m_spawnPointTwo.y = 0;
 
@@ -630,9 +630,8 @@ void PlayerPiece::SetPositions(int oneX, int oneY, int twoX, int twoY)
 
 void PlayerPiece::SetOwner(int owner)
 {
-	m_owner = owner;
-	m_pieceOne->SetOwner(m_owner);
-	m_pieceTwo->SetOwner(m_owner);
+	m_pieceOne->SetOwner(owner);
+	m_pieceTwo->SetOwner(owner+1);
 }
 
 void PlayerPiece::SetPositionToSpawn()
@@ -661,7 +660,7 @@ void PlayerPiece::SetNewPlayerPieces()
 	int twoPosX = m_pieceTwo->GetPosition().x;
 	int twoPosY = m_pieceTwo->GetPosition().y;
 	RandomizeNewPiece();
-	SetOwner(10);
+	SetOwner(m_owner);
 	Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
 	Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
 }
