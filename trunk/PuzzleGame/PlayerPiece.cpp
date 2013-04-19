@@ -446,15 +446,15 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
-				Board::Instance()->CheckForMatch();
 				SetNewPlayerPieces();
+				Board::Instance()->CheckForMatch();
 			}
 		}
 		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
-			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
+			Board::Instance()->CheckForMatch();
 		}
 
 		//Piece two drop if possible
@@ -469,21 +469,21 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 			else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			{
 				SetOwner(0);
-				Board::Instance()->CheckForMatch();
 				SetNewPlayerPieces();
+				Board::Instance()->CheckForMatch();
 			}
 		}
 		else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
-			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
+			Board::Instance()->CheckForMatch();
 		}
 		if ((pieceOneDropped && !pieceTwoDropped) || (!pieceOneDropped && pieceTwoDropped))
 		{
 			SetOwner(0);
-			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
+			Board::Instance()->CheckForMatch();
 		}
 	}
 	else //Piece aligned vertically
@@ -502,14 +502,14 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
-					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
+					Board::Instance()->CheckForMatch();
 				}
 				else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
-					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
+					Board::Instance()->CheckForMatch();
 				}
 			}
 			else if(m_pieceOne->GetPosition().y == m_pieceTwo->GetPosition().y - 1) //Piece two lowest
@@ -523,22 +523,22 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 				{
 					SetOwner(0);
-					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
+					Board::Instance()->CheckForMatch();
 				}
 				else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 				{
 					SetOwner(0);
-					Board::Instance()->CheckForMatch();
 					SetNewPlayerPieces();
+					Board::Instance()->CheckForMatch();
 				}
 			}
 		}
 		else if((m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1) || (m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1))
 		{
 			SetOwner(0);
-			Board::Instance()->CheckForMatch();
 			SetNewPlayerPieces();
+		    Board::Instance()->CheckForMatch();
 		}
 	}
 
