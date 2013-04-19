@@ -85,6 +85,8 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 
+	sf::Clock* removalClock;
+
 	ParticleEffect* m_particleEffect;
 };
 
