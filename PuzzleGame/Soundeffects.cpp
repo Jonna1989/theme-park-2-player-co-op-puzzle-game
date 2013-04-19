@@ -32,13 +32,6 @@ Soundeffects* Soundeffects::Instance()
 void Soundeffects::Initialize()
 {
 	DeclareSheetPathArray(m_sheetPathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
-// 	for (int i = 0; i < NUMBER_OF_UI_SOUNDS ; i++)
-// 	{
-// 		std::ostringstream	s;
-// 		s << i;
-// 		std::string i_as_string(s.str());
-// 		SHEET_PATH_ARRAY_UI[i] = SHEET_PATH_TO_SOUND_ASSETS_UI+i_as_string+".wav";
-// 	}
 #pragma region Volume
 	if(!m_soundconfig.load("options.txt"))
 	{
