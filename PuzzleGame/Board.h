@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 #include "WindowManager.h"
 #include "Tile.h"
@@ -14,11 +15,8 @@ static int BOARD_HEIGHT = 10;
 static int BOARD_WIDTH	 = 20;
 static unsigned int TILE_SIZE_X = 96;
 static unsigned int TILE_SIZE_Y = 108;
-static const std::string SHEET_PATH_GREEN = "Assets/GraphicalAssets/Bubbles/green_bubbles01.png";
-static const std::string SHEET_PATH_BLUE = "Assets/GraphicalAssets/Bubbles/blue_bubbles01.png";
-static const std::string SHEET_PATH_PURPLE = "Assets/GraphicalAssets/Bubbles/purple_bubbles01.png";
-static const std::string SHEET_PATH_RED = "Assets/GraphicalAssets/Bubbles/red_bubbles01.png";
-static const std::string SHEET_PATH_YELLOW = "Assets/GraphicalAssets/Bubbles/yellow_bubbles01.png";
+static const int NUMBER_OF_BUBBLES = 5;
+static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
 
 class Board
 {
@@ -88,6 +86,8 @@ private:
 	sf::Clock* removalClock;
 
 	ParticleEffect* m_particleEffect;
+
+	std::vector<std::string> SHEET_PATH_TO_BUBBLES;
 };
 
 #endif
