@@ -22,7 +22,7 @@ void Game::Initialize()
 	Music::Instance()->Initialize(Music::LevelMusic1);
 	Music::Instance()->StartMusic();
 	m_gravityClock = new sf::Clock;
-	m_gravityInterval = 50;
+	m_gravityInterval = 1000;
 	m_player1Clock = new sf::Clock();
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
@@ -102,6 +102,7 @@ void Game::UseTimedFunctions()
 		m_player2Clock->restart();
 		Board::Instance()->PrintBoardToConsole();
 	}
+
 }
 
 #pragma endregion

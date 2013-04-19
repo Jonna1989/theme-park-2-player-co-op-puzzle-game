@@ -37,7 +37,6 @@ void Board::Update()
 	Window->clear();
 	DrawBoard();
 	m_particleEffect->Update();
-	
 	Window->display();
 }
 
@@ -94,7 +93,26 @@ void Board::SetOwner(int x, int y, int owner)
 #pragma endregion
 
 #pragma region Publics
+void Board::CheckForMatch()
+{
+	
+	for (int x = 0; x < BOARD_WIDTH; x++)
+	{
+		for (int y = 0; y < BOARD_HEIGHT; y++)
+		{
+			if (NrOfConnectedSameColor(x,y) > 3)
+			{
+				int temp2 = NrOfConnectedSameColor(x,y);
+				std::vector<sf::Vector2i> temp = PositionsOfConnectedSameColor(x,y);
+				for (int i = 0; i < temp2;i++)
+				{
+					m_board.at(temp[i].y).at(temp[i].x).ClearTile();
+				}
+			}
+		}
+	}
 
+}
 bool Board::IsTileVacant(int x, int y)
 {
 	if((0 <= x && x < BOARD_WIDTH) && (0 <= y && y < BOARD_HEIGHT))
@@ -159,10 +177,13 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 	{
 		if(m_board.at(y).at(x - 1).GetContent() == m_board.at(y).at(x).GetContent())
 		{
-			sameColorPositions.push_back(m_board.at(y).at(x + 1).GetPositionVector());
+			sameColorPositions.push_back(m_board.at(y).at(x - 1).GetPositionVector());
 		}
 	}
-
+	if (m_board.at(y).at(x).GetContent() == 0)
+	{
+		sameColorPositions.clear();
+	}
 	return sameColorPositions;
 }
 
@@ -207,7 +228,6 @@ std::vector<sf::Vector2i> Board::PositionsOfConnectedSameColor(int x, int y)
 
 	return positions;
 }
-
 #pragma endregion
 
 #pragma region Privates
