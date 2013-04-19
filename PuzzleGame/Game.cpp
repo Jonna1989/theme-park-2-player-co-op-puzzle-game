@@ -21,7 +21,7 @@ void Game::Initialize()
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	Music::Instance()->Initialize(Music::LevelMusic1);
 	Music::Instance()->StartMusic();
-	m_gravityClock = new sf::Clock;
+	m_gravityClock = new sf::Clock();
 	m_gravityInterval = 1000;
 	m_player1Clock = new sf::Clock();
 	m_player2Clock = new sf::Clock();

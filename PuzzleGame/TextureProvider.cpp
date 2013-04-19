@@ -7,7 +7,6 @@ TextureProvider::TextureProvider()
 
 TextureProvider::~TextureProvider()
 {
-	
 	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 	{
 		 delete it->second;
@@ -32,7 +31,7 @@ TextureProvider* TextureProvider::Instance()
 
 void TextureProvider::Initialize()
 {
-
+	m_sprite = new sf::Sprite();
 }
 
 void TextureProvider::Cleanup()
@@ -41,31 +40,32 @@ void TextureProvider::Cleanup()
 	{
 		 delete it->second;
 	}
-
+	delete m_sprite;
 }
 
 sf::Texture* TextureProvider::GetTexture(std::string sheetPath)
 {
-
 	std::map<std::string,  sf::Texture* > ::iterator m_interator = m_textures.find(sheetPath);
 
 	 if(m_interator == m_textures.end())
     {
         sf::Texture* m_texture = new sf::Texture();
-		LoadTexture(m_texture,sheetPath);
+		m_texture->loadFromFile(sheetPath);
 		
 		m_textures.insert(std::pair<std::string,sf::Texture* >(sheetPath,m_texture));
 		
-		//std::cout << "Texture lista size" << m_textures.size() << std::endl;
         return m_textures.at(sheetPath);
     }
     else
     {
-        //std::cout << "Texture lista size" << m_textures.size() << std::endl;
         return m_textures.at(sheetPath);
     }
-	//std::cout << "Texture lista size" << m_textures.size() << std::endl;
+}
 
+void TextureProvider::GetSubRect(sf::Vector2i cellPos, sf::Vector2i cellSize, std::string sheetPath, sf::Sprite* sprite)
+{
+	sprite->setTexture(*GetTexture(sheetPath));
+	sprite->setTextureRect(sf::IntRect(cellPos.x,cellPos.y,cellSize.x,cellSize.y));
 }
 
 #pragma endregion
