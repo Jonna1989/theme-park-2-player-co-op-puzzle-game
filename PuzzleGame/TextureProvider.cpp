@@ -50,8 +50,7 @@ sf::Texture* TextureProvider::GetTexture(std::string sheetPath)
 	 if(m_interator == m_textures.end())
     {
         sf::Texture* m_texture = new sf::Texture();
-		m_texture->loadFromFile(sheetPath);
-		
+		LoadTexture(m_texture,sheetPath);
 		m_textures.insert(std::pair<std::string,sf::Texture* >(sheetPath,m_texture));
 		
         return m_textures.at(sheetPath);
