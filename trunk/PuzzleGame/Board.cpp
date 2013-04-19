@@ -145,7 +145,7 @@ int Board::NrOfAdjacentSameColor(int x, int y)
 
 std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 {
-	std::vector<sf::Vector2i> sameColorPositions; 
+	std::vector<sf::Vector2i> sameColorPositions;
 
 	if(y - 1 >= 0)
 	{
@@ -237,11 +237,11 @@ void Board::InitializeSprites()
 		m_sprites.push_back(new sf::Sprite());
 	}
 	
-	m_sprites.at(0)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_GREEN));
-	m_sprites.at(1)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_BLUE));
-	m_sprites.at(2)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_PURPLE));
-	m_sprites.at(3)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_RED));
-	m_sprites.at(4)->setTexture(*TextureProvider::Instance()->GetTexture(SHEET_PATH_YELLOW));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_GREEN,m_sprites.at(0));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_BLUE,m_sprites.at(1));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_PURPLE,m_sprites.at(2));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_RED,m_sprites.at(3));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_YELLOW,m_sprites.at(4));
 }
 
 void Board::CreateBoard()

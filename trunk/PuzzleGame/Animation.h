@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include "TextureProvider.h"
+#include "FrameTime.h"
 
 
 class Animation
@@ -14,9 +15,9 @@ public:
 	~Animation();
 
 	//Base
-	void initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps);
-	void update(float deltaTime);
-	void cleanUp();
+	void Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps);
+	void Update();
+	void CleanUp();
 
 	//Misc functions
 	void changeAnimation(sf::Vector2i startPlace, int cellCount, sf::Vector2i nextPlace, int nextCellCount);
@@ -37,7 +38,6 @@ private:
 	sf::Sprite* m_sprite;
 
 	std::string m_sheetPath;
-	
 
 	sf::Vector2f m_cellSize;
 	int m_cellCount;

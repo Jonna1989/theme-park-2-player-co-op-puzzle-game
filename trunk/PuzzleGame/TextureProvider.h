@@ -15,9 +15,12 @@ public:
 	void Initialize();
 	void Cleanup();
 
-	sf::Texture* GetTexture(std::string sheetPath); 
+	void GetSubRect(sf::Vector2i cellPos, sf::Vector2i cellSize, std::string sheetPath, sf::Sprite* sprite);
+
+	sf::Texture* GetTexture(std::string sheetPath);
 	std::map<std::string, sf::Texture*> m_textures;
 
 private:
+	sf::Sprite* m_sprite;
 };
 

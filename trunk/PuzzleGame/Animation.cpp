@@ -16,15 +16,10 @@ Animation::~Animation()
 
 #pragma region Base
 
-void Animation::initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
+void Animation::Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
 {
-	
-	//vi har nu en textureProvider som håller alla texturer
-	//man får tag på de med TextureProvider::instance()->getTexture(sheetPath)
-	//TextureProvider är en klass för sig..
-
 	m_sprite = new sf::Sprite();
-	m_sprite->setTexture(*TextureProvider::instance()->getTexture(sheetPath));
+	m_sprite->setTexture(*TextureProvider::Instance()->GetTexture(sheetPath));
 
 	//Animation info
 	m_cellSize = cellSize;
@@ -50,9 +45,9 @@ void Animation::initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vec
 	setCurrentCell();	
 }
 
-void Animation::update(float deltaTime)
+void Animation::Update()
 {	
-	m_timeSinceUpdate += deltaTime;
+	m_timeSinceUpdate += DeltaTime;
 	//std::cout << m_timeSinceUpdate << std::endl;
 	//Check if it is time to update to the next cell
 	if(m_timeSinceUpdate < m_updateRate)
@@ -90,22 +85,20 @@ void Animation::update(float deltaTime)
 	m_cellPlace++;
 }
 
-void Animation::cleanUp()
+void Animation::CleanUp()
 {
-	//Deallocate memory
-	//delete m_texture;
 	delete m_sprite;
 }
 #pragma endregion
 
 #pragma region Misc
 
-void Animation::changeAnimation( sf::Vector2i startPlace, int cellCount, sf::Vector2i nextPlace,  int nextCellCount )
+void Animation::changeAnimation( sf::Vector2i startPlace, int cellCount, sf::Vector2i nextPlace,  int nextCellCount)
 {
 	m_startRow = startPlace.y;
 	m_cellPlace = startPlace.x;
 	m_cellCount = cellCount;
-	m_cellSizeCountY = (m_cellSize.y * m_startRow); 
+	m_cellSizeCountY = (m_cellSize.y * m_startRow);
    	m_rowChange = 0;
    	m_currentCell = 0;
 
@@ -147,14 +140,11 @@ std::string Animation::getMapKey()
 
 #pragma region Helpers
 
-void Animation::setCurrentCell()                                              
+void Animation::setCurrentCell()
 {
 	sf::IntRect currentCell = sf::IntRect(m_cellPlace * (int)m_cellSize.x, (int)m_cellSizeCountY, (int)m_cellSize.x, (int)m_cellSize.y);
 
 	m_sprite->setTextureRect(currentCell);
 }
-
-
-
 
 #pragma endregion
