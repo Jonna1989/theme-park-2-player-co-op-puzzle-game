@@ -158,6 +158,7 @@ void Board::CheckForMatch()
 							}
 						}
 					}
+					Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,1,200);
 				}
 			}
 		}

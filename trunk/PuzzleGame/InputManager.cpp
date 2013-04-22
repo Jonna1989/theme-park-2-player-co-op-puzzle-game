@@ -44,7 +44,7 @@ void InputManager::Update(bool singlePlayer, int state)
 		{
 			if (event.key.code == sf::Keyboard::Return)
 			{
-				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH);
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
 				break;
 			}
@@ -122,7 +122,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1Gravity = 100;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH,100);
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -182,7 +182,7 @@ void InputManager::CheckPlayer2Input()
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player2Gravity = 100;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH,100);
 			m_keyPressedPlayer2 = true;
 		}
 	}

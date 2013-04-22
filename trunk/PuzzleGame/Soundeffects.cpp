@@ -32,6 +32,7 @@ Soundeffects* Soundeffects::Instance()
 void Soundeffects::Initialize()
 {
 	DeclareSheetPathArray(m_sheetPathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
+	DeclareSheetPathArray(m_sheetPathVectorPop,NUMBER_OF_POP_SOUNDS,PATH_POP);
 #pragma region Volume
 	if(!m_soundconfig.load("options.txt"))
 	{
@@ -45,6 +46,12 @@ void Soundeffects::Initialize()
 		LoadSoundFile(m_uiBuffers,i,m_sheetPathVectorUi);
 	}
 	m_uiSound = new sf::Sound();
+
+	for (int i = 0; i < NUMBER_OF_POP_SOUNDS ; i++)
+	{
+		LoadSoundFile(m_popBuffers,i,m_sheetPathVectorPop);
+	}
+	m_popSound = new sf::Sound();
 }
 
 #pragma region Update
@@ -58,6 +65,8 @@ void Soundeffects::Cleanup()
 {
 	delete m_uiSound;
 	CleanupVector(m_uiBuffers);
+	delete m_popSound;
+	CleanupVector(m_popBuffers);
 }
 #pragma endregion
 
@@ -66,13 +75,16 @@ void Soundeffects::PlaySound(int SoundNumber)
 {
 	
 }
-void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch)
+void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch, float Volume) // The sound category is an enum with all different sound categories
 {
 	switch (SoundCategory)
 	{
 	case UISOUND:
-		SetBufferToSoundAndPlay(m_uiBuffers,SoundNumber,m_uiSound, Pitch);
-			 break;
+		SetBufferToSoundAndPlay(m_uiBuffers,SoundNumber,m_uiSound, Pitch, Volume);
+			break;
+	case POPSOUND:
+		SetBufferToSoundAndPlay(m_popBuffers,SoundNumber,m_popSound, Pitch, Volume);
+			break;
 	}
 }
 #pragma region StopSound
@@ -177,11 +189,12 @@ void Soundeffects::SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Soun
 	Sound->setBuffer(*Buffer);
 	Sound->setPitch(initialPitch);
 }
-void Soundeffects::SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber,sf::Sound* &SoundToUse, float Pitch)
+void Soundeffects::SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber,sf::Sound* &SoundToUse, float Pitch, float Volume)
 {
 	SoundToUse->stop();
 	SoundToUse->setBuffer(*VectorToUse[BufferNumber]);
 	SoundToUse->setPitch(Pitch);
+	SoundToUse->setVolume(Volume);
 	SoundToUse->play();
 }
 #pragma endregion
