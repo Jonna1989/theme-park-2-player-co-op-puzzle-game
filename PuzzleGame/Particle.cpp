@@ -49,7 +49,7 @@ void Particle::Update()
 	{
 		m_alpha = 0;
 	}
-	m_sprite->setColor(sf::Color(m_sprite->getColor().r,m_sprite->getColor().g,m_sprite->getColor().b,m_alpha));
+	m_sprite->setColor(sf::Color(m_sprite->getColor().r,m_sprite->getColor().g,m_sprite->getColor().b,(sf::Uint8)m_alpha));
 
 	m_sprite->move(xDir,yDir);
 	if (m_clock->getElapsedTime().asMilliseconds() > 1500)

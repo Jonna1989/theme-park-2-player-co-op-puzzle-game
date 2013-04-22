@@ -35,7 +35,7 @@ void Board::Initialize()
 	m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
 	
-	m_plateSprite->setPosition(BOARD_OFFSET_X,BOARD_OFFSET_Y);
+	m_plateSprite->setPosition((float)BOARD_OFFSET_X,(float)BOARD_OFFSET_Y);
 }
 
 void Board::Update()
