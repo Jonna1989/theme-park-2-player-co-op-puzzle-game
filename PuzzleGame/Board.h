@@ -11,10 +11,12 @@
 #include "TextureProvider.h"
 #include "ParticleEffect.h"
 
-static int BOARD_HEIGHT = 10;
-static int BOARD_WIDTH	 = 20;
-static unsigned int TILE_SIZE_X = 96;
-static unsigned int TILE_SIZE_Y = 108;
+static int BOARD_HEIGHT = 14;
+static int BOARD_WIDTH	= 20;
+static unsigned int TILE_SIZE_X = 50;
+static unsigned int TILE_SIZE_Y = 50;
+static unsigned int BOARD_OFFSET_X = 460;
+static unsigned int BOARD_OFFSET_Y = 140;
 static const int NUMBER_OF_BUBBLES = 5;
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
 
@@ -88,6 +90,12 @@ private:
 	ParticleEffect* m_particleEffect;
 
 	std::vector<std::string> SHEET_PATH_TO_BUBBLES;
+
+	sf::Texture* m_backgroundTexture;
+	sf::Sprite* m_backgroundSprite;
+
+	sf::Texture* m_plateTexture;
+	sf::Sprite* m_plateSprite;
 };
 
 #endif

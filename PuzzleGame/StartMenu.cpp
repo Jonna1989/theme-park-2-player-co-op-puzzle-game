@@ -30,15 +30,6 @@ void StartMenu::Update()
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
 	Window->display();
-
-	sf::Event events;
-	while(WindowManager::Instance()->GetWindow()->pollEvent(events))
-	{
-		if(events.type == sf::Event::Closed)
-		{
-			Window->close();
-		}
-	}
 }
 
 void StartMenu::Cleanup()
