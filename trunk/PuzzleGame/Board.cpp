@@ -29,11 +29,22 @@ void Board::Initialize()
 	m_particleEffect = new ParticleEffect();
 	m_particleEffect->Initialize();
 	removalClock = new sf::Clock();
+
+	m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
+	CreateSprite(m_backgroundSprite, m_backgroundTexture);
+	m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
+	CreateSprite(m_plateSprite, m_plateTexture);
+	
+	m_plateSprite->setPosition(BOARD_OFFSET_X,BOARD_OFFSET_Y);
 }
 
 void Board::Update()
 {
 	Window->clear();
+	
+	Window->draw(*m_backgroundSprite);
+	Window->draw(*m_plateSprite);
+
 	DrawBoard();
 	m_particleEffect->Update();
 	Window->display();
@@ -47,6 +58,9 @@ void Board::Cleanup()
 	{
 		delete m_sprites.at(i);
 	}
+
+	Clean(m_backgroundTexture, m_backgroundSprite);
+	Clean(m_plateTexture, m_plateSprite);
 
 	delete m_instance;
 }
@@ -395,17 +409,17 @@ void Board::DrawTile(int x, int y)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 		if (owner == 10)
 		{
 //			std::cout << "Aura?" << std::endl;
-			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(5));
 		}
 		else if(owner == 20)
 		{
-			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x, m_board.at(y).at(x).GetPositionPixels().y);
+			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(6));
 		}
 	}

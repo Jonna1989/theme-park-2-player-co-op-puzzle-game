@@ -52,6 +52,10 @@ void InputManager::Update(bool singlePlayer, int state)
 			{
 				CheckMusicKeys();
 			}
+			if(event.type == sf::Event::Closed)
+			{
+				Window->close();
+			}
 		}
 		break;
 	case StateManager::InGame: //Game
