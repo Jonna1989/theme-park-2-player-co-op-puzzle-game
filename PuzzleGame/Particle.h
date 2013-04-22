@@ -13,14 +13,15 @@ public:
 	Particle();
 	~Particle();
 
-	void Initialize(float rotation);
+	void Initialize(float rotation, float xPos, float yPos);
 	void Update();
 	void Cleanup();
 
-	void StartParticle();
+	void StartParticle(float xPos, float yPos);
 
 	bool IsBusy();
 	sf::Sprite* GetSprite();
+
 
 private:
 	sf::Texture* m_texture;
@@ -31,5 +32,7 @@ private:
 	float m_alpha;
 	float m_rotation;
 	bool m_busy;
+
+	float m_fly;
 };
 

@@ -26,8 +26,12 @@ void Board::Initialize()
 	InitializeSprites();
 	CreateBoard();
 
-	m_particleEffect = new ParticleEffect();
-	m_particleEffect->Initialize();
+	for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
+	{
+		m_particleEffects.push_back(new ParticleEffect);
+		m_particleEffects[i]->Initialize();
+	}
+
 	removalClock = new sf::Clock();
 
 	m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
@@ -46,14 +50,25 @@ void Board::Update()
 	Window->draw(*m_plateSprite);
 
 	DrawBoard();
-	m_particleEffect->Update();
+	for (int i = 0; i < NUMBER_OF_PARTICLES ; i++)
+	{
+		if (m_particleEffects[i]->IsBusy())
+		{
+			m_particleEffects[i]->Update();
+		}
+	}
+
 	Window->display();
 }
 
 void Board::Cleanup()
 {
-	m_particleEffect->Cleanup();
-	delete m_particleEffect;
+	for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
+	{
+		m_particleEffects[i]->Cleanup();
+		delete m_particleEffects[i];
+	}
+	m_particleEffects.clear();
 	for(unsigned int i = 0; i < m_sprites.size(); i++)
 	{
 		delete m_sprites.at(i);
@@ -134,6 +149,14 @@ void Board::CheckForMatch()
 					for (int i = 0; i < temp2;i++)
 					{
 						m_board.at(temp[i].y).at(temp[i].x).ClearTile();
+						for (int j = 0; j < NUMBER_OF_PARTICLES; j++)
+						{
+							if (!m_particleEffects[j]->IsBusy())
+							{
+								m_particleEffects[j]->StartEffect((temp[i].x*TILE_SIZE_X)+(TILE_SIZE_X/2)+BOARD_OFFSET_X-7.5f,(temp[i].y*TILE_SIZE_Y)+(TILE_SIZE_Y/2)+BOARD_OFFSET_Y-7.5f);
+								break;
+							}
+						}
 					}
 				}
 			}
