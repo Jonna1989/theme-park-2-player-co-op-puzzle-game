@@ -7,9 +7,11 @@
 #include <sstream>
 #include <stdlib.h>
 
-const int NUMBER_OF_UI_SOUNDS = 7;
 const std::string SHEET_PATH_TO_SOUND_EFFECTS = "Assets/AudioAssets/SoundEffects/";
+const int NUMBER_OF_UI_SOUNDS = 7;
 const std::string PATH_UI = "UiSounds/UiSound";
+const int NUMBER_OF_POP_SOUNDS = 1;
+const std::string PATH_POP = "BubblePop/Pop";
 const float DEFAULT_PITCH = 1.0f;
 
 class Soundeffects
@@ -18,7 +20,8 @@ public:
 	
 	enum SoundCatergory
 	{
-		UISOUND
+		UISOUND,
+		POPSOUND
 	};
 
 	static Soundeffects* Instance();
@@ -27,7 +30,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void PlaySound(int SoundCategory,int SoundNumber, float Pitch);
+	void PlaySound(int SoundCategory,int SoundNumber, float Pitch, float Volume);
 	void PlaySound(int SoundNumber);
 	void StopSound(int SoundNumber);
 
@@ -40,10 +43,14 @@ private:
 	~Soundeffects();
 	
 	std::vector<std::string> m_sheetPathVectorUi;
+	std::vector<std::string> m_sheetPathVectorPop;
 	static Soundeffects*	m_instance;
 
 	sf::Sound* m_uiSound;
 	std::vector<sf::SoundBuffer*> m_uiBuffers;
+
+	sf::Sound* m_popSound;
+	std::vector<sf::SoundBuffer*> m_popBuffers;
 
 #pragma region declare Volume 
 	ConfigReader m_soundconfig;
@@ -59,7 +66,7 @@ void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::strin
 void LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename);
 void LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, std::vector<std::string> filenameVector);
 void SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, float initialPitch);
-void SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber, sf::Sound* &SoundToUse, float Pitch);
+void SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber, sf::Sound* &SoundToUse, float Pitch, float Volume);
 };
 
 

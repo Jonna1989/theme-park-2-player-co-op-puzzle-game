@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "Soundeffects.h"
 
+#define PlayRotateSound Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH,100)
 
 const int SPAWN_PLAYER_1X = 4;
 const int SPAWN_PLAYER_2X = 14;

@@ -10,6 +10,7 @@
 #include "Tile.h"
 #include "TextureProvider.h"
 #include "ParticleEffect.h"
+#include "Soundeffects.h"
 
 static int BOARD_HEIGHT = 14;
 static int BOARD_WIDTH	= 20;
