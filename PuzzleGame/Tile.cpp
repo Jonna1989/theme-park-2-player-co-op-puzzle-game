@@ -19,6 +19,7 @@ void Tile::Initialize(int tileSizeX, int tileSizeY, int vectorPosX, int vectorPo
 	SetPositionPixels(((float)m_positionVector.x * m_tileSize.x), ((float)m_positionVector.y * m_tileSize.y));
 	m_content = 0;
 	m_owner = 0;
+	m_isFalling = false;
 }
 
 void Tile::Update()
@@ -96,4 +97,12 @@ void Tile::ClearTile()
 {
 	SetContent(0);
 	SetOwner(0);
+}
+void Tile::SetFalling(bool isfalling)
+{
+	m_isFalling = isfalling;
+}
+bool Tile::GetFalling()
+{
+	return m_isFalling;
 }
