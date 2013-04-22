@@ -19,6 +19,7 @@ static unsigned int BOARD_OFFSET_X = 460;
 static unsigned int BOARD_OFFSET_Y = 140;
 static const int NUMBER_OF_BUBBLES = 5;
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
+static unsigned int NUMBER_OF_PARTICLES = 13;
 
 class Board
 {
@@ -87,7 +88,7 @@ private:
 
 	sf::Clock* removalClock;
 
-	ParticleEffect* m_particleEffect;
+	std::vector<ParticleEffect*> m_particleEffects;
 
 	std::vector<std::string> SHEET_PATH_TO_BUBBLES;
 

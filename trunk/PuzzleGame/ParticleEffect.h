@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include <vector>
 
-const int PARTICLE_COUNT = 100;
+const int PARTICLE_COUNT = 8;
 
 class ParticleEffect
 {
@@ -15,9 +15,18 @@ public:
 	void Update();
 	void Cleanup();
 
+	void StartEffect(float xPos, float yPos);
+
+	bool IsBusy();
+
 private:
 	std::vector<Particle> m_particles;
 
 	sf::Clock* m_clock;
+
+	float m_xPos;
+	float m_yPos;
+
+	bool m_isBusy;
 };
 

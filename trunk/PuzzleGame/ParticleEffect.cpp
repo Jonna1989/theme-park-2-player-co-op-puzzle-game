@@ -17,15 +17,17 @@ ParticleEffect::~ParticleEffect()
 
 void ParticleEffect::Initialize()
 {
-	srand((int)time(0));
 	for (int i = 0; i < PARTICLE_COUNT ; i++)
 	{
 		Particle particle;
 		m_particles.push_back(particle);
-		m_particles[i].Initialize((float)(rand () % (300 + 300) - 300));
+		m_particles[i].Initialize((float)(rand () % (300 + 300) - 300), m_xPos, m_yPos);
 	}
 
 	m_clock = new sf::Clock();
+	m_xPos = 0;
+	m_yPos = 0;
+	m_isBusy = false;
 }
 
 void ParticleEffect::Update()
@@ -38,17 +40,18 @@ void ParticleEffect::Update()
 			Window->draw(*m_particles[i].GetSprite());
 		}
 	}
-	if (m_clock->getElapsedTime().asMilliseconds() > 50)
+	if (m_clock->getElapsedTime().asMilliseconds() > 1000)
 	{
-		for (int i = 0; i < PARTICLE_COUNT ; i++)
+		m_isBusy = false;
+		/*for (int i = 0; i < PARTICLE_COUNT ; i++)
 		{
 			if (!m_particles[i].IsBusy())
 			{
-				m_particles[i].StartParticle();
+				m_particles[i].StartParticle(m_xPos,m_yPos);
 				m_clock->restart();
 				break;
 			}
-		}
+		}*/
 	}
 }
 
@@ -58,7 +61,26 @@ void ParticleEffect::Cleanup()
 	{
 		m_particles[i].Cleanup();
 	}
+	m_particles.clear();
+
 	delete m_clock;
+}
+
+void ParticleEffect::StartEffect(float xPos, float yPos)
+{
+	m_clock->restart();
+	m_xPos = xPos;
+	m_yPos = yPos;
+	for (int i = 0; i < PARTICLE_COUNT; i++)
+	{
+		m_particles[i].StartParticle(m_xPos, m_yPos);
+	}
+	m_isBusy = true;
+}
+
+bool ParticleEffect::IsBusy()
+{
+	return m_isBusy;
 }
 
 #pragma endregion
