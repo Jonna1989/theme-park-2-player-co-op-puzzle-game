@@ -18,14 +18,15 @@ public:
 	sf::Vector2i GetPositionVector();
 	int GetContent();
 	int GetOwner();
+	bool GetFalling();
 
 	void SetTileSize(int x, int y);
 	void SetPositionPixels(float x, float y);
 	void SetPositionVector(int x, int y);
 	void SetContent(int content);
 	void SetOwner(int owner);
-
 	void ClearTile();
+	void SetFalling(bool isfalling);
 
 private:
 	sf::Vector2i m_tileSize;
@@ -33,6 +34,7 @@ private:
 	sf::Vector2i m_positionVector;
 	int m_content;	
 	int m_owner;
+	bool m_isFalling;
 };
 
 #endif

@@ -116,9 +116,25 @@ void Board::CheckForMatch()
 			{
 				int temp2 = NrOfConnectedSameColor(x,y);
 				std::vector<sf::Vector2i> temp = PositionsOfConnectedSameColor(x,y);
-				for (int i = 0; i < temp2;i++)
+				int notFallingCounter = 0;
+				int passiveCounter = 0;
+				for (int h = 0; h < temp2; h++)
 				{
-					m_board.at(temp[i].y).at(temp[i].x).ClearTile();
+					if (m_board.at(temp[h].y).at(temp[h].x).GetFalling() == false)
+					{
+						notFallingCounter++;
+					}
+					if (m_board.at(temp[h].y).at(temp[h].x).GetOwner() == PASSIVE)
+					{
+						passiveCounter++;
+					}
+				}
+				if ((notFallingCounter == temp2) && (passiveCounter == temp2))
+				{
+					for (int i = 0; i < temp2;i++)
+					{
+						m_board.at(temp[i].y).at(temp[i].x).ClearTile();
+					}
 				}
 			}
 		}
@@ -296,6 +312,21 @@ void Board::DrawTile(int x, int y)
 	int owner = m_board.at(y).at(x).GetOwner();
 	if(0 < color)
 	{
+		if (y < BOARD_HEIGHT-1)
+		{
+			if (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE)
+			{
+				m_board.at(y).at(x).SetFalling(true);
+			}
+			else
+			{
+				m_board.at(y).at(x).SetFalling(false);
+			}
+		}
+		else
+		{
+			m_board.at(y).at(x).SetFalling(false);
+		}
 		bool above = false;
 		bool right = false;
 		bool below = false;
