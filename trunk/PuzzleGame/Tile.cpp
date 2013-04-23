@@ -19,6 +19,7 @@ void Tile::Initialize(int tileSizeX, int tileSizeY, int vectorPosX, int vectorPo
 	SetPositionPixels(((float)m_positionVector.x * m_tileSize.x), ((float)m_positionVector.y * m_tileSize.y));
 	m_content = 0;
 	m_owner = 0;
+	m_previousOwner = 0;
 	m_isFalling = false;
 }
 
@@ -58,6 +59,11 @@ int Tile::GetOwner()
 	return m_owner;
 }
 
+int Tile::GetPreviousOwner()
+{
+	return m_previousOwner;
+}
+
 #pragma endregion
 
 #pragma region Setters
@@ -89,6 +95,11 @@ void Tile::SetContent(int content)
 void Tile::SetOwner(int owner)
 {
 	m_owner = owner;
+}
+
+void Tile::SetPreviousOwner(int previousOwner)
+{
+	m_previousOwner = previousOwner;
 }
 
 #pragma endregion
