@@ -26,13 +26,14 @@ void Board::Initialize()
 	InitializeSprites();
 	CreateBoard();
 
-	for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
+	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
 		m_particleEffects.push_back(new ParticleEffect);
 		m_particleEffects[i]->Initialize();
 	}
 
-	removalClock = new sf::Clock();
+	soundClock = new sf::Clock();
+	soundClock->restart();
 
 	m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
 	CreateSprite(m_backgroundSprite, m_backgroundTexture);
@@ -44,6 +45,9 @@ void Board::Initialize()
 	m_boardHalfStep = 0;
 	m_player1HalfStep = 0;
 	m_player2HalfStep = 0;
+	m_comboPitch = 1.0f;
+	m_comboVolume = 200.0f;
+	m_comboSoundThreshold = 5000;
 }
 
 void Board::Update()
@@ -54,7 +58,7 @@ void Board::Update()
 	Window->draw(*m_plateSprite);
 
 	DrawBoard();
-	for (int i = 0; i < NUMBER_OF_PARTICLES ; i++)
+	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
 	{
 		if (m_particleEffects[i]->IsBusy())
 		{
@@ -67,7 +71,7 @@ void Board::Update()
 
 void Board::Cleanup()
 {
-	for (int i = 0; i < NUMBER_OF_PARTICLES; i++)
+	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
 		m_particleEffects[i]->Cleanup();
 		delete m_particleEffects[i];
@@ -153,7 +157,7 @@ void Board::CheckForMatch()
 					for (int i = 0; i < temp2;i++)
 					{
 						m_board.at(temp[i].y).at(temp[i].x).ClearTile();
-						for (int j = 0; j < NUMBER_OF_PARTICLES; j++)
+						for (unsigned int j = 0; j < NUMBER_OF_PARTICLES; j++)
 						{
 							if (!m_particleEffects[j]->IsBusy())
 							{
@@ -162,7 +166,7 @@ void Board::CheckForMatch()
 							}
 						}
 					}
-					Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,1,200);
+					PlayComboSound(soundClock);
 				}
 			}
 		}
@@ -177,7 +181,6 @@ bool Board::IsTileVacant(int x, int y)
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -576,5 +579,20 @@ void Board::PrintBoardToConsole()
 	}
 	std::cout << "------------------------------------------------" << std::endl;
 }
-
+void Board::PlayComboSound(sf::Clock* &comboClock)
+{
+	if (comboClock->getElapsedTime().asMilliseconds() <= m_comboSoundThreshold)
+	{
+		m_comboPitch += 0.10f;
+		m_comboVolume += 75.0f;
+		Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,m_comboPitch,m_comboVolume);
+	}
+	else
+	{
+		m_comboPitch = 1.0f;
+		m_comboVolume = 200.0f;
+		Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,m_comboPitch,m_comboVolume);
+	}
+	comboClock->restart();
+}
 #pragma endregion

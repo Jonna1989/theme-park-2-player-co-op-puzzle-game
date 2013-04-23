@@ -55,16 +55,8 @@ public:
 	int GetColor(int x, int y);
 	int GetOwner(int x, int y);
 
-	bool GetBoardHalfStep();
-	bool GetPlayer1HalfStep();
-	bool GetPlayer2HalfStep();
-
 	void SetColor(int x, int y, int color);
 	void SetOwner(int x, int y, int owner);
-
-	void SetBoardHalfStep(int halfStep);
-	void SetPlayer1HalfStep(int halfStep);
-	void SetPlayer2HalfStep(int halfStep);
 
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
@@ -95,7 +87,7 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 
-	sf::Clock* removalClock;
+	sf::Clock* soundClock;
 
 	std::vector<ParticleEffect*> m_particleEffects;
 
@@ -107,9 +99,10 @@ private:
 	sf::Texture* m_plateTexture;
 	sf::Sprite* m_plateSprite;
 
-	int m_boardHalfStep;
-	int m_player1HalfStep;
-	int m_player2HalfStep;
+	void PlayComboSound(sf::Clock* &comboClock);
+	float m_comboVolume;
+	float m_comboPitch;
+	int   m_comboSoundThreshold;
 };
 
 #endif
