@@ -24,7 +24,9 @@ Board* Board::Instance()
 void Board::Initialize()
 {
 	InitializeSprites();
+	InitializeLevels();
 	CreateBoard();
+	SetBoard(1);
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
@@ -363,6 +365,52 @@ void Board::InitializeSprites()
 
 }
 
+void Board::InitializeLevels()
+{
+	ReadTextLevels(PATH_LEVEL_1);	
+	ReadTextLevels(PATH_LEVEL_2);
+}
+
+void Board::ReadTextLevels(std::string sheetPath)
+{
+	int color = 0;
+	std::string nextChar;
+	std::string currentChar;
+	std::ifstream iStream(sheetPath);
+	std::vector<int> levelColors;
+
+	while(iStream.good())
+	{
+		nextChar = iStream.peek();
+
+		if(nextChar != " " && nextChar != "\n")
+		{
+			currentChar = iStream.get();
+			color = atoi(currentChar.c_str());
+			levelColors.push_back(color);
+			std::cout << color << std::endl;
+		}
+		else
+		{
+			iStream.ignore();
+		}
+	}
+
+	levelColors.pop_back();
+
+	if(levelColors.size() == BOARD_HEIGHT * BOARD_WIDTH)
+	{
+		m_levels.push_back(levelColors);
+		levelColors.clear();
+	}
+	else
+	{
+		std::cout << "Error, wrong number of colors read\n";
+	}
+
+	iStream.close();
+}
+
 void Board::CreateBoard()
 {
 	for(int y = 0; y < BOARD_HEIGHT; y++)
@@ -373,6 +421,20 @@ void Board::CreateBoard()
 		{
 			m_board.at(y).push_back(Tile());
 			m_board.at(y).at(x).Initialize(TILE_SIZE_X, TILE_SIZE_Y, x, y);
+		}
+	}
+}
+
+void Board::SetBoard(int level)
+{
+	int counter = 0;
+
+	for(int y = 0; y < BOARD_HEIGHT; y++)
+	{
+		for(int x = 0; x < BOARD_WIDTH; x++)
+		{
+			m_board.at(y).at(x).SetContent(m_levels.at(level - 1).at(counter));
+			counter++;
 		}
 	}
 }
