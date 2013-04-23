@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 
 #include "WindowManager.h"
 #include "Tile.h"
@@ -20,6 +21,8 @@ static unsigned int BOARD_OFFSET_X = 460;
 static unsigned int BOARD_OFFSET_Y = 140;
 static const int NUMBER_OF_BUBBLES = 5;
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
+static const std::string PATH_LEVEL_1 = "Assets/Levels/Level1.txt";
+static const std::string PATH_LEVEL_2 = "Assets/Levels/Level2.txt";
 static unsigned int NUMBER_OF_PARTICLES = 13;
 
 class Board
@@ -48,6 +51,8 @@ public:
 	void Initialize();
 	void Update();
 	void Cleanup();
+
+	void SetBoard(int level);
 	
 	std::vector<std::vector<Tile>> GetBoard();
 	Tile* GetTile(int x, int y);
@@ -69,11 +74,11 @@ public:
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
 
-	//Only the tiles above, below, to the right and to the left. Doesn't count the tile making the call
+	//Only the tiles above, below, to the right and to the left
 	int NrOfAdjacentSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor(int x, int y);
 	
-	//All connected tiles, branching out to tiles connected to other connected tiles. Doesn't count the original tile making the call
+	//All connected tiles, branching out to tiles connected to other connected tiles
 	int NrOfConnectedSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfConnectedSameColor(int x, int y);
 
@@ -91,15 +96,10 @@ private:
 	std::vector<std::vector<Tile>> m_board;
 	std::vector<sf::Sprite*> m_sprites;
 
-	void InitializeSprites();
-	void CreateBoard();
-
-	void DrawBoard();
-	void DrawTile(int x, int y);
-
 	sf::Clock* soundClock;
 
 	std::vector<ParticleEffect*> m_particleEffects;
+	std::vector<std::vector<int>> m_levels;
 
 	std::vector<std::string> SHEET_PATH_TO_BUBBLES;
 
@@ -116,6 +116,15 @@ private:
 	float m_comboVolume;
 	float m_comboPitch;
 	int   m_comboSoundThreshold;
+
+	void InitializeSprites();
+	void InitializeLevels();
+	void ReadTextLevels(std::string sheetPath);
+	void CreateBoard();
+
+	void DrawBoard();
+	void DrawTile(int x, int y);
+
 };
 
 #endif
