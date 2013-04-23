@@ -31,8 +31,6 @@ Soundeffects* Soundeffects::Instance()
 #pragma region Initialize
 void Soundeffects::Initialize()
 {
-	DeclareSheetPathArray(m_sheetPathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
-	DeclareSheetPathArray(m_sheetPathVectorPop,NUMBER_OF_POP_SOUNDS,PATH_POP);
 #pragma region Volume
 	if(!m_soundconfig.load("options.txt"))
 	{
@@ -41,18 +39,14 @@ void Soundeffects::Initialize()
 	m_soundvol = m_soundconfig.get("sound_options","soundvolume",m_soundvol) * 10;
 	m_soundon = m_soundconfig.get("sound_options","soundon",m_soundon);
 #pragma endregion
-	for (int i = 0; i < NUMBER_OF_UI_SOUNDS ; i++)
-	{
-		LoadSoundFile(m_uiBuffers,i,m_sheetPathVectorUi);
-	}
-	m_uiSound = new sf::Sound();
 
-	for (int i = 0; i < NUMBER_OF_POP_SOUNDS ; i++)
-	{
-		LoadSoundFile(m_popBuffers,i,m_sheetPathVectorPop);
-	}
-	m_popSound = new sf::Sound();
+	DeclarePathArray(m_pathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
+	DeclarePathArray(m_pathVectorPop,NUMBER_OF_POP_SOUNDS,PATH_POP);
+
+	AddVectorsToVector(NUMBER_OF_UI_SOUNDS,m_uiBuffers,m_pathVectorUi,m_uiSound);
+	AddVectorsToVector(NUMBER_OF_POP_SOUNDS,m_popBuffers,m_pathVectorPop,m_popSound);
 }
+#pragma endregion
 
 #pragma region Update
 void Soundeffects::Update()
@@ -71,28 +65,10 @@ void Soundeffects::Cleanup()
 #pragma endregion
 
 #pragma region PlaySound
-void Soundeffects::PlaySound(int SoundNumber)
-{
-	
-}
 void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch, float Volume) // The sound category is an enum with all different sound categories
 {
-	switch (SoundCategory)
-	{
-	case UISOUND:
-		SetBufferToSoundAndPlay(m_uiBuffers,SoundNumber,m_uiSound, Pitch, Volume);
-			break;
-	case POPSOUND:
-		SetBufferToSoundAndPlay(m_popBuffers,SoundNumber,m_popSound, Pitch, Volume);
-			break;
-	}
+	SetBufferToSoundAndPlay(SoundCategory,SoundNumber,Pitch,Volume);
 }
-#pragma region StopSound
-void Soundeffects::StopSound(int SoundNumber)
-{
-
-}
-
 #pragma endregion
 
 #pragma region SetSoundvol
@@ -112,22 +88,29 @@ void Soundeffects::SetSoundvol()
 }
 #pragma endregion
 
-#pragma endregion
-
 #pragma region Privates
 
-std::vector<std::string> Soundeffects::DeclareSheetPathArray(std::vector<std::string> &m_sheetPathVectorUi, int NumberOfSoundsInArray, const std::string Path)
+std::vector<std::string> Soundeffects::DeclarePathArray(std::vector<std::string> &m_pathVector, int NumberOfSoundsInArray, const std::string path)
 {
 	for (int i = 1; i <= NumberOfSoundsInArray ; i++)
 	{
 		std::ostringstream	s;
 		s << i;
 		std::string i_as_string(s.str());
-		m_sheetPathVectorUi.push_back(SHEET_PATH_TO_SOUND_EFFECTS+Path+i_as_string+".wav");
+		m_pathVector.push_back(PATH_TO_SOUND_EFFECTS+path+i_as_string+".wav");
 	}
-	return m_sheetPathVectorUi;
+	return m_pathVector;
 }
-
+void Soundeffects::AddVectorsToVector(int numberOfSounds,std::vector<sf::SoundBuffer*> &vectorToLoadInto, std::vector<std::string> &pathVector, sf::Sound* &categorySound)
+{
+	for (int i = 0; i < numberOfSounds; i++)
+	{
+		LoadSoundFile(vectorToLoadInto,i,pathVector);
+	}
+	m_bufferCategories.push_back(vectorToLoadInto);
+	categorySound = new sf::Sound();
+	m_soundCategories.push_back(categorySound);
+}
 void Soundeffects::CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean)
 {
 	for (unsigned int i = 0; i < vectorToClean.size() ; i++)
@@ -189,12 +172,12 @@ void Soundeffects::SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Soun
 	Sound->setBuffer(*Buffer);
 	Sound->setPitch(initialPitch);
 }
-void Soundeffects::SetBufferToSoundAndPlay(std::vector<sf::SoundBuffer*> VectorToUse, int BufferNumber,sf::Sound* &SoundToUse, float Pitch, float Volume)
+void Soundeffects::SetBufferToSoundAndPlay(int BufferCategory, int BufferNumber, float Pitch, float Volume)
 {
-	SoundToUse->stop();
-	SoundToUse->setBuffer(*VectorToUse[BufferNumber]);
-	SoundToUse->setPitch(Pitch);
-	SoundToUse->setVolume(Volume);
-	SoundToUse->play();
+	m_soundCategories[BufferCategory]->stop();
+	m_soundCategories[BufferCategory]->setBuffer(*m_bufferCategories[BufferCategory][BufferNumber]);
+	m_soundCategories[BufferCategory]->setPitch(Pitch);
+	m_soundCategories[BufferCategory]->setVolume(Volume);
+	m_soundCategories[BufferCategory]->play();
 }
 #pragma endregion

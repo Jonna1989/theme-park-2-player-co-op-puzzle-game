@@ -116,11 +116,11 @@ void Game::UseTimedFunctions()
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
 	}
-	if (m_printBoardInterval->getElapsedTime().asSeconds() >= 5)
-	{
-		Board::Instance()->PrintBoardToConsole();
-		m_printBoardInterval->restart();
-	}
+// 	if (m_printBoardInterval->getElapsedTime().asSeconds() >= 5)
+// 	{
+// 		Board::Instance()->PrintBoardToConsole();
+// 		m_printBoardInterval->restart();
+// 	}
 }
 
 #pragma endregion
@@ -134,10 +134,10 @@ void Game::KeyCommands()
 }
 void Game::KeyCommand_PrintBoardToConsole()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
-	{
-		Board::Instance()->PrintBoardToConsole();
-	}
+// 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
+// 	{
+// 		Board::Instance()->PrintBoardToConsole();
+// 	}
 }
 
 void Game::KeyCommand_ClearBottomRow()
