@@ -403,6 +403,7 @@ void Board::DrawTile(int x, int y)
 		bool left = false;
 		int pos = 0;
 
+		CheckForFall(x,y);
 		if (m_board.at(y).at(x).GetOwner() == 0 && !m_board.at(y).at(x).GetFalling())
 		{
 			SetBoardHalfStep(0);
@@ -420,25 +421,37 @@ void Board::DrawTile(int x, int y)
 		{
 			if (PositionsOfAdjacentSameColor(x,y).at(i).y == y-1)
 			{
-				above = true;
+				if (GetTile(PositionsOfAdjacentSameColor(x,y).at(i).x,PositionsOfAdjacentSameColor(x,y).at(i).y)->GetOwner() == 0)
+				{
+					above = true;
+				}
 			}
 			if (PositionsOfAdjacentSameColor(x,y).at(i).x < BOARD_WIDTH)
 			{
 				if (PositionsOfAdjacentSameColor(x,y).at(i).x == x+1)
 				{
-					right = true;
+					if (GetTile(PositionsOfAdjacentSameColor(x,y).at(i).x,PositionsOfAdjacentSameColor(x,y).at(i).y)->GetOwner() == 0)
+					{
+						right = true;
+					}
 				}
 			}
 			if (PositionsOfAdjacentSameColor(x,y).at(i).y < BOARD_HEIGHT)
 			{
 				if (PositionsOfAdjacentSameColor(x,y).at(i).y == y+1)
 				{
-					below = true;
+					if (GetTile(PositionsOfAdjacentSameColor(x,y).at(i).x,PositionsOfAdjacentSameColor(x,y).at(i).y)->GetOwner() == 0)
+					{
+						below = true;
+					}
 				}
 			}
 			if (PositionsOfAdjacentSameColor(x,y).at(i).x == x-1)
 			{
-				left = true;
+				if (GetTile(PositionsOfAdjacentSameColor(x,y).at(i).x,PositionsOfAdjacentSameColor(x,y).at(i).y)->GetOwner() == 0)
+				{
+					left = true;
+				}
 			}
 		}
 #pragma region BubbleChecking
@@ -507,19 +520,19 @@ void Board::DrawTile(int x, int y)
 			pos = 15;
 		}
 #pragma endregion
-		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
+		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() == 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(pos*TILE_SIZE_X,TILE_SIZE_Y*0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
+		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() == 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-6)*TILE_SIZE_X,TILE_SIZE_Y*1),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
+		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() == 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*TILE_SIZE_X,TILE_SIZE_Y*2),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if (NrOfAdjacentSameColor(x,y) == 0 || m_board.at(y).at(x).GetOwner() == 0)
+		else if (NrOfAdjacentSameColor(x,y) == 0 || m_board.at(y).at(x).GetOwner() != 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
