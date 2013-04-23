@@ -31,7 +31,7 @@ private:
 
 	sf::Clock*	m_player1Clock;
 	sf::Clock*	m_player2Clock;
-	
+
 	sf::Clock* m_printBoardInterval;
 
 	void Gravity();

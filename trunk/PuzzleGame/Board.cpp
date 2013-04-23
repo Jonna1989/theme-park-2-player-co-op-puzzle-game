@@ -40,6 +40,10 @@ void Board::Initialize()
 	CreateSprite(m_plateSprite, m_plateTexture);
 	
 	m_plateSprite->setPosition((float)BOARD_OFFSET_X,(float)BOARD_OFFSET_Y);
+
+	m_boardHalfStep = 0;
+	m_player1HalfStep = 0;
+	m_player2HalfStep = 0;
 }
 
 void Board::Update()
@@ -279,6 +283,58 @@ std::vector<sf::Vector2i> Board::PositionsOfConnectedSameColor(int x, int y)
 
 	return positions;
 }
+
+bool Board::GetBoardHalfStep()
+{
+	if (m_boardHalfStep > 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Board::GetPlayer1HalfStep()
+{
+	if (m_player1HalfStep > 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Board::GetPlayer2HalfStep()
+{
+	if (m_player2HalfStep > 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Board::SetBoardHalfStep(int halfStep)
+{
+	m_boardHalfStep = halfStep;
+}
+
+void Board::SetPlayer1HalfStep(int halfStep)
+{
+	m_player1HalfStep = halfStep;
+}
+
+void Board::SetPlayer2HalfStep(int halfStep)
+{
+	m_player2HalfStep = halfStep;
+}
+
 #pragma endregion
 
 #pragma region Privates
@@ -334,6 +390,7 @@ void Board::DrawTile(int x, int y)
 {
 	int color = m_board.at(y).at(x).GetContent();
 	int owner = m_board.at(y).at(x).GetOwner();
+
 	if(0 < color)
 	{
 		if (y < BOARD_HEIGHT-1)
@@ -351,6 +408,20 @@ void Board::DrawTile(int x, int y)
 		{
 			m_board.at(y).at(x).SetFalling(false);
 		}
+
+		if (owner == 0 && !m_board.at(y).at(x).GetFalling())
+		{
+			SetBoardHalfStep(0);
+		}
+		else if (owner == 10 || owner == 11 && !m_board.at(y).at(x).GetFalling())
+		{
+			SetPlayer1HalfStep(0);
+		}
+		else if (owner == 20 || owner == 21 && !m_board.at(y).at(x).GetFalling())
+		{
+			SetPlayer2HalfStep(0);
+		}
+
 		bool above = false;
 		bool right = false;
 		bool below = false;
@@ -450,31 +521,43 @@ void Board::DrawTile(int x, int y)
 #pragma endregion
 		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0)
 		{
-			TextureProvider::Instance()->GetSubRect(sf::Vector2i(pos*50,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i(pos*TILE_SIZE_X,TILE_SIZE_Y*0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
 		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0)
 		{
-			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-6)*50,50),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-6)*TILE_SIZE_X,TILE_SIZE_Y*1),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
 		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0)
 		{
-			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*50,100),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*TILE_SIZE_X,TILE_SIZE_Y*2),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
 		else if (NrOfAdjacentSameColor(x,y) == 0)
 		{
-			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
+			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+
+		if (owner == 0)
+		{
+			m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_boardHalfStep);
+		}
+		else if (owner == 10 || owner == 11)
+		{
+			m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
+		}
+		else if (owner == 20 || owner == 21)
+		{
+			m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
+		}
+
 		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 		if (owner == 10)
 		{
-//			std::cout << "Aura?" << std::endl;
-			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
 			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(5));
 		}
 		else if(owner == 20)
 		{
-			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
 			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(6));
 		}
 	}
