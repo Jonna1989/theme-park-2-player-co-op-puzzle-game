@@ -85,7 +85,7 @@ void Game::BoardGravity()
 
 void Game::UseTimedFunctions()
 {
-	if (m_gravityClock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetGravity()/2 && !Board::Instance()->GetBoardHalfStep() != 0)
+	if (m_gravityClock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetGravity()/2 && !Board::Instance()->GetBoardHalfStep())
 	{
 		Board::Instance()->SetBoardHalfStep(TILE_SIZE_Y/2);
 	}
@@ -96,7 +96,7 @@ void Game::UseTimedFunctions()
 		m_gravityClock->restart();
 		Board::Instance()->CheckForMatch();
 	}
-	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity()/2 && !Board::Instance()->GetPlayer1HalfStep() != 0)
+	if (m_player1Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer1Gravity()/2 && !Board::Instance()->GetPlayer1HalfStep())
 	{
 		Board::Instance()->SetPlayer1HalfStep(TILE_SIZE_Y/2);
 	}
@@ -106,7 +106,7 @@ void Game::UseTimedFunctions()
 		m_player1->GetPlayerPiece()->DropPiece();
 		m_player1Clock->restart();
 	}
-	if (m_player2Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer2Gravity()/2 && !Board::Instance()->GetPlayer2HalfStep() != 0)
+	if (m_player2Clock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetPlayer2Gravity()/2 && !Board::Instance()->GetPlayer2HalfStep())
 	{
 		Board::Instance()->SetPlayer2HalfStep(TILE_SIZE_Y/2);
 	}
