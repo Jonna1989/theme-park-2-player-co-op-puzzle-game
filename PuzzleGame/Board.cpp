@@ -135,6 +135,7 @@ void Board::CheckForMatch()
 	{
 		for (int y = 0; y < BOARD_HEIGHT; y++)
 		{
+			CheckForFall(x,y);
 			if (NrOfConnectedSameColor(x,y) > 3)
 			{
 				int temp2 = NrOfConnectedSameColor(x,y);
@@ -143,7 +144,7 @@ void Board::CheckForMatch()
 				int passiveCounter = 0;
 				for (int h = 0; h < temp2; h++)
 				{
-					if (m_board.at(temp[h].y).at(temp[h].x).GetFalling() == false)
+					if (!m_board.at(temp[h].y).at(temp[h].x).GetFalling())
 					{
 						notFallingCounter++;
 					}
@@ -396,41 +397,25 @@ void Board::DrawTile(int x, int y)
 
 	if(0 < color)
 	{
-		if (y < BOARD_HEIGHT-1)
-		{
-			if (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE)
-			{
-				m_board.at(y).at(x).SetFalling(true);
-			}
-			else
-			{
-				m_board.at(y).at(x).SetFalling(false);
-			}
-		}
-		else
-		{
-			m_board.at(y).at(x).SetFalling(false);
-		}
-
-		if (owner == 0 && !m_board.at(y).at(x).GetFalling())
-		{
-			SetBoardHalfStep(0);
-		}
-		else if (owner == 10 || owner == 11 && !m_board.at(y).at(x).GetFalling())
-		{
-			SetPlayer1HalfStep(0);
-		}
-		else if (owner == 20 || owner == 21 && !m_board.at(y).at(x).GetFalling())
-		{
-			SetPlayer2HalfStep(0);
-		}
-
 		bool above = false;
 		bool right = false;
 		bool below = false;
 		bool left = false;
 		int pos = 0;
-		
+
+		if (m_board.at(y).at(x).GetOwner() == 0 && !m_board.at(y).at(x).GetFalling())
+		{
+			SetBoardHalfStep(0);
+		}
+		else if ((m_board.at(y).at(x).GetOwner() == 10 || m_board.at(y).at(x).GetOwner() == 11) && !m_board.at(y).at(x).GetFalling())
+		{
+			SetPlayer1HalfStep(0);
+		}
+		else if ((m_board.at(y).at(x).GetOwner() == 20 || m_board.at(y).at(x).GetOwner() == 21) && !m_board.at(y).at(x).GetFalling())
+		{
+			SetPlayer2HalfStep(0);
+		}
+
 		for (int i = 0; i < NrOfAdjacentSameColor(x,y); i++)
 		{
 			if (PositionsOfAdjacentSameColor(x,y).at(i).y == y-1)
@@ -522,19 +507,19 @@ void Board::DrawTile(int x, int y)
 			pos = 15;
 		}
 #pragma endregion
-		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0)
+		if ((pos < 6) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(pos*TILE_SIZE_X,TILE_SIZE_Y*0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0)
+		else if ((pos < 12) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-6)*TILE_SIZE_X,TILE_SIZE_Y*1),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0)
+		else if ((pos < 18) && NrOfAdjacentSameColor(x,y) > 0 && m_board.at(y).at(x).GetOwner() != 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*TILE_SIZE_X,TILE_SIZE_Y*2),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
-		else if (NrOfAdjacentSameColor(x,y) == 0)
+		else if (NrOfAdjacentSameColor(x,y) == 0 || m_board.at(y).at(x).GetOwner() == 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[color-1],m_sprites.at(color - 1));
 		}
@@ -565,6 +550,44 @@ void Board::DrawTile(int x, int y)
 		}
 	}
 }
+
+void Board::CheckForFall(int x, int y)
+{
+	if (y < BOARD_HEIGHT-1)
+	{
+		if (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE
+			|| m_board.at(y+1).at(x).GetOwner() != PASSIVE)
+		{
+			if (m_board.at(y+1).at(x).GetOwner() != 0)
+			{
+				if (m_board.at(y+1).at(x).GetFalling() || (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE))
+				{
+					m_board.at(y).at(x).SetFalling(true);
+				}
+				else
+				{
+					m_board.at(y).at(x).SetFalling(false);
+				}
+			}
+			else
+			{
+				m_board.at(y).at(x).SetFalling(true);
+			}
+		}
+		else
+		{
+			if (m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE)
+			{
+				m_board.at(y).at(x).SetFalling(false);
+			}
+		}
+	}
+	else
+	{
+		m_board.at(y).at(x).SetFalling(false);
+	}
+}
+
 void Board::PrintBoardToConsole()
 {
 	//std::system("cls");
