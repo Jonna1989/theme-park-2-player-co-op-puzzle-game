@@ -116,11 +116,6 @@ void Game::UseTimedFunctions()
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
 	}
-// 	if (m_printBoardInterval->getElapsedTime().asSeconds() >= 5)
-// 	{
-// 		Board::Instance()->PrintBoardToConsole();
-// 		m_printBoardInterval->restart();
-// 	}
 }
 
 #pragma endregion
