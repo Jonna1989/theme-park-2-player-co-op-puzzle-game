@@ -631,7 +631,14 @@ void PlayerPiece::SetPositions(int oneX, int oneY, int twoX, int twoY)
 void PlayerPiece::SetOwner(int owner)
 {
 	m_pieceOne->SetOwner(owner);
-	m_pieceTwo->SetOwner(owner+1);
+	if (owner != 0)
+	{
+		m_pieceTwo->SetOwner(owner+1);
+	}
+	else
+	{
+		m_pieceTwo->SetOwner(owner);
+	}
 }
 
 void PlayerPiece::SetPositionToSpawn()

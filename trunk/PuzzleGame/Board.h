@@ -80,6 +80,8 @@ public:
 	void PrintBoardToConsole();
 
 	void CheckForMatch();
+
+	void CheckForFall(int x, int y);
 private:
 	Board();
 	~Board();
