@@ -41,7 +41,14 @@ int Player::GetScore()
 {
 	return m_score;
 }
-
+std::string Player::GetScoreAsString()
+{
+	std::string result;
+	std::ostringstream convert;
+	convert << m_score;
+	result = convert.str();
+	return result;
+}
 #pragma endregion
 
 #pragma region Setters

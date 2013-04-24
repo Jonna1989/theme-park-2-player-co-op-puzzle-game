@@ -1,6 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <iomanip>
+#include <locale>
+#include <sstream>
+
 #include "Board.h"
 #include "PlayerPiece.h"
 
@@ -16,7 +20,7 @@ public:
 
 	PlayerPiece* GetPlayerPiece();
 	int GetScore();
-
+	std::string GetScoreAsString();
 	void addToScore(int score);
 	void resetScore();
 	void setScore(int newScore);
