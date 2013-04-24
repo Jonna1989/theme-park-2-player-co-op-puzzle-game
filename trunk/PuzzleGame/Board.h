@@ -61,7 +61,6 @@ public:
 	int GetColor(int x, int y);
 	int GetOwner(int x, int y);
 
-	bool GetBoardHalfStep();
 	bool GetPlayer1HalfStep();
 	bool GetPlayer2HalfStep();
 
@@ -110,7 +109,6 @@ private:
 	sf::Texture* m_plateTexture;
 	sf::Sprite* m_plateSprite;
 
-	int m_boardHalfStep;
 	int m_player1HalfStep;
 	int m_player2HalfStep;
 	void PlayComboSound(sf::Clock* &comboClock);
