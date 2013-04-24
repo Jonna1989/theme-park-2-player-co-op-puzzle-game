@@ -68,7 +68,6 @@ void Board::Update()
 			m_particleEffects[i]->Update();
 		}
 	}
-//	Window->draw(*m_score->GetScoreAsText());
 	if (soundClock->getElapsedTime().asMilliseconds() >= m_comboSoundThreshold)
 	{
 		m_score->SetComboMultiplier(1);

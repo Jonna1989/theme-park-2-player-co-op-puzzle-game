@@ -27,7 +27,7 @@ void Score::Initialize(float scorePosX, float scorePosY)
 	m_comboMultiplierAsText = new sf::Text();
 	m_comboMultiplierAsText->setCharacterSize(40);
 	m_comboMultiplierAsText->setColor(sf::Color::Black);
-	m_comboMultiplierAsText->setPosition(scorePosX+400,scorePosY);
+	m_comboMultiplierAsText->setPosition(scorePosX+400,scorePosY+10);
 }
 void Score::Update()
 {
@@ -46,7 +46,8 @@ void Score::Update()
 }
 void Score::Cleanup()
 {
-
+	delete m_scoreAsText;
+	delete m_comboMultiplierAsText;
 }
 
 int Score::GetScore()
