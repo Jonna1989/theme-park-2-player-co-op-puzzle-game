@@ -54,8 +54,6 @@ private:
 	int m_owner;
 	sf::Vector2i m_spawnPointOne; //For piece one
 	sf::Vector2i m_spawnPointTwo; //For piece two
-
-	Board* m_board;
 };
 
 #endif
