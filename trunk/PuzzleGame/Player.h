@@ -1,11 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <iomanip>
-#include <locale>
-#include <sstream>
-
-#include "Board.h"
 #include "PlayerPiece.h"
 
 class Player
