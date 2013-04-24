@@ -13,6 +13,7 @@
 #include "ParticleEffect.h"
 #include "Soundeffects.h"
 
+
 static int BOARD_HEIGHT = 14;
 static int BOARD_WIDTH	= 20;
 static unsigned int TILE_SIZE_X = 50;
@@ -125,6 +126,12 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 
+	int m_score;
+	std::string m_scoreAsString;
+	int m_scoreMultiplier;
+	sf::String m_scoreAsSfString;
+	void UpdateScoreAsString();
+	sf::Text* m_scoreAsText;
 };
 
 #endif
