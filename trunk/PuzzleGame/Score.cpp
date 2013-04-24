@@ -23,24 +23,22 @@ void Score::Initialize(float scorePosX, float scorePosY)
 	m_scoreAsText->setCharacterSize(50);
 	m_scoreAsText->setColor(sf::Color::Black);
 	m_scoreAsText->setPosition(m_scoreTextPos);
-	UpdateSfTextFromSfString(m_score,m_scoreAsSfString,m_scoreAsText);
 
 	m_comboMultiplierAsText = new sf::Text();
-	m_comboMultiplierAsText->setCharacterSize(50);
+	m_comboMultiplierAsText->setCharacterSize(40);
 	m_comboMultiplierAsText->setColor(sf::Color::Black);
 	m_comboMultiplierAsText->setPosition(scorePosX+400,scorePosY);
-	UpdateSfTextFromSfString(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText);
 }
 void Score::Update()
 {
  	if (m_score != m_scoreLastUpdate)
  	{
-		UpdateSfTextFromSfString(m_score,m_scoreAsSfString,m_scoreAsText);
+		ConvertIntToSfStringToSfText(m_score,m_scoreAsSfString,m_scoreAsText);
  	}
 	m_scoreLastUpdate = m_score;
 	if (m_comboMultiplier != m_comboMultiplierLastUpdate)
 	{
-		UpdateSfTextFromSfString(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText);
+		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo");
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
 	Window->draw(*m_scoreAsText);
@@ -98,17 +96,23 @@ sf::Text* Score::GetScoreAsText()
 #pragma endregion
 
 #pragma region Privates
-void Score::UpdateSfTextFromSfString(int intToGetStringFrom,sf::String sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
-{
-	ConvertIntToSfString(intToGetStringFrom,sfStringToUpdateFrom);
-	sfTextToConvertTo->setString(sfStringToUpdateFrom);
-}
-void Score::ConvertIntToSfString(int intToConvertFrom, sf::String &sfStringToConvertTo)
+void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
 {
 	std::ostringstream convert;
-	convert << intToConvertFrom;
+	convert << intToGetStringFrom;
 	std::string tempStdString;
 	tempStdString = convert.str();
-	sfStringToConvertTo = tempStdString;
+	sfStringToUpdateFrom = tempStdString;
+	sfTextToConvertTo->setString(sfStringToUpdateFrom);
+}
+void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addAtEnd)
+{
+	std::ostringstream convert;
+	convert << intToGetStringFrom;
+	std::string tempStdString;
+	tempStdString = convert.str();
+	sfStringToUpdateFrom = tempStdString;
+	sfStringToUpdateFrom.insert(sfStringToUpdateFrom.getSize(),addAtEnd);
+	sfTextToConvertTo->setString(sfStringToUpdateFrom);
 }
 #pragma endregion
