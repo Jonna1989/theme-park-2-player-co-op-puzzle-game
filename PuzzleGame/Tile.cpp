@@ -21,6 +21,7 @@ void Tile::Initialize(int tileSizeX, int tileSizeY, int vectorPosX, int vectorPo
 	m_owner = 0;
 	m_previousOwner = 0;
 	m_isFalling = false;
+	m_halfStep = 0;
 }
 
 void Tile::Update()
@@ -116,4 +117,12 @@ void Tile::SetFalling(bool isfalling)
 bool Tile::GetFalling()
 {
 	return m_isFalling;
+}
+void Tile::SetHalfStep(int halfStep)
+{
+	m_halfStep = halfStep;
+}
+int Tile::GetHalfStep()
+{
+	return m_halfStep;
 }

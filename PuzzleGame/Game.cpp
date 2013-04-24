@@ -85,7 +85,7 @@ void Game::BoardGravity()
 
 void Game::UseTimedFunctions()
 {
-	if (m_gravityClock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetGravity()/2 && !Board::Instance()->GetBoardHalfStep())
+	if (m_gravityClock->getElapsedTime().asMilliseconds() >= InputManager::Instance()->GetGravity()/2)
 	{
 		Board::Instance()->SetBoardHalfStep(TILE_SIZE_Y/2);
 	}

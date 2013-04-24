@@ -439,9 +439,15 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		{
 			if(m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
 			{
-				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
-				dropped = true;
-				pieceOneDropped = true;
+				if((0 <= m_pieceTwo->GetPosition().y + 1 && m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT))
+				{
+					if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
+					{
+						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+						dropped = true;
+						pieceOneDropped = true;
+					}
+				}
 			}
 			else if(m_board->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 			{
@@ -462,9 +468,15 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		{
 			if(m_board->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
 			{
-				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
-				dropped = true;
-				pieceTwoDropped = true;
+				if((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT))
+				{
+					if (m_board->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
+					{
+						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+						dropped = true;
+						pieceTwoDropped = true;
+					}
+				}
 			}
 			else if(m_board->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 			{
