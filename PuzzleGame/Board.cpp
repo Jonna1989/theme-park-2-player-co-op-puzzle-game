@@ -50,6 +50,14 @@ void Board::Initialize()
 	m_comboPitch = 1.0f;
 	m_comboVolume = 200.0f;
 	m_comboSoundThreshold = 5000;
+
+	m_score = 0;
+	m_scoreMultiplier = 10;
+	m_scoreAsText = new sf::Text();
+	m_scoreAsText->setCharacterSize(50);
+	m_scoreAsText->setPosition(500,75);
+	m_scoreAsText->setColor(sf::Color::Black);
+	UpdateScoreAsString();
 }
 
 void Board::Update()
@@ -67,7 +75,7 @@ void Board::Update()
 			m_particleEffects[i]->Update();
 		}
 	}
-
+	Window->draw(*m_scoreAsText);
 	Window->display();
 }
 
@@ -170,6 +178,8 @@ void Board::CheckForMatch()
 						}
 					}
 					PlayComboSound(soundClock);
+					m_score += (temp2*m_scoreMultiplier);
+					UpdateScoreAsString();
 				}
 			}
 		}
@@ -683,14 +693,24 @@ void Board::PlayComboSound(sf::Clock* &comboClock)
 	{
 		m_comboPitch += 0.10f;
 		m_comboVolume += 75.0f;
+		m_scoreMultiplier += 2;
 		Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,m_comboPitch,m_comboVolume);
 	}
 	else
 	{
 		m_comboPitch = 1.0f;
 		m_comboVolume = 200.0f;
+		m_scoreMultiplier = 10;
 		Soundeffects::Instance()->PlaySound(Soundeffects::POPSOUND,0,m_comboPitch,m_comboVolume);
 	}
 	comboClock->restart();
+}
+void Board::UpdateScoreAsString()
+{
+	std::ostringstream convert;
+	convert << m_score;
+	m_scoreAsString = convert.str();
+	m_scoreAsSfString = m_scoreAsString;
+	m_scoreAsText->setString(m_scoreAsSfString);
 }
 #pragma endregion
