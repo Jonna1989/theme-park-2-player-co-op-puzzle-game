@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Board.h"
+
 class PowerItem
 {
 public:
@@ -16,12 +18,12 @@ public:
 	virtual void Activate() = 0;
 
 	virtual sf::Vector2i GetPosition() = 0;
+	virtual bool IsFalling() = 0;
+
 	virtual void SetPosition(int x, int y) = 0;
+	virtual void SetFalling(bool falling) = 0;
 
-	virtual bool isFalling() = 0;
-	virtual void setFalling() = 0;
-
-private:
+protected:
 	sf::Vector2i m_position;
 	bool m_isFalling;
 };
