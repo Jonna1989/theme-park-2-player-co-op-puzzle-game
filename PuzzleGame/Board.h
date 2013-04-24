@@ -14,10 +14,10 @@
 #include "Soundeffects.h"
 
 
-static int BOARD_HEIGHT = 14;
-static int BOARD_WIDTH	= 20;
-static unsigned int TILE_SIZE_X = 50;
-static unsigned int TILE_SIZE_Y = 50;
+static int BOARD_HEIGHT = 10;
+static int BOARD_WIDTH	= 16;
+static unsigned int TILE_SIZE_X = 75;
+static unsigned int TILE_SIZE_Y = 75;
 static unsigned int BOARD_OFFSET_X = 460;
 static unsigned int BOARD_OFFSET_Y = 140;
 static const int NUMBER_OF_BUBBLES = 5;

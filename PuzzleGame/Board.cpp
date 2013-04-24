@@ -361,7 +361,7 @@ void Board::InitializeSprites()
 		s << i+1;
 		std::string i_as_string(s.str());
 		SHEET_PATH_TO_BUBBLES.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
-		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
+		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
 	}
 	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura.png",m_sprites.at(5));
 	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura2.png",m_sprites.at(6));
@@ -391,7 +391,6 @@ void Board::ReadTextLevels(std::string sheetPath)
 			currentChar = iStream.get();
 			color = atoi(currentChar.c_str());
 			levelColors.push_back(color);
-			std::cout << color << std::endl;
 		}
 		else
 		{
@@ -475,7 +474,7 @@ void Board::DrawTile(int x, int y)
 			{
 				if (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE)
 				{
-					m_board.at(y).at(x).SetHalfStep(25);
+					m_board.at(y).at(x).SetHalfStep(TILE_SIZE_Y/2);
 				}
 				else
 				{
@@ -491,7 +490,9 @@ void Board::DrawTile(int x, int y)
 		{
 			if ( y < BOARD_HEIGHT-1)
 			{
-				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling()) || m_board.at(y+1).at(x).GetOwner() != 0)
+				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
+					|| (m_board.at(y+1).at(x).GetOwner() == 20)
+					|| (m_board.at(y+1).at(x).GetOwner() == 21))
 				{
 					SetPlayer1HalfStep(0);
 				}
@@ -505,7 +506,9 @@ void Board::DrawTile(int x, int y)
 		{
 			if ( y < BOARD_HEIGHT-1)
 			{
-				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling()) || m_board.at(y+1).at(x).GetOwner() != 0)
+				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
+					|| (m_board.at(y+1).at(x).GetOwner() == 10)
+					|| (m_board.at(y+1).at(x).GetOwner() == 11))
 				{
 					SetPlayer2HalfStep(0);
 				}
