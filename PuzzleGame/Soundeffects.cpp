@@ -32,7 +32,7 @@ Soundeffects* Soundeffects::Instance()
 void Soundeffects::Initialize()
 {
 #pragma region Volume
-	if(!m_soundconfig.load("options.txt"))
+	if(!m_soundconfig.load("Assets/Options/options.txt"))
 	{
 		std::cout << "Failed to load sound options" << std::endl;
 	}

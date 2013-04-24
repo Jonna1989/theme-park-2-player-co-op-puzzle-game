@@ -29,7 +29,7 @@ Music* Music::Instance()
 void Music::Initialize(int TrackNumber)
 {
 	
-	if(!m_Soundoptions.load("options.txt"))
+	if(!m_Soundoptions.load("Assets/Options/options.txt"))
 	{
 		std::cout << "Failed to load music options" << std::endl;
 	}
