@@ -488,7 +488,18 @@ void Board::DrawTile(int x, int y)
 		}
 		else if ((m_board.at(y).at(x).GetOwner() == 10 || m_board.at(y).at(x).GetOwner() == 11)/* && !m_board.at(y).at(x).GetFalling()*/)
 		{
-			if ( y < BOARD_HEIGHT-1)
+			if ( y < BOARD_HEIGHT-2)
+			{
+				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
+					|| (m_board.at(y+1).at(x).GetOwner() == 20)
+					|| (m_board.at(y+1).at(x).GetOwner() == 21)
+					|| (m_board.at(y+2).at(x).GetOwner() == 20)
+					|| (m_board.at(y+2).at(x).GetOwner() == 21))
+				{
+					SetPlayer1HalfStep(0);
+				}
+			}
+			else if ( y < BOARD_HEIGHT-1)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
 					|| (m_board.at(y+1).at(x).GetOwner() == 20)
@@ -504,7 +515,18 @@ void Board::DrawTile(int x, int y)
 		}
 		else if ((m_board.at(y).at(x).GetOwner() == 20 || m_board.at(y).at(x).GetOwner() == 21)/* && !m_board.at(y).at(x).GetFalling()*/)
 		{
-			if ( y < BOARD_HEIGHT-1)
+			if ( y < BOARD_HEIGHT-2)
+			{
+				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
+					|| (m_board.at(y+1).at(x).GetOwner() == 10)
+					|| (m_board.at(y+1).at(x).GetOwner() == 11)
+					|| (m_board.at(y+2).at(x).GetOwner() == 10)
+					|| (m_board.at(y+2).at(x).GetOwner() == 11))
+				{
+					SetPlayer2HalfStep(0);
+				}
+			}
+			else if ( y < BOARD_HEIGHT-1)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
 					|| (m_board.at(y+1).at(x).GetOwner() == 10)
