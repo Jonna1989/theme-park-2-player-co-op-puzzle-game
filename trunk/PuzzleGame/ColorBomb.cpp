@@ -16,7 +16,7 @@ void ColorBomb::Initialize()
 	m_position.x = 0;
 	m_position.y = 1;
 	m_isFalling = true;
-	color = 0;
+	m_colorToRemove = 0;
 }
 
 void ColorBomb::Update()
