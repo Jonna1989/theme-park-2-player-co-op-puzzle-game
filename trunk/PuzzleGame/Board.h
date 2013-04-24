@@ -3,16 +3,14 @@
 
 #include <vector>
 #include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <fstream>
+
 
 #include "WindowManager.h"
 #include "Tile.h"
 #include "TextureProvider.h"
 #include "ParticleEffect.h"
 #include "Soundeffects.h"
-
+#include "Score.h"
 
 static int BOARD_HEIGHT = 10;
 static int BOARD_WIDTH	= 16;
@@ -124,12 +122,7 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 
-	int m_score;
-	std::string m_scoreAsString;
-	int m_scoreMultiplier;
-	sf::String m_scoreAsSfString;
-	void UpdateScoreAsString();
-	sf::Text* m_scoreAsText;
+	Score* m_score;
 };
 
 #endif
