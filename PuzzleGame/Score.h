@@ -20,12 +20,12 @@ public:
 	void SetScore(int newScore);
 	void AddScore(int scoreToAdd);
 
-	int GetScoreMultiplier();
-	void SetScoreMultiplier(int newScoreMultiplier);
+	int GetScoreMultiplier		();
+	void SetScoreMultiplier		(int newScoreMultiplier);
 	void IncreaseScoreMultiplier(int scoreMultiplierIncrease);
 
-	int GetComboMultiplier();
-	void SetComboMultiplier(int newComboMultiplier);
+	int GetComboMultiplier		();
+	void SetComboMultiplier		(int newComboMultiplier);
 	void IncreaseComboMultiplier(int comboMultiplierIncrease);
 
 	sf::Text* GetScoreAsText();
@@ -36,11 +36,11 @@ private:
 	int m_comboMultiplier;
 	sf::String m_scoreAsSfString;
 	sf::String m_comboMultiplierAsSfString;
-	void UpdateSfTextFromSfString(int intToGetStringFrom,sf::String sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo);
 	int m_scoreLastUpdate;
 	int m_comboMultiplierLastUpdate;
-	void ConvertIntToSfString(int intToConvertFrom, sf::String &sfStringToConvertTo);
 	sf::Text* m_scoreAsText;
 	sf::Text* m_comboMultiplierAsText;
+	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo);
+	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addAtEnd);
 };
 
