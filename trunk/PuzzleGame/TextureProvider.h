@@ -7,8 +7,6 @@
 class TextureProvider
 {
 public:
-	TextureProvider();
-	~TextureProvider();
 	static TextureProvider* m_instance;
 	static TextureProvider* Instance();
 
@@ -21,6 +19,8 @@ public:
 	std::map<std::string, sf::Texture*> m_textures;
 
 private:
+	TextureProvider();
+	~TextureProvider();
 	sf::Sprite* m_sprite;
 };
 

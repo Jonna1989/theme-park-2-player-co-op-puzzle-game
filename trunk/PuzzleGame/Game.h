@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-
+#include "Avatar.h"
 #include "State.h"
 #include "InputManager.h"
 #include "Player.h"
@@ -41,6 +41,7 @@ private:
 	void KeyCommands();
 	void KeyCommand_PrintBoardToConsole();
 	void KeyCommand_ClearBottomRow();
+	Avatar* m_avatar1;
 };
 
 #endif
