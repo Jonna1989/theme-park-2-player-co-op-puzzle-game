@@ -30,19 +30,20 @@ public:
 	enum SPACE
 	{
 		EMPTY_SPACE, 
-		GREEN_SPACE, 
 		BLUE_SPACE, 
-		PURPLE_SPACE, 
+		GREEN_SPACE, 
+		PURPLE_SPACE,
 		RED_SPACE, 
-		YELLOW_SPACE 
+		YELLOW_SPACE,
+		ORANGE_SPACE,
+		CYAN_SPACE
 	};
 
 	enum PLAYER
 	{
 		PASSIVE		= 0,
 		PLAYER_ONE	= 10,
-		PLAYER_TWO	= 20,
-		
+		PLAYER_TWO	= 20
 	};
 
 	static Board* Instance();

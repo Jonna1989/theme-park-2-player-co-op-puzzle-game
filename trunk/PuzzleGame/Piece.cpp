@@ -20,7 +20,6 @@ void Piece::Initialize(int owner)
 	RandomizeColor();
 	m_position = sf::Vector2i(-1, -1);
 
-	m_board = Board::Instance();
 	m_owner = owner;
 }
 
@@ -54,7 +53,7 @@ void Piece::SetColor(int color)
 
 	if(m_position.x != -1 && m_position.y != -1)
 	{
-		m_board->SetColor(m_position.x, m_position.y, color);
+		Board::Instance()->SetColor(m_position.x, m_position.y, color);
 	}
 }
 
@@ -62,20 +61,20 @@ void Piece::SetPosition(int posX, int posY)
 {
 	if(m_position.x != -1 && m_position.y != -1)
 	{
-		m_board->SetOwner(m_position.x, m_position.y, 0);
-		m_board->SetColor(m_position.x, m_position.y, 0);
+		Board::Instance()->SetOwner(m_position.x, m_position.y, 0);
+		Board::Instance()->SetColor(m_position.x, m_position.y, 0);
 	}
 	
 	m_position.x = posX;
 	m_position.y = posY;
-	m_board->SetOwner(m_position.x, m_position.y, m_owner);
-	m_board->SetColor(m_position.x, m_position.y, m_color);
+	Board::Instance()->SetOwner(m_position.x, m_position.y, m_owner);
+	Board::Instance()->SetColor(m_position.x, m_position.y, m_color);
 }
 
 void Piece::SetOwner(int owner)
 {
 	m_owner = owner;
-	m_board->SetOwner(m_position.x, m_position.y, m_owner);
+	Board::Instance()->SetOwner(m_position.x, m_position.y, m_owner);
 }
 
 #pragma endregion
@@ -93,7 +92,7 @@ int Piece::NrOfAdjacentSameColor()
 
 	if(m_position.y - 1 >= 0)
 	{
-		if(m_board->GetColor(m_position.x, m_position.y - 1) == m_color)
+		if(Board::Instance()->GetColor(m_position.x, m_position.y - 1) == m_color)
 		{
 			sameColor++;
 		}
@@ -101,7 +100,7 @@ int Piece::NrOfAdjacentSameColor()
 
 	if(m_position.x + 1 < BOARD_WIDTH)
 	{
-		if(m_board->GetColor(m_position.x + 1, m_position.y) == m_color)
+		if(Board::Instance()->GetColor(m_position.x + 1, m_position.y) == m_color)
 		{
 			sameColor++;
 		}
@@ -109,7 +108,7 @@ int Piece::NrOfAdjacentSameColor()
 
 	if(m_position.y + 1 < BOARD_HEIGHT)
 	{
-		if(m_board->GetColor(m_position.x, m_position.y + 1) == m_color)
+		if(Board::Instance()->GetColor(m_position.x, m_position.y + 1) == m_color)
 		{
 			sameColor++;
 		}
@@ -117,7 +116,7 @@ int Piece::NrOfAdjacentSameColor()
 
 	if(m_position.x - 1 >= 0)
 	{
-		if(m_board->GetColor(m_position.x - 1, m_position.y) == m_color)
+		if(Board::Instance()->GetColor(m_position.x - 1, m_position.y) == m_color)
 		{
 			sameColor++;
 		}
@@ -132,7 +131,7 @@ std::vector<sf::Vector2i> Piece::PositionsOfAdjacentSameColor()
 
 	if(m_position.y - 1 >= 0)
 	{
-		if(m_board->GetColor(m_position.x, m_position.y - 1) == m_color)
+		if(Board::Instance()->GetColor(m_position.x, m_position.y - 1) == m_color)
 		{
 			sameColorPositions.push_back(sf::Vector2i(m_position.x, m_position.y - 1));
 		}
@@ -140,7 +139,7 @@ std::vector<sf::Vector2i> Piece::PositionsOfAdjacentSameColor()
 
 	if(m_position.x + 1 < BOARD_WIDTH)
 	{
-		if(m_board->GetColor(m_position.x + 1, m_position.y) == m_color)
+		if(Board::Instance()->GetColor(m_position.x + 1, m_position.y) == m_color)
 		{
 			sameColorPositions.push_back(sf::Vector2i(m_position.x + 1, m_position.y));
 		}
@@ -148,7 +147,7 @@ std::vector<sf::Vector2i> Piece::PositionsOfAdjacentSameColor()
 
 	if(m_position.y + 1 < BOARD_HEIGHT)
 	{
-		if(m_board->GetColor(m_position.x, m_position.y + 1) == m_color)
+		if(Board::Instance()->GetColor(m_position.x, m_position.y + 1) == m_color)
 		{
 			sameColorPositions.push_back(sf::Vector2i(m_position.x, m_position.y + 1));
 		}
@@ -156,7 +155,7 @@ std::vector<sf::Vector2i> Piece::PositionsOfAdjacentSameColor()
 
 	if(m_position.x - 1 >= 0)
 	{
-		if(m_board->GetColor(m_position.x - 1, m_position.y) == m_color)
+		if(Board::Instance()->GetColor(m_position.x - 1, m_position.y) == m_color)
 		{
 			sameColorPositions.push_back(sf::Vector2i(m_position.x - 1, m_position.y));
 		}

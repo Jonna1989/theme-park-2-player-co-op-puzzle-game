@@ -55,8 +55,6 @@ void Board::Initialize()
 
 void Board::Update()
 {
-
-	
 	Window->draw(*m_backgroundSprite);
 	Window->draw(*m_plateSprite);
 
@@ -132,6 +130,7 @@ Tile* Board::GetSpecifiedTile(int owner)
 			}
 		}
 	}
+	return nullptr;
 }
 
 #pragma endregion
@@ -363,7 +362,7 @@ void Board::SetPlayer2HalfStep(int halfStep)
 
 void Board::InitializeSprites()
 {
-	for(int i = 0; i < 7; i++)
+	for(int i = 0; i < 9; i++)
 	{
 		m_sprites.push_back(new sf::Sprite());
 	}
@@ -376,8 +375,8 @@ void Board::InitializeSprites()
 		SHEET_PATH_TO_BUBBLES.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
 		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
 	}
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura.png",m_sprites.at(5));
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura2.png",m_sprites.at(6));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura.png",m_sprites.at(NUMBER_OF_BUBBLES));
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura2.png",m_sprites.at(NUMBER_OF_BUBBLES+1));
 
 }
 
@@ -793,13 +792,13 @@ void Board::DrawTile(int x, int y)
 		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 		if (owner == 10)
 		{
-			m_sprites.at(5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
-			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(5));
+			m_sprites.at(NUMBER_OF_BUBBLES)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
+			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES));
 		}
 		else if(owner == 20)
 		{
-			m_sprites.at(6)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
-			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(6));
+			m_sprites.at(NUMBER_OF_BUBBLES+1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
+			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+1));
 		}
 	}
 }
