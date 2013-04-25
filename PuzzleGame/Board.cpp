@@ -529,18 +529,18 @@ void Board::DrawTile(int x, int y)
 				{
 					SetPlayer1HalfStep(0);
 				}
-				if (m_board.at(y).at(x).GetOwner() == 10)
+				if (m_board.at(y).at(x).GetOwner() == 10 && GetSpecifiedTile(11) != nullptr)
 				{
 					if (GetSpecifiedTile(11)->GetPositionVector().y == y) // Horizontally Aligned
 					{
-						if (GetSpecifiedTile(11)->GetPositionVector().x == x+1) // To the right
+						if (GetSpecifiedTile(11)->GetPositionVector().x == x+1 && (x+1 <= BOARD_WIDTH)) // To the right
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
 								SetPlayer1HalfStep(0);
 							}
 						}
-						else if (GetSpecifiedTile(11)->GetPositionVector().x == x-1) // To the left
+						else if (GetSpecifiedTile(11)->GetPositionVector().x == x-1 && (x-1 >= 0)) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
@@ -556,18 +556,18 @@ void Board::DrawTile(int x, int y)
 						}
 					}
 				}
-				else if (m_board.at(y).at(x).GetOwner() == 11)
+				else if (m_board.at(y).at(x).GetOwner() == 11 && GetSpecifiedTile(10) != nullptr)
 				{
 					if (GetSpecifiedTile(10)->GetPositionVector().y == y) // Horizontally Aligned
 					{
-						if (GetSpecifiedTile(10)->GetPositionVector().x == x+1) // To the right
+						if (GetSpecifiedTile(10)->GetPositionVector().x == x+1 && (x+1 >= BOARD_WIDTH)) // To the right
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
 								SetPlayer1HalfStep(0);
 							}
 						}
-						else if (GetSpecifiedTile(10)->GetPositionVector().x == x-1) // To the left
+						else if (GetSpecifiedTile(10)->GetPositionVector().x == x-1 && (x-1 >= 0)) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
@@ -610,18 +610,18 @@ void Board::DrawTile(int x, int y)
 				{
 					SetPlayer2HalfStep(0);
 				}
-				if (m_board.at(y).at(x).GetOwner() == 20)
+				if (m_board.at(y).at(x).GetOwner() == 20 && GetSpecifiedTile(21) != nullptr)
 				{
 					if (GetSpecifiedTile(21)->GetPositionVector().y == y) // Horizontally Aligned
 					{
-						if (GetSpecifiedTile(21)->GetPositionVector().x == x+1) // To the right
+						if (GetSpecifiedTile(21)->GetPositionVector().x == x+1 && (x+1 <= BOARD_HEIGHT)) // To the right
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
 								SetPlayer2HalfStep(0);
 							}
 						}
-						else if (GetSpecifiedTile(21)->GetPositionVector().x == x-1) // To the left
+						else if (GetSpecifiedTile(21)->GetPositionVector().x == x-1 && (x-1 >= 0)) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
@@ -637,18 +637,18 @@ void Board::DrawTile(int x, int y)
 						}
 					}
 				}
-				else if (m_board.at(y).at(x).GetOwner() == 21)
+				else if (m_board.at(y).at(x).GetOwner() == 21 && GetSpecifiedTile(20) != nullptr)
 				{
 					if (GetSpecifiedTile(20)->GetPositionVector().y == y) // Horizontally Aligned
 					{
-						if (GetSpecifiedTile(20)->GetPositionVector().x == x+1) // To the right
+						if (GetSpecifiedTile(20)->GetPositionVector().x == x+1 && (x+1 <= BOARD_HEIGHT)) // To the right
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
 								SetPlayer2HalfStep(0);
 							}
 						}
-						else if (GetSpecifiedTile(20)->GetPositionVector().x == x-1) // To the left
+						else if (GetSpecifiedTile(20)->GetPositionVector().x == x-1 && (x-1 >= 0)) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
