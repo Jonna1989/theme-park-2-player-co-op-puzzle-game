@@ -19,15 +19,8 @@ void Score::Initialize(float scorePosX, float scorePosY)
 	m_comboMultiplier = 1;
 	m_scoreMultiplier = 10;
 
-	m_scoreAsText = new sf::Text();
-	m_scoreAsText->setCharacterSize(50);
-	m_scoreAsText->setColor(sf::Color::Black);
-	m_scoreAsText->setPosition(m_scoreTextPos);
-
-	m_comboMultiplierAsText = new sf::Text();
-	m_comboMultiplierAsText->setCharacterSize(40);
-	m_comboMultiplierAsText->setColor(sf::Color::Black);
-	m_comboMultiplierAsText->setPosition(scorePosX+400,scorePosY+10);
+	DeclareSfText(m_scoreAsText,50,sf::Color::Black,m_scoreTextPos);
+	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+400,scorePosY+10);
 }
 void Score::Update()
 {
@@ -97,6 +90,20 @@ sf::Text* Score::GetScoreAsText()
 #pragma endregion
 
 #pragma region Privates
+void Score::DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition)
+{
+	textToDeclare = new sf::Text();
+	textToDeclare->setCharacterSize(charSize);
+	textToDeclare->setColor(textColor);
+	textToDeclare->setPosition(textPosition);
+}
+void Score::DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
+{
+	textToDeclare = new sf::Text();
+	textToDeclare->setCharacterSize(charSize);
+	textToDeclare->setColor(textColor);
+	textToDeclare->setPosition(textPositionX,textPositionY);
+}
 void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
 {
 	std::ostringstream convert;
