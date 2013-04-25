@@ -55,7 +55,7 @@ void Board::Initialize()
 
 void Board::Update()
 {
-	Window->clear();
+
 	
 	Window->draw(*m_backgroundSprite);
 	//Window->draw(*m_plateSprite);
@@ -74,7 +74,6 @@ void Board::Update()
 		m_score->SetComboMultiplier(1);
 	}
 	m_score->Update();
-	Window->display();
 }
 
 void Board::Cleanup()

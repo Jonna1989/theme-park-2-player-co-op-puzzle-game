@@ -10,17 +10,13 @@ class Music
 {
 public:
 	
-	enum Track{MenuMusic1,LevelMusic1, PongMusic1};
+	enum Track{MenuMusic1,LevelMusic1};
 
 	static Music* Instance();
 
 	void Initialize	(int TrackNumber);
 	void Update();
-	//void Cleanup	(int TrackNumber);
 	void Cleanup();
-
-// 	void StartMusic	(int Track);
-// 	void StopMusic	(int Track);
 
     void StartMusic	();
     void StopMusic	();
@@ -37,9 +33,6 @@ private:
 	~Music();
 	void SetAllVolume();
 	static Music* m_instance;
-
-// 	sf::Music* m_levelMusic1;
-// 	sf::Music* m_menuMusic1;
 
 	sf::Music* m_music;
 

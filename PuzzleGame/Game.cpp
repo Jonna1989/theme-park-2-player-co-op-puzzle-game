@@ -32,7 +32,9 @@ void Game::Initialize()
 void Game::Update()
 {
 	UseTimedFunctions();
-	Board::Instance()->Update();	
+	Window->clear();
+	Board::Instance()->Update();
+	Window->display();
 	KeyCommands();
 }
 
