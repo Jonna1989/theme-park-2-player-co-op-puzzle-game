@@ -83,7 +83,7 @@ void Music::IncreasePitch()
 	}
 	else
 	{
-		pitch+= PITCH_SPEED *DeltaTime;
+		pitch+= PITCH_SPEED*DeltaTime;
 	}
 	m_music->setPitch(pitch);
 }
