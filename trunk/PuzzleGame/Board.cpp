@@ -42,7 +42,7 @@ void Board::Initialize()
 	m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
 	
-	m_plateSprite->setPosition((float)BOARD_OFFSET_X,(float)BOARD_OFFSET_Y);
+	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20);
 
 	m_player1HalfStep = 0;
 	m_player2HalfStep = 0;
@@ -58,7 +58,7 @@ void Board::Update()
 
 	
 	Window->draw(*m_backgroundSprite);
-	//Window->draw(*m_plateSprite);
+	Window->draw(*m_plateSprite);
 
 	DrawBoard();
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
