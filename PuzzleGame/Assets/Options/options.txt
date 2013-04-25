@@ -1,3 +1,5 @@
 [sound_options]
-	musicon = true
+	musicon = false
 	musicvolume = 10
+	soundon = true
+	soundvolume = 10
