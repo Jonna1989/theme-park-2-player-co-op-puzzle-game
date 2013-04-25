@@ -200,8 +200,7 @@ void Board::CheckForMatch()
 						previousOwnerP2++;
 					}
 				}
-				if ((notFallingCounter == temp2) && (passiveCounter == temp2)
-					&& (previousOwnerP1 >= 1) && (previousOwnerP2 >= 1))
+				if ((notFallingCounter == temp2) && (passiveCounter == temp2))
 				{
 					for (int i = 0; i < temp2;i++)
 					{
@@ -216,8 +215,12 @@ void Board::CheckForMatch()
 						}
 					}
 					PlayComboSound(soundClock);
+					if((previousOwnerP1 >= 1) && (previousOwnerP2 >= 1))
+					{
+						m_score->IncreaseScoreMultiplier(10);
+					}
 					m_score->AddScore(temp2);
-
+					m_score->SetScoreMultiplier(10);
 				}
 			}
 		}
