@@ -41,7 +41,6 @@ private:
 	void KeyCommands();
 	void KeyCommand_PrintBoardToConsole();
 	void KeyCommand_ClearBottomRow();
-	Avatar* m_avatar1;
 };
 
 #endif

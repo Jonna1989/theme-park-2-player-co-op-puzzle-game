@@ -35,7 +35,6 @@ void Game::Update()
 	UseTimedFunctions();
 	Window->clear();
 	Board::Instance()->Update();
-	m_avatar1->Update();
 	Window->display();
 	KeyCommands();
 }
