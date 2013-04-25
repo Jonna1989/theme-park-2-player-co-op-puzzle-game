@@ -368,7 +368,7 @@ void Board::SetPlayer2HalfStep(int halfStep)
 
 void Board::InitializeSprites()
 {
-	for(int i = 0; i < 9; i++)
+	for(int i = 0; i < 11; i++)
 	{
 		m_sprites.push_back(new sf::Sprite());
 	}
@@ -381,14 +381,16 @@ void Board::InitializeSprites()
 		SHEET_PATH_TO_BUBBLES.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
 		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),SHEET_PATH_TO_BUBBLES[i],m_sprites.at(i));
 	}
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura.png",m_sprites.at(NUMBER_OF_BUBBLES));
-	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(50,50),"Assets/GraphicalAssets/Bubbles/Aura2.png",m_sprites.at(NUMBER_OF_BUBBLES+1));
+	m_sprites[NUMBER_OF_BUBBLES]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura.png"));
+	m_sprites[NUMBER_OF_BUBBLES+1]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura2.png"));
+	m_sprites[NUMBER_OF_BUBBLES+2]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/AuraTransparent.png"));
+	m_sprites[NUMBER_OF_BUBBLES+3]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura2Transparent.png"));
 
 }
 
 void Board::InitializeLevels()
 {
-	ReadTextLevels(PATH_LEVEL_1);	
+	ReadTextLevels(PATH_LEVEL_1);
 	ReadTextLevels(PATH_LEVEL_2);
 }
 
