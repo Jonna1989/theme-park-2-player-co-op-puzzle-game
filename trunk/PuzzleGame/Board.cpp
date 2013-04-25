@@ -169,6 +169,8 @@ void Board::CheckForMatch()
 				std::vector<sf::Vector2i> temp = PositionsOfConnectedSameColor(x,y);
 				int notFallingCounter = 0;
 				int passiveCounter = 0;
+				int previousOwnerP1 = 0;
+				int previousOwnerP2 = 0;
 				for (int h = 0; h < temp2; h++)
 				{
 					if (!m_board.at(temp[h].y).at(temp[h].x).GetFalling())
@@ -179,8 +181,19 @@ void Board::CheckForMatch()
 					{
 						passiveCounter++;
 					}
+					if ((m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 10)
+						||(m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 11))
+					{
+						previousOwnerP1++;
+					}
+					if ((m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 20)
+						||(m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 21))
+					{
+						previousOwnerP2++;
+					}
 				}
-				if ((notFallingCounter == temp2) && (passiveCounter == temp2))
+				if ((notFallingCounter == temp2) && (passiveCounter == temp2)
+					&& (previousOwnerP1 >= 1) && (previousOwnerP2 >= 1))
 				{
 					for (int i = 0; i < temp2;i++)
 					{
