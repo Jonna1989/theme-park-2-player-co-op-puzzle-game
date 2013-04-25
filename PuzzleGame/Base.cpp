@@ -12,6 +12,9 @@ Base::~Base()
 
 void Base::Initialize()
 {
+	m_runtime = new sf::Clock();
+	m_timePassed = 0;
+	m_runtime->restart();
 	FrameTime::Instance()->Initialize();
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
@@ -32,9 +35,22 @@ void Base::Update()
 				Window->close();
 			}
 		}
+		if (m_runtime->getElapsedTime().asSeconds() >= 60)
+		{
+			m_timePassed +=60;
+			m_runtime->restart();
+			if (m_timePassed == 60)
+			{
+				std::cout << m_timePassed/60 << " minute passed since start of program!" << std::endl;
+			}
+			else
+			{
+				std::cout << m_timePassed/60 << " minutes passed since start of program!" << std::endl;
+			}
+		}
 		StateManager::Instance()->Update();
-		FrameTime::Instance()->Update();
 		InputManager::Instance()->Update(false, StateManager::Instance()->GetState());
+		FrameTime::Instance()->Update();
 	}
 }
 
@@ -44,6 +60,7 @@ void Base::Cleanup()
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
 	FrameTime::Instance()->Cleanup();
+	delete m_runtime;
 }
 
 #pragma endregion
