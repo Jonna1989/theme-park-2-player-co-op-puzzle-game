@@ -36,10 +36,10 @@ void InputManager::Initialize()
 
 void InputManager::Update(bool singlePlayer, int state)
 {
+	sf::Event event;
 	switch(state)
 	{
 	case StateManager::MainMenu: //Menu
-		sf::Event event;
 		while (Window->pollEvent(event))
 		{
 			if (event.key.code == sf::Keyboard::Return)
@@ -64,7 +64,6 @@ void InputManager::Update(bool singlePlayer, int state)
 		CheckMusicKeys();
 		break;
 	case StateManager::GameLost: //GameOver
-		sf::Event event;
 		while (Window->pollEvent(event))
 		{
 			if (event.key.code == sf::Keyboard::Return)

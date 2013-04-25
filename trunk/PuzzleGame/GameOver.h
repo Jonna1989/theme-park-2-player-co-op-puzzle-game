@@ -1,5 +1,4 @@
-#ifndef START_MENU_H
-#define START_MENU_H
+#pragma once
 
 #include "State.h"
 #include "InputManager.h"
@@ -8,6 +7,7 @@
 #include "Music.h"
 
 class StateManager;
+
 class GameOver:public State
 {
 public:
@@ -21,8 +21,4 @@ public:
 private:
 	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
-
-	//InputManager* m_input;
 };
-
-#endif
