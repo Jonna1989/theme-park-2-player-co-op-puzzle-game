@@ -26,12 +26,12 @@ void Score::Update()
 {
  	if (m_score != m_scoreLastUpdate)
  	{
-		ConvertIntToSfStringToSfText(m_score,m_scoreAsSfString,m_scoreAsText);
+		ConvertIntToSfStringToSfText(m_score,m_scoreAsSfString,m_scoreAsText, "Score: ",false);
  	}
 	m_scoreLastUpdate = m_score;
 	if (m_comboMultiplier != m_comboMultiplierLastUpdate)
 	{
-		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo");
+		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo",true);
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
 	Window->draw(*m_scoreAsText);
@@ -113,14 +113,21 @@ void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfSt
 	sfStringToUpdateFrom = tempStdString;
 	sfTextToConvertTo->setString(sfStringToUpdateFrom);
 }
-void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addAtEnd)
+void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd)
 {
 	std::ostringstream convert;
 	convert << intToGetStringFrom;
 	std::string tempStdString;
 	tempStdString = convert.str();
 	sfStringToUpdateFrom = tempStdString;
-	sfStringToUpdateFrom.insert(sfStringToUpdateFrom.getSize(),addAtEnd);
+	if (atEnd == false)
+	{
+		sfStringToUpdateFrom.insert(0,addExtraText);
+	}
+	else
+	{
+		sfStringToUpdateFrom.insert(sfStringToUpdateFrom.getSize(),addExtraText);
+	}
 	sfTextToConvertTo->setString(sfStringToUpdateFrom);
 }
 #pragma endregion
