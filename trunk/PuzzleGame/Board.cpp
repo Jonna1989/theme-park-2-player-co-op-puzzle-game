@@ -68,6 +68,7 @@ void Board::Update()
 			m_particleEffects[i]->Update();
 		}
 	}
+//	Window->draw(*m_score->GetScoreAsText());
 	if (soundClock->getElapsedTime().asMilliseconds() >= m_comboSoundThreshold)
 	{
 		m_score->SetComboMultiplier(1);
@@ -118,6 +119,20 @@ int Board::GetColor(int x, int y)
 int Board::GetOwner(int x, int y)
 {
 	return m_board.at(y).at(x).GetOwner();
+}
+
+Tile* Board::GetSpecifiedTile(int owner)
+{
+	for (int y = 0; y < BOARD_HEIGHT ; y++)
+	{
+		for (int x = 0; x < BOARD_WIDTH ; x++)
+		{
+			if (GetTile(x,y)->GetOwner() == owner)
+			{
+				return GetTile(x,y);
+			}
+		}
+	}
 }
 
 #pragma endregion
@@ -469,40 +484,81 @@ void Board::DrawTile(int x, int y)
 		CheckForFall(x,y);
 		if (m_board.at(y).at(x).GetOwner() == 0 && !m_board.at(y).at(x).GetFalling())
 		{
-			if ( y < BOARD_HEIGHT-1)
-			{
-				if (m_board.at(y+1).at(x).GetContent() == EMPTY_SPACE)
-				{
-					m_board.at(y).at(x).SetHalfStep(TILE_SIZE_Y/2);
-				}
-				else
-				{
-					m_board.at(y).at(x).SetHalfStep(0);
-				}
-			}
-			else
-			{
-				m_board.at(y).at(x).SetHalfStep(0);
-			}
+			m_board.at(y).at(x).SetHalfStep(0);
+		
 		}
-		else if ((m_board.at(y).at(x).GetOwner() == 10 || m_board.at(y).at(x).GetOwner() == 11)/* && !m_board.at(y).at(x).GetFalling()*/)
+		else if ((m_board.at(y).at(x).GetOwner() == 10 || m_board.at(y).at(x).GetOwner() == 11))
 		{
 			if ( y < BOARD_HEIGHT-2)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
-					|| (m_board.at(y+1).at(x).GetOwner() == 20)
-					|| (m_board.at(y+1).at(x).GetOwner() == 21)
-					|| (m_board.at(y+2).at(x).GetOwner() == 20)
-					|| (m_board.at(y+2).at(x).GetOwner() == 21))
+					|| (m_board.at(y+1).at(x).GetOwner() == 20
+					|| m_board.at(y+1).at(x).GetOwner() == 21
+					|| m_board.at(y+2).at(x).GetOwner() == 20
+					|| m_board.at(y+2).at(x).GetOwner() == 21))
 				{
 					SetPlayer1HalfStep(0);
+				}
+				if (m_board.at(y).at(x).GetOwner() == 10)
+				{
+					if (GetSpecifiedTile(11)->GetPositionVector().y == y) // Horizontally Aligned
+					{
+						if (GetSpecifiedTile(11)->GetPositionVector().x == x+1) // To the right
+						{
+							if (GetTile(x+1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+						else if (GetSpecifiedTile(11)->GetPositionVector().x == x-1) // To the left
+						{
+							if (GetTile(x-1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+					}
+					else if (GetSpecifiedTile(11)->GetPositionVector().y == y+1) // Below
+					{
+						if (GetTile(x,y+2)->GetOwner() != 0)
+						{
+							SetPlayer1HalfStep(0);
+						}
+					}
+				}
+				else if (m_board.at(y).at(x).GetOwner() == 11)
+				{
+					if (GetSpecifiedTile(10)->GetPositionVector().y == y) // Horizontally Aligned
+					{
+						if (GetSpecifiedTile(10)->GetPositionVector().x == x+1) // To the right
+						{
+							if (GetTile(x+1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+						else if (GetSpecifiedTile(10)->GetPositionVector().x == x-1) // To the left
+						{
+							if (GetTile(x-1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+					}
+					else if (GetSpecifiedTile(10)->GetPositionVector().y == y+1) // Below
+					{
+						if (GetTile(x,y+2)->GetOwner() != 0)
+						{
+							SetPlayer1HalfStep(0);
+						}
+					}
 				}
 			}
 			else if ( y < BOARD_HEIGHT-1)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
-					|| (m_board.at(y+1).at(x).GetOwner() == 20)
-					|| (m_board.at(y+1).at(x).GetOwner() == 21))
+					|| (m_board.at(y+1).at(x).GetOwner() == 20
+					|| m_board.at(y+1).at(x).GetOwner() == 21))
 				{
 					SetPlayer1HalfStep(0);
 				}
@@ -512,24 +568,78 @@ void Board::DrawTile(int x, int y)
 				SetPlayer1HalfStep(0);
 			}
 		}
-		else if ((m_board.at(y).at(x).GetOwner() == 20 || m_board.at(y).at(x).GetOwner() == 21)/* && !m_board.at(y).at(x).GetFalling()*/)
+		else if ((m_board.at(y).at(x).GetOwner() == 20 || m_board.at(y).at(x).GetOwner() == 21))
 		{
 			if ( y < BOARD_HEIGHT-2)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
-					|| (m_board.at(y+1).at(x).GetOwner() == 10)
-					|| (m_board.at(y+1).at(x).GetOwner() == 11)
-					|| (m_board.at(y+2).at(x).GetOwner() == 10)
-					|| (m_board.at(y+2).at(x).GetOwner() == 11))
+					|| (m_board.at(y+1).at(x).GetOwner() == 10
+					|| m_board.at(y+1).at(x).GetOwner() == 11
+					|| m_board.at(y+2).at(x).GetOwner() == 10
+					|| m_board.at(y+2).at(x).GetOwner() == 11))
 				{
 					SetPlayer2HalfStep(0);
+				}
+				if (m_board.at(y).at(x).GetOwner() == 20)
+				{
+					if (GetSpecifiedTile(21)->GetPositionVector().y == y) // Horizontally Aligned
+					{
+						if (GetSpecifiedTile(21)->GetPositionVector().x == x+1) // To the right
+						{
+							if (GetTile(x+1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+						else if (GetSpecifiedTile(21)->GetPositionVector().x == x-1) // To the left
+						{
+							if (GetTile(x-1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+					}
+					else if (GetSpecifiedTile(21)->GetPositionVector().y == y+1) // Below
+					{
+						if (GetTile(x,y+2)->GetOwner() != 0)
+						{
+							SetPlayer1HalfStep(0);
+						}
+					}
+				}
+				else if (m_board.at(y).at(x).GetOwner() == 21)
+				{
+					if (GetSpecifiedTile(20)->GetPositionVector().y == y) // Horizontally Aligned
+					{
+						if (GetSpecifiedTile(20)->GetPositionVector().x == x+1) // To the right
+						{
+							if (GetTile(x+1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+						else if (GetSpecifiedTile(20)->GetPositionVector().x == x-1) // To the left
+						{
+							if (GetTile(x-1,y+1)->GetOwner() != 0)
+							{
+								SetPlayer1HalfStep(0);
+							}
+						}
+					}
+					else if (GetSpecifiedTile(20)->GetPositionVector().y == y+1) // Below
+					{
+						if (GetTile(x,y+2)->GetOwner() != 0)
+						{
+							SetPlayer1HalfStep(0);
+						}
+					}
 				}
 			}
 			else if ( y < BOARD_HEIGHT-1)
 			{
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
-					|| (m_board.at(y+1).at(x).GetOwner() == 10)
-					|| (m_board.at(y+1).at(x).GetOwner() == 11))
+					|| (m_board.at(y+1).at(x).GetOwner() == 10
+					|| m_board.at(y+1).at(x).GetOwner() == 11))
 				{
 					SetPlayer2HalfStep(0);
 				}
