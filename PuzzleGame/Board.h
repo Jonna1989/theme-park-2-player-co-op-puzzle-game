@@ -85,6 +85,10 @@ public:
 	void CheckForMatch();
 
 	void CheckForFall(int x, int y);
+
+	// Returns the first tile found with the specified owner
+	Tile* GetSpecifiedTile(int owner);
+
 private:
 	Board();
 	~Board();

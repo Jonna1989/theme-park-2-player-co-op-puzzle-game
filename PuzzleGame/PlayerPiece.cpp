@@ -433,83 +433,34 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 
 	if(m_pieceOne->GetPosition().x != m_pieceTwo->GetPosition().x) //Piece aligned horizontally
 	{
-		//Piece one drop if possible
-		if((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT))
+		if((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT)
+			&& 0 <= m_pieceTwo->GetPosition().y + 1 && m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT)
 		{
-			if(Board::Instance()->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1))
+			if(Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetContent() == 0
+				&& Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetContent() == 0)
 			{
-				if((0 <= m_pieceTwo->GetPosition().y + 1 && m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT))
-				{
-					if(Board::Instance()->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)
-						&& Board::Instance()->GetTile(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y+1)->GetOwner() != Board::Instance()->GetTile(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y)->GetOwner()+1)
-					{
-						m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
-						dropped = true;
-						pieceOneDropped = true;
-					}
-				}
+				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
+				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
+				dropped = true;
+				pieceOneDropped = true;
+				pieceTwoDropped = true;
 			}
-			else if(Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
+			else if((Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0
+				&& Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetContent() != 0)
+				|| (Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0
+				&& Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetContent() != 0))
 			{
 				SetOwner(0);
 				SetNewPlayerPieces();
 				Board::Instance()->CheckForMatch();
-				std::cout << "SetOwner 0 - #1" << std::endl;
 			}
 		}
-		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
+		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1
+			|| m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 		{
 			SetOwner(0);
 			SetNewPlayerPieces();
 			Board::Instance()->CheckForMatch();
-			std::cout << "SetOwner 0 - #2" << std::endl;
-		}
-
-		//Piece two drop if possible
-		if((0 <= m_pieceTwo->GetPosition().y + 1 && m_pieceTwo->GetPosition().y + 1 < BOARD_HEIGHT))
-		{
-			if(Board::Instance()->IsTileVacant(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1))
-			{
-				if((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT))
-				{
-					if (Board::Instance()->IsTileVacant(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)
-						&& Board::Instance()->GetTile(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y+1)->GetOwner() != Board::Instance()->GetTile(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y)->GetOwner()-1)
-					{
-						m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
-						dropped = true;
-						pieceTwoDropped = true;
-					}
-				}
-			}
-			else if(Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
-			{
-				SetOwner(0);
-				SetNewPlayerPieces();
-				Board::Instance()->CheckForMatch();
-				std::cout << "SetOwner 0 - #3" << std::endl;
-			}
-		}
-		else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
-		{
-			SetOwner(0);
-			SetNewPlayerPieces();
-			Board::Instance()->CheckForMatch();
-			std::cout << "SetOwner 0 - #4" << std::endl;
-		}
-		if ((pieceOneDropped && !pieceTwoDropped) || (!pieceOneDropped && pieceTwoDropped))
-		{
-			if (pieceOneDropped && !pieceTwoDropped)
-			{
-				std::cout << "pieceOne Dropped" << std::endl;
-			}
-			else if (pieceTwoDropped && !pieceOneDropped)
-			{
-				std::cout << "pieceTwo Dropped" << std::endl;
-			}
-			SetOwner(0);
-			SetNewPlayerPieces();
-			Board::Instance()->CheckForMatch();
-			std::cout << "SetOwner 0 - #5" << std::endl;
 		}
 	}
 	else //Piece aligned vertically
