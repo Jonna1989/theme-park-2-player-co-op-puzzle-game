@@ -16,6 +16,8 @@ void StateManager::Initialize()
 	m_listOfStates.push_back(newState);
 	newState = new Game();
 	m_listOfStates.push_back(newState);
+	newState = new GameOver();
+	m_listOfStates.push_back(newState);
 
 	m_currentState = MainMenu;
 	m_listOfStates[m_currentState]->Initialize();

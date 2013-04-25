@@ -637,11 +637,11 @@ void PlayerPiece::SetNewPlayerPieces()
 
 void PlayerPiece::ConvertPieceToPassive()
 {
-	if (Board::Instance()->GetOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y) != 0)
+	if (m_pieceOne->GetOwner() != 0)
 	{
 		Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
 	}
-	if (Board::Instance()->GetOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y) != 0)
+	if (m_pieceTwo->GetOwner() != 0)
 	{
 		Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 	}

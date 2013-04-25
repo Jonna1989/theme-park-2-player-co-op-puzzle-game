@@ -63,6 +63,26 @@ void InputManager::Update(bool singlePlayer, int state)
 		CheckPlayer2Input();
 		CheckMusicKeys();
 		break;
+	case StateManager::GameLost: //GameOver
+		sf::Event event;
+		while (Window->pollEvent(event))
+		{
+			if (event.key.code == sf::Keyboard::Return)
+			{
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
+				StateManager::Instance()->SetState(StateManager::MainMenu);
+				break;
+			}
+			else
+			{
+				CheckMusicKeys();
+			}
+			if(event.type == sf::Event::Closed)
+			{
+				Window->close();
+			}
+		}
+		break;
 	}
 }
 void InputManager::Cleanup()
