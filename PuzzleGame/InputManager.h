@@ -8,7 +8,6 @@
 #include "StateManager.h"
 #include "Player.h"
 #include "Soundeffects.h"
-#include "Game.h"
 
 class InputManager
 {
@@ -32,8 +31,6 @@ public:
 
 	void CheckPlayer1Input();
 	void CheckPlayer2Input();
-
-
 
 private:
 	InputManager();

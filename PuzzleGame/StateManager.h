@@ -5,11 +5,12 @@
 #include <iostream>
 #include "Game.h"
 #include "StartMenu.h"
+#include "GameOver.h"
 
 class StateManager
 {
 public:	
-	enum TypeOfState {MainMenu, InGame};
+	enum TypeOfState {MainMenu, InGame, GameLost};
 	static StateManager* Instance();
 
 	void Initialize();
