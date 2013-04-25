@@ -17,10 +17,8 @@ StartMenu::~StartMenu()
 
 void StartMenu::Initialize()
 {
-	m_backgroundTexture = new sf::Texture();
-	m_backgroundSprite = new sf::Sprite();
 	m_backgroundTexture->loadFromFile("Assets/GraphicalAssets/TempArt/menu.png");
-	m_backgroundSprite->setTexture(*m_backgroundTexture);
+	CreateSprite(m_backgroundSprite,m_backgroundTexture);
 	Music::Instance()->Initialize(0);
 	Music::Instance()->StartMusic();
 }
@@ -34,8 +32,7 @@ void StartMenu::Update()
 
 void StartMenu::Cleanup()
 {
-	delete m_backgroundSprite;
-	delete m_backgroundTexture;
+	Clean(m_backgroundTexture,m_backgroundSprite);
 	Music::Instance()->Cleanup();
 }
 
