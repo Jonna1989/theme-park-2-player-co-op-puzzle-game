@@ -30,7 +30,6 @@ public:
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor();
 
 private:
-	Board* m_board;
 	int m_color;
 	int m_owner;
 	sf::Vector2i m_position;
