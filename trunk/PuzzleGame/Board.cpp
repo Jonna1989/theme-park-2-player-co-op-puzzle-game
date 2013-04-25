@@ -117,7 +117,10 @@ int Board::GetOwner(int x, int y)
 {
 	return m_board.at(y).at(x).GetOwner();
 }
-
+int Board::GetPreviousOwner(int x, int y)
+{
+	return m_board.at(y).at(x).GetPreviousOwner();
+}
 Tile* Board::GetSpecifiedTile(int owner)
 {
 	for (int y = 0; y < BOARD_HEIGHT ; y++)
@@ -146,7 +149,10 @@ void Board::SetOwner(int x, int y, int owner)
 {
 	m_board.at(y).at(x).SetOwner(owner);
 }
-
+void Board::SetPreviousOwner(int x, int y, int previousOwner)
+{
+	m_board.at(y).at(x).SetPreviousOwner(previousOwner);
+}
 #pragma endregion
 
 #pragma region Publics

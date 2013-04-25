@@ -450,6 +450,8 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				|| (Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0
 				&& Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetContent() != 0))
 			{
+				Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+				Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 				SetOwner(0);
 				SetNewPlayerPieces();
 				Board::Instance()->CheckForMatch();
@@ -458,6 +460,8 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1
 			|| m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 		{
+			Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+			Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 			SetOwner(0);
 			SetNewPlayerPieces();
 			Board::Instance()->CheckForMatch();
@@ -478,12 +482,16 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				}
 				else if(Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0)
 				{
+					Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+					Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 					SetOwner(0);
 					SetNewPlayerPieces();
 					Board::Instance()->CheckForMatch();
 				}
 				else if(m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1)
 				{
+					Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+					Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 					SetOwner(0);
 					SetNewPlayerPieces();
 					Board::Instance()->CheckForMatch();
@@ -499,12 +507,16 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				}
 				else if(Board::Instance()->GetTile(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1)->GetOwner() == 0)
 				{
+					Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+					Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 					SetOwner(0);
 					SetNewPlayerPieces();
 					Board::Instance()->CheckForMatch();
 				}
 				else if(m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1)
 				{
+					Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+					Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 					SetOwner(0);
 					SetNewPlayerPieces();
 					Board::Instance()->CheckForMatch();
@@ -513,6 +525,8 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 		}
 		else if((m_pieceOne->GetPosition().y == BOARD_HEIGHT - 1) || (m_pieceTwo->GetPosition().y == BOARD_HEIGHT - 1))
 		{
+			Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
+			Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 			SetOwner(0);
 			SetNewPlayerPieces();
 		    Board::Instance()->CheckForMatch();

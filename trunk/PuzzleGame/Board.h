@@ -59,12 +59,14 @@ public:
 
 	int GetColor(int x, int y);
 	int GetOwner(int x, int y);
+	int GetPreviousOwner(int x, int y);
 
 	bool GetPlayer1HalfStep();
 	bool GetPlayer2HalfStep();
 
 	void SetColor(int x, int y, int color);
 	void SetOwner(int x, int y, int owner);
+	void SetPreviousOwner(int x, int y, int previousOwner);
 
 	void SetBoardHalfStep(int halfStep);
 	void SetPlayer1HalfStep(int halfStep);
