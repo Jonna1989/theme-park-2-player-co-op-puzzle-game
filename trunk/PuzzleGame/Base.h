@@ -2,6 +2,7 @@
 #define BASE_H
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 #include "FrameTime.h"
 #include "StateManager.h"
@@ -20,6 +21,8 @@ public:
 	void Cleanup();
 
 private:
+	sf::Clock* m_runtime;
+	int m_timePassed;
 };
 
 #endif
