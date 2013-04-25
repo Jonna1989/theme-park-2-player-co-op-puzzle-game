@@ -58,7 +58,7 @@ void Board::Update()
 	Window->clear();
 	
 	Window->draw(*m_backgroundSprite);
-	Window->draw(*m_plateSprite);
+	//Window->draw(*m_plateSprite);
 
 	DrawBoard();
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
@@ -494,8 +494,8 @@ void Board::DrawTile(int x, int y)
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
 					|| (m_board.at(y+1).at(x).GetOwner() == 20
 					|| m_board.at(y+1).at(x).GetOwner() == 21
-					|| m_board.at(y+2).at(x).GetOwner() == 20
-					|| m_board.at(y+2).at(x).GetOwner() == 21))
+					/*|| m_board.at(y+2).at(x).GetOwner() == 20
+					|| m_board.at(y+2).at(x).GetOwner() == 21*/))
 				{
 					SetPlayer1HalfStep(0);
 				}
@@ -575,8 +575,8 @@ void Board::DrawTile(int x, int y)
 				if ((m_board.at(y+1).at(x).GetContent() != EMPTY_SPACE && !m_board.at(y+1).at(x).GetFalling())
 					|| (m_board.at(y+1).at(x).GetOwner() == 10
 					|| m_board.at(y+1).at(x).GetOwner() == 11
-					|| m_board.at(y+2).at(x).GetOwner() == 10
-					|| m_board.at(y+2).at(x).GetOwner() == 11))
+					/*|| m_board.at(y+2).at(x).GetOwner() == 10
+					|| m_board.at(y+2).at(x).GetOwner() == 11*/))
 				{
 					SetPlayer2HalfStep(0);
 				}
@@ -588,14 +588,14 @@ void Board::DrawTile(int x, int y)
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
-								SetPlayer1HalfStep(0);
+								SetPlayer2HalfStep(0);
 							}
 						}
 						else if (GetSpecifiedTile(21)->GetPositionVector().x == x-1) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
-								SetPlayer1HalfStep(0);
+								SetPlayer2HalfStep(0);
 							}
 						}
 					}
@@ -603,7 +603,7 @@ void Board::DrawTile(int x, int y)
 					{
 						if (GetTile(x,y+2)->GetOwner() != 0)
 						{
-							SetPlayer1HalfStep(0);
+							SetPlayer2HalfStep(0);
 						}
 					}
 				}
@@ -615,14 +615,14 @@ void Board::DrawTile(int x, int y)
 						{
 							if (GetTile(x+1,y+1)->GetOwner() != 0)
 							{
-								SetPlayer1HalfStep(0);
+								SetPlayer2HalfStep(0);
 							}
 						}
 						else if (GetSpecifiedTile(20)->GetPositionVector().x == x-1) // To the left
 						{
 							if (GetTile(x-1,y+1)->GetOwner() != 0)
 							{
-								SetPlayer1HalfStep(0);
+								SetPlayer2HalfStep(0);
 							}
 						}
 					}
@@ -630,7 +630,7 @@ void Board::DrawTile(int x, int y)
 					{
 						if (GetTile(x,y+2)->GetOwner() != 0)
 						{
-							SetPlayer1HalfStep(0);
+							SetPlayer2HalfStep(0);
 						}
 					}
 				}
