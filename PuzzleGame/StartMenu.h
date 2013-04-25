@@ -21,8 +21,6 @@ public:
 private:
 	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
-
-	//InputManager* m_input;
 };
 
 #endif
