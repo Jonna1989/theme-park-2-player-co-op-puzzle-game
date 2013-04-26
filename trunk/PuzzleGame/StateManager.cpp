@@ -75,6 +75,9 @@ std::string StateManager::GetName()
 	case InGame:
 		answer = "InGame";
 		break;
+	case GameLost:
+		answer = "GameLost";
+		break;
 	}
 	return answer;
 }

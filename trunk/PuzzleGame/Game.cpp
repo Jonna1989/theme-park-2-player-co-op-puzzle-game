@@ -39,6 +39,7 @@ void Game::Update()
 	m_player2->Update();
 	Window->display();	
 	KeyCommands();
+	Board::Instance()->CheckForGameOver();
 }
 
 void Game::Cleanup()
@@ -46,6 +47,11 @@ void Game::Cleanup()
 	delete m_gravityClock;
 	delete m_player1Clock;
 	delete m_player2Clock;
+	delete m_printBoardInterval;
+	m_player1->Cleanup();
+	delete m_player1;
+	m_player2->Cleanup();
+	delete m_player2;
 	Board::Instance()->Cleanup();
 }
 
