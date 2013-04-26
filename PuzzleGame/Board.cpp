@@ -505,7 +505,7 @@ void Board::PrintBoardToConsole()
 
 void Board::InitializeSprites()
 {
-	for(int i = 0; i < NUMBER_OF_BUBBLES + 2; i++)
+	for(int i = 0; i < NUMBER_OF_BUBBLES + 4; i++)
 	{
 		m_sprites.push_back(new sf::Sprite());
 	}
