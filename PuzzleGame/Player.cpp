@@ -18,16 +18,16 @@ void Player::Initialize(int owner)
 	if(owner == 10)
 	{
 		m_nextPieceOnePosition.x = BOARD_OFFSET_X - 20 - TILE_SIZE_X;
-		m_nextPieceOnePosition.y = BOARD_OFFSET_Y - 20;
+		m_nextPieceOnePosition.y = BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
 		m_nextPieceTwoPosition.x = BOARD_OFFSET_X - 20 - TILE_SIZE_X;
-		m_nextPieceTwoPosition.y = BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
+		m_nextPieceTwoPosition.y = BOARD_OFFSET_Y - 20;
 	}
 	else if(owner == 20)
 	{
 		m_nextPieceOnePosition.x = (float)BOARD_OFFSET_X + 1240;
-		m_nextPieceOnePosition.y = (float)BOARD_OFFSET_Y - 20;
+		m_nextPieceOnePosition.y = (float)BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
 		m_nextPieceTwoPosition.x = (float)BOARD_OFFSET_X + 1240;
-		m_nextPieceTwoPosition.y = (float)BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
+		m_nextPieceTwoPosition.y = (float)BOARD_OFFSET_Y - 20;
 	}
 
 	m_score = 0;
