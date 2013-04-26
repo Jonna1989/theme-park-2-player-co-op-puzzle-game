@@ -24,17 +24,7 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, floa
 	SpriteToUse->setTexture(*TextureToSetFrom);
 	SpriteToUse->setPosition(x,y);
 }
-// void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom)
-// {
-// 	SpriteToUse = new sf::Sprite();
-// 	SpriteToUse = AnimationToSetFrom->GetSprite();
-// }
-// void CreateSprite(sf::Sprite* &SpriteToUse, Animation* &AnimationToSetFrom, float x, float y)
-// {
-// 	SpriteToUse = new sf::Sprite();
-// 	SpriteToUse = AnimationToSetFrom->GetSprite();
-// 	SpriteToUse->setPosition(x,y);
-// }
+
 void Clean(sf::Texture* &TextureToDelete)
 {
 	delete TextureToDelete;
@@ -44,14 +34,32 @@ void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete)
 	delete SpriteToDelete;
 	delete TextureToDelete;
 }
-// void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
-// {
-// 	delete AnimationToDelete;
-// 	delete SpriteToDelete;
-// 	delete TextureToDelete;
-// }
-// void Clean(sf::Sprite* & SpriteToDelete, Animation* &AnimationToDelete)
-// {
-// 	delete AnimationToDelete;
-// 	delete SpriteToDelete;
-// }
+void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition)
+{
+	textToDeclare = new sf::Text();
+	textToDeclare->setCharacterSize(charSize);
+	textToDeclare->setColor(textColor);
+	textToDeclare->setPosition(textPosition);
+}
+void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
+{
+	textToDeclare = new sf::Text();
+	textToDeclare->setCharacterSize(charSize);
+	textToDeclare->setColor(textColor);
+	textToDeclare->setPosition(textPositionX,textPositionY);
+}
+void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor)
+{
+	textToDeclare = new sf::Text();
+	textToDeclare->setCharacterSize(charSize);
+	textToDeclare->setColor(textColor);
+}
+void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsInVector, unsigned int charSize, const sf::Color textColor)
+{
+	vectorToDeclare.push_back(new sf::Text());
+	for (int i = 0; i < NumberOfSfTextsInVector; i++)
+	{
+		vectorToDeclare[i]->setCharacterSize(charSize);
+		vectorToDeclare[i]->setColor(textColor);
+	}
+}

@@ -11,16 +11,24 @@ Score::~Score()
 }
 #pragma endregion
 #pragma region Publics
-void Score::Initialize(float scorePosX, float scorePosY)
+void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier)
 {
 	m_scoreTextPos.x = scorePosX;
 	m_scoreTextPos.y = scorePosY;
+	m_defaultScoreMultiplier = defaultScoreMultiplier;
+	m_defaultComboMultiplier = defaultComboMultiplier;
 	m_score = 0;
-	m_comboMultiplier = 1;
-	m_scoreMultiplier = 10;
+	m_scoreMultiplier = m_defaultScoreMultiplier;
+	m_comboMultiplier = m_defaultComboMultiplier;
 
 	DeclareSfText(m_scoreAsText,50,sf::Color::Black,m_scoreTextPos);
-	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+400,scorePosY+10);
+	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+500,scorePosY+10);
+	DeclareSfText(m_previousScoreAsText,20,sf::Color::Black,600,600);
+	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
+	{
+		m_scoreTexts.push_back(new ScoreText());
+		m_scoreTexts[i]->Initialize();
+	}
 }
 void Score::Update()
 {
@@ -34,6 +42,13 @@ void Score::Update()
 		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo",true);
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
+	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
+	{
+		if (m_scoreTexts[i]->GetBusy() == true)
+		{
+			m_scoreTexts[i]->Update();
+		}
+	}
 	Window->draw(*m_scoreAsText);
 	Window->draw(*m_comboMultiplierAsText);
 }
@@ -42,7 +57,7 @@ void Score::Cleanup()
 	delete m_scoreAsText;
 	delete m_comboMultiplierAsText;
 }
-
+#pragma region Score
 int Score::GetScore()
 {
 	return m_score;
@@ -53,9 +68,24 @@ void Score::SetScore(int newScore)
 }
 void Score::AddScore(int scoreToAdd)
 {
-	m_score += (scoreToAdd*m_scoreMultiplier)*m_comboMultiplier;
+	m_previousScore = (scoreToAdd*m_scoreMultiplier)*m_comboMultiplier;
+	ConvertIntToSfStringToSfText(m_previousScore,m_previousScoreAsSfString,m_previousScoreAsText);
+	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
+	{
+		if (m_scoreTexts[i]->GetBusy() == false)
+		{
+			m_scoreTexts[i]->Reset(m_previousScoreAsText,500);
+			break;
+		}
+	}
+	m_score += m_previousScore;
 }
-
+#pragma endregion
+int Score::GetPreviousScore()
+{
+	return m_previousScore;
+}
+#pragma region ScoreMultiplier
 int Score::GetScoreMultiplier()
 {
 	return m_scoreMultiplier;
@@ -68,7 +98,12 @@ void Score::IncreaseScoreMultiplier(int scoreMultiplierIncrease)
 {
 	m_scoreMultiplier += scoreMultiplierIncrease;
 }
-
+void Score::ResetScoreMultiplier()
+{
+	m_scoreMultiplier = m_defaultScoreMultiplier;
+}
+#pragma endregion
+#pragma region ComboMultiplier
 int Score::GetComboMultiplier()
 {
 	return m_comboMultiplier;
@@ -81,29 +116,22 @@ void Score::IncreaseComboMultiplier(int comboMultiplierIncrease)
 {
 	m_comboMultiplier += comboMultiplierIncrease;
 }
-
+void Score::ResetComboMultiplier()
+{
+	m_comboMultiplier = m_defaultComboMultiplier;
+}
+#pragma endregion
 sf::Text* Score::GetScoreAsText()
 {
 	return m_scoreAsText;
 }
-
+void Score::SetPositionForPreviousScoreText(float x, float y)
+{
+	m_previousScoreAsText->setPosition(x,y);
+}
 #pragma endregion
 
 #pragma region Privates
-void Score::DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition)
-{
-	textToDeclare = new sf::Text();
-	textToDeclare->setCharacterSize(charSize);
-	textToDeclare->setColor(textColor);
-	textToDeclare->setPosition(textPosition);
-}
-void Score::DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
-{
-	textToDeclare = new sf::Text();
-	textToDeclare->setCharacterSize(charSize);
-	textToDeclare->setColor(textColor);
-	textToDeclare->setPosition(textPositionX,textPositionY);
-}
 void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
 {
 	std::ostringstream convert;

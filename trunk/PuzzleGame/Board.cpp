@@ -50,7 +50,7 @@ void Board::Initialize()
 	m_comboVolume = 200.0f;
 	m_comboSoundThreshold = 5000;
 	m_score = new Score;
-	m_score->Initialize(500,75);
+	m_score->Initialize(400,75,10,1);
 }
 
 void Board::Update()
@@ -367,7 +367,6 @@ void Board::CheckForMatch()
 		for (int y = 0; y < BOARD_HEIGHT; y++)
 		{
 			CheckForFall(x,y);
-
 			if (NrOfConnectedSameColor(x,y) > 3)
 			{
 				int temp2 = NrOfConnectedSameColor(x,y);
@@ -376,25 +375,25 @@ void Board::CheckForMatch()
 				int passiveCounter = 0;
 				int previousOwnerP1 = 0;
 				int previousOwnerP2 = 0;
-
+				float avragePosX = 0;
+				float avragePosY = 0;
 				for (int h = 0; h < temp2; h++)
 				{
+					avragePosX += (((m_board.at(temp[h].y).at(temp[h].x).GetPositionVector().x)*TILE_SIZE_X)+BOARD_OFFSET_X+TILE_SIZE_X/4);
+					avragePosY += (((m_board.at(temp[h].y).at(temp[h].x).GetPositionVector().y)*TILE_SIZE_Y)+BOARD_OFFSET_Y);
 					if (!m_board.at(temp[h].y).at(temp[h].x).GetFalling())
 					{
 						notFallingCounter++;
 					}
-
 					if (m_board.at(temp[h].y).at(temp[h].x).GetOwner() == PASSIVE)
 					{
 						passiveCounter++;
 					}
-
 					if ((m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 10)
 						||(m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 11))
 					{
 						previousOwnerP1++;
 					}
-
 					if ((m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 20)
 						||(m_board.at(temp[h].y).at(temp[h].x).GetPreviousOwner() == 21))
 					{
@@ -406,7 +405,6 @@ void Board::CheckForMatch()
 					for (int i = 0; i < temp2;i++)
 					{
 						m_board.at(temp[i].y).at(temp[i].x).ClearTile();
-
 						for (unsigned int j = 0; j < NUMBER_OF_PARTICLES; j++)
 						{
 							if (!m_particleEffects[j]->IsBusy())
@@ -416,16 +414,25 @@ void Board::CheckForMatch()
 							}
 						}
 					}
-
 					PlayComboSound(soundClock);
-
-					if((previousOwnerP1 >= 1) && (previousOwnerP2 >= 1))
+					if((previousOwnerP1 == 3) && (previousOwnerP2 == 1)
+						||(previousOwnerP1 == 1)&&(previousOwnerP2 == 3))
 					{
-						m_score->IncreaseScoreMultiplier(10);
+						m_score->SetScoreMultiplier(15);
 					}
-
+					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
+					{
+						m_score->SetScoreMultiplier(20);
+					}
+					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
+					{
+						m_score->SetScoreMultiplier(30);
+					}
+					avragePosX /= temp2; 
+					avragePosY /= temp2;
+					m_score->SetPositionForPreviousScoreText(avragePosX,avragePosY);
 					m_score->AddScore(temp2);
-					m_score->SetScoreMultiplier(10);
+					m_score->ResetScoreMultiplier();
 				}
 			}
 		}
