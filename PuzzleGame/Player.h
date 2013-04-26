@@ -16,12 +16,16 @@ public:
 	PlayerPiece* GetPlayerPiece();
 	int GetScore();
 	std::string GetScoreAsString();
-	void addToScore(int score);
-	void resetScore();
-	void setScore(int newScore);
+	void AddToScore(int score);
+	void ResetScore();
+	void SetScore(int newScore);
+
+	void DrawNextPiece();
 
 private:
 	PlayerPiece* m_piece;
+	sf::Vector2f m_nextPieceOnePosition;
+	sf::Vector2f m_nextPieceTwoPosition;
 
 	int m_score;
 };

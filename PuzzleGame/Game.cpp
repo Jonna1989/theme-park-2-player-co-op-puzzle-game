@@ -35,7 +35,9 @@ void Game::Update()
 	UseTimedFunctions();
 	Window->clear();
 	Board::Instance()->Update();
-	Window->display();
+	m_player1->Update();
+	m_player2->Update();
+	Window->display();	
 	KeyCommands();
 }
 
