@@ -54,6 +54,11 @@ void Score::Update()
 }
 void Score::Cleanup()
 {
+	for( int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
+	{
+		m_scoreTexts[i]->Cleanup();
+	}
+	m_scoreTexts.clear();
 	delete m_scoreAsText;
 	delete m_comboMultiplierAsText;
 }
