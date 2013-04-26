@@ -55,7 +55,10 @@ public:
 	void SetBoard(int level);
 	
 	std::vector<std::vector<Tile>> GetBoard();
+	std::vector<std::string> GetBubblesSheetpaths();
+	std::vector<sf::Sprite*> GetSprites();
 	Tile* GetTile(int x, int y);
+	Tile* GetSpecifiedTile(int owner); // Returns the first tile found with the specified owner
 
 	int GetColor(int x, int y);
 	int GetOwner(int x, int y);
@@ -83,14 +86,13 @@ public:
 	int NrOfConnectedSameColor(int x, int y);
 	std::vector<sf::Vector2i> PositionsOfConnectedSameColor(int x, int y);
 
-	void PrintBoardToConsole();
-
 	void CheckForMatch();
-
 	void CheckForFall(int x, int y);
 
-	// Returns the first tile found with the specified owner
-	Tile* GetSpecifiedTile(int owner);
+	void DrawNextPiece(sf::Vector2f positionOne, sf::Vector2f positionTwo, int colorOne, int colorTwo);
+
+	void PrintBoardToConsole();
+	
 
 private:
 	Board();
@@ -105,9 +107,10 @@ private:
 
 	std::vector<ParticleEffect*> m_particleEffects;
 	std::vector<std::vector<int>> m_levels;
-
-	std::vector<std::string> SHEET_PATH_TO_BUBBLES;
-
+	std::vector<std::string> bubblesSheetpaths;
+	
+	Score* m_score;
+	
 	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
 
@@ -116,9 +119,8 @@ private:
 
 	int m_player1HalfStep;
 	int m_player2HalfStep;
-	void PlayComboSound(sf::Clock* &comboClock);
 	float m_comboVolume;
-	float m_comboPitch;
+	float m_comboPitch; 
 	int   m_comboSoundThreshold;
 
 	void InitializeSprites();
@@ -129,7 +131,7 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 
-	Score* m_score;
+	void PlayComboSound(sf::Clock* &comboClock);
 };
 
 #endif
