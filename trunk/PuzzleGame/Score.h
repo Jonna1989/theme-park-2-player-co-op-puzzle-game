@@ -14,9 +14,10 @@ public:
 	Score();
 	~Score();
 
-	void Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier);/*The two floats define the position of the score text that is drawn onto the screen
-		  //defaultScoreMultiplier is the multiplier that is multiplied with the bubbles removed to give a score
-		  //defaultComboMultiplier is the multiplier that multiplies the score when you have a combo going*/
+	//The two floats define the position of the score text that is drawn onto the screen
+	//defaultScoreMultiplier is the multiplier that is multiplied with the bubbles removed to give a score
+	//defaultComboMultiplier is the multiplier that multiplies the score when you have a combo going
+	void Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier);
 	void Update();
 	void Cleanup();
 
