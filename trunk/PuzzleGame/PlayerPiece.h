@@ -33,6 +33,8 @@ public:
 
 	int GetColorPieceOne();
 	int GetColorPieceTwo();
+	int GetNextColorPieceOne();
+	int GetNextColorPieceTwo();
 	sf::Vector2i GetPositionPieceOne();
 	sf::Vector2i GetPositionPieceTwo();
 	int GetOwner();
@@ -54,6 +56,8 @@ private:
 	int m_owner;
 	sf::Vector2i m_spawnPointOne; //For piece one
 	sf::Vector2i m_spawnPointTwo; //For piece two
+	int m_pieceOneNextColor;
+	int m_pieceTwoNextColor;
 
 	void ConvertPieceToPassive();
 };

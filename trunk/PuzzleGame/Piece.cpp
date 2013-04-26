@@ -17,7 +17,7 @@ Piece::~Piece()
 
 void Piece::Initialize(int owner)
 {
-	RandomizeColor();
+	m_color = RandomizeColor();
 	m_position = sf::Vector2i(-1, -1);
 
 	m_owner = owner;
@@ -81,9 +81,9 @@ void Piece::SetOwner(int owner)
 
 #pragma region Publics
 
-void Piece::RandomizeColor()
+int Piece::RandomizeColor()
 {
-	m_color = (rand () % (8 - 1) + 1);
+	return (rand () % (8 - 1) + 1);
 }
 
 int Piece::NrOfAdjacentSameColor()

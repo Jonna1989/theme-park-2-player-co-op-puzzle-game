@@ -14,35 +14,33 @@ PlayerPiece::~PlayerPiece()
 void PlayerPiece::Initialize(int owner)
 {
 	m_owner = owner;
+	m_pieceOne = new Piece();
+	m_pieceTwo = new Piece();
+	m_pieceOne->Initialize(m_owner);
+	m_pieceTwo->Initialize(m_owner+1);
 
 	if(m_owner == 10)
-	{
-		m_pieceOne = new Piece();
-		m_pieceOne->Initialize(m_owner);
+	{		
 		m_spawnPointOne.x = SPAWN_PLAYER_1X;
 		m_spawnPointOne.y = 1;
-		
-		m_pieceTwo = new Piece();
-		m_pieceTwo->Initialize(m_owner+1);
+					
 		m_spawnPointTwo.x = SPAWN_PLAYER_1X;
 		m_spawnPointTwo.y = 0;
 		
-		SetPositionToSpawn();
+		
 	}
 	else if(m_owner == 20)
 	{
-		m_pieceOne = new Piece();
-		m_pieceOne->Initialize(m_owner);
 		m_spawnPointOne.x = SPAWN_PLAYER_2X;
 		m_spawnPointOne.y = 1;
 
-		m_pieceTwo = new Piece();
-		m_pieceTwo->Initialize(m_owner+1);
 		m_spawnPointTwo.x = SPAWN_PLAYER_2X;
 		m_spawnPointTwo.y = 0;
-
-		SetPositionToSpawn();
 	}
+
+	SetPositionToSpawn();
+	m_pieceOneNextColor = m_pieceOne->RandomizeColor();
+	m_pieceTwoNextColor = m_pieceTwo->RandomizeColor();
 }
 
 void PlayerPiece::Update()
@@ -521,9 +519,8 @@ void PlayerPiece::DropPieceQuickly()
 
 void PlayerPiece::RandomizeNewPiece()
 {
-	m_pieceOne->RandomizeColor();
-	m_pieceTwo->RandomizeColor();
-	SetPositionToSpawn();
+	m_pieceOneNextColor = m_pieceOne->RandomizeColor();
+	m_pieceTwoNextColor = m_pieceTwo->RandomizeColor();
 }
 
 #pragma endregion
@@ -548,6 +545,16 @@ int PlayerPiece::GetColorPieceOne()
 int PlayerPiece::GetColorPieceTwo()
 {
 	return m_pieceTwo->GetColor();
+}
+
+int PlayerPiece::GetNextColorPieceOne()
+{
+	return m_pieceOneNextColor;
+}
+
+int PlayerPiece::GetNextColorPieceTwo()
+{
+	return m_pieceTwoNextColor;
 }
 
 sf::Vector2i PlayerPiece::GetPositionPieceOne()
@@ -594,6 +601,7 @@ void PlayerPiece::SetPositions(int oneX, int oneY, int twoX, int twoY)
 void PlayerPiece::SetOwner(int owner)
 {
 	m_pieceOne->SetOwner(owner);
+
 	if (owner != 0)
 	{
 		m_pieceTwo->SetOwner(owner+1);
@@ -623,16 +631,14 @@ void PlayerPiece::SetSpawnPointTwo(int x, int y)
 
 void PlayerPiece::SetNewPlayerPieces()
 {
-	int oneValue = Board::Instance()->GetTile(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y)->GetContent();
-	int twoValue = Board::Instance()->GetTile(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y)->GetContent();
-	int onePosX = m_pieceOne->GetPosition().x;
-	int onePosY = m_pieceOne->GetPosition().y;
-	int twoPosX = m_pieceTwo->GetPosition().x;
-	int twoPosY = m_pieceTwo->GetPosition().y;
-	RandomizeNewPiece();
+	/*Board::Instance()->SetColor(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y, m_pieceOne->GetColor());
+	Board::Instance()->SetColor(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y, m_pieceTwo->GetColor());*/
+
+	SetColors(m_pieceOneNextColor, m_pieceTwoNextColor);
 	SetOwner(m_owner);
-	Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
-	Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
+	SetPositionToSpawn();
+
+	RandomizeNewPiece();
 }
 
 void PlayerPiece::ConvertPieceToPassive()
@@ -649,4 +655,5 @@ void PlayerPiece::ConvertPieceToPassive()
 	SetNewPlayerPieces();
 	Board::Instance()->CheckForMatch();
 }
+
 #pragma endregion

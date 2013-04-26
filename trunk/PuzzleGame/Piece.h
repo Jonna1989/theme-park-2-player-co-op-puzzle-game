@@ -25,7 +25,7 @@ public:
 	void SetPosition(int posX, int posY);
 	void SetOwner(int owner);
 
-	void RandomizeColor();
+	int RandomizeColor();
 	int NrOfAdjacentSameColor();
 	std::vector<sf::Vector2i> PositionsOfAdjacentSameColor();
 

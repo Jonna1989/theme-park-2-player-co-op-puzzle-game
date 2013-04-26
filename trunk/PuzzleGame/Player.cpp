@@ -15,12 +15,27 @@ void Player::Initialize(int owner)
 	m_piece = new PlayerPiece();
 	m_piece->Initialize(owner);
 
+	if(owner == 10)
+	{
+		m_nextPieceOnePosition.x = BOARD_OFFSET_X - 20 - TILE_SIZE_X;
+		m_nextPieceOnePosition.y = BOARD_OFFSET_Y - 20;
+		m_nextPieceTwoPosition.x = BOARD_OFFSET_X - 20 - TILE_SIZE_X;
+		m_nextPieceTwoPosition.y = BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
+	}
+	else if(owner == 20)
+	{
+		m_nextPieceOnePosition.x = (float)BOARD_OFFSET_X + 1240;
+		m_nextPieceOnePosition.y = (float)BOARD_OFFSET_Y - 20;
+		m_nextPieceTwoPosition.x = (float)BOARD_OFFSET_X + 1240;
+		m_nextPieceTwoPosition.y = (float)BOARD_OFFSET_Y - 20 + TILE_SIZE_Y;
+	}
+
 	m_score = 0;
 }
 
 void Player::Update()
 {
-
+	DrawNextPiece();
 }
 
 void Player::Cleanup()
@@ -53,19 +68,28 @@ std::string Player::GetScoreAsString()
 
 #pragma region Setters
 
-void Player::addToScore(int score)
+void Player::AddToScore(int score)
 {
 	m_score += score;
 }
 
-void Player::resetScore()
+void Player::ResetScore()
 {
 	m_score = 0;
 }
 
-void Player::setScore(int newScore)
+void Player::SetScore(int newScore)
 {
 	m_score = newScore;
+}
+
+#pragma endregion
+
+#pragma region Misc
+
+void Player::DrawNextPiece()
+{
+	Board::Instance()->DrawNextPiece(m_nextPieceOnePosition, m_nextPieceTwoPosition, m_piece->GetNextColorPieceOne(), m_piece->GetNextColorPieceTwo());
 }
 
 #pragma endregion
