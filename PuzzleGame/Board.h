@@ -12,12 +12,12 @@
 #include "Soundeffects.h"
 #include "Score.h"
 
-static int BOARD_HEIGHT = 10;
+static int BOARD_HEIGHT = 12;
 static int BOARD_WIDTH	= 16;
 static unsigned int TILE_SIZE_X = 75;
 static unsigned int TILE_SIZE_Y = 75;
 static unsigned int BOARD_OFFSET_X = 360;
-static unsigned int BOARD_OFFSET_Y = 165;
+static unsigned int BOARD_OFFSET_Y = 165-(TILE_SIZE_Y*2);
 static const int NUMBER_OF_BUBBLES = 7;
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
 static const std::string PATH_LEVEL_1 = "Assets/Levels/Level1.txt";
@@ -88,6 +88,8 @@ public:
 
 	void CheckForMatch();
 	void CheckForFall(int x, int y);
+
+	void CheckForGameOver();
 
 	void DrawNextPiece(sf::Vector2f positionOne, sf::Vector2f positionTwo, int colorOne, int colorTwo);
 

@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "StateManager.h"
 
 #pragma region Base
 Board::Board()
@@ -42,7 +43,7 @@ void Board::Initialize()
 	m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
 	
-	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20);
+	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
 
 	m_player1HalfStep = 0;
 	m_player2HalfStep = 0;
@@ -90,7 +91,7 @@ void Board::Cleanup()
 	{
 		delete m_sprites.at(i);
 	}
-
+	m_sprites.clear();
 	Clean(m_backgroundTexture, m_backgroundSprite);
 	Clean(m_plateTexture, m_plateSprite);
 	m_score->Cleanup();
@@ -222,11 +223,51 @@ void Board::SetPreviousOwner(int x, int y, int previousOwner) //Automatically ca
 
 void Board::SetBoardHalfStep(int halfStep)
 {
-	for (int y = 0; y < BOARD_HEIGHT ; y++)
+	for (int y = 2; y < BOARD_HEIGHT ; y++)
 	{
 		for (int x = 0; x < BOARD_WIDTH ; x++)
 		{
 			GetTile(x,y)->SetHalfStep(halfStep);
+		}
+	}
+}
+
+void Board::CheckForGameOver()
+{
+	bool first = false;
+	bool second = false;
+	bool third = false;
+	for (int x = 0; x < BOARD_WIDTH; x++)
+	{
+		if (first && second && third)
+		{
+			break;
+		}
+		first = false;
+		second = false;
+		third = false;
+		for (int y = 0; y < 3 ; y++)
+		{
+			if (GetTile(x,y)->GetContent() != 0)
+			{
+				if (!first)
+				{
+					first = true;
+				}
+				else if (!second)
+				{
+					second = true;
+				}
+				else if (!third)
+				{
+					third = true;
+				}
+				if (first && second && third)
+				{
+					StateManager::Instance()->SetState(StateManager::GameLost);
+					break;
+				}
+			}
 		}
 	}
 }
@@ -280,7 +321,7 @@ std::vector<sf::Vector2i> Board::PositionsOfAdjacentSameColor(int x, int y)
 {
 	std::vector<sf::Vector2i> sameColorPositions;
 
-	if(y - 1 >= 0)
+	if(y - 1 >= 2)
 	{
 		if(m_board.at(y - 1).at(x).GetContent() == m_board.at(y).at(x).GetContent())
 		{
@@ -487,7 +528,7 @@ void Board::DrawNextPiece(sf::Vector2f positionOne, sf::Vector2f positionTwo, in
 void Board::PrintBoardToConsole()
 {
 	//std::system("cls");
-	for(int y = 0; y < BOARD_HEIGHT; y++) 
+	for (int y = 0; y < BOARD_HEIGHT; y++)
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
@@ -512,7 +553,7 @@ void Board::InitializeSprites()
 	
 	for (int i = 0; i < NUMBER_OF_BUBBLES; i++)
 	{
-		std::ostringstream	s;
+		std::ostringstream s;
 		s << i+1;
 		std::string i_as_string(s.str());
 		bubblesSheetpaths.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
@@ -556,7 +597,7 @@ void Board::ReadTextLevels(std::string sheetPath)
 
 	levelColors.pop_back();
 
-	if(levelColors.size() == BOARD_HEIGHT * BOARD_WIDTH)
+	if (levelColors.size() == BOARD_HEIGHT * BOARD_WIDTH)
 	{
 		m_levels.push_back(levelColors);
 		levelColors.clear();
@@ -697,6 +738,13 @@ void Board::DrawTile(int x, int y)
 			{
 				SetPlayer1HalfStep(0);
 			}
+			if (GetSpecifiedTile(10) != nullptr && GetSpecifiedTile(11) != nullptr)
+			{
+				if (GetSpecifiedTile(10)->GetPositionVector().y < 2 || GetSpecifiedTile(11)->GetPositionVector().y < 2)
+				{
+					SetPlayer1HalfStep(0);
+				}
+			}
 		}
 		else if ((m_board.at(y).at(x).GetOwner() == 20 || m_board.at(y).at(x).GetOwner() == 21))
 		{
@@ -778,6 +826,13 @@ void Board::DrawTile(int x, int y)
 			else
 			{
 				SetPlayer2HalfStep(0);
+			}
+			if (GetSpecifiedTile(20) != nullptr && GetSpecifiedTile(21) != nullptr)
+			{
+				if (GetSpecifiedTile(20)->GetPositionVector().y < 2 || GetSpecifiedTile(21)->GetPositionVector().y < 2)
+				{
+					SetPlayer2HalfStep(0);
+				}
 			}
 		}
 
@@ -924,12 +979,29 @@ void Board::DrawTile(int x, int y)
 		{
 			m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
 		}
-
-		WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
-		if (owner == 10)
+		if (y >= 2)
 		{
-			m_sprites.at(NUMBER_OF_BUBBLES)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
-			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES));
+			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
+			if (owner == 10)
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player1HalfStep);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES));
+			}
+			else if(owner == 20)
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES+1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+1));
+			}
+			if (GetPreviousOwner(x,y) == 10 && !GetTile(x,y)->GetFalling())
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES+2)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+2));
+			}
+			else if (GetPreviousOwner(x,y) == 20 && !GetTile(x,y)->GetFalling())
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES+3)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
+			}
 		}
 		else if(owner == 20)
 		{
