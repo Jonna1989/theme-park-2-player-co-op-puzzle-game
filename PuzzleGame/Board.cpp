@@ -209,7 +209,7 @@ void Board::SetPreviousOwner(int x, int y, int previousOwner) //Automatically ca
 {
 	if(previousOwner == 11)
 	{
-		preivousOwner = 10;
+		previousOwner = 10;
 	}
 	
 	if(previousOwner == 21)
@@ -217,7 +217,7 @@ void Board::SetPreviousOwner(int x, int y, int previousOwner) //Automatically ca
 		previousOwner = 20;
 	}
 
-	m_board.at(y).at(x).SetPreviousOwner(owner);
+	m_board.at(y).at(x).SetPreviousOwner(previousOwner);
 }
 
 void Board::SetBoardHalfStep(int halfStep)
