@@ -40,7 +40,8 @@ void Player::Update()
 
 void Player::Cleanup()
 {
-
+	m_piece->Cleanup();
+	delete m_piece;
 }
 
 #pragma endregion
