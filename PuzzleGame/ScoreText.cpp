@@ -28,6 +28,7 @@ void ScoreText::Update()
 {
 	if (m_isBusy == true)
 	{
+		m_textToDraw->setColor(sf::Color(m_textToDraw->getColor().r,m_textToDraw->getColor().g,m_textToDraw->getColor().b,m_textToDraw->getColor().a));
 		if (m_fadeClock->getElapsedTime().asMilliseconds() >= m_fadeDuration)
 		{
 			m_isBusy = false;
