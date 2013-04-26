@@ -465,7 +465,12 @@ void Board::CheckForMatch()
 					{
 						m_score->SetScoreMultiplier(20);
 					}
-					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
+					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 2)
+						   ||(previousOwnerP1 == 2) && (previousOwnerP2 == 3))
+					{
+						m_score->SetScoreMultiplier(25);
+					}
+					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 3))
 					{
 						m_score->SetScoreMultiplier(30);
 					}

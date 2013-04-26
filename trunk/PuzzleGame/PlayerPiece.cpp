@@ -655,5 +655,4 @@ void PlayerPiece::ConvertPieceToPassive()
 	SetNewPlayerPieces();
 	Board::Instance()->CheckForMatch();
 }
-
 #pragma endregion
