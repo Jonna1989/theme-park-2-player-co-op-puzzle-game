@@ -12,20 +12,24 @@ public:
 	~PowerItem();
 
 	virtual void Initialize() = 0;
-	virtual void Upddate() = 0;
+	virtual void Update() = 0;
 	virtual void Cleanup() = 0;
 
 	virtual void Activate() = 0;
+	virtual void Drop();
 
-	virtual sf::Vector2i GetPosition() = 0;
-	virtual bool IsFalling() = 0;
+	virtual sf::Vector2i GetPosition();
+	virtual bool IsFalling();
+	virtual bool IsGoodItem();
 
-	virtual void SetPosition(int x, int y) = 0;
-	virtual void SetFalling(bool falling) = 0;
+	virtual void SetPosition(int x, int y);
+	virtual void SetFalling(bool falling);
+	virtual void SetGoodItem(bool good);
 
 protected:
 	sf::Vector2i m_position;
 	bool m_isFalling;
+	bool m_goodItem; //true = powerup, false = trap
 };
 
 #endif

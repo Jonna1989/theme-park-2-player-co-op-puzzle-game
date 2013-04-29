@@ -14,8 +14,9 @@ ColorBomb::~ColorBomb()
 void ColorBomb::Initialize()
 {
 	m_position.x = 0;
-	m_position.y = 1;
+	m_position.y = 0;
 	m_isFalling = true;
+	m_goodItem = true;
 	m_colorToRemove = 0;
 }
 
@@ -58,16 +59,6 @@ void ColorBomb::Activate()
 
 #pragma region Getters
 
-sf::Vector2i ColorBomb::GetPosition()
-{
-	return m_position;
-}
-
-bool ColorBomb::IsFalling()
-{
-	return m_isFalling;
-}
-
 int ColorBomb::GetColorToRemove()
 {
 	return m_colorToRemove;
@@ -76,17 +67,6 @@ int ColorBomb::GetColorToRemove()
 #pragma endregion
 
 #pragma region Setters
-
-void ColorBomb::SetPosition(int x, int y)
-{
-	m_position.x = x;
-	m_position.y = y;
-}
-
-void ColorBomb::SetFalling(bool falling)
-{
-	m_isFalling = falling;
-}
 
 void ColorBomb::SetColorToRemove(int color)
 {
