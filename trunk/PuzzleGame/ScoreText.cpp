@@ -28,13 +28,21 @@ void ScoreText::Update()
 {
 	if (m_isBusy == true)
 	{
-		m_textToDraw->setColor(sf::Color(m_textToDraw->getColor().r,m_textToDraw->getColor().g,m_textToDraw->getColor().b,m_textToDraw->getColor().a));
 		if (m_fadeClock->getElapsedTime().asMilliseconds() >= m_fadeDuration)
 		{
 			m_isBusy = false;
+			m_alpha  = 255;
 		}
 		else
 		{
+			if (m_fadeClock->getElapsedTime().asMilliseconds() >= m_fadeDuration/2)
+			{
+				m_textToDraw->setColor(sf::Color(m_textToDraw->getColor().r,m_textToDraw->getColor().g,m_textToDraw->getColor().b,m_alpha));
+				if (m_alpha > 5)
+				{
+					m_alpha += -5; 
+				}
+			}
 			m_textToDraw->setPosition(m_textToDraw->getPosition().x,m_textToDraw->getPosition().y-0.3f);
 			Window->draw(*m_textToDraw);
 		}
