@@ -16,9 +16,9 @@ public:
 
 private:
 	sf::Clock* m_fadeClock;
-	int m_fadeDuration;
+	int		   m_fadeDuration;
 	sf::Text*  m_textToDraw;
-	sf::Uint8 m_alpha;
-	bool m_isBusy;
+	sf::Uint8  m_alpha;
+	bool	   m_isBusy;
 };
 

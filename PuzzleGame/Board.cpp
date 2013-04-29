@@ -532,7 +532,6 @@ void Board::DrawNextPiece(sf::Vector2f positionOne, sf::Vector2f positionTwo, in
 
 void Board::PrintBoardToConsole()
 {
-	//std::system("cls");
 	for (int y = 0; y < BOARD_HEIGHT; y++)
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
