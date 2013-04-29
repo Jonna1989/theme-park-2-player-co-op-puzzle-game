@@ -601,7 +601,7 @@ void PlayerPiece::SetPositions(int oneX, int oneY, int twoX, int twoY)
 void PlayerPiece::SetOwner(int owner)
 {
 	m_pieceOne->SetOwner(owner);
-
+	
 	if (owner != 0)
 	{
 		m_pieceTwo->SetOwner(owner+1);
@@ -631,18 +631,30 @@ void PlayerPiece::SetSpawnPointTwo(int x, int y)
 
 void PlayerPiece::SetNewPlayerPieces()
 {
-	/*Board::Instance()->SetColor(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y, m_pieceOne->GetColor());
-	Board::Instance()->SetColor(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y, m_pieceTwo->GetColor());*/
+	//Board::Instance()->SetColor(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y, m_pieceOne->GetColor());
+	//Board::Instance()->SetColor(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y, m_pieceTwo->GetColor());
+	
+	int onePosX = m_pieceOne->GetPosition().x;
+	int onePosY = m_pieceOne->GetPosition().y;
+	int twoPosX = m_pieceTwo->GetPosition().x;
+	int twoPosY = m_pieceTwo->GetPosition().y;
+	int oneValue = Board::Instance()->GetTile(onePosX,onePosY)->GetContent();
+	int twoValue = Board::Instance()->GetTile(twoPosX,twoPosY)->GetContent();
 
 	SetColors(m_pieceOneNextColor, m_pieceTwoNextColor);
 	SetOwner(m_owner);
 	SetPositionToSpawn();
 
 	RandomizeNewPiece();
+
+	Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
+	Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
 }
 
 void PlayerPiece::ConvertPieceToPassive()
 {
+	std::cout << "pieceone = " << m_pieceOne->GetOwner() << std::endl;
+	std::cout << "piecetwo = " << m_pieceTwo->GetOwner() << std::endl;
 	if (m_pieceOne->GetOwner() != 0)
 	{
 		Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());
@@ -651,8 +663,11 @@ void PlayerPiece::ConvertPieceToPassive()
 	{
 		Board::Instance()->SetPreviousOwner(m_pieceTwo->GetPosition().x,m_pieceTwo->GetPosition().y,m_pieceTwo->GetOwner());
 	}
+
 	SetOwner(0);
+
 	SetNewPlayerPieces();
+
 	Board::Instance()->CheckForMatch();
 }
 #pragma endregion
