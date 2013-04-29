@@ -525,8 +525,10 @@ void Board::CheckForFall(int x, int y)
 void Board::DrawNextPiece(sf::Vector2f positionOne, sf::Vector2f positionTwo, int colorOne, int colorTwo)
 {
 	m_sprites.at(colorOne - 1)->setPosition(positionOne);
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[colorOne-1],m_sprites.at(colorOne - 1));
 	WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(colorOne - 1));
 	m_sprites.at(colorTwo - 1)->setPosition(positionTwo);
+	TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[colorTwo-1],m_sprites.at(colorTwo - 1));
 	WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(colorTwo - 1));
 }
 
