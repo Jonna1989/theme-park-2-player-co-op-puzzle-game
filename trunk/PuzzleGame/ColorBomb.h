@@ -15,12 +15,8 @@ public:
 
 	void Activate();
 
-	sf::Vector2i GetPosition();
-	bool IsFalling();
 	int GetColorToRemove();
-	
-	void SetPosition(int x, int y);
-	void SetFalling(bool falling);
+
 	void SetColorToRemove(int color);
 
 private:

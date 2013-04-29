@@ -14,8 +14,9 @@ Bomb::~Bomb()
 void Bomb::Initialize()
 {
 	m_position.x = 0;
-	m_position.y = 1;
+	m_position.y = 0;
 	m_isFalling = true;
+	m_goodItem = true;
 	m_blastRadius = 2;
 }
 
@@ -58,29 +59,18 @@ void Bomb::Activate()
 
 #pragma region Getters
 
-sf::Vector2i Bomb::GetPosition()
+int Bomb::GetBlastRadius()
 {
-	return m_position;
-}
-
-bool Bomb::IsFalling()
-{
-	return m_isFalling;
+	return m_blastRadius;
 }
 
 #pragma endregion
 
 #pragma region Setters
 
-void Bomb::SetPosition(int x, int y)
+void Bomb::SetBlastRadius(int blastRadius)
 {
-	m_position.x = x;
-	m_position.y = y;
-}
-
-void Bomb::SetFalling(bool falling)
-{
-	m_isFalling = falling;
+	m_blastRadius = blastRadius;
 }
 
 #pragma endregion

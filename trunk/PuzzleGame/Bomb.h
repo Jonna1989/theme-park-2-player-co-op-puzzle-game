@@ -15,11 +15,9 @@ public:
 
 	void Activate();
 
-	sf::Vector2i GetPosition();
-	void SetPosition(int x, int y);
+	int GetBlastRadius();
 
-	bool IsFalling();
-	void SetFalling(bool falling);
+	void SetBlastRadius(int blastRadius);
 
 private:
 	int m_blastRadius;
