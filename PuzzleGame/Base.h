@@ -9,6 +9,8 @@
 #include "InputManager.h"
 #include "Player.h"
 #include "Soundeffects.h"
+#include "TextureProvider.h"
+#include "Board.h"
 
 class Base
 {

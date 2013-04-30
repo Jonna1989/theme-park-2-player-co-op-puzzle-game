@@ -27,7 +27,6 @@ void Game::Initialize()
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
 	m_printBoardInterval = new sf::Clock();
-
 }
 
 void Game::Update()

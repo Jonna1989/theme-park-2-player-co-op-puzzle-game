@@ -8,17 +8,18 @@ public:
 	ScoreText();
 	~ScoreText();
 
-	void Initialize();
-	void Reset(sf::Text* TextToShow, int Duration);
+	void Initialize(unsigned int charSize, const sf::Color textColor);
+	void Reset(sf::String scoreAsString, float positionX, float positionY);
 	void Update();
 	void Cleanup();
 	bool GetBusy();
 
 private:
-	sf::Clock* m_fadeClock;
-	int		   m_fadeDuration;
-	sf::Text*  m_textToDraw;
-	sf::Uint8  m_alpha;
-	bool	   m_isBusy;
+	float		 m_offsetY;
+	sf::Text*	 m_textToDraw;
+	sf::Uint8	 m_alpha;
+	bool		 m_isBusy;
+	float m_scoreTextPosX;
+	float m_scoreTextPosY;
 };
 

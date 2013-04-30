@@ -60,6 +60,7 @@ void Base::Cleanup()
 	StateManager::Instance()->Cleanup();
 	WindowManager::Instance()->Cleanup();
 	FrameTime::Instance()->Cleanup();
+	TextureProvider::Instance()->Cleanup();
 	delete m_runtime;
 }
 

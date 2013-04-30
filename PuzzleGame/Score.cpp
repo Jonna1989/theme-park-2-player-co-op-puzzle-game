@@ -23,11 +23,10 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 
 	DeclareSfText(m_scoreAsText,50,sf::Color::Black,m_scoreTextPos);
 	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+500,scorePosY+10);
-	DeclareSfText(m_previousScoreAsText,20,sf::Color::Black,600,600);
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
 		m_scoreTexts.push_back(new ScoreText());
-		m_scoreTexts[i]->Initialize();
+		m_scoreTexts[i]->Initialize(20,sf::Color::Black);
 	}
 }
 void Score::Update()
@@ -71,15 +70,15 @@ void Score::SetScore(int newScore)
 {
 	m_score = newScore;
 }
-void Score::AddScore(int scoreToAdd)
+void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY)
 {
 	m_previousScore = (scoreToAdd*m_scoreMultiplier)*m_comboMultiplier;
-	ConvertIntToSfStringToSfText(m_previousScore,m_previousScoreAsSfString,m_previousScoreAsText);
+	ConvertIntToSfString(m_previousScore,m_previousScoreAsSfString);
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
 		if (m_scoreTexts[i]->GetBusy() == false)
 		{
-			m_scoreTexts[i]->Reset(m_previousScoreAsText,500);
+			m_scoreTexts[i]->Reset(m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
 			break;
 		}
 	}
@@ -130,13 +129,18 @@ sf::Text* Score::GetScoreAsText()
 {
 	return m_scoreAsText;
 }
-void Score::SetPositionForPreviousScoreText(float x, float y)
-{
-	m_previousScoreAsText->setPosition(x,y);
-}
+
 #pragma endregion
 
 #pragma region Privates
+void Score::ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom)
+{
+	std::ostringstream convert;
+	convert << intToGetStringFrom;
+	std::string tempStdString;
+	tempStdString = convert.str();
+	sfStringToUpdateFrom = tempStdString;
+}
 void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
 {
 	std::ostringstream convert;
