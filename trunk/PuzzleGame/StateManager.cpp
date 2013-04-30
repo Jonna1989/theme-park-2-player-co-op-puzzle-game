@@ -35,7 +35,6 @@ void StateManager::Cleanup()
 	{
 		delete m_listOfStates[i];
 	}
-
 	delete m_instance;
 }
 

@@ -52,8 +52,8 @@ public:
 	void Update();
 	void Cleanup();
 
+	void DeleteBoardInstance();
 	void SetBoard(int level);
-	
 	std::vector<std::vector<Tile>> GetBoard();
 	std::vector<std::string> GetBubblesSheetpaths();
 	std::vector<sf::Sprite*> GetSprites();

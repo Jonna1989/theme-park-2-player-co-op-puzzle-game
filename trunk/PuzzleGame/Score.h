@@ -7,7 +7,7 @@
 #include "WindowManager.h"
 #include "Load.h"
 #include "ScoreText.h"
-static const int NUMBER_OF_SCORE_POPUPS = 5;
+static const int NUMBER_OF_SCORE_POPUPS = 10;
 class Score
 {
 public:
@@ -23,7 +23,7 @@ public:
 
 	int GetScore();
 	void SetScore(int newScore);
-	void AddScore(int scoreToAdd);
+	void AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY);
 	int GetPreviousScore		();
 	int GetScoreMultiplier		();
 	void SetScoreMultiplier		(int newScoreMultiplier);
@@ -36,7 +36,6 @@ public:
 	void ResetComboMultiplier	();
 
 	sf::Text* GetScoreAsText();
-	void SetPositionForPreviousScoreText(float x, float y);
 private:
 
 	sf::Vector2f m_scoreTextPos;
@@ -53,8 +52,9 @@ private:
 	int m_comboMultiplierLastUpdate;
 	sf::Text* m_scoreAsText;
 	sf::Text* m_comboMultiplierAsText;
-	sf::Text* m_previousScoreAsText;
 	std::vector<ScoreText*> m_scoreTexts;
+	int scoreTextAlternation;
+	void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom);
 	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo);
 	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd);
 };

@@ -653,8 +653,6 @@ void PlayerPiece::SetNewPlayerPieces()
 
 void PlayerPiece::ConvertPieceToPassive()
 {
-	std::cout << "pieceone = " << m_pieceOne->GetOwner() << std::endl;
-	std::cout << "piecetwo = " << m_pieceTwo->GetOwner() << std::endl;
 	if (m_pieceOne->GetOwner() != 0)
 	{
 		Board::Instance()->SetPreviousOwner(m_pieceOne->GetPosition().x,m_pieceOne->GetPosition().y,m_pieceOne->GetOwner());

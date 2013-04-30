@@ -28,19 +28,15 @@ TextureProvider* TextureProvider::Instance()
 
 	return m_instance;
 }
-
 void TextureProvider::Initialize()
 {
-	m_sprite = new sf::Sprite();
 }
-
 void TextureProvider::Cleanup()
 {
 	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 	{
 		 delete it->second;
 	}
-	delete m_sprite;
 }
 
 sf::Texture* TextureProvider::GetTexture(std::string sheetPath)

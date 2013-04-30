@@ -32,6 +32,8 @@ void InputManager::Initialize()
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
+	m_player1 = new Player();
+	m_player2 = new Player();
 }
 
 void InputManager::Update(bool singlePlayer, int state)
@@ -86,11 +88,16 @@ void InputManager::Update(bool singlePlayer, int state)
 }
 void InputManager::Cleanup()
 {
-	delete m_keyboard;
+ 	delete m_keyboard;
+// 	m_player1->Cleanup();
+// 	delete m_player1;
+// 	m_player2->Cleanup();
+// 	delete m_player2;
 }
 
 void InputManager::SetPlayers(Player* player)
 {
+
 	m_player1 = player;
 }
 

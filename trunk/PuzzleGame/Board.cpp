@@ -24,6 +24,7 @@ Board* Board::Instance()
 
 void Board::Initialize()
 {
+
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();
@@ -38,9 +39,11 @@ void Board::Initialize()
 	soundClock = new sf::Clock();
 	soundClock->restart();
 
-	m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
+	//m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
+	LoadTexture(m_backgroundTexture,"Assets/GraphicalAssets/TempArt/background.png");
 	CreateSprite(m_backgroundSprite, m_backgroundTexture);
-	m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
+	//m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
+	LoadTexture(m_plateTexture,"Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
 	
 	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
@@ -68,7 +71,6 @@ void Board::Update()
 			m_particleEffects[i]->Update();
 		}
 	}
-//	Window->draw(*m_score->GetScoreAsText());
 	if (soundClock->getElapsedTime().asMilliseconds() >= m_comboSoundThreshold)
 	{
 		m_score->SetComboMultiplier(1);
@@ -79,26 +81,26 @@ void Board::Update()
 
 void Board::Cleanup()
 {
-	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
+	for (unsigned int i = 0; i < m_particleEffects.size(); i++)
 	{
 		m_particleEffects[i]->Cleanup();
 		delete m_particleEffects[i];
 	}
-
 	m_particleEffects.clear();
-
 	for(unsigned int i = 0; i < m_sprites.size(); i++)
 	{
-		delete m_sprites.at(i);
+		delete m_sprites[i];
 	}
 	m_sprites.clear();
 	Clean(m_backgroundTexture, m_backgroundSprite);
 	Clean(m_plateTexture, m_plateSprite);
 	m_score->Cleanup();
 	delete m_score;
+}
+void Board::DeleteBoardInstance()
+{
 	delete m_instance;
 }
-
 void Board::SetBoard(int level)
 {
 	int counter = 0;
@@ -476,8 +478,7 @@ void Board::CheckForMatch()
 					}
 					avragePosX /= temp2; 
 					avragePosY /= temp2;
-					m_score->SetPositionForPreviousScoreText(avragePosX,avragePosY);
-					m_score->AddScore(temp2);
+					m_score->AddScore(temp2,avragePosX,avragePosY);
 					m_score->ResetScoreMultiplier();
 				}
 			}
