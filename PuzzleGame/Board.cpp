@@ -262,7 +262,7 @@ void Board::CheckForGameOver()
 				{
 					third = true;
 				}
-				if (first && second && third)
+				if (first && second && third && GetTile(x,2)->GetOwner() == 0)
 				{
 					StateManager::Instance()->SetState(StateManager::GameLost);
 					break;
