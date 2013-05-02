@@ -40,7 +40,7 @@ void ScoreText::Update()
 		}
 		else
 		{
-			m_alpha -= (50*DeltaTime);
+			m_alpha -= (sf::Uint8)(50*DeltaTime);
 			m_textToDraw->setColor(sf::Color(m_textToDraw->getColor().r,
 											 m_textToDraw->getColor().g,
 											 m_textToDraw->getColor().b,

@@ -17,7 +17,7 @@ StartMenu::~StartMenu()
 
 void StartMenu::Initialize()
 {
-	LoadTexture(m_backgroundTexture,"Assets/GraphicalAssets/TempArt/menu.png");
+	LoadTexture(m_backgroundTexture,"Assets/GraphicalAssets/TempArt/how.png");
 	CreateSprite(m_backgroundSprite,m_backgroundTexture);
 	Music::Instance()->Initialize(0);
 	Music::Instance()->StartMusic();
