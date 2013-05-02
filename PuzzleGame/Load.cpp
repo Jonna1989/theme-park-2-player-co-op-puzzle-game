@@ -63,3 +63,38 @@ void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsI
 		vectorToDeclare[i]->setColor(textColor);
 	}
 }
+
+void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom)
+{
+	std::ostringstream convert;
+	convert << intToGetStringFrom;
+	std::string tempStdString;
+	tempStdString = convert.str();
+	sfStringToUpdateFrom = tempStdString;
+}
+void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
+{
+	std::ostringstream convert;
+	convert << intToGetStringFrom;
+	std::string tempStdString;
+	tempStdString = convert.str();
+	sfStringToUpdateFrom = tempStdString;
+	sfTextToConvertTo->setString(sfStringToUpdateFrom);
+}
+void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd)
+{
+	std::ostringstream convert;
+	convert << intToGetStringFrom;
+	std::string tempStdString;
+	tempStdString = convert.str();
+	sfStringToUpdateFrom = tempStdString;
+	if (atEnd == false)
+	{
+		sfStringToUpdateFrom.insert(0,addExtraText);
+	}
+	else
+	{
+		sfStringToUpdateFrom.insert(sfStringToUpdateFrom.getSize(),addExtraText);
+	}
+	sfTextToConvertTo->setString(sfStringToUpdateFrom);
+}

@@ -1,0 +1,12 @@
+[Highscore]
+	highscore0 = 40
+	highscore1 = 2
+	highscore2 = 3
+	highscore3 = 4
+	highscore4 = 5
+[HighscoreName]
+	highscoreName0 = Null
+	highscoreName1 = Null
+	highscoreName2 = Null
+	highscoreName3 = Null
+	highscoreName4 = Null

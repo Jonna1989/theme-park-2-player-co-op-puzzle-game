@@ -57,8 +57,8 @@ private:
 
 #pragma region declare Volume 
 	ConfigReader m_soundconfig;
-	float m_soundvol;
-	bool m_soundon;
+	float		 m_soundvol;
+	bool		 m_soundon;
 #pragma endregion
 
 std::vector<std::string> DeclarePathArray(std::vector<std::string> &m_pathVector, int NumberOfSoundsInArray, const std::string Path); 
