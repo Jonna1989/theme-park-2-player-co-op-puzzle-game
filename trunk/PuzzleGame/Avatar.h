@@ -1,8 +1,9 @@
 #pragma once
 #include "TextureProvider.h"
 #include "WindowManager.h"
+#include "Animation.h"
 
-static const std::string PATH_AVATAR_FOLDER = "Assets/GraphicalAssets/Avatars/Avatar";
+static const std::string PATH_AVATAR_FOLDER = "Assets/GraphicalAssets/TempArt/sheet";
 static const std::string PATH_ENDING = ".png";
 
 class Avatar
@@ -16,7 +17,8 @@ public:
 	void Cleanup();
 
 private:
-	sf::Texture* m_avatarTexture;
 	sf::Sprite* m_avatarSprite;
+
+	Animation* m_avatarAnimation;
 };
 
