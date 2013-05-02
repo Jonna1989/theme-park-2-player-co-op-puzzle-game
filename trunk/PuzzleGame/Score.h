@@ -1,12 +1,7 @@
 #pragma once
 
-#include <iomanip>
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include "WindowManager.h"
-#include "Load.h"
 #include "ScoreText.h"
+#include "HighScore.h"
 static const int NUMBER_OF_SCORE_POPUPS = 10;
 class Score
 {
@@ -54,7 +49,6 @@ private:
 	sf::Text* m_comboMultiplierAsText;
 	std::vector<ScoreText*> m_scoreTexts;
 	int scoreTextAlternation;
-	void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom);
-	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo);
-	void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd);
+
+	HighScore* m_highscore;
 };

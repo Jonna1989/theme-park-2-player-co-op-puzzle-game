@@ -1,5 +1,4 @@
 #include "Score.h"
-
 #pragma region base
 Score::Score()
 {
@@ -28,6 +27,8 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 		m_scoreTexts.push_back(new ScoreText());
 		m_scoreTexts[i]->Initialize(20,sf::Color::Black);
 	}
+	m_highscore = new HighScore();
+	m_highscore->Initialize();
 }
 void Score::Update()
 {
@@ -50,9 +51,11 @@ void Score::Update()
 	}
 	Window->draw(*m_scoreAsText);
 	Window->draw(*m_comboMultiplierAsText);
+	m_highscore->Update();
 }
 void Score::Cleanup()
 {
+	m_highscore->SetHighscore(m_score);
 	for( int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
 		m_scoreTexts[i]->Cleanup();
@@ -133,38 +136,5 @@ sf::Text* Score::GetScoreAsText()
 #pragma endregion
 
 #pragma region Privates
-void Score::ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom)
-{
-	std::ostringstream convert;
-	convert << intToGetStringFrom;
-	std::string tempStdString;
-	tempStdString = convert.str();
-	sfStringToUpdateFrom = tempStdString;
-}
-void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
-{
-	std::ostringstream convert;
-	convert << intToGetStringFrom;
-	std::string tempStdString;
-	tempStdString = convert.str();
-	sfStringToUpdateFrom = tempStdString;
-	sfTextToConvertTo->setString(sfStringToUpdateFrom);
-}
-void Score::ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd)
-{
-	std::ostringstream convert;
-	convert << intToGetStringFrom;
-	std::string tempStdString;
-	tempStdString = convert.str();
-	sfStringToUpdateFrom = tempStdString;
-	if (atEnd == false)
-	{
-		sfStringToUpdateFrom.insert(0,addExtraText);
-	}
-	else
-	{
-		sfStringToUpdateFrom.insert(sfStringToUpdateFrom.getSize(),addExtraText);
-	}
-	sfTextToConvertTo->setString(sfStringToUpdateFrom);
-}
+
 #pragma endregion
