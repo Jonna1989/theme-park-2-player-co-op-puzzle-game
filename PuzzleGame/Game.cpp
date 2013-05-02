@@ -18,6 +18,10 @@ void Game::Initialize()
 	m_player1->Initialize(10);
 	m_player2 = new Player();
 	m_player2->Initialize(20);
+	m_player1Avatar = new Avatar();
+	m_player1Avatar->Initialize("1",100,500);
+	m_player2Avatar = new Avatar();
+	m_player2Avatar->Initialize("2",1780,500);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	Music::Instance()->Initialize(Music::LevelMusic1);
 	Music::Instance()->StartMusic();
@@ -27,6 +31,8 @@ void Game::Initialize()
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
 	m_printBoardInterval = new sf::Clock();
+	m_increaseClock = new sf::Clock();
+	m_increaseInterval = 10000;
 }
 
 void Game::Update()
@@ -36,6 +42,8 @@ void Game::Update()
 	Board::Instance()->Update();
 	m_player1->Update();
 	m_player2->Update();
+	//m_player1Avatar->Update();
+	//m_player2Avatar->Update();
 	Window->display();	
 	KeyCommands();
 	Board::Instance()->CheckForGameOver();
@@ -43,6 +51,7 @@ void Game::Update()
 
 void Game::Cleanup()
 {
+	delete m_increaseClock;
 	delete m_gravityClock;
 	delete m_player1Clock;
 	delete m_player2Clock;
@@ -51,6 +60,10 @@ void Game::Cleanup()
 	delete m_player1;
 	m_player2->Cleanup();
 	delete m_player2;
+	m_player1Avatar->Cleanup();
+	delete m_player1Avatar;
+	m_player2Avatar->Cleanup();
+	delete m_player2Avatar;
 	Board::Instance()->Cleanup();
 }
 
@@ -125,6 +138,13 @@ void Game::UseTimedFunctions()
 		Board::Instance()->SetPlayer2HalfStep(0);
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
+	}
+	if (m_increaseClock->getElapsedTime().asMilliseconds() > m_increaseInterval && m_gravityInterval > 50)
+	{
+		m_increaseInterval += 2000;
+		SetGravityInterval(m_gravityInterval-25);
+		InputManager::Instance()->SetGravity(m_gravityInterval);
+		m_increaseClock->restart();
 	}
 }
 
