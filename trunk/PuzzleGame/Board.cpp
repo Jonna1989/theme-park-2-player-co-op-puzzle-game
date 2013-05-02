@@ -560,10 +560,7 @@ void Board::InitializeSprites()
 	
 	for (int i = 0; i < NUMBER_OF_BUBBLES; i++)
 	{
-		std::ostringstream s;
-		s << i+1;
-		std::string i_as_string(s.str());
-		bubblesSheetpaths.push_back(PATH_TO_BUBBLES+"bubble0"+i_as_string+".png");
+		bubblesSheetpaths.push_back(PATH_TO_BUBBLES+"bubble0"+ConvertIntToStdString(i+1)+".png");
 		TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[i],m_sprites.at(i));
 	}
 	m_sprites[NUMBER_OF_BUBBLES]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura.png"));

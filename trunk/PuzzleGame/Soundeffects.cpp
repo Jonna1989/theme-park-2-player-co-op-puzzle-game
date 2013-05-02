@@ -94,10 +94,7 @@ std::vector<std::string> Soundeffects::DeclarePathArray(std::vector<std::string>
 {
 	for (int i = 1; i <= NumberOfSoundsInArray ; i++)
 	{
-		std::ostringstream	s;
-		s << i;
-		std::string i_as_string(s.str());
-		m_pathVector.push_back(PATH_TO_SOUND_EFFECTS+path+i_as_string+".wav");
+		m_pathVector.push_back(PATH_TO_SOUND_EFFECTS+path+ConvertIntToStdString(i)+".wav");
 	}
 	return m_pathVector;
 }
