@@ -39,7 +39,7 @@ void HighScore::Update()
 
 void HighScore::Cleanup()
 {
-
+	delete m_highscoreAsText;
 }
 
 int HighScore::GetHighscore(int highscorePosition)
@@ -57,6 +57,7 @@ void HighScore::SetHighscore(int highscore)
 			{
 				m_configReader.add("Highscore","highscore0",highscore);
 				m_configReader.save(HIGHSCORE_FILENAME);
+				break;
 			}
 			else
 			{
