@@ -11,6 +11,7 @@
 #include "ParticleEffect.h"
 #include "Soundeffects.h"
 #include "Score.h"
+#include "Load.h"
 
 static int BOARD_HEIGHT = 12;
 static int BOARD_WIDTH	= 16;

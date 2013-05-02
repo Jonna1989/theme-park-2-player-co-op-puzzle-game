@@ -7,7 +7,6 @@ HighScore::HighScore()
 HighScore::~HighScore()
 {
 }
-
 void HighScore::Initialize()
 {
 	m_wordHighscore = "Highscore: ";
@@ -15,12 +14,13 @@ void HighScore::Initialize()
 	{
 		for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 		{
-			std::ostringstream	s;
-			s << i;
-			std::string i_as_string(s.str());
 			int temp = 0;
-			temp = m_configReader.get("Highscore","highscore"+i_as_string,temp);
+			temp = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(i),temp);
 			m_highscore.push_back(temp);
+
+			std::string tempstring;
+			tempstring = m_configReader.get("HighscoreName","highscoreName"+ConvertIntToStdString(i),tempstring);
+			m_highscoreName.push_back(tempstring);
 		}
 		std::cout << "File has been read: " << HIGHSCORE_FILENAME << std::endl;
 	}
@@ -28,13 +28,17 @@ void HighScore::Initialize()
 	{
 		std::cout << "Failed to read file" << std::endl;
 	}
-	DeclareSfText(m_highscoreAsText, 50, sf::Color::Black);
+	DeclareSfText(m_highscoreAsText, 40, sf::Color::Black);
 	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoreAsText,m_wordHighscore,false);
+	DeclareSfText(m_highscoreNameAsText, 40,sf::Color::Black);
+	m_highscoreNameAsText->setString("Team Name: "+m_highscoreName[0]);
+	m_highscoreNameAsText->setPosition(0,40);
 }
 
 void HighScore::Update()
 {
 	Window->draw(*m_highscoreAsText);
+	Window->draw(*m_highscoreNameAsText);
 }
 
 void HighScore::Cleanup()
@@ -55,7 +59,8 @@ void HighScore::SetHighscore(int highscore)
 		{
 			if (m_configReader.load(HIGHSCORE_FILENAME))
 			{
-				m_configReader.add("Highscore","highscore0",highscore);
+				int temp = 0;
+				m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i),highscore);
 				m_configReader.save(HIGHSCORE_FILENAME);
 				break;
 			}

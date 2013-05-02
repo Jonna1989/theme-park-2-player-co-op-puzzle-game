@@ -41,10 +41,11 @@ void ScoreText::Update()
 		else
 		{
 			m_alpha -= (50*DeltaTime);
-			m_textToDraw->setColor(sf::Color(m_textToDraw->getColor().r,
-											 m_textToDraw->getColor().g,
-											 m_textToDraw->getColor().b,
-											 m_alpha));
+			m_textToDraw->setColor(sf::Color
+				(0,
+				 0,
+				 0,
+				 (sf::Uint8)m_alpha));
 			m_textToDraw->move(0, m_offsetY*DeltaTime);
 			Window->draw(*m_textToDraw);
 		}

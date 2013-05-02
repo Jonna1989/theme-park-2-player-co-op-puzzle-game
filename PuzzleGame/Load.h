@@ -22,3 +22,5 @@ void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsI
 void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom);
 void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo);
 void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd);
+
+std::string ConvertIntToStdString(int intToConvert);

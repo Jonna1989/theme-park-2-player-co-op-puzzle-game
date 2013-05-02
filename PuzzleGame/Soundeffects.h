@@ -2,10 +2,9 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "ConfigReader.h"
-#include <sstream>
 #include <stdlib.h>
+#include "Load.h"
 
 const std::string PATH_TO_SOUND_EFFECTS = "Assets/AudioAssets/SoundEffects/"; // Path to the 
 const int NUMBER_OF_UI_SOUNDS = 7; // Number of sounds in the UISounds folder

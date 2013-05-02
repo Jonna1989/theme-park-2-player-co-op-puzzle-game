@@ -17,7 +17,7 @@ public:
 private:
 	float		 m_offsetY;
 	sf::Text*	 m_textToDraw;
-	sf::Uint8	 m_alpha;
+	float	 m_alpha;
 	bool		 m_isBusy;
 	float m_scoreTextPosX;
 	float m_scoreTextPosY;
