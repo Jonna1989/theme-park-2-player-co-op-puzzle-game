@@ -10,7 +10,7 @@ Score::~Score()
 }
 #pragma endregion
 #pragma region Publics
-void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier)
+void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier, int defaultFriendBonusMultiplier)
 {
 	m_scoreTextPos.x = scorePosX;
 	m_scoreTextPos.y = scorePosY;
@@ -19,7 +19,7 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 	m_score = 0;
 	m_scoreMultiplier = m_defaultScoreMultiplier;
 	m_comboMultiplier = m_defaultComboMultiplier;
-
+	m_friendBonusMultiplier = defaultFriendBonusMultiplier;
 	DeclareSfText(m_scoreAsText,50,sf::Color::Black,m_scoreTextPos);
 	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+500,scorePosY+10);
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
@@ -73,9 +73,19 @@ void Score::SetScore(int newScore)
 {
 	m_score = newScore;
 }
-void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY)
+void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, int ownedByP1, int ownedByP2)
 {
-	m_previousScore = (scoreToAdd*m_scoreMultiplier)*m_comboMultiplier;
+	int P1andP2 = 0;
+	P1andP2 += ownedByP1; P1andP2 += ownedByP2;
+	if ((ownedByP1 == ownedByP2) && (ownedByP1 != 0) && (ownedByP2 !=0))
+	{
+		P1andP2*=2;
+	}
+	if ((ownedByP1 == 0)||(ownedByP2 == 0))
+	{
+		P1andP2 = 0;
+	}
+	m_previousScore = ((scoreToAdd*m_scoreMultiplier) + P1andP2*m_friendBonusMultiplier) * m_comboMultiplier;
 	ConvertIntToSfString(m_previousScore,m_previousScoreAsSfString);
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
@@ -132,7 +142,6 @@ sf::Text* Score::GetScoreAsText()
 {
 	return m_scoreAsText;
 }
-
 #pragma endregion
 
 #pragma region Privates

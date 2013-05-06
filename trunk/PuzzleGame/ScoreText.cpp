@@ -13,9 +13,7 @@ ScoreText::~ScoreText()
 
 void ScoreText::Initialize(unsigned int charSize, const sf::Color textColor)
 {
-	m_textToDraw = new sf::Text();
-	m_textToDraw->setCharacterSize(charSize);
-	m_textToDraw->setColor(textColor);
+	DeclareSfText(m_textToDraw,charSize,textColor);
 	m_isBusy = false;
 	m_alpha = 255;
 	m_offsetY = -50.0f;
@@ -45,7 +43,7 @@ void ScoreText::Update()
 				(0,
 				 0,
 				 0,
-				 (sf::Uint8)m_alpha));
+				(sf::Uint8)m_alpha));
 			m_textToDraw->move(0, m_offsetY*DeltaTime);
 			Window->draw(*m_textToDraw);
 		}

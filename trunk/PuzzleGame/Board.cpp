@@ -54,7 +54,7 @@ void Board::Initialize()
 	m_comboVolume = 200.0f;
 	m_comboSoundThreshold = 5000;
 	m_score = new Score;
-	m_score->Initialize(400,75,10,1);
+	m_score->Initialize(400,75,10,1,20);
 }
 
 void Board::Update()
@@ -458,27 +458,27 @@ void Board::CheckForMatch()
 						}
 					}
 					PlayComboSound(soundClock);
-					if((previousOwnerP1 == 3) && (previousOwnerP2 == 1)
-						||(previousOwnerP1 == 1)&&(previousOwnerP2 == 3))
-					{
-						m_score->SetScoreMultiplier(15);
-					}
-					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
-					{
-						m_score->SetScoreMultiplier(20);
-					}
-					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 2)
-						   ||(previousOwnerP1 == 2) && (previousOwnerP2 == 3))
-					{
-						m_score->SetScoreMultiplier(25);
-					}
-					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 3))
-					{
-						m_score->SetScoreMultiplier(30);
-					}
+// 					if((previousOwnerP1 == 3) && (previousOwnerP2 == 1)
+// 					 ||(previousOwnerP1 == 1) && (previousOwnerP2 == 3))
+// 					{
+// 						m_score->SetScoreMultiplier(20);
+// 					}
+// 					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
+// 					{
+// 						m_score->SetScoreMultiplier(30);
+// 					}
+// 					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 2)
+// 						   ||(previousOwnerP1 == 2) && (previousOwnerP2 == 3))
+// 					{
+// 						m_score->SetScoreMultiplier(40);
+// 					}
+// 					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 3))
+// 					{
+// 						m_score->SetScoreMultiplier(50);
+// 					}
 					avragePosX /= temp2; 
 					avragePosY /= temp2;
-					m_score->AddScore(temp2,avragePosX,avragePosY);
+					m_score->AddScore(temp2, avragePosX, avragePosY, previousOwnerP1, previousOwnerP2);
 					m_score->ResetScoreMultiplier();
 				}
 			}
