@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
 #include "FrameTime.h"
+#include "Load.h"
 class ScoreText
 {
 public:
@@ -17,7 +18,7 @@ public:
 private:
 	float		 m_offsetY;
 	sf::Text*	 m_textToDraw;
-	float	 m_alpha;
+	float		 m_alpha;
 	bool		 m_isBusy;
 	float m_scoreTextPosX;
 	float m_scoreTextPosY;

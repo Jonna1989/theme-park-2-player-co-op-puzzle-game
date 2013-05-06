@@ -7,7 +7,7 @@ void LoadTexture(sf::Texture* &TextureToUse, const std::string FileName)
 	{
 		std::cout << "Loaded texture: " << FileName << std::endl;
 	}
-	else if (!TextureToUse->loadFromFile(FileName))
+	else
 	{
 		std::cout << "Failed to load texture: " << FileName << std::endl;
 	}
