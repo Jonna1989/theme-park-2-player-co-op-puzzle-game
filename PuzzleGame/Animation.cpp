@@ -30,7 +30,7 @@ void Animation::Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vec
 	m_cellPerRow = cellPerRow;	
 
 	//Next animation info
-	m_nextStartRow = 0;
+	m_nextStartRow	= 0;
 	m_nextCellPlace = 0;
 	m_nextCellCount = 0;
 
@@ -54,10 +54,8 @@ void Animation::Update()
 	{
 		return;
 	}
-	
 	//Reset time for latest update and change to the next cell
-	m_timeSinceUpdate = 0.0f;
-	m_currentCell++;	
+
 	
 	//Check if the animation continues on the next row
 	if( m_currentCell == m_cellPerRow || m_cellPlace == m_cellPerRow )
@@ -71,18 +69,20 @@ void Animation::Update()
 	if(m_currentCell == m_cellCount)
 	{
 		m_currentCell = 0;
-		//m_cellSizeCountY -=  m_cellSize.y * m_rowChange;
+//		m_cellSizeCountY -=  m_cellSize.y * m_rowChange;
 		m_rowChange = 0;
-		//m_cellPlace = 0;
+//		m_cellPlace = 0;
 
 		m_startRow = m_nextStartRow;
 		m_cellPlace = m_nextCellPlace;
-		m_cellCount = m_nextCellCount;
+		//m_cellCount = m_nextCellCount;
 		m_cellSizeCountY = m_nextCellSizeCountY;
 	}	
-	
+	std::cout << "currentCell: " << m_currentCell << std::endl;
 	setCurrentCell();
+	m_currentCell++;
 	m_cellPlace++;
+	m_timeSinceUpdate = 0.0f;
 }
 
 void Animation::CleanUp()
