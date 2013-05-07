@@ -135,6 +135,8 @@ private:
 	void DrawTile(int x, int y);
 
 	void PlayComboSound(sf::Clock* &comboClock);
+
+
 };
 
 #endif

@@ -20,8 +20,7 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom)
 }
 void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, float x, float y)
 {
-	SpriteToUse = new sf::Sprite();
-	SpriteToUse->setTexture(*TextureToSetFrom);
+	CreateSprite(SpriteToUse,TextureToSetFrom);
 	SpriteToUse->setPosition(x,y);
 }
 
@@ -34,25 +33,21 @@ void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete)
 	delete SpriteToDelete;
 	delete TextureToDelete;
 }
-void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition)
-{
-	textToDeclare = new sf::Text();
-	textToDeclare->setCharacterSize(charSize);
-	textToDeclare->setColor(textColor);
-	textToDeclare->setPosition(textPosition);
-}
-void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
-{
-	textToDeclare = new sf::Text();
-	textToDeclare->setCharacterSize(charSize);
-	textToDeclare->setColor(textColor);
-	textToDeclare->setPosition(textPositionX,textPositionY);
-}
 void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor)
 {
 	textToDeclare = new sf::Text();
 	textToDeclare->setCharacterSize(charSize);
 	textToDeclare->setColor(textColor);
+}
+void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition)
+{
+	DeclareSfText(textToDeclare,charSize,textColor);
+	textToDeclare->setPosition(textPosition);
+}
+void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
+{
+	DeclareSfText(textToDeclare,charSize,textColor);
+	textToDeclare->setPosition(textPositionX,textPositionY);
 }
 void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsInVector, unsigned int charSize, const sf::Color textColor)
 {
@@ -74,20 +69,12 @@ void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFro
 }
 void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo)
 {
-	std::ostringstream convert;
-	convert << intToGetStringFrom;
-	std::string tempStdString;
-	tempStdString = convert.str();
-	sfStringToUpdateFrom = tempStdString;
+	ConvertIntToSfString(intToGetStringFrom,sfStringToUpdateFrom);
 	sfTextToConvertTo->setString(sfStringToUpdateFrom);
 }
 void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd)
 {
-	std::ostringstream convert;
-	convert << intToGetStringFrom;
-	std::string tempStdString;
-	tempStdString = convert.str();
-	sfStringToUpdateFrom = tempStdString;
+	ConvertIntToSfString(intToGetStringFrom,sfStringToUpdateFrom);
 	if (atEnd == false)
 	{
 		sfStringToUpdateFrom.insert(0,addExtraText);

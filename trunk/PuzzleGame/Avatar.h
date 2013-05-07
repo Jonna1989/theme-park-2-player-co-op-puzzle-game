@@ -17,8 +17,6 @@ public:
 	void Cleanup();
 
 private:
-	sf::Sprite* m_avatarSprite;
-
 	Animation* m_avatarAnimation;
 };
 

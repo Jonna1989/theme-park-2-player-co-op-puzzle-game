@@ -458,24 +458,6 @@ void Board::CheckForMatch()
 						}
 					}
 					PlayComboSound(soundClock);
-// 					if((previousOwnerP1 == 3) && (previousOwnerP2 == 1)
-// 					 ||(previousOwnerP1 == 1) && (previousOwnerP2 == 3))
-// 					{
-// 						m_score->SetScoreMultiplier(20);
-// 					}
-// 					else if ((previousOwnerP1 == 2) && (previousOwnerP2 == 2))
-// 					{
-// 						m_score->SetScoreMultiplier(30);
-// 					}
-// 					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 2)
-// 						   ||(previousOwnerP1 == 2) && (previousOwnerP2 == 3))
-// 					{
-// 						m_score->SetScoreMultiplier(40);
-// 					}
-// 					else if ((previousOwnerP1 == 3) && (previousOwnerP2 == 3))
-// 					{
-// 						m_score->SetScoreMultiplier(50);
-// 					}
 					avragePosX /= temp2; 
 					avragePosY /= temp2;
 					m_score->AddScore(temp2, avragePosX, avragePosY, previousOwnerP1, previousOwnerP2);
