@@ -66,14 +66,14 @@ void ParticleEffect::Cleanup()
 	delete m_clock;
 }
 
-void ParticleEffect::StartEffect(float xPos, float yPos)
+void ParticleEffect::StartEffect(float xPos, float yPos, int value)
 {
 	m_clock->restart();
 	m_xPos = xPos;
 	m_yPos = yPos;
 	for (int i = 0; i < PARTICLE_COUNT; i++)
 	{
-		m_particles[i].StartParticle(m_xPos, m_yPos);
+		m_particles[i].StartParticle(m_xPos, m_yPos, value);
 	}
 	m_isBusy = true;
 }

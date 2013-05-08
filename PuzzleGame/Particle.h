@@ -4,6 +4,7 @@
 #include "FrameTime.h"
 #include "WindowManager.h"
 #include "TextureProvider.h"
+#include "Load.h"
 
 const float PARTICLE_TIME = 2;
 
@@ -17,7 +18,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void StartParticle(float xPos, float yPos);
+	void StartParticle(float xPos, float yPos, int value);
 
 	bool IsBusy();
 	sf::Sprite* GetSprite();
@@ -29,6 +30,7 @@ private:
 
 	sf::Clock* m_clock;
 
+	int m_value;
 	float m_alpha;
 	float m_rotation;
 	bool m_busy;

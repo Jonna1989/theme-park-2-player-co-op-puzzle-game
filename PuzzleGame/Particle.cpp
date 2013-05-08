@@ -32,6 +32,8 @@ void Particle::Initialize(float rotation, float xPos, float yPos)
 
 	m_alpha = 255;
 
+	m_value = 0;
+
 	m_clock = new sf::Clock();
 
 	m_fly = 0;
@@ -69,11 +71,12 @@ void Particle::Cleanup()
 	delete m_clock;
 }
 
-void Particle::StartParticle(float xPos, float yPos)
+void Particle::StartParticle(float xPos, float yPos, int value)
 {
 	m_clock->restart();
 	m_sprite->setPosition(xPos,yPos);
 	m_alpha = 255;
+	m_value = value;
 	m_fly = 0;
 	m_busy = true;
 }
@@ -85,6 +88,7 @@ bool Particle::IsBusy()
 
 sf::Sprite* Particle::GetSprite()
 {
+	m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particle0"+ConvertIntToStdString(m_value)+".png"));
 	return m_sprite;
 }
 
