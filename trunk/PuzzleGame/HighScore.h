@@ -15,7 +15,8 @@ public:
 
 	void InitializeForIngame();
 	void InitializeForGameOver();
-	void Update();
+	void UpdateInGame();
+	void UpdateGameOver();
 	void Cleanup();
 
 	int GetHighscore(int highscorePosition);
@@ -26,7 +27,7 @@ private:
 
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;
-	sf::Text* m_highscoreAsText;
+	std::vector<sf::Text*> m_highscoresAsText;
 
 	ConfigReader m_configReader;
 
@@ -34,6 +35,6 @@ private:
 
 	std::vector<std::string> m_highscoreName;
 	sf::String m_HighscoreNameAsSfString;
-	sf::Text* m_highscoreNameAsText;
+	std::vector<sf::Text*> m_highscoreNamesAsText;
 };
 

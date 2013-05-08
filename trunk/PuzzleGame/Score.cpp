@@ -51,18 +51,21 @@ void Score::Update()
 	}
 	Window->draw(*m_scoreAsText);
 	Window->draw(*m_comboMultiplierAsText);
-	m_highscore->Update();
+	m_highscore->UpdateInGame();
 }
 void Score::Cleanup()
 {
 	m_highscore->SetHighscore(m_score);
+	m_highscore->Cleanup();
 	for( int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
 		m_scoreTexts[i]->Cleanup();
 	}
 	m_scoreTexts.clear();
+	delete m_highscore;
 	delete m_scoreAsText;
 	delete m_comboMultiplierAsText;
+
 }
 #pragma region Score
 int Score::GetScore()
