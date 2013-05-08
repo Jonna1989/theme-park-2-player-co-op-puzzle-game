@@ -451,6 +451,8 @@ void Board::CheckForMatch()
 				}
 				if ((notFallingCounter == temp2) && (passiveCounter == temp2))
 				{
+				int particleColor = 0;
+				particleColor = GetTile(x,y)->GetContent();
 					for (int i = 0; i < temp2;i++)
 					{
 						m_board.at(temp[i].y).at(temp[i].x).ClearTile();
@@ -458,7 +460,7 @@ void Board::CheckForMatch()
 						{
 							if (!m_particleEffects[j]->IsBusy())
 							{
-								m_particleEffects[j]->StartEffect((temp[i].x*TILE_SIZE_X)+(TILE_SIZE_X/2)+BOARD_OFFSET_X-7.5f,(temp[i].y*TILE_SIZE_Y)+(TILE_SIZE_Y/2)+BOARD_OFFSET_Y-7.5f, GetTile(x,y)->GetContent());
+								m_particleEffects[j]->StartEffect((temp[i].x*TILE_SIZE_X)+(TILE_SIZE_X/2)+BOARD_OFFSET_X-7.5f,(temp[i].y*TILE_SIZE_Y)+(TILE_SIZE_Y/2)+BOARD_OFFSET_Y-7.5f, particleColor);
 								break;
 							}
 						}
