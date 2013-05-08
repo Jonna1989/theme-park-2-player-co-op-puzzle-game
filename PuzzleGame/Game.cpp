@@ -33,6 +33,9 @@ void Game::Initialize()
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
 	m_increaseInterval = 10000;
+
+	b = Bomb();
+	cb = ColorBomb();
 }
 
 void Game::Update()
@@ -44,6 +47,10 @@ void Game::Update()
 	m_player2->Update();
 	m_player1Avatar->Update();
 	m_player2Avatar->Update();
+
+	b.Update();
+	cb.Update();
+
 	Window->display();	
 	KeyCommands();
 	Board::Instance()->CheckForGameOver();
@@ -156,6 +163,8 @@ void Game::KeyCommands()
 {
 	KeyCommand_PrintBoardToConsole();
 	KeyCommand_ClearBottomRow();
+	KeyCommand_DropBomb();
+	KeyCommand_DropColorBomb();
 }
 void Game::KeyCommand_PrintBoardToConsole()
 {
@@ -173,6 +182,25 @@ void Game::KeyCommand_ClearBottomRow()
 		{
 			Board::Instance()->GetTile(x, BOARD_HEIGHT - 1)->ClearTile();
 		}
+	}
+}
+
+void Game::KeyCommand_DropBomb()
+{
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	{
+		b.Initialize();
+		b.SetPosition(BOARD_WIDTH / 2, 0);
+	}
+}
+
+void Game::KeyCommand_DropColorBomb()
+{
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	{
+		cb.Initialize();
+		cb.SetColorToRemove(1);
+		cb.SetPosition(BOARD_WIDTH / 2, 0);
 	}
 }
 

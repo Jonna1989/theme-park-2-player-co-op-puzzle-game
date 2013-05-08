@@ -56,6 +56,11 @@ bool PowerItem::IsGoodItem()
 	return m_goodItem;
 }
 
+int PowerItem::GetContentID()
+{
+	return m_contentID;
+}
+
 #pragma endregion
 
 #pragma region Setters
@@ -64,6 +69,8 @@ void PowerItem::SetPosition(int x, int y)
 {
 	m_position.x = x;
 	m_position.y = y;
+
+	Board::Instance()->SetColor(x, y, m_contentID);
 }
 
 void PowerItem::SetFalling(bool falling)
@@ -74,6 +81,11 @@ void PowerItem::SetFalling(bool falling)
 void PowerItem::SetGoodItem(bool good)
 {
 	m_goodItem = good;
+}
+
+void PowerItem::SetContentID(int ID)
+{
+	m_contentID = ID;
 }
 
 #pragma endregion

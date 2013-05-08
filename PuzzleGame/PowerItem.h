@@ -21,15 +21,18 @@ public:
 	virtual sf::Vector2i GetPosition();
 	virtual bool IsFalling();
 	virtual bool IsGoodItem();
+	virtual int GetContentID();
 
 	virtual void SetPosition(int x, int y);
 	virtual void SetFalling(bool falling);
 	virtual void SetGoodItem(bool good);
+	virtual void SetContentID(int ID);
 
 protected:
 	sf::Vector2i m_position;
 	bool m_isFalling;
 	bool m_goodItem; //true = powerup, false = trap
+	int m_contentID;
 };
 
 #endif

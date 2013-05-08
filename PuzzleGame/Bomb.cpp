@@ -18,11 +18,17 @@ void Bomb::Initialize()
 	m_isFalling = true;
 	m_goodItem = true;
 	m_blastRadius = 2;
+	m_contentID = 11;
 }
 
 void Bomb::Update()
 {
+	Drop();
 
+	if(!m_isFalling)
+	{
+		Activate();
+	}
 }
 
 void Bomb::Cleanup()
