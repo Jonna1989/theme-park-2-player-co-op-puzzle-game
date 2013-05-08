@@ -78,7 +78,6 @@ void Animation::Update()
 		//m_cellCount = m_nextCellCount;
 		m_cellSizeCountY = m_nextCellSizeCountY;
 	}	
-	std::cout << "currentCell: " << m_currentCell << std::endl;
 	setCurrentCell();
 	m_currentCell++;
 	m_cellPlace++;
