@@ -38,15 +38,12 @@ void Board::Initialize()
 	soundClock = new sf::Clock();
 	soundClock->restart();
 
-	//m_backgroundTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/background.png");
 	LoadTexture(m_backgroundTexture,"Assets/GraphicalAssets/TempArt/background.png");
 	CreateSprite(m_backgroundSprite, m_backgroundTexture);
-	//m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
+	
 	LoadTexture(m_plateTexture,"Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
 
-
-	
 	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
 
 	m_player1HalfStep = 0;
