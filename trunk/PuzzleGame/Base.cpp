@@ -56,11 +56,11 @@ void Base::Update()
 
 void Base::Cleanup()
 {
-	InputManager::Instance()->Cleanup();
-	StateManager::Instance()->Cleanup();
-	WindowManager::Instance()->Cleanup();
-	FrameTime::Instance()->Cleanup();
-	TextureProvider::Instance()->Cleanup();
+	InputManager	::Instance()->Cleanup();
+	StateManager	::Instance()->Cleanup();
+	WindowManager	::Instance()->Cleanup();
+	FrameTime		::Instance()->Cleanup();
+	TextureProvider	::Instance()->Cleanup();
 	delete m_runtime;
 }
 

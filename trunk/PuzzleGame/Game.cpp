@@ -97,10 +97,7 @@ void Game::SetGravityInterval(int milliSeconds)
 
 void Game::Gravity()
 {
-	//if((!m_player1->GetPlayerPiece()->DropPiece()) || (!m_player2->GetPlayerPiece()->DropPiece()))
-	//{
-		BoardGravity();
-	//}
+	BoardGravity();
 }
 
 void Game::BoardGravity()

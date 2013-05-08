@@ -63,9 +63,6 @@ void Board::Update()
 {
 	Window->draw(*m_backgroundSprite);
 	Window->draw(*m_plateSprite);
-	Window->draw(*m_bombSprite);
-	Window->draw(*m_colorBombSprite);
-
 	DrawBoard();
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
