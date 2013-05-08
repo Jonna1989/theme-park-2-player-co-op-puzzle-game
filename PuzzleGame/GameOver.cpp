@@ -21,12 +21,15 @@ void GameOver::Initialize()
 	CreateSprite(m_backgroundSprite,m_backgroundTexture);
 	Music::Instance()->Initialize(0);
 	Music::Instance()->StartMusic();
+	m_highscore = new HighScore();
+	m_highscore->InitializeForGameOver();
 }
 
 void GameOver::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
+	m_highscore->UpdateGameOver();
 	Window->display();
 }
 
@@ -34,6 +37,7 @@ void GameOver::Cleanup()
 {
 	Clean(m_backgroundTexture,m_backgroundSprite);
 	Music::Instance()->Cleanup();
+	m_highscore->Cleanup();
 }
 
 #pragma endregion

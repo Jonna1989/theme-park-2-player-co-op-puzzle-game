@@ -51,9 +51,9 @@ void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Co
 }
 void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsInVector, unsigned int charSize, const sf::Color textColor)
 {
-	vectorToDeclare.push_back(new sf::Text());
 	for (int i = 0; i < NumberOfSfTextsInVector; i++)
 	{
+		vectorToDeclare.push_back(new sf::Text());
 		vectorToDeclare[i]->setCharacterSize(charSize);
 		vectorToDeclare[i]->setColor(textColor);
 	}

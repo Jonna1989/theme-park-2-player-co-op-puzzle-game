@@ -10,26 +10,47 @@ HighScore::~HighScore()
 void HighScore::InitializeForIngame()
 {
 	LoadHighscoresToVector();
-	DeclareSfText(m_highscoreAsText, 40, sf::Color::Black);
-	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoreAsText,m_wordHighscore,false);
-	DeclareSfText(m_highscoreNameAsText, 40,sf::Color::Black);
-	m_highscoreNameAsText->setString("Team Name: "+m_highscoreName[0]);
-	m_highscoreNameAsText->setPosition(0,40);
+	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::Black);
+	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
+	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::Black);
+	m_highscoreNamesAsText[0]->setString("Team Name: "+m_highscoreName[0]);
+	m_highscoreNamesAsText[0]->setPosition(0,40);
 }
 void HighScore::InitializeForGameOver()
 {
 	LoadHighscoresToVector();
-
+	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
+	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::White);
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);
+		m_highscoresAsText[i]->setPosition(500.0f,40.0f*(float)i);
+		m_highscoreNamesAsText[i]->setString("Team Name: "+m_highscoreName[i]);
+		m_highscoreNamesAsText[i]->setPosition(1000.0f,40.0f*(float)i);
+	}
 }
-void HighScore::Update()
+void HighScore::UpdateInGame()
 {
-	Window->draw(*m_highscoreAsText);
-	Window->draw(*m_highscoreNameAsText);
+	Window->draw(*m_highscoresAsText[0]);
+	Window->draw(*m_highscoreNamesAsText[0]);
 }
-
+void HighScore::UpdateGameOver()
+{
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		Window->draw(*m_highscoresAsText[i]);
+		Window->draw(*m_highscoreNamesAsText[i]);
+	}
+}
 void HighScore::Cleanup()
 {
-	delete m_highscoreAsText;
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		delete m_highscoresAsText[i];
+		delete m_highscoreNamesAsText[i];
+	}
+	m_highscoresAsText.clear();
+	m_highscoreNamesAsText.clear();
 }
 
 int HighScore::GetHighscore(int highscorePosition)
@@ -48,11 +69,12 @@ void HighScore::SetHighscore(int highscore)
 				std::vector<int> temp;
 				for (int x = i; x < NUMBER_OF_HIGHSCORES ; x++)
 				{
-					int temp2 = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(x),temp2);
+					int temp2 = 0;
+					temp2 = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(x),temp2);
 					temp.push_back(temp2);
 				}
 				int temp3 = 1;
-				for (int y = 0; y < temp.size(); y++)
+				for (unsigned int y = 0; y < temp.size(); y++)
 				{
 					m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i+temp3),temp[y]); 
 					temp3++;
