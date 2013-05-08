@@ -120,11 +120,6 @@ private:
 	sf::Texture* m_plateTexture;
 	sf::Sprite* m_plateSprite;
 
-	//Temp
-	sf::Sprite* m_bombSprite;
-	sf::Sprite* m_colorBombSprite;
-
-
 	int m_player1HalfStep;
 	int m_player2HalfStep;
 	float m_comboVolume;

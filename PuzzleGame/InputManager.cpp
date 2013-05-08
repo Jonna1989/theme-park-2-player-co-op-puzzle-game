@@ -89,10 +89,6 @@ void InputManager::Update(bool singlePlayer, int state)
 void InputManager::Cleanup()
 {
  	delete m_keyboard;
-// 	m_player1->Cleanup();
-// 	delete m_player1;
-// 	m_player2->Cleanup();
-// 	delete m_player2;
 }
 
 void InputManager::SetPlayers(Player* player)

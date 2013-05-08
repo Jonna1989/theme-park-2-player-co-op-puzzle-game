@@ -9,7 +9,7 @@ HighScore::~HighScore()
 }
 void HighScore::InitializeForIngame()
 {
-	LoadHighscoresToVector();
+	LoadHighscoresToVectors();
 	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::Black);
 	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::Black);
 	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
@@ -18,7 +18,7 @@ void HighScore::InitializeForIngame()
 }
 void HighScore::InitializeForGameOver()
 {
-	LoadHighscoresToVector();
+	LoadHighscoresToVectors();
 	DeclareSfText(m_highscoresAsText, NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
 	DeclareSfText(m_highscoreNamesAsText, NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
@@ -94,7 +94,7 @@ void HighScore::SetHighscore(int highscore)
 		}
 	}
 }
-void HighScore::LoadHighscoresToVector()
+void HighScore::LoadHighscoresToVectors()
 {
 	m_wordHighscore = "Highscore: ";
 	if (m_configReader.load(HIGHSCORE_FILENAME))

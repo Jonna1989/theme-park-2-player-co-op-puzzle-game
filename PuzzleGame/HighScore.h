@@ -23,7 +23,7 @@ public:
 	void SetHighscore(int highscore);
 private:
 
-	void LoadHighscoresToVector();
+	void LoadHighscoresToVectors();
 
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;
