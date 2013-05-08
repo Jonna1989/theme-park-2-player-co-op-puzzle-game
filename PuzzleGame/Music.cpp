@@ -44,6 +44,9 @@ void Music::Initialize(int TrackNumber)
 	case LevelMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/chicken.ogg");
 		break;
+	case GameOverMusic1:
+		LoadMusic(m_music,"Assets/AudioAssets/Music/canLose.ogg");
+		break;
 	}
 
 	pitch = 1;

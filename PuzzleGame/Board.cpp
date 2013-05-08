@@ -267,6 +267,12 @@ void Board::CheckForGameOver()
 				}
 				if (first && second && third && GetTile(x,2)->GetOwner() == 0)
 				{
+					Music::Instance()->Cleanup();
+					Soundeffects::Instance()->PlaySound(Soundeffects::DEATHSOUND,0,1,100);
+					sf::Clock tempclock;
+					while (tempclock.getElapsedTime().asMilliseconds() < 2000)
+					{
+					}
 					StateManager::Instance()->SetState(StateManager::GameLost);
 					break;
 				}

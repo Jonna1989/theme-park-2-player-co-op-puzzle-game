@@ -19,7 +19,7 @@ void GameOver::Initialize()
 {
 	LoadTexture(m_backgroundTexture, "Assets/GraphicalAssets/TempArt/gameover.png");
 	CreateSprite(m_backgroundSprite,m_backgroundTexture);
-	Music::Instance()->Initialize(Music::MenuMusic1);
+	Music::Instance()->Initialize(Music::GameOverMusic1);
 	Music::Instance()->StartMusic();
 	m_highscore = new HighScore();
 	m_highscore->InitializeForGameOver();
