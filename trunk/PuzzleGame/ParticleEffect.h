@@ -15,7 +15,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void StartEffect(float xPos, float yPos);
+	void StartEffect(float xPos, float yPos, int value);
 
 	bool IsBusy();
 
