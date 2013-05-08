@@ -45,6 +45,8 @@ void Board::Initialize()
 	//m_plateTexture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/plate.png");
 	LoadTexture(m_plateTexture,"Assets/GraphicalAssets/TempArt/plate.png");
 	CreateSprite(m_plateSprite, m_plateTexture);
+
+
 	
 	m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
 
@@ -61,6 +63,8 @@ void Board::Update()
 {
 	Window->draw(*m_backgroundSprite);
 	Window->draw(*m_plateSprite);
+	Window->draw(*m_bombSprite);
+	Window->draw(*m_colorBombSprite);
 
 	DrawBoard();
 
@@ -535,7 +539,7 @@ void Board::PrintBoardToConsole()
 
 void Board::InitializeSprites()
 {
-	for(int i = 0; i < NUMBER_OF_BUBBLES + 4; i++)
+	for(int i = 0; i < NUMBER_OF_BUBBLES + 6; i++)
 	{
 		m_sprites.push_back(new sf::Sprite());
 	}
@@ -549,6 +553,8 @@ void Board::InitializeSprites()
 	m_sprites[NUMBER_OF_BUBBLES+1]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura2.png"));
 	m_sprites[NUMBER_OF_BUBBLES+2]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/AuraTransparent.png"));
 	m_sprites[NUMBER_OF_BUBBLES+3]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/Aura2Transparent.png"));
+	m_sprites[NUMBER_OF_BUBBLES+4]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/Bomb.png"));
+	m_sprites[NUMBER_OF_BUBBLES+5]->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/Colorbomb.png"));		
 }
 
 void Board::InitializeLevels()

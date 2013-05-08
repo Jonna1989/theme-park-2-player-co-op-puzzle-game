@@ -17,12 +17,18 @@ void ColorBomb::Initialize()
 	m_position.y = 0;
 	m_isFalling = true;
 	m_goodItem = true;
+	m_contentID = 12;
 	m_colorToRemove = 0;
 }
 
 void ColorBomb::Update()
 {
+	Drop();
 
+	if(!m_isFalling)
+	{
+		Activate();
+	}
 }
 
 void ColorBomb::Cleanup()

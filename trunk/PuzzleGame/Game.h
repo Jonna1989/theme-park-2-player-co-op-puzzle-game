@@ -5,6 +5,9 @@
 #include "Player.h"
 #include "ParticleEffect.h"
 #include "Avatar.h"
+#include "PowerItem.h"
+#include "ColorBomb.h"
+#include "Bomb.h"
 
 class StateManager;
 
@@ -47,6 +50,11 @@ private:
 	void KeyCommands();
 	void KeyCommand_PrintBoardToConsole();
 	void KeyCommand_ClearBottomRow();
+	void KeyCommand_DropBomb();
+	void KeyCommand_DropColorBomb();
+
+	Bomb b;
+	ColorBomb cb;
 };
 
 #endif
