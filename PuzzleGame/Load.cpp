@@ -85,7 +85,6 @@ void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToU
 	}
 	sfTextToConvertTo->setString(sfStringToUpdateFrom);
 }
-
 std::string ConvertIntToStdString(int intToConvert)
 {
 	std::ostringstream	s;
