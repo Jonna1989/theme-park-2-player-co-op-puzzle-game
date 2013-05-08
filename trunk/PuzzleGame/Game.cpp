@@ -33,9 +33,6 @@ void Game::Initialize()
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
 	m_increaseInterval = 10000;
-
-	b = Bomb();
-	cb = ColorBomb();
 }
 
 void Game::Update()
