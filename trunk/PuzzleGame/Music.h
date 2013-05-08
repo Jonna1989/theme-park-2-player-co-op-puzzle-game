@@ -10,7 +10,7 @@ class Music
 {
 public:
 	
-	enum Track{MenuMusic1,LevelMusic1};
+	enum Track{MenuMusic1,LevelMusic1,GameOverMusic1};
 
 	static Music* Instance();
 

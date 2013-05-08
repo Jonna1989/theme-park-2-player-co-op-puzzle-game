@@ -11,7 +11,10 @@ const int NUMBER_OF_UI_SOUNDS = 7; // Number of sounds in the UISounds folder
 const std::string PATH_UI = "UiSounds/UiSound";
 const int NUMBER_OF_POP_SOUNDS = 3; // Number of Sounds in the BubblePop folder
 const std::string PATH_POP = "BubblePop/Pop";
-const int NUMBER_OF_CATEGORIES = 2; // Number of PATHS_
+const int NUMBER_OF_DEATH_SOUNDS = 1;
+const std::string PATH_DEATH = "DeathSounds/DeathSound";
+const int NUMBER_OF_CATEGORIES = 3; // Number of PATHS_
+
 
 const float DEFAULT_PITCH = 1.0f;
 
@@ -22,7 +25,8 @@ public:
 	enum SoundCatergory
 	{
 		UISOUND,
-		POPSOUND
+		POPSOUND,
+		DEATHSOUND
 	};
 
 	static Soundeffects* Instance();
@@ -40,9 +44,10 @@ public:
 private:
 	Soundeffects();
 	~Soundeffects();
-	
+	std::vector<std::vector<std::string>> m_paths;
 	std::vector<std::string> m_pathVectorUi;
 	std::vector<std::string> m_pathVectorPop;
+	std::vector<std::string> m_pathVectorDeath;
 	static Soundeffects*	m_instance;
 
 	sf::Sound* m_uiSound;
@@ -50,6 +55,9 @@ private:
 
 	sf::Sound* m_popSound;
 	std::vector<sf::SoundBuffer*> m_popBuffers;
+
+	sf::Sound* m_deathSound;
+	std::vector<sf::SoundBuffer*> m_deathBuffers;
 
 	std::vector<std::vector<sf::SoundBuffer*>> m_bufferCategories;
 	std::vector<sf::Sound*> m_soundCategories;
