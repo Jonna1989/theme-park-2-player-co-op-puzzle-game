@@ -11,16 +11,16 @@ void HighScore::InitializeForIngame()
 {
 	LoadHighscoresToVector();
 	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::Black);
-	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
 	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::Black);
+	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
 	m_highscoreNamesAsText[0]->setString("Team Name: "+m_highscoreName[0]);
 	m_highscoreNamesAsText[0]->setPosition(0,40);
 }
 void HighScore::InitializeForGameOver()
 {
 	LoadHighscoresToVector();
-	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
-	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::White);
+	DeclareSfText(m_highscoresAsText, NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
+	DeclareSfText(m_highscoreNamesAsText, NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
 		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);

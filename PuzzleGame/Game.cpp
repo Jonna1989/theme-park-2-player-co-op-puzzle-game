@@ -72,6 +72,7 @@ void Game::Cleanup()
 	m_player2Avatar->Cleanup();
 	delete m_player2Avatar;
 	Board::Instance()->Cleanup();
+	Music::Instance()->Cleanup();
 }
 
 #pragma endregion
