@@ -28,7 +28,7 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 		m_scoreTexts[i]->Initialize(20,sf::Color::Black);
 	}
 	m_highscore = new HighScore();
-	m_highscore->Initialize();
+	m_highscore->InitializeForIngame();
 }
 void Score::Update()
 {

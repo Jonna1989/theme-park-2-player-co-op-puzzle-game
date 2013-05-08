@@ -13,13 +13,17 @@ public:
 	HighScore();
 	~HighScore();
 
-	void Initialize();
+	void InitializeForIngame();
+	void InitializeForGameOver();
 	void Update();
 	void Cleanup();
 
 	int GetHighscore(int highscorePosition);
 	void SetHighscore(int highscore);
 private:
+
+	void LoadHighscoresToVector();
+
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;
 	sf::Text* m_highscoreAsText;

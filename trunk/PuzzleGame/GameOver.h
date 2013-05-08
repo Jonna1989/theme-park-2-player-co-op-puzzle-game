@@ -5,7 +5,7 @@
 #include "WindowManager.h"
 #include "StateManager.h"
 #include "Music.h"
-
+#include "HighScore.h"
 class StateManager;
 
 class GameOver:public State
