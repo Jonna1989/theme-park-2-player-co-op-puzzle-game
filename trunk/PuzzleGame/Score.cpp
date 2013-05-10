@@ -3,8 +3,6 @@
 Score::Score()
 {
 }
-
-
 Score::~Score()
 {
 }
@@ -43,14 +41,14 @@ void Score::Update()
 		if (m_comboMultiplier != 1)
 		{
 			m_comboAlpha = 255;
-			m_comboMultiplierAsText->setColor(sf::Color(0,0,0,m_comboAlpha));
+			m_comboMultiplierAsText->setColor(sf::Color(0,0,0,(sf::Uint8)m_comboAlpha));
 		}
 		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo",true);
 	}
 	else
 	{
 		m_comboAlpha -= 15*DeltaTime;
-		m_comboMultiplierAsText->setColor(sf::Color(0,0,0,m_comboAlpha));
+		m_comboMultiplierAsText->setColor(sf::Color(0,0,0,(sf::Uint8)m_comboAlpha));
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
