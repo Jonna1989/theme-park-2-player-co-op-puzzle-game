@@ -33,6 +33,8 @@ void Game::Initialize()
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
 	m_increaseInterval = 10000;
+	b = new Bomb();
+	cb = new ColorBomb();
 }
 
 void Game::Update()
@@ -45,8 +47,8 @@ void Game::Update()
 	m_player1Avatar->Update();
 	m_player2Avatar->Update();
 
-	b.Update();
-	cb.Update();
+	b->Update();
+	cb->Update();
 
 	Window->display();	
 	KeyCommands();
@@ -69,6 +71,10 @@ void Game::Cleanup()
 	m_player2Avatar->Cleanup();
 	delete m_player2Avatar;
 	Board::Instance()->Cleanup();
+	b->Cleanup();
+	cb->Cleanup();
+	delete b;
+	delete cb;
 }
 
 #pragma endregion
@@ -183,8 +189,8 @@ void Game::KeyCommand_DropBomb()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V))
 	{
-		b.Initialize();
-		b.SetPosition(BOARD_WIDTH / 2, 0);
+		b->Initialize();
+		b->SetPosition(BOARD_WIDTH / 2, 0);
 	}
 }
 
@@ -192,9 +198,9 @@ void Game::KeyCommand_DropColorBomb()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C))
 	{
-		cb.Initialize();
-		cb.SetColorToRemove(1);
-		cb.SetPosition(BOARD_WIDTH / 2, 0);
+		cb->Initialize();
+		cb->SetColorToRemove(1);
+		cb->SetPosition(BOARD_WIDTH / 2, 0);
 	}
 }
 

@@ -47,7 +47,7 @@ void Score::Update()
 	}
 	else
 	{
-		m_comboAlpha -= 15*DeltaTime;
+		m_comboAlpha -= 50*DeltaTime;
 		m_comboMultiplierAsText->setColor(sf::Color(0,0,0,(sf::Uint8)m_comboAlpha));
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;

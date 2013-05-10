@@ -5,8 +5,6 @@
 GameOver::GameOver()
 {
 }
-
-
 GameOver::~GameOver()
 {
 }
@@ -32,12 +30,10 @@ void GameOver::Update()
 	m_highscore->UpdateGameOver();
 	Window->display();
 }
-
 void GameOver::Cleanup()
 {
 	Clean(m_backgroundTexture,m_backgroundSprite);
 	Music::Instance()->Cleanup();
 	m_highscore->Cleanup();
 }
-
 #pragma endregion

@@ -53,8 +53,8 @@ private:
 	void KeyCommand_DropBomb();
 	void KeyCommand_DropColorBomb();
 
-	Bomb b;
-	ColorBomb cb;
+	Bomb* b;
+	ColorBomb* cb;
 };
 
 #endif

@@ -23,6 +23,7 @@ static const int NUMBER_OF_BUBBLES = 7;
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
 static const std::string PATH_LEVEL_1 = "Assets/Levels/Level1.txt";
 static const std::string PATH_LEVEL_2 = "Assets/Levels/Level2.txt";
+static const std::string PATH_LEVEL_3 = "Assets/Levels/Level3.txt";
 static unsigned int NUMBER_OF_PARTICLES = 13;
 
 class Board
