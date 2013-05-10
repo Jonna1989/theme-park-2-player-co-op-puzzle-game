@@ -9,9 +9,6 @@ public:
 	Score();
 	~Score();
 
-	//The two floats define the position of the score text that is drawn onto the screen
-	//defaultScoreMultiplier is the multiplier that is multiplied with the bubbles removed to give a //score
-	//defaultComboMultiplier is the multiplier that multiplies the score when you have a combo going
 	void Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier, int defaultFriendBonusMultiplier);
 	void Update();
 	void Cleanup();
@@ -48,6 +45,7 @@ private:
 	int m_comboMultiplierLastUpdate;
 	sf::Text* m_scoreAsText;
 	sf::Text* m_comboMultiplierAsText;
+	sf::Uint8 m_comboAlpha;
 	std::vector<ScoreText*> m_scoreTexts;
 	int scoreTextAlternation;
 

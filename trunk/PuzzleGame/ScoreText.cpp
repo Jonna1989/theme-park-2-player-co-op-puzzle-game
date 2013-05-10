@@ -38,7 +38,7 @@ void ScoreText::Update()
 		}
 		else
 		{
-			m_alpha -= (50*DeltaTime);
+			m_alpha -= (100*DeltaTime);
 			m_textToDraw->setColor(sf::Color
 				(0,
 				 0,
