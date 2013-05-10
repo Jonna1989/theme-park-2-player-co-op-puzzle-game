@@ -43,7 +43,7 @@ void Particle::Update()
 {
 	float angleToRadians = (3.141592653589793238462643383279502884197169399375105820974944f / 180.0f) * (m_sprite->getRotation());
 
-	m_fly += 1.5f * DeltaTime;
+	m_fly += 6.0f * DeltaTime;
 
 	float xDir = (cos(angleToRadians) * 150.0f * DeltaTime);
 	float yDir = (sin(angleToRadians) * -150.0f * DeltaTime - m_fly);

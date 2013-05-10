@@ -120,6 +120,9 @@ private:
 	sf::Texture* m_plateTexture;
 	sf::Sprite* m_plateSprite;
 
+	sf::Texture* m_frameTexture;
+	sf::Sprite* m_frameSprite;
+
 	int m_player1HalfStep;
 	int m_player2HalfStep;
 	float m_comboVolume;
