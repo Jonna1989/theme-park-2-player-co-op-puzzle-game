@@ -9,13 +9,13 @@ public:
 	Score();
 	~Score();
 
-	void Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier, int defaultFriendBonusMultiplier);
-	void Update();
-	void Cleanup();
+	void Initialize				(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier, int defaultFriendBonusMultiplier);
+	void Update					();
+	void Cleanup				();
 
 	int GetScore();
-	void SetScore(int newScore);
-	void AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, int ownedByP1, int ownedByP2);
+	void SetScore				(int newScore);
+	void AddScore				(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, int ownedByP1, int ownedByP2);
 	int GetPreviousScore		();
 	int GetScoreMultiplier		();
 	void SetScoreMultiplier		(int newScoreMultiplier);
@@ -45,7 +45,7 @@ private:
 	int m_comboMultiplierLastUpdate;
 	sf::Text* m_scoreAsText;
 	sf::Text* m_comboMultiplierAsText;
-	sf::Uint8 m_comboAlpha;
+	float m_comboAlpha;
 	std::vector<ScoreText*> m_scoreTexts;
 	int scoreTextAlternation;
 
