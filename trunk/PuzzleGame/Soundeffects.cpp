@@ -79,11 +79,7 @@ void Soundeffects::SetSoundvol()
 	m_soundconfig.load("options.txt");
 	m_soundon = m_soundconfig.get("sound_options","soundon",m_soundon);
 	m_soundvol = m_soundconfig.get("sound_options","soundvolume",m_soundvol) * 10;
-	if(m_soundon)
-	{
-		
-	}
-	else 
+	if(!m_soundon)
 	{
 		m_soundvol = 0.0f;
 	}
