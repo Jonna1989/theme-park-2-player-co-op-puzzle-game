@@ -27,7 +27,7 @@ public:
 	void IncreaseComboMultiplier(int comboMultiplierIncrease);
 	void ResetComboMultiplier	();
 
-	sf::Text* GetScoreAsText();
+	sf::Text* GetScoreAsText	();
 private:
 
 	sf::Vector2f m_scoreTextPos;

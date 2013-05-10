@@ -32,7 +32,7 @@ void ScoreText::Update()
 {
 	if (m_isBusy == true)
 	{
-		if (m_alpha <= 0)
+		if (m_alpha <= 5)
 		{
 			m_isBusy = false;
 		}
