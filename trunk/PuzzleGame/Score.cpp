@@ -167,6 +167,10 @@ void Score::ResetComboMultiplier()
 	m_comboMultiplier = m_defaultComboMultiplier;
 }
 #pragma endregion
+bool Score::FriendBonus()
+{
+	return m_friendBonus;
+}
 sf::Text* Score::GetScoreAsText()
 {
 	return m_scoreAsText;
