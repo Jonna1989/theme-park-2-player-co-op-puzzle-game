@@ -32,7 +32,7 @@ WindowManager* WindowManager::Instance()
 
 void WindowManager::Initialize()
 {
-	m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Puzzle Prototype", sf::Style::Default);
+	m_window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Pop!", sf::Style::Default);
 	m_window->setMouseCursorVisible(true);
 	m_window->setFramerateLimit(60);
 }
