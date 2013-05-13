@@ -28,6 +28,7 @@ void Bomb::Update()
 	if(!m_isFalling)
 	{
 		Activate();
+		m_isFalling = true;
 	}
 }
 
