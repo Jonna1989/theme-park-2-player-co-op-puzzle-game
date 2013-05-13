@@ -34,8 +34,6 @@ void Particle::Initialize(float rotation, float xPos, float yPos)
 
 	m_value = 0;
 
-	m_clock = new sf::Clock();
-
 	m_fly = 0;
 }
 
@@ -54,26 +52,21 @@ void Particle::Update()
 	else
 	{
 		m_alpha = 0;
+		m_busy = false;
 	}
 	
 	m_sprite->setColor(sf::Color(m_sprite->getColor().r,m_sprite->getColor().g,m_sprite->getColor().b,(sf::Uint8)m_alpha));
 
 	m_sprite->move(xDir,yDir);
-	if (m_clock->getElapsedTime().asMilliseconds() > 1000)
-	{
-		m_busy = false;
-	}
 }
 
 void Particle::Cleanup()
 {
 	delete m_sprite;
-	delete m_clock;
 }
 
 void Particle::StartParticle(float xPos, float yPos, int value)
 {
-	m_clock->restart();
 	m_sprite->setPosition(xPos,yPos);
 	m_alpha = 255;
 	m_value = value;
