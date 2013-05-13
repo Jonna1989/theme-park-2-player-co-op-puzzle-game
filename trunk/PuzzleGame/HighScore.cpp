@@ -31,8 +31,8 @@ void HighScore::InitializeForGameOver()
 }
 void HighScore::UpdateInGame()
 {
-	//Window->draw(*m_highscoresAsText[0]);
-	//Window->draw(*m_highscoreNamesAsText[0]);
+	Window->draw(*m_highscoresAsText[0]);
+	Window->draw(*m_highscoreNamesAsText[0]);
 }
 void HighScore::UpdateGameOver()
 {
