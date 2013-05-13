@@ -27,6 +27,8 @@ public:
 	void IncreaseComboMultiplier(int comboMultiplierIncrease);
 	void ResetComboMultiplier	();
 
+	bool FriendBonus();
+
 	sf::Text* GetScoreAsText	();
 private:
 
