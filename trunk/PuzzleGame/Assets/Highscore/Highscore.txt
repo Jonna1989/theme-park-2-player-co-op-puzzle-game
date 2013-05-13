@@ -1,9 +1,10 @@
 [Highscore]
-	highscore0 = 40
-	highscore1 = 2
-	highscore2 = 3
-	highscore3 = 4
-	highscore4 = 5
+	highscore0 = 2740
+	highscore1 = 2720
+	highscore2 = 2340
+	highscore3 = 2300
+	highscore4 = 2300
+	highscore5 = 2140
 [HighscoreName]
 	highscoreName0 = Null
 	highscoreName1 = Null

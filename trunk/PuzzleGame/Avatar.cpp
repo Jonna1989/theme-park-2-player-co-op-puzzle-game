@@ -20,7 +20,7 @@ void Avatar::Initialize(const std::string avatarName, float avatarPositionX, flo
 void Avatar::Update()
 {
 	m_avatarAnimation->Update();
-	Window->draw(*m_avatarAnimation->getSprite());
+	//Window->draw(*m_avatarAnimation->getSprite());
 }
 void Avatar::Cleanup()
 {
