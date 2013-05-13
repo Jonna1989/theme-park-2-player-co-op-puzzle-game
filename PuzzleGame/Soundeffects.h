@@ -15,6 +15,7 @@ const int NUMBER_OF_DEATH_SOUNDS = 1;
 const std::string PATH_DEATH = "DeathSounds/DeathSound";
 const int NUMBER_OF_CATEGORIES = 3; // Number of PATHS_
 
+#define PlayRotateSound Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,DEFAULT_PITCH,35);
 
 const float DEFAULT_PITCH = 1.0f;
 
