@@ -19,8 +19,9 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 	m_scoreMultiplier = m_defaultScoreMultiplier;
 	m_comboMultiplier = m_defaultComboMultiplier;
 	m_friendBonusMultiplier = defaultFriendBonusMultiplier;
-	DeclareSfText(m_scoreAsText,50,sf::Color::Black,m_scoreTextPos);
-	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::Black,scorePosX+500,scorePosY+10);
+	DeclareSfText(m_scoreAsText,50,sf::Color::White,m_scoreTextPos);
+	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::White,scorePosX+500,scorePosY+10);
+	m_friendBonus = true;
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
 		m_scoreTexts.push_back(new ScoreText());
@@ -41,14 +42,14 @@ void Score::Update()
 		if (m_comboMultiplier != 1)
 		{
 			m_comboAlpha = 255;
-			m_comboMultiplierAsText->setColor(sf::Color(0,0,0,(sf::Uint8)m_comboAlpha));
+			m_comboMultiplierAsText->setColor(sf::Color(m_comboMultiplierAsText->getColor().r,m_comboMultiplierAsText->getColor().g,m_comboMultiplierAsText->getColor().b,(sf::Uint8)m_comboAlpha));
 		}
 		ConvertIntToSfStringToSfText(m_comboMultiplier,m_comboMultiplierAsSfString,m_comboMultiplierAsText, "x Combo",true);
 	}
 	else
 	{
 		m_comboAlpha -= 50*DeltaTime;
-		m_comboMultiplierAsText->setColor(sf::Color(0,0,0,(sf::Uint8)m_comboAlpha));
+		m_comboMultiplierAsText->setColor(sf::Color(m_comboMultiplierAsText->getColor().r,m_comboMultiplierAsText->getColor().g,m_comboMultiplierAsText->getColor().b,(sf::Uint8)m_comboAlpha));
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
@@ -91,14 +92,19 @@ void Score::SetScore(int newScore)
 void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, int ownedByP1, int ownedByP2)
 {
 	int P1andP2 = 0;
+	m_friendBonus = true;
 	P1andP2 += ownedByP1; P1andP2 += ownedByP2;
 	if ((ownedByP1 == ownedByP2) && (ownedByP1 != 0) && (ownedByP2 !=0))
 	{
 		P1andP2*=2;
+		m_friendBonus = true;
 	}
-	if ((ownedByP1 == 0)||(ownedByP2 == 0))
+	if   (((ownedByP1 == 0) || (ownedByP2 == 0)) 
+		||((ownedByP1 == 0) && (ownedByP2 != 0))
+		||((ownedByP2 == 0) && (ownedByP1 != 0)))
 	{
 		P1andP2 = 0;
+		m_friendBonus = false;
 	}
 	m_previousScore = ((scoreToAdd*m_scoreMultiplier) + P1andP2*m_friendBonusMultiplier) * m_comboMultiplier;
 	ConvertIntToSfString(m_previousScore,m_previousScoreAsSfString);
@@ -106,8 +112,16 @@ void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, i
 	{
 		if (m_scoreTexts[i]->GetBusy() == false)
 		{
-			m_scoreTexts[i]->Reset(m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
-			break;
+			if (m_friendBonus == true)
+			{
+				m_scoreTexts[i]->Reset("WOO FRIEND BONUS: "+m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
+				break;
+			}
+			else
+			{
+				m_scoreTexts[i]->Reset(m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
+				break;
+			}
 		}
 	}
 	m_score += m_previousScore;

@@ -10,8 +10,8 @@ HighScore::~HighScore()
 void HighScore::InitializeForIngame()
 {
 	LoadHighscoresToVectors();
-	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::Black);
-	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::Black);
+	DeclareSfText(m_highscoresAsText,NUMBER_OF_HIGHSCORES, 40, sf::Color::White);
+	DeclareSfText(m_highscoreNamesAsText,NUMBER_OF_HIGHSCORES, 40,sf::Color::White);
 	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
 	m_highscoreNamesAsText[0]->setString("Team Name: "+m_highscoreName[0]);
 	m_highscoreNamesAsText[0]->setPosition(0,40);
