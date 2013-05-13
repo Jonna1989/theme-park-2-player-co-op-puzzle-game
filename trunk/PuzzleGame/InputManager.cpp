@@ -144,7 +144,7 @@ void InputManager::CheckPlayer1Input()
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player1Gravity = 100;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH,100);
+			PlayRotateSound
 			m_keyPressedPlayer1 = true;
 		}
 	}
@@ -204,7 +204,7 @@ void InputManager::CheckPlayer2Input()
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
 		{
 			m_player2Gravity = 100;
-			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,5,DEFAULT_PITCH,100);
+			PlayRotateSound
 			m_keyPressedPlayer2 = true;
 		}
 	}

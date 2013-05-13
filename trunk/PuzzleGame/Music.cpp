@@ -40,12 +40,16 @@ void Music::Initialize(int TrackNumber)
 	{
 	case MenuMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/can.ogg");
+		m_music->play();
 		break;
 	case LevelMusic1:
-		LoadMusic(m_music,"Assets/AudioAssets/Music/chicken.ogg");
+		LoadMusic(m_music,"Assets/AudioAssets/Music/forest.ogg");
+		m_music->setVolume(70);
+		m_music->play();
 		break;
 	case GameOverMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/canLose.ogg");
+		m_music->play();
 		break;
 	}
 
