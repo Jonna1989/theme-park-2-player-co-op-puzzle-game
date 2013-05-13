@@ -47,9 +47,9 @@ void Particle::Update()
 
 	float xDir = (cos(angleToRadians) * 150.0f * DeltaTime);
 	float yDir = (sin(angleToRadians) * -150.0f * DeltaTime - m_fly);
-	if (m_alpha - 300.0f * DeltaTime > 0)
+	if (m_alpha - 200.0f * DeltaTime > 0)
 	{
-		m_alpha -= 300.0f * DeltaTime;
+		m_alpha -= 200.0f * DeltaTime;
 	}
 	else
 	{
