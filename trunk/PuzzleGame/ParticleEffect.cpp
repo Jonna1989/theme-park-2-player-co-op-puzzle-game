@@ -40,18 +40,9 @@ void ParticleEffect::Update()
 			Window->draw(*m_particles[i].GetSprite());
 		}
 	}
-	if (m_clock->getElapsedTime().asMilliseconds() > 1000)
+	if (!m_particles[7].IsBusy())
 	{
 		m_isBusy = false;
-		/*for (int i = 0; i < PARTICLE_COUNT ; i++)
-		{
-			if (!m_particles[i].IsBusy())
-			{
-				m_particles[i].StartParticle(m_xPos,m_yPos);
-				m_clock->restart();
-				break;
-			}
-		}*/
 	}
 }
 

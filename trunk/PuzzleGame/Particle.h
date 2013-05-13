@@ -28,8 +28,6 @@ private:
 	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
 
-	sf::Clock* m_clock;
-
 	int m_value;
 	float m_alpha;
 	float m_rotation;

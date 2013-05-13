@@ -27,7 +27,7 @@ void Board::Initialize()
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();
-	SetBoard(3);
+	SetBoard(4);
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
@@ -568,6 +568,7 @@ void Board::InitializeLevels()
 	ReadTextLevels(PATH_LEVEL_1);	
 	ReadTextLevels(PATH_LEVEL_2);
 	ReadTextLevels(PATH_LEVEL_3);
+	ReadTextLevels(PATH_LEVEL_4);
 }
 
 void Board::ReadTextLevels(std::string sheetPath)
