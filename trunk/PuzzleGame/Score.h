@@ -49,5 +49,7 @@ private:
 	std::vector<ScoreText*> m_scoreTexts;
 	int scoreTextAlternation;
 
+	bool m_friendBonus;
+
 	HighScore* m_highscore;
 };
