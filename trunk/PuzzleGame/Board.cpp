@@ -1012,16 +1012,16 @@ void Board::DrawTile(int x, int y)
 				m_sprites.at(NUMBER_OF_BUBBLES+1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_player2HalfStep);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+1));
 			}
-			if (GetPreviousOwner(x,y) == 10 && !GetTile(x,y)->GetFalling())
-			{
-				m_sprites.at(NUMBER_OF_BUBBLES+2)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
-				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+2));
-			}
-			else if (GetPreviousOwner(x,y) == 20 && !GetTile(x,y)->GetFalling())
-			{
-				m_sprites.at(NUMBER_OF_BUBBLES+3)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
-				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
-			}
+// 			if (GetPreviousOwner(x,y) == 10 && !GetTile(x,y)->GetFalling())
+// 			{
+// 				m_sprites.at(NUMBER_OF_BUBBLES+2)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+// 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+2));
+// 			}
+// 			else if (GetPreviousOwner(x,y) == 20 && !GetTile(x,y)->GetFalling())
+// 			{
+// 				m_sprites.at(NUMBER_OF_BUBBLES+3)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+// 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
+// 			}
 
 			if (marker == 1 && !GetTile(x,y)->GetFalling())
 			{
