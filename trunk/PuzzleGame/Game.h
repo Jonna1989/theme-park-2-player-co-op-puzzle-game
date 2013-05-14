@@ -1,5 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include "State.h"
 #include "InputManager.h"
 #include "Player.h"

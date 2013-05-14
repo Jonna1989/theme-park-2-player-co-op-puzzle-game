@@ -39,11 +39,6 @@ void Game::Initialize()
 
 void Game::Update()
 {
-	if(b->GetIsInitialized())
-	{
-		b->Update();
-	}
-
 	UseTimedFunctions();
 	Window->clear();
 	Board::Instance()->Update();
@@ -201,7 +196,15 @@ void Game::KeyCommand_DropBomb()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V))
 	{
-		b->Initialize();
+		if(!b->GetIsInitialized())
+		{
+			b->Initialize();
+		}
+		else
+		{
+			b->SetFalling(true);
+		}
+
 		b->SetPosition(BOARD_WIDTH / 2, 2);
 	}
 }
@@ -210,7 +213,15 @@ void Game::KeyCommand_DropColorBomb()
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C))
 	{
-		cb->Initialize();
+		if(!cb->GetIsInitialized())
+		{
+			cb->Initialize();
+		}
+		else
+		{
+			cb->SetFalling(true);
+		}
+
 		cb->SetColorToRemove(1);
 		cb->SetPosition(BOARD_WIDTH / 2, 2);
 	}
