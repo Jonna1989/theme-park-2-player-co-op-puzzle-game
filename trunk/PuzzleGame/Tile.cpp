@@ -22,6 +22,7 @@ void Tile::Initialize(int tileSizeX, int tileSizeY, int vectorPosX, int vectorPo
 	m_previousOwner = 0;
 	m_isFalling = false;
 	m_halfStep = 0;
+	m_marker = 0;
 }
 
 void Tile::Update()
@@ -64,7 +65,10 @@ int Tile::GetPreviousOwner()
 {
 	return m_previousOwner;
 }
-
+int Tile::GetMarker()
+{
+	return m_marker;
+}
 #pragma endregion
 
 #pragma region Setters
@@ -102,7 +106,10 @@ void Tile::SetPreviousOwner(int previousOwner)
 {
 	m_previousOwner = previousOwner;
 }
-
+void Tile::SetMarker(int marker)
+{
+	m_marker = marker;
+}
 #pragma endregion
 
 void Tile::ClearTile()

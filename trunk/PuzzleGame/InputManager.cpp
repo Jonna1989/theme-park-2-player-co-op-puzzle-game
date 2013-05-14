@@ -34,6 +34,11 @@ void InputManager::Initialize()
 	m_keyPressedPlayer2 = true;
 	m_player1 = new Player();
 	m_player2 = new Player();
+	for (int i = 0; i < 4; i++)
+	{
+		m_moveFastClocks.push_back(new sf::Clock);
+		m_moveFastClocks[i]->restart();
+	}
 }
 
 void InputManager::Update(bool singlePlayer, int state)
@@ -105,40 +110,10 @@ void InputManager::SetPlayers(Player* player1, Player* player2)
 
 void InputManager::CheckPlayer1Input()
 {
-	if((m_keyboard->isKeyPressed(sf::Keyboard::A)) && (!m_keyPressedPlayer1))
-	{
-		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player1->GetPlayerPiece()->MovePiece(-1);
-			m_keyPressedPlayer1 = true;
-		}
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::D)) && (!m_keyPressedPlayer1))
-	{
-		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player1->GetPlayerPiece()->MovePiece(1);
-			m_keyPressedPlayer1 = true;
-		}
-	}
-
-	if((m_keyboard->isKeyPressed(sf::Keyboard::Q)) && (!m_keyPressedPlayer1))
-	{
-		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player1->GetPlayerPiece()->RotatePiece(-1);
-			m_keyPressedPlayer1 = true;
-		}
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::E)) && (!m_keyPressedPlayer1))
-	{
-		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player1->GetPlayerPiece()->RotatePiece(1);
-			m_keyPressedPlayer1 = true;
-		}
-	}
-
+	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::A,-1,0,false);
+	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
+	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,1,0,true);
+	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::E,1,0,true);
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
@@ -160,45 +135,16 @@ void InputManager::CheckPlayer1Input()
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::S)))
 	{
 		m_keyPressedPlayer1 = false;
+		m_moveFastClocks[0]->restart();
 	}
 }
 
 void InputManager::CheckPlayer2Input()
 {
-	if((m_keyboard->isKeyPressed(sf::Keyboard::J)) && (!m_keyPressedPlayer2))
-	{
-		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player2->GetPlayerPiece()->MovePiece(-1);
-			m_keyPressedPlayer2 = true;
-		}
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::L)) && (!m_keyPressedPlayer2))
-	{
-		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player2->GetPlayerPiece()->MovePiece(1);
-			m_keyPressedPlayer2 = true;
-		}
-	}
-
-	if((m_keyboard->isKeyPressed(sf::Keyboard::U)) && (!m_keyPressedPlayer2))
-	{
-		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player2->GetPlayerPiece()->RotatePiece(-1);
-			m_keyPressedPlayer2 = true;
-		}
-	}
-	else if((m_keyboard->isKeyPressed(sf::Keyboard::O)) && (!m_keyPressedPlayer2))
-	{
-		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
-		{
-			m_player2->GetPlayerPiece()->RotatePiece(1);
-			m_keyPressedPlayer2 = true;
-		}
-	}
-
+	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::J,-1,2,false);
+	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::L, 1,2,false);
+	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::U,-1,2,true);
+	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::O, 1,2,true);
 	if((m_keyboard->isKeyPressed(sf::Keyboard::K)) && (!m_keyPressedPlayer2))
 	{
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
@@ -220,6 +166,7 @@ void InputManager::CheckPlayer2Input()
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::K)))
 	{
 		m_keyPressedPlayer2 = false;
+		m_moveFastClocks[2]->restart();
 	}
 }
 
@@ -261,5 +208,26 @@ void InputManager::CheckMusicKeys()
 	{
 		Music::Instance()->ResetPitchVariable();
 		Music::Instance()->GetMusic()->setPitch(Music::Instance()->GetPitchVariable());
+	}
+}
+void InputManager::CheckInputs(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate)
+{
+	if( ( (m_keyboard->isKeyPressed(key)) && (!playerPressedKey))
+		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > 500) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
+	{
+		if (player->GetPlayerPiece()->GetOwner() != 0)
+		{
+			if (rotate)
+			{
+				player->GetPlayerPiece()->RotatePiece(dir);
+				playerPressedKey = true;
+			}
+			else
+			{
+				player->GetPlayerPiece()->MovePiece(dir);
+				playerPressedKey = true;
+			}
+		}
+		m_moveFastClocks[clock+1]->restart();
 	}
 }

@@ -16,8 +16,8 @@ void PlayerPiece::Initialize(int owner)
 	m_owner = owner;
 	m_pieceOne = new Piece();
 	m_pieceTwo = new Piece();
-	m_pieceOne->Initialize(m_owner);
-	m_pieceTwo->Initialize(m_owner+1);
+	m_pieceOne->Initialize(m_owner,m_owner/10);
+	m_pieceTwo->Initialize(m_owner+1,m_owner/10);
 
 	if(m_owner == 10)
 	{		
@@ -649,6 +649,8 @@ void PlayerPiece::SetNewPlayerPieces()
 
 	Board::Instance()->GetTile(onePosX,onePosY)->SetContent(oneValue);
 	Board::Instance()->GetTile(twoPosX,twoPosY)->SetContent(twoValue);
+	Board::Instance()->GetTile(onePosX,onePosY)->SetMarker(m_pieceOne->GetMarker());
+	Board::Instance()->GetTile(twoPosX,twoPosY)->SetMarker(m_pieceTwo->GetMarker());
 }
 
 void PlayerPiece::ConvertPieceToPassive()
