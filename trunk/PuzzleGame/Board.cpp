@@ -27,7 +27,7 @@ void Board::Initialize()
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();
-	SetBoard(3);
+	SetBoard(4);
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
