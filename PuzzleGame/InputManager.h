@@ -11,7 +11,6 @@
 
 class InputManager
 {
-
 public:
 	static InputManager* Instance();
 
@@ -51,7 +50,10 @@ private:
 	sf::Event event2;
 	bool m_keyPressedPlayer2;
 
+	std::vector<sf::Clock*> m_moveFastClocks;
+
 	void CheckMusicKeys();
+	void CheckInputs(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate);
 };
 
 #endif

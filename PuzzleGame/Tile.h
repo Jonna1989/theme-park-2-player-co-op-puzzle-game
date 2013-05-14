@@ -21,6 +21,7 @@ public:
 	int GetPreviousOwner();
 	bool GetFalling();
 	int GetHalfStep();
+	int GetMarker();
 
 	void SetTileSize(int x, int y);
 	void SetPositionPixels(float x, float y);
@@ -31,6 +32,7 @@ public:
 	void ClearTile();
 	void SetFalling(bool isfalling);
 	void SetHalfStep(int halfStep);
+	void SetMarker(int marker);
 
 private:
 	sf::Vector2i m_tileSize;
@@ -41,6 +43,7 @@ private:
 	int m_previousOwner;
 	bool m_isFalling;
 	int m_halfStep;
+	int m_marker;
 };
 
 #endif

@@ -316,8 +316,10 @@ void Board::DropTile(int x, int y)
 		{
 			GetTile(x, y + 1)->SetContent(GetTile(x, y)->GetContent());
 			GetTile(x, y + 1)->SetOwner(GetTile(x, y)->GetOwner());
+			GetTile(x, y + 1)->SetMarker(GetTile(x, y)->GetMarker());
 			GetTile(x, y)->SetContent(0);
 			GetTile(x, y)->SetOwner(0);
+			GetTile(x, y)->SetMarker(0);
 		}
 	}
 }

@@ -15,12 +15,13 @@ Piece::~Piece()
 
 #pragma region Publics
 
-void Piece::Initialize(int owner)
+void Piece::Initialize(int owner, int marker)
 {
 	m_color = RandomizeColor();
 	m_position = sf::Vector2i(-1, -1);
 
 	m_owner = owner;
+	m_marker = marker;
 }
 
 void Piece::Update()
@@ -46,7 +47,10 @@ int Piece::GetOwner()
 {
 	return m_owner;
 }
-
+int Piece::GetMarker()
+{
+	return m_marker;
+}
 void Piece::SetColor(int color)
 {
 	m_color = color;
@@ -76,7 +80,10 @@ void Piece::SetOwner(int owner)
 	m_owner = owner;
 	Board::Instance()->SetOwner(m_position.x, m_position.y, m_owner);
 }
-
+void Piece::SetMarker(int marker)
+{
+	m_marker = marker;
+}
 #pragma endregion
 
 #pragma region Publics

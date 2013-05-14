@@ -13,17 +13,19 @@ public:
 	Piece();
 	~Piece();
 
-	void Initialize(int owner);
+	void Initialize(int owner, int marker);
 	void Update();
 	void Cleanup();
 
 	int GetColor();
 	sf::Vector2i GetPosition();
 	int GetOwner();
+	int GetMarker();
 
 	void SetColor(int color);
 	void SetPosition(int posX, int posY);
 	void SetOwner(int owner);
+	void SetMarker(int marker);
 
 	int RandomizeColor();
 	int NrOfAdjacentSameColor();
@@ -32,6 +34,7 @@ public:
 private:
 	int m_color;
 	int m_owner;
+	int m_marker;
 	sf::Vector2i m_position;
 };
 
