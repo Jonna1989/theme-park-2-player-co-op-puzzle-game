@@ -33,6 +33,10 @@ void Game::Initialize()
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
 	m_increaseInterval = 10000;
+
+	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/TempArt/speed.png");
+	m_speedUpSprite->setPosition(800,500);
+	m_speedUpSpriteAlpha = 0.0f;
 	b = new Bomb();
 	cb = new ColorBomb();
 }
@@ -56,7 +60,12 @@ void Game::Update()
 	{
 		cb->Update();
 	}
-
+	m_speedUpSprite->setColor(sf::Color(255,255,225,(sf::Uint8)m_speedUpSpriteAlpha));
+	if (m_speedUpSpriteAlpha > 5)
+	{
+		Window->draw(*m_speedUpSprite);
+		m_speedUpSpriteAlpha -= 100*DeltaTime;
+	}
 	Window->display();	
 	KeyCommands();
 	Board::Instance()->CheckForGameOver();
@@ -158,6 +167,7 @@ void Game::UseTimedFunctions()
 		m_increaseInterval += 2000;
 		SetGravityInterval(m_gravityInterval-25);
 		InputManager::Instance()->SetGravity(m_gravityInterval);
+		m_speedUpSpriteAlpha = 255;
 		m_increaseClock->restart();
 	}
 }

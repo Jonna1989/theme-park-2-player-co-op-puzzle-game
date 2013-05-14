@@ -112,7 +112,7 @@ void InputManager::CheckPlayer1Input()
 {
 	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::A,-1,0,false);
 	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
-	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,1,0,true);
+	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,-1,0,true);
 	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::E,1,0,true);
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
