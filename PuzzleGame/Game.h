@@ -9,7 +9,7 @@
 #include "PowerItem.h"
 #include "ColorBomb.h"
 #include "Bomb.h"
-
+#include "ScoreText.h"
 class StateManager;
 
 class Game:public State
@@ -54,6 +54,8 @@ private:
 	void KeyCommand_DropBomb();
 	void KeyCommand_DropColorBomb();
 
+	sf::Sprite* m_speedUpSprite;
+	float m_speedUpSpriteAlpha;
 	Bomb* b;
 	ColorBomb* cb;
 };

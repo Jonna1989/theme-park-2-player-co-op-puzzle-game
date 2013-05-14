@@ -12,10 +12,13 @@ void LoadTexture(sf::Texture* &TextureToUse, const std::string FileName)
 		std::cout << "Failed to load texture: " << FileName << std::endl;
 	}
 }
-
-void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom)
+void CreateSprite(sf::Sprite* &SpriteToUse)
 {
 	SpriteToUse = new sf::Sprite();
+}
+void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom)
+{
+	CreateSprite(SpriteToUse);
 	SpriteToUse->setTexture(*TextureToSetFrom);
 }
 void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, float x, float y)
@@ -23,7 +26,11 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, floa
 	CreateSprite(SpriteToUse,TextureToSetFrom);
 	SpriteToUse->setPosition(x,y);
 }
-
+void CreateSprite(sf::Sprite* &SpriteToUse, const std::string PathToTexture)
+{
+	CreateSprite(SpriteToUse);
+	SpriteToUse->setTexture(*TextureProvider::Instance()->GetTexture(PathToTexture));
+}
 void Clean(sf::Texture* &TextureToDelete)
 {
 	delete TextureToDelete;
