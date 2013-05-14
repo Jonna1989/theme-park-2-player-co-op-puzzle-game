@@ -32,6 +32,7 @@ void ColorBomb::Update()
 	{
 		Activate();
 		m_isFalling = true;
+		Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 	}
 }
 

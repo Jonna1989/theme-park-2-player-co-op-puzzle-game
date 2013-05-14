@@ -27,7 +27,7 @@ void Board::Initialize()
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();
-	SetBoard(3);
+	SetBoard(2);
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
@@ -971,7 +971,7 @@ void Board::DrawTile(int x, int y)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*TILE_SIZE_X,TILE_SIZE_Y*2),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[color-1],m_sprites.at(color - 1));
 		}
-		else if (NrOfAdjacentSameColor(x,y) == 0 && m_board.at(y).at(x).GetOwner() == 0)
+		else if (NrOfAdjacentSameColor(x,y) == 0 && GetTile(x, y)->GetOwner() == 0 && GetTile(x, y)->GetContent() > 10)
 		{
 			
 		}
@@ -982,7 +982,14 @@ void Board::DrawTile(int x, int y)
 
 		if (owner == PASSIVE)
 		{
-			m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_board.at(y).at(x).GetHalfStep());
+			if(GetTile(x, y)->GetContent() <= 10)
+			{
+				m_sprites.at(color - 1)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_board.at(y).at(x).GetHalfStep());
+			}
+			else 
+			{
+				m_sprites.at(color)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y+m_board.at(y).at(x).GetHalfStep());
+			}
 		}
 		else if (owner == 10 || owner == 11)
 		{
