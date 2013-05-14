@@ -4,6 +4,8 @@
 
 Bomb::Bomb()
 {
+	m_isFalling = true;
+	m_isInitialized = false;
 }
 
 
@@ -19,6 +21,7 @@ void Bomb::Initialize()
 	m_goodItem = true;
 	m_blastRadius = 2;
 	m_contentID = 11;
+	m_isInitialized = true;
 }
 
 void Bomb::Update()

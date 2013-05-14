@@ -27,7 +27,7 @@ void Board::Initialize()
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();
-	SetBoard(4);
+	SetBoard(3);
 
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES; i++)
 	{
@@ -630,7 +630,14 @@ void Board::DrawBoard()
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
-			DrawTile(x, y);
+			if(x == 8 && y == 2 && GetTile(8,2)->GetContent() == 11)
+			{
+				DrawTile(x, y);
+			}
+			else
+			{
+				DrawTile(x, y);
+			}
 		}
 	}
 }
@@ -639,8 +646,8 @@ void Board::DrawBoard()
 
 void Board::DrawTile(int x, int y)
 {
-	int color = m_board.at(y).at(x).GetContent();
-	int owner = m_board.at(y).at(x).GetOwner();
+	int color = GetTile(x, y)->GetContent();
+	int owner = GetTile(x, y)->GetOwner();
 
 	if(0 < color)
 	{
@@ -962,6 +969,10 @@ void Board::DrawTile(int x, int y)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i((pos-12)*TILE_SIZE_X,TILE_SIZE_Y*2),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[color-1],m_sprites.at(color - 1));
 		}
+		else if (NrOfAdjacentSameColor(x,y) == 0 && m_board.at(y).at(x).GetOwner() == 0)
+		{
+			
+		}
 		else if (NrOfAdjacentSameColor(x,y) == 0 || m_board.at(y).at(x).GetOwner() != 0)
 		{
 			TextureProvider::Instance()->GetSubRect(sf::Vector2i(0,0),sf::Vector2i(TILE_SIZE_X,TILE_SIZE_Y),bubblesSheetpaths[color-1],m_sprites.at(color - 1));
@@ -1012,6 +1023,18 @@ void Board::DrawTile(int x, int y)
 			{
 				m_sprites.at(NUMBER_OF_BUBBLES+3)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
+			}
+
+			if (GetColor(x, y) == 11 && !GetTile(x,y)->GetFalling())
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES+4)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+4));			
+			}
+
+			if (GetColor(x, y) == 12 && !GetTile(x,y)->GetFalling())
+			{
+				m_sprites.at(NUMBER_OF_BUBBLES+5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
+				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+5));			
 			}
 		}
 	}

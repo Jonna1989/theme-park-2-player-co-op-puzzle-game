@@ -22,6 +22,7 @@ public:
 	virtual bool IsFalling();
 	virtual bool IsGoodItem();
 	virtual int GetContentID();
+	virtual bool GetIsInitialized();
 
 	virtual void SetPosition(int x, int y);
 	virtual void SetFalling(bool falling);
@@ -33,6 +34,7 @@ protected:
 	bool m_isFalling;
 	bool m_goodItem; //true = powerup, false = trap
 	int m_contentID;
+	bool m_isInitialized;
 };
 
 #endif
