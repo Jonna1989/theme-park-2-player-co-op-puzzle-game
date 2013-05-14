@@ -428,6 +428,8 @@ void Board::CheckForMatch()
 				int passiveCounter = 0;
 				int previousOwnerP1 = 0;
 				int previousOwnerP2 = 0;
+				int markerP1 = 0;
+				int markerP2 = 0;
 				float avragePosX = 0;
 				float avragePosY = 0;
 				for (int h = 0; h < temp2; h++)
@@ -452,6 +454,14 @@ void Board::CheckForMatch()
 					{
 						previousOwnerP2++;
 					}
+					if ((m_board.at(temp[h].y).at(temp[h].x).GetMarker() == 1))
+					{
+						markerP1++;
+					}
+					if ((m_board.at(temp[h].y).at(temp[h].x).GetMarker() == 2))
+					{
+						markerP2++;
+					}
 				}
 				if ((notFallingCounter == temp2) && (passiveCounter == temp2))
 				{
@@ -472,7 +482,7 @@ void Board::CheckForMatch()
 					PlayComboSound(soundClock);
 					avragePosX /= temp2; 
 					avragePosY /= temp2;
-					m_score->AddScore(temp2, avragePosX, avragePosY, previousOwnerP1, previousOwnerP2);
+					m_score->AddScore(temp2, avragePosX, avragePosY, markerP1, markerP2);
 					m_score->ResetScoreMultiplier();
 				}
 			}
@@ -650,6 +660,7 @@ void Board::DrawTile(int x, int y)
 {
 	int color = GetTile(x, y)->GetContent();
 	int owner = GetTile(x, y)->GetOwner();
+	int marker = GetTile(x,y)->GetMarker();
 
 	if(0 < color)
 	{
@@ -1012,12 +1023,12 @@ void Board::DrawTile(int x, int y)
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
 			}
 
-			if (GetPreviousOwner(x,y) == 10 && !GetTile(x,y)->GetFalling())
+			if (marker == 1 && !GetTile(x,y)->GetFalling())
 			{
 				m_sprites.at(NUMBER_OF_BUBBLES+2)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+2));
 			}
-			else if (GetPreviousOwner(x,y) == 20 && !GetTile(x,y)->GetFalling())
+			else if (marker == 2 && !GetTile(x,y)->GetFalling())
 			{
 				m_sprites.at(NUMBER_OF_BUBBLES+3)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+3));
