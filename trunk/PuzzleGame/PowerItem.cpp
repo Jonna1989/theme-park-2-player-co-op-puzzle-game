@@ -61,6 +61,11 @@ int PowerItem::GetContentID()
 	return m_contentID;
 }
 
+bool PowerItem::GetIsInitialized()
+{
+	return m_isInitialized;
+}
+
 #pragma endregion
 
 #pragma region Setters

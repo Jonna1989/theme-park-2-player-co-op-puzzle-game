@@ -4,6 +4,8 @@
 
 ColorBomb::ColorBomb()
 {
+	m_isFalling = true;
+	m_isInitialized = false;
 }
 
 
@@ -19,6 +21,7 @@ void ColorBomb::Initialize()
 	m_goodItem = true;
 	m_contentID = 12;
 	m_colorToRemove = 0;
+	m_isInitialized = true;
 }
 
 void ColorBomb::Update()

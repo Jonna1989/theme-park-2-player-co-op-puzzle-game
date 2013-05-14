@@ -39,6 +39,11 @@ void Game::Initialize()
 
 void Game::Update()
 {
+	if(b->GetIsInitialized())
+	{
+		b->Update();
+	}
+
 	UseTimedFunctions();
 	Window->clear();
 	Board::Instance()->Update();
@@ -47,8 +52,15 @@ void Game::Update()
 	m_player1Avatar->Update();
 	m_player2Avatar->Update();
 
-	b->Update();
-	cb->Update();
+	if(b->GetIsInitialized())
+	{
+		b->Update();
+	}
+
+	if(cb->GetIsInitialized())
+	{
+		cb->Update();
+	}
 
 	Window->display();	
 	KeyCommands();
@@ -190,7 +202,7 @@ void Game::KeyCommand_DropBomb()
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V))
 	{
 		b->Initialize();
-		b->SetPosition(BOARD_WIDTH / 2, 0);
+		b->SetPosition(BOARD_WIDTH / 2, 2);
 	}
 }
 
@@ -200,7 +212,7 @@ void Game::KeyCommand_DropColorBomb()
 	{
 		cb->Initialize();
 		cb->SetColorToRemove(1);
-		cb->SetPosition(BOARD_WIDTH / 2, 0);
+		cb->SetPosition(BOARD_WIDTH / 2, 2);
 	}
 }
 
