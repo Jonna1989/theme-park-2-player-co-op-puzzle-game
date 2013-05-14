@@ -64,7 +64,7 @@ void ParticleEffect::StartEffect(float xPos, float yPos, int value)
 	m_yPos = yPos;
 	for (int i = 0; i < PARTICLE_COUNT; i++)
 	{
-		m_particles[i].StartParticle(m_xPos, m_yPos, value);
+		m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10));
 	}
 	m_isBusy = true;
 }

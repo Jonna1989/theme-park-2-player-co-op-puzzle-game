@@ -35,6 +35,8 @@ void Particle::Initialize(float rotation, float xPos, float yPos)
 	m_value = 0;
 
 	m_fly = 0;
+
+	m_scale = 0;
 }
 
 void Particle::Update()
@@ -54,6 +56,12 @@ void Particle::Update()
 		m_alpha = 0;
 		m_busy = false;
 	}
+
+	if ((m_scale - 1.0f * DeltaTime) > 0)
+	{
+		m_scale -= 1.0f * DeltaTime;
+	}
+	m_sprite->setScale(m_scale,m_scale);
 	
 	m_sprite->setColor(sf::Color(m_sprite->getColor().r,m_sprite->getColor().g,m_sprite->getColor().b,(sf::Uint8)m_alpha));
 
@@ -65,13 +73,15 @@ void Particle::Cleanup()
 	delete m_sprite;
 }
 
-void Particle::StartParticle(float xPos, float yPos, int value)
+void Particle::StartParticle(float xPos, float yPos, int value, float scale)
 {
 	m_sprite->setPosition(xPos,yPos);
 	m_alpha = 255;
 	m_value = value;
 	m_fly = 0;
 	m_busy = true;
+	m_scale = scale;
+	m_sprite->setScale(m_scale,m_scale);
 }
 
 bool Particle::IsBusy()

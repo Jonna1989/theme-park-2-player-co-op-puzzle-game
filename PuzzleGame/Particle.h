@@ -18,7 +18,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void StartParticle(float xPos, float yPos, int value);
+	void StartParticle(float xPos, float yPos, int value, float scale);
 
 	bool IsBusy();
 	sf::Sprite* GetSprite();
@@ -28,6 +28,7 @@ private:
 	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
 
+	float m_scale;
 	int m_value;
 	float m_alpha;
 	float m_rotation;
