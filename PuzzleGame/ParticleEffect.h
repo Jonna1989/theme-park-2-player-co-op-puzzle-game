@@ -15,7 +15,7 @@ public:
 	void Update();
 	void Cleanup();
 
-	void StartEffect(float xPos, float yPos, int value);
+	void StartEffect(float xPos, float yPos, int value, int version);
 
 	bool IsBusy();
 
@@ -23,6 +23,8 @@ private:
 	std::vector<Particle> m_particles;
 
 	sf::Clock* m_clock;
+
+	int m_version;
 
 	float m_xPos;
 	float m_yPos;

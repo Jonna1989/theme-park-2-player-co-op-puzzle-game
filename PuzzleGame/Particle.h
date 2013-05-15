@@ -18,11 +18,17 @@ public:
 	void Update();
 	void Cleanup();
 
-	void StartParticle(float xPos, float yPos, int value, float scale);
+	void StartParticle(float xPos, float yPos, int value, float scale, int version);
 
 	bool IsBusy();
 	sf::Sprite* GetSprite();
 
+	enum
+	{
+		NOTHING,
+		NORMAL,
+		FRIEND
+	};
 
 private:
 	sf::Texture* m_texture;
@@ -33,6 +39,7 @@ private:
 	float m_alpha;
 	float m_rotation;
 	bool m_busy;
+	int m_version;
 
 	float m_fly;
 };
