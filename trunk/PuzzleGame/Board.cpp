@@ -1061,14 +1061,84 @@ void Board::DrawTile(int x, int y)
 				m_sprites.at(NUMBER_OF_BUBBLES+5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+5));			
 			}
-			if (NrOfAdjacentSameColor(x,y) == 2)
+
+			bool connectedFalling = false;
+			if (GetSpecifiedTile(10) != nullptr && GetSpecifiedTile(11) != nullptr)
 			{
-				m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
-				Window->draw(*m_glowAnimation->getSprite());
-				for (int i = 0; i < NrOfAdjacentSameColor(x,y); i++)
+				if ((GetSpecifiedTile(10)->GetContent() == GetTile(x,y)->GetContent()) || (GetSpecifiedTile(11)->GetContent() == GetTile(x,y)->GetContent()))
 				{
-					m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
-					Window->draw(*m_glowAnimation->getSprite());
+					if (NrOfAdjacentSameColor(x,y) == 2)
+					{
+						for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+						{
+							if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling())
+							{
+								connectedFalling = true;
+							}
+						}
+						if (!connectedFalling)
+						{
+							m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+							Window->draw(*m_glowAnimation->getSprite());
+							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							{
+								m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+								Window->draw(*m_glowAnimation->getSprite());
+							}
+						}
+					}
+				}
+				else if (GetSpecifiedTile(20) != nullptr && GetSpecifiedTile(21) != nullptr)
+				{
+					if ((GetSpecifiedTile(20)->GetContent() == GetTile(x,y)->GetContent()) || (GetSpecifiedTile(21)->GetContent() == GetTile(x,y)->GetContent()))
+					{
+						if (NrOfAdjacentSameColor(x,y) == 2)
+						{
+							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							{
+								if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling())
+								{
+									connectedFalling = true;
+								}
+							}
+							if (!connectedFalling)
+							{
+								m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+								Window->draw(*m_glowAnimation->getSprite());
+								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+								{
+									m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+									Window->draw(*m_glowAnimation->getSprite());
+								}
+							}
+						}
+					}
+				}
+			}
+			else if (GetSpecifiedTile(20) != nullptr && GetSpecifiedTile(21) != nullptr)
+			{
+				if ((GetSpecifiedTile(20)->GetContent() == GetTile(x,y)->GetContent()) || (GetSpecifiedTile(21)->GetContent() == GetTile(x,y)->GetContent()))
+				{
+					if (NrOfAdjacentSameColor(x,y) == 2)
+					{
+						for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+						{
+							if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling())
+							{
+								connectedFalling = true;
+							}
+						}
+						if (!connectedFalling)
+						{
+							m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+							Window->draw(*m_glowAnimation->getSprite());
+							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							{
+								m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+								Window->draw(*m_glowAnimation->getSprite());
+							}
+						}
+					}
 				}
 			}
 		}
