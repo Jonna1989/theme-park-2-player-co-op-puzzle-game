@@ -38,14 +38,9 @@ void Board::Initialize()
 	soundClock = new sf::Clock();
 	soundClock->restart();
 
-	LoadTexture(m_backgroundTexture,"Assets/GraphicalAssets/Backgrounds/background.png");
-	CreateSprite(m_backgroundSprite, m_backgroundTexture);
-	
-	LoadTexture(m_plateTexture,"Assets/GraphicalAssets/Backgrounds/plate.png");
-	CreateSprite(m_plateSprite, m_plateTexture);
-
-	LoadTexture(m_frameTexture,"Assets/GraphicalAssets/Backgrounds/frame.png");
-	CreateSprite(m_frameSprite, m_frameTexture);
+	CreateSprite(m_backgroundSprite, "Assets/GraphicalAssets/Backgrounds/background.png");
+	CreateSprite(m_plateSprite, "Assets/GraphicalAssets/Backgrounds/plate.png");
+	CreateSprite(m_frameSprite, "Assets/GraphicalAssets/Backgrounds/frame.png");
 
 	//m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
 
@@ -93,9 +88,9 @@ void Board::Cleanup()
 		delete m_sprites[i];
 	}
 	m_sprites.clear();
-	Clean(m_backgroundTexture, m_backgroundSprite);
-	Clean(m_plateTexture, m_plateSprite);
-	Clean(m_frameTexture,m_frameSprite);
+	Clean(m_backgroundSprite);
+	Clean(m_plateSprite);
+	Clean(m_frameSprite);
 	m_score->Cleanup();
 	delete m_score;
 }

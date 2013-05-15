@@ -13,7 +13,9 @@ const int NUMBER_OF_POP_SOUNDS = 3; // Number of Sounds in the BubblePop folder
 const std::string PATH_POP = "BubblePop/Pop";
 const int NUMBER_OF_DEATH_SOUNDS = 1;
 const std::string PATH_DEATH = "DeathSounds/DeathSound";
-const int NUMBER_OF_CATEGORIES = 3; // Number of PATHS_
+const int NUMBER_OF_SPEEDUP_SOUNDS = 5;
+const std::string PATH_SPEEDUP = "SpeedupSounds/speedup";
+const int NUMBER_OF_CATEGORIES = 4; // Number of PATHS_
 
 #define PlayRotateSound Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,4,DEFAULT_PITCH,35);
 
@@ -27,7 +29,8 @@ public:
 	{
 		UISOUND,
 		POPSOUND,
-		DEATHSOUND
+		DEATHSOUND,
+		SPEEDUPSOUND
 	};
 
 	static Soundeffects* Instance();
@@ -37,7 +40,7 @@ public:
 	void Cleanup();
 
 	void PlaySound(int SoundCategory,int SoundNumber, float Pitch, float Volume);
-
+	void PlayRandomSoundInCategory(int SoundCategory, int lowRange, int highRange);
 	void SetSoundvol();
 
 
@@ -49,6 +52,7 @@ private:
 	std::vector<std::string> m_pathVectorUi;
 	std::vector<std::string> m_pathVectorPop;
 	std::vector<std::string> m_pathVectorDeath;
+	std::vector<std::string> m_pathVectorSpeedup;
 	static Soundeffects*	m_instance;
 
 	sf::Sound* m_uiSound;
@@ -59,6 +63,9 @@ private:
 
 	sf::Sound* m_deathSound;
 	std::vector<sf::SoundBuffer*> m_deathBuffers;
+
+	sf::Sound* m_speedupSound;
+	std::vector<sf::SoundBuffer*> m_speedupBuffers;
 
 	std::vector<std::vector<sf::SoundBuffer*>> m_bufferCategories;
 	std::vector<sf::Sound*> m_soundCategories;

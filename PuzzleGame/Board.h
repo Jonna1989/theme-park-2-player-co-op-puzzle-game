@@ -116,13 +116,10 @@ private:
 	
 	Score* m_score;
 	
-	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
 
-	sf::Texture* m_plateTexture;
 	sf::Sprite* m_plateSprite;
 
-	sf::Texture* m_frameTexture;
 	sf::Sprite* m_frameSprite;
 
 	int m_player1HalfStep;

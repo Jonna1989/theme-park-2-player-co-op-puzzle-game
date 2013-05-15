@@ -43,10 +43,11 @@ void Soundeffects::Initialize()
 	DeclarePathArray(m_pathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
 	DeclarePathArray(m_pathVectorPop,NUMBER_OF_POP_SOUNDS,PATH_POP);
 	DeclarePathArray(m_pathVectorDeath,NUMBER_OF_DEATH_SOUNDS,PATH_DEATH);
-
+	DeclarePathArray(m_pathVectorSpeedup,NUMBER_OF_SPEEDUP_SOUNDS,PATH_SPEEDUP);
 	AddVectorsToVector(NUMBER_OF_UI_SOUNDS,m_uiBuffers,m_pathVectorUi,m_uiSound);
 	AddVectorsToVector(NUMBER_OF_POP_SOUNDS,m_popBuffers,m_pathVectorPop,m_popSound);
 	AddVectorsToVector(NUMBER_OF_DEATH_SOUNDS,m_deathBuffers,m_pathVectorDeath,m_deathSound);
+	AddVectorsToVector(NUMBER_OF_SPEEDUP_SOUNDS,m_speedupBuffers,m_pathVectorSpeedup,m_speedupSound);
 }
 #pragma endregion
 
@@ -72,7 +73,10 @@ void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch, fl
 	SetBufferToSoundAndPlay(SoundCategory,SoundNumber,Pitch,Volume);
 }
 #pragma endregion
-
+void Soundeffects::PlayRandomSoundInCategory(int SoundCategory, int lowRange, int highRange)
+{
+	SetBufferToSoundAndPlay(SoundCategory,(rand() % ((highRange-lowRange) - 1) + lowRange +1),1,100);
+}
 #pragma region SetSoundvol
 void Soundeffects::SetSoundvol()
 {
