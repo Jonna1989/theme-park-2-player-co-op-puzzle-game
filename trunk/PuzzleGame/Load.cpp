@@ -35,10 +35,14 @@ void Clean(sf::Texture* &TextureToDelete)
 {
 	delete TextureToDelete;
 }
-void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete)
+void Clean(sf::Sprite* &SpriteToDelete)
 {
 	delete SpriteToDelete;
-	delete TextureToDelete;
+}
+void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete)
+{
+	Clean(SpriteToDelete);
+	Clean(TextureToDelete);
 }
 void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor)
 {

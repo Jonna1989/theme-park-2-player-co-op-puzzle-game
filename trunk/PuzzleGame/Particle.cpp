@@ -22,9 +22,7 @@ void Particle::Initialize(float rotation, float xPos, float yPos)
 	m_rotation = rotation;
 	m_rotation = ((m_rotation * 180.0f) / 3.141592653589793238462643383279502884197169399375105820974944f) * -1.0f;
 
-	m_texture = TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/TempArt/pixel.png");
-	m_sprite = new sf::Sprite();
-	m_sprite->setTexture(*m_texture);
+	CreateSprite(m_sprite,"Assets/GraphicalAssets/TempArt/pixel.png");
 	m_sprite->setRotation(m_rotation);
 	m_sprite->setPosition(xPos,yPos);
 

@@ -15,8 +15,7 @@ GameOver::~GameOver()
 
 void GameOver::Initialize()
 {
-	LoadTexture(m_backgroundTexture, "Assets/GraphicalAssets/TempArt/gameover.png");
-	CreateSprite(m_backgroundSprite,m_backgroundTexture);
+	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/gameover.png");
 	Music::Instance()->Initialize(Music::GameOverMusic1);
 	Music::Instance()->StartMusic();
 	m_highscore = new HighScore();
@@ -32,7 +31,7 @@ void GameOver::Update()
 }
 void GameOver::Cleanup()
 {
-	Clean(m_backgroundTexture,m_backgroundSprite);
+	Clean(m_backgroundSprite);
 	Music::Instance()->Cleanup();
 	m_highscore->Cleanup();
 }

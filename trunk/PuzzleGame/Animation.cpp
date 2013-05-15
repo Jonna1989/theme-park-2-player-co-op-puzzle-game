@@ -18,8 +18,7 @@ Animation::~Animation()
 
 void Animation::Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
 {
-	m_sprite = new sf::Sprite();
-	m_sprite->setTexture(*TextureProvider::Instance()->GetTexture(sheetPath));
+	CreateSprite(m_sprite,sheetPath);
 
 	//Animation info
 	m_cellSize = cellSize;
@@ -116,10 +115,10 @@ sf::Sprite* Animation::getSprite()
 	return m_sprite; 
 }
 
-sf::Texture* Animation::getTexture()
-{
-	return m_texture;
-}
+// sf::Texture* Animation::getTexture()
+// {
+// 	return m_texture;
+// }
 
 float Animation::getCurrentCell()
 {

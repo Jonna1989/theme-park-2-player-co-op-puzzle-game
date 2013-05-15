@@ -14,6 +14,7 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, floa
 void CreateSprite(sf::Sprite* &SpriteToUse, const std::string PathToTexture);
 
 void Clean(sf::Texture* &TextureToDelete);
+void Clean(sf::Sprite* &SpriteToDelete);
 void Clean(sf::Texture* &TextureToDelete, sf::Sprite* & SpriteToDelete);
 
 void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Color textColor, sf::Vector2f textPosition);

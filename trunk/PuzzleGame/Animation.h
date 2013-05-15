@@ -34,7 +34,6 @@ public:
 	float m_updateRate;
 
 private:
-	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
 
 	std::string m_sheetPath;

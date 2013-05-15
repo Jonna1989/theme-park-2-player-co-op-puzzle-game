@@ -19,7 +19,6 @@ public:
 	void Cleanup();
 
 private:
-	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
 };
 

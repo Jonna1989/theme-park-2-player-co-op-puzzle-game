@@ -20,6 +20,5 @@ public:
 
 private:
 	HighScore* m_highscore;
-	sf::Texture* m_backgroundTexture;
 	sf::Sprite* m_backgroundSprite;
 };

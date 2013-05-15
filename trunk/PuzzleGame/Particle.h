@@ -31,7 +31,6 @@ public:
 	};
 
 private:
-	sf::Texture* m_texture;
 	sf::Sprite* m_sprite;
 
 	float m_scale;
