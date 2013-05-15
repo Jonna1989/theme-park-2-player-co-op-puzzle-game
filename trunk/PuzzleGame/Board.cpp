@@ -474,7 +474,12 @@ void Board::CheckForMatch()
 						{
 							if (!m_particleEffects[j]->IsBusy())
 							{
-								m_particleEffects[j]->StartEffect((temp[i].x*TILE_SIZE_X)+(TILE_SIZE_X/2)+BOARD_OFFSET_X-7.5f,(temp[i].y*TILE_SIZE_Y)+(TILE_SIZE_Y/2)+BOARD_OFFSET_Y-7.5f, particleColor);
+								int tempBonus = 1;
+								if (markerP1 > 0 && markerP2 > 0)
+								{
+									tempBonus = 2;
+								}
+								m_particleEffects[j]->StartEffect((temp[i].x*TILE_SIZE_X)+(TILE_SIZE_X/2)+BOARD_OFFSET_X-7.5f,(temp[i].y*TILE_SIZE_Y)+(TILE_SIZE_Y/2)+BOARD_OFFSET_Y-7.5f, particleColor, tempBonus);
 								break;
 							}
 						}

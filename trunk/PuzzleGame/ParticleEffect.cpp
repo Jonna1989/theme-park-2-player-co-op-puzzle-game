@@ -27,6 +27,7 @@ void ParticleEffect::Initialize()
 	m_clock = new sf::Clock();
 	m_xPos = 0;
 	m_yPos = 0;
+	m_version = 0;
 	m_isBusy = false;
 }
 
@@ -57,14 +58,15 @@ void ParticleEffect::Cleanup()
 	delete m_clock;
 }
 
-void ParticleEffect::StartEffect(float xPos, float yPos, int value)
+void ParticleEffect::StartEffect(float xPos, float yPos, int value, int version)
 {
 	m_clock->restart();
+	m_version = version;
 	m_xPos = xPos;
 	m_yPos = yPos;
 	for (int i = 0; i < PARTICLE_COUNT; i++)
 	{
-		m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10));
+		m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10), m_version);
 	}
 	m_isBusy = true;
 }

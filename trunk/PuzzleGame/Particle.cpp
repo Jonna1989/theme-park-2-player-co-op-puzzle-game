@@ -37,6 +37,8 @@ void Particle::Initialize(float rotation, float xPos, float yPos)
 	m_fly = 0;
 
 	m_scale = 0;
+
+	m_version = 0;
 }
 
 void Particle::Update()
@@ -73,7 +75,7 @@ void Particle::Cleanup()
 	delete m_sprite;
 }
 
-void Particle::StartParticle(float xPos, float yPos, int value, float scale)
+void Particle::StartParticle(float xPos, float yPos, int value, float scale, int version)
 {
 	m_sprite->setPosition(xPos,yPos);
 	m_alpha = 255;
@@ -81,7 +83,16 @@ void Particle::StartParticle(float xPos, float yPos, int value, float scale)
 	m_fly = 0;
 	m_busy = true;
 	m_scale = scale;
+	m_version = version;
 	m_sprite->setScale(m_scale,m_scale);
+	if (m_version == NORMAL)
+	{
+		m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particle0"+ConvertIntToStdString(m_value)+".png"));
+	}
+	else if (m_version == FRIEND)
+	{
+		m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particleFriend.png"));
+	}
 }
 
 bool Particle::IsBusy()
@@ -91,7 +102,6 @@ bool Particle::IsBusy()
 
 sf::Sprite* Particle::GetSprite()
 {
-	m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particle0"+ConvertIntToStdString(m_value)+".png"));
 	return m_sprite;
 }
 
