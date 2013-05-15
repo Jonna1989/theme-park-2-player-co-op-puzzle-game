@@ -4,7 +4,6 @@
 #include <vector>
 #include <iostream>
 
-
 #include "WindowManager.h"
 #include "Tile.h"
 #include "TextureProvider.h"
@@ -12,6 +11,7 @@
 #include "Soundeffects.h"
 #include "Score.h"
 #include "Load.h"
+#include "Animation.h"
 
 static int BOARD_HEIGHT = 12;
 static int BOARD_WIDTH	= 16;
@@ -113,6 +113,8 @@ private:
 	std::vector<ParticleEffect*> m_particleEffects;
 	std::vector<std::vector<int>> m_levels;
 	std::vector<std::string> bubblesSheetpaths;
+	
+	Animation* m_glowAnimation;
 	
 	Score* m_score;
 	

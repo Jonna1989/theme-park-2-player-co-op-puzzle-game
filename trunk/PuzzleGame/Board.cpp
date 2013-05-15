@@ -44,6 +44,9 @@ void Board::Initialize()
 
 	//m_plateSprite->setPosition((float)BOARD_OFFSET_X-20,(float)BOARD_OFFSET_Y-20+(TILE_SIZE_Y*2));
 
+	m_glowAnimation = new Animation();
+	m_glowAnimation->Initialize("Assets/GraphicalAssets/Bubbles/glow.png", sf::Vector2f(75,75), sf::Vector2i(0,0), 8, 6, 8);
+
 	m_player1HalfStep = 0;
 	m_player2HalfStep = 0;
 	m_comboPitch = 1.0f;
@@ -57,6 +60,7 @@ void Board::Update()
 {
 	Window->draw(*m_backgroundSprite);
 	Window->draw(*m_plateSprite);
+	m_glowAnimation->Update();
 	DrawBoard();
 	Window->draw(*m_frameSprite);
 
@@ -87,6 +91,7 @@ void Board::Cleanup()
 	{
 		delete m_sprites[i];
 	}
+	delete m_glowAnimation;
 	m_sprites.clear();
 	Clean(m_backgroundSprite);
 	Clean(m_plateSprite);
@@ -1044,6 +1049,16 @@ void Board::DrawTile(int x, int y)
 			{
 				m_sprites.at(NUMBER_OF_BUBBLES+5)->setPosition(m_board.at(y).at(x).GetPositionPixels().x+BOARD_OFFSET_X, m_board.at(y).at(x).GetPositionPixels().y+BOARD_OFFSET_Y);
 				WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(NUMBER_OF_BUBBLES+5));			
+			}
+			if (NrOfAdjacentSameColor(x,y) == 2)
+			{
+				m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+				Window->draw(*m_glowAnimation->getSprite());
+				for (int i = 0; i < NrOfAdjacentSameColor(x,y); i++)
+				{
+					m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+					Window->draw(*m_glowAnimation->getSprite());
+				}
 			}
 		}
 	}
