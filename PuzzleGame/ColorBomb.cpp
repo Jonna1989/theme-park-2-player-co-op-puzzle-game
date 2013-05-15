@@ -6,6 +6,7 @@ ColorBomb::ColorBomb()
 {
 	m_isFalling = true;
 	m_isInitialized = false;
+	m_hasActivated = false;
 }
 
 
@@ -22,17 +23,16 @@ void ColorBomb::Initialize()
 	m_contentID = 12;
 	m_colorToRemove = 0;
 	m_isInitialized = true;
+	m_hasActivated = false;
 }
 
 void ColorBomb::Update()
 {
 	Drop();
 
-	if(!m_isFalling)
+	if(!m_isFalling && !m_hasActivated)
 	{
 		Activate();
-		m_isFalling = true;
-		Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 	}
 }
 
@@ -64,6 +64,9 @@ void ColorBomb::Activate()
 	{
 		Board::Instance()->GetTile(tilesToRemove.at(i).x, tilesToRemove.at(i).y)->ClearTile();
 	}
+
+	m_hasActivated = true;
+	Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 }
 
 #pragma endregion

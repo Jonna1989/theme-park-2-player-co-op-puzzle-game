@@ -66,6 +66,11 @@ bool PowerItem::GetIsInitialized()
 	return m_isInitialized;
 }
 
+bool PowerItem::HasActivated()
+{
+	return m_hasActivated;
+}
+
 #pragma endregion
 
 #pragma region Setters
@@ -91,6 +96,11 @@ void PowerItem::SetGoodItem(bool good)
 void PowerItem::SetContentID(int ID)
 {
 	m_contentID = ID;
+}
+
+void PowerItem::SetHasActivated(bool activated)
+{
+	 m_hasActivated = activated;
 }
 
 #pragma endregion

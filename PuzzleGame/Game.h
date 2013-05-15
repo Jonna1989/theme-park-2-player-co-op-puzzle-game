@@ -10,6 +10,9 @@
 #include "ColorBomb.h"
 #include "Bomb.h"
 #include "ScoreText.h"
+
+#include <stdlib.h>
+
 class StateManager;
 
 class Game:public State
