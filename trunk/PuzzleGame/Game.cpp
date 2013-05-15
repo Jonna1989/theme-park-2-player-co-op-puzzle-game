@@ -60,6 +60,7 @@ void Game::Update()
 	{
 		cb->Update();
 	}
+
 	m_speedUpSprite->setColor(sf::Color(255,255,225,(sf::Uint8)m_speedUpSpriteAlpha));
 	if (m_speedUpSpriteAlpha > 5)
 	{
@@ -215,6 +216,7 @@ void Game::KeyCommand_DropBomb()
 		else
 		{
 			b->SetFalling(true);
+			b->SetHasActivated(false);
 		}
 
 		b->SetPosition(BOARD_WIDTH / 2, 2);
@@ -232,9 +234,11 @@ void Game::KeyCommand_DropColorBomb()
 		else
 		{
 			cb->SetFalling(true);
+			cb->SetHasActivated(false);
 		}
 
-		cb->SetColorToRemove(1);
+		int color = (rand() % 7) + 1;
+		cb->SetColorToRemove(color);
 		cb->SetPosition(BOARD_WIDTH / 2, 2);
 	}
 }

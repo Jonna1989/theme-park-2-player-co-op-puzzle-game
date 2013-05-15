@@ -23,11 +23,13 @@ public:
 	virtual bool IsGoodItem();
 	virtual int GetContentID();
 	virtual bool GetIsInitialized();
+	virtual bool HasActivated();
 
 	virtual void SetPosition(int x, int y);
 	virtual void SetFalling(bool falling);
 	virtual void SetGoodItem(bool good);
 	virtual void SetContentID(int ID);
+	virtual void SetHasActivated(bool activated);
 
 protected:
 	sf::Vector2i m_position;
@@ -35,6 +37,7 @@ protected:
 	bool m_goodItem; //true = powerup, false = trap
 	int m_contentID;
 	bool m_isInitialized;
+	bool m_hasActivated;
 };
 
 #endif

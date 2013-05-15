@@ -6,6 +6,7 @@ Bomb::Bomb()
 {
 	m_isFalling = true;
 	m_isInitialized = false;
+	m_hasActivated = false;
 }
 
 
@@ -22,17 +23,16 @@ void Bomb::Initialize()
 	m_blastRadius = 2;
 	m_contentID = 11;
 	m_isInitialized = true;
+	m_hasActivated = false;
 }
 
 void Bomb::Update()
 {
 	Drop();
 
-	if(!m_isFalling)
+	if(!m_isFalling && !m_hasActivated)
 	{
 		Activate();
-		m_isFalling = true;
-		Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 	}
 }
 
@@ -64,6 +64,9 @@ void Bomb::Activate()
 	{
 		Board::Instance()->GetTile(tilesToClear.at(i).x, tilesToClear.at(i).y)->ClearTile();
 	}
+
+	m_hasActivated = true;
+	Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 }
 
 #pragma endregion
