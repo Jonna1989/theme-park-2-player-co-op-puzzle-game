@@ -19,9 +19,9 @@ void Game::Initialize()
 	m_player2 = new Player();
 	m_player2->Initialize(20);
 	m_player1Avatar = new Avatar();
-	m_player1Avatar->Initialize("3",100,500);
+	m_player1Avatar->Initialize("rose",100,500, sf::Vector2f(466/2,534), sf::Vector2i(0,0), 2, 6, 1);
 	m_player2Avatar = new Avatar();
-	m_player2Avatar->Initialize("3",1780,500);
+	m_player2Avatar->Initialize("rose",1780,500, sf::Vector2f(466/2,534), sf::Vector2i(0,0), 2, 6, 2);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	Music::Instance()->Initialize(Music::LevelMusic1);
 	Music::Instance()->StartMusic();
@@ -49,7 +49,7 @@ void Game::Update()
 	m_player1->Update();
 	m_player2->Update();
 	m_player1Avatar->Update();
-	m_player2Avatar->Update();
+	//m_player2Avatar->Update();
 
 	if(b->GetIsInitialized())
 	{
