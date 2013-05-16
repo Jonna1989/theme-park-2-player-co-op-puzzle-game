@@ -63,7 +63,7 @@ void Board::Update()
 	m_glowAnimation->Update();
 	DrawBoard();
 	Window->draw(*m_frameSprite);
-
+	DrawNewPieceSpawn();
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
 	{
 		if (m_particleEffects[i]->IsBusy())
@@ -1230,7 +1230,21 @@ void Board::DrawGlow()
 }
 
 #pragma endregion
-
+void Board::DrawNewPieceSpawn()
+{
+	if (GetSpecifiedTile(10)->GetPositionVector().y < 2)
+	{
+		CreateSprite(m_newPieceSpawnSprite,"Assets/GraphicalAssets/Bubbles/ros.png");
+		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(10)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(10)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
+		Window->draw(*m_newPieceSpawnSprite);
+	}
+	if (GetSpecifiedTile(20)->GetPositionVector().y < 2)
+	{
+		m_newPieceSpawnSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/lilja.png"));
+		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(20)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(20)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
+		Window->draw(*m_newPieceSpawnSprite);
+	}
+}
 void Board::PlayComboSound(sf::Clock* &comboClock)
 {
 	if (comboClock->getElapsedTime().asMilliseconds() <= m_comboSoundThreshold)

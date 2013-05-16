@@ -124,6 +124,8 @@ private:
 
 	sf::Sprite* m_frameSprite;
 
+	sf::Sprite* m_newPieceSpawnSprite;
+
 	int m_player1HalfStep;
 	int m_player2HalfStep;
 	float m_comboVolume;
@@ -138,7 +140,7 @@ private:
 	void DrawBoard();
 	void DrawTile(int x, int y);
 	void DrawGlow();
-
+	void DrawNewPieceSpawn();
 	void PlayComboSound(sf::Clock* &comboClock);
 
 

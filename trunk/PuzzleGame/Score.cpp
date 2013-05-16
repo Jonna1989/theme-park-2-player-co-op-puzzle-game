@@ -32,6 +32,7 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 }
 void Score::Update()
 {
+	m_comboAlphaLastUpdate = m_comboAlpha;
  	if (m_score != m_scoreLastUpdate)
  	{
 		ConvertIntToSfStringToSfText(m_score,m_scoreAsSfString,m_scoreAsText, "Score: ",false);
@@ -48,8 +49,13 @@ void Score::Update()
 	}
 	else
 	{
+		
 		m_comboAlpha -= 50*DeltaTime;
 		m_comboMultiplierAsText->setColor(sf::Color(m_comboMultiplierAsText->getColor().r,m_comboMultiplierAsText->getColor().g,m_comboMultiplierAsText->getColor().b,(sf::Uint8)m_comboAlpha));
+		if (m_comboAlpha <= 0 && m_comboAlphaLastUpdate > 0)
+		{
+			Soundeffects::Instance()->PlaySound(0,3,1,100);
+		}
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)

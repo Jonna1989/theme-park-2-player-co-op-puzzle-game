@@ -2,6 +2,7 @@
 
 #include "ScoreText.h"
 #include "HighScore.h"
+#include "Soundeffects.h"
 static const int NUMBER_OF_SCORE_POPUPS = 10;
 class Score
 {
@@ -48,6 +49,7 @@ private:
 	sf::Text* m_scoreAsText;
 	sf::Text* m_comboMultiplierAsText;
 	float m_comboAlpha;
+	float m_comboAlphaLastUpdate;
 	std::vector<ScoreText*> m_scoreTexts;
 	int scoreTextAlternation;
 
