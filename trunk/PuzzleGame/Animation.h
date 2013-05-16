@@ -24,7 +24,6 @@ public:
 
 	//Getters & Setters
 	sf::Sprite* getSprite();
-	sf::Texture* getTexture();
 	float getCurrentCell();
 
 	std::string getMapKey();
