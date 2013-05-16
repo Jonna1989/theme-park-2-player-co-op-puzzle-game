@@ -27,3 +27,6 @@ void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToU
 void ConvertIntToSfStringToSfText(int intToGetStringFrom,sf::String &sfStringToUpdateFrom, sf::Text* &sfTextToConvertTo, sf::String addExtraText, bool atEnd);
 
 std::string ConvertIntToStdString(int intToConvert);
+std::string ConvertCharToStdString(char charToConvert);
+int RandomNumber();
+int RandomNumber(int lowRange, int highRange);

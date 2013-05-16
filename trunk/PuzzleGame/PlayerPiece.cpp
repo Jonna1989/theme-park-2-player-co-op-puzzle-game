@@ -20,7 +20,7 @@ void PlayerPiece::Initialize(int owner)
 	m_pieceTwo->Initialize(m_owner+1,m_owner/10);
 
 	if(m_owner == 10)
-	{		
+	{	
 		m_spawnPointOne.x = SPAWN_PLAYER_1X;
 		m_spawnPointOne.y = 1;
 					
@@ -519,6 +519,25 @@ void PlayerPiece::DropPieceQuickly()
 
 void PlayerPiece::RandomizeNewPiece()
 {
+	if (m_owner == 10 || m_owner == 11)
+	{
+		randNum = RandomNumber(2,12);
+		while(randNum % 2 == 0)
+		{
+			randNum = RandomNumber(2,12);
+		}
+	}
+	else if (m_owner == 20 || m_owner == 21)
+	{
+		randNum = RandomNumber(2,12);
+		while(randNum % 2 != 0)
+		{
+			randNum = RandomNumber(2,12);
+		}
+	}
+
+	m_pieceOne->SetPosition(randNum,m_pieceOne->GetPosition().y);
+	m_pieceTwo->SetPosition(randNum,m_pieceTwo->GetPosition().y);
 	m_pieceOneNextColor = m_pieceOne->RandomizeColor();
 	m_pieceTwoNextColor = m_pieceTwo->RandomizeColor();
 }

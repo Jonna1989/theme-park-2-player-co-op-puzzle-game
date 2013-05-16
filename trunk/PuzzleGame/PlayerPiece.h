@@ -7,7 +7,7 @@
 #include "Piece.h"
 #include "Board.h"
 #include "Soundeffects.h"
-
+#include "Load.h"
 const int SPAWN_PLAYER_1X = BOARD_WIDTH/2-(BOARD_WIDTH/3);
 const int SPAWN_PLAYER_2X = BOARD_WIDTH/2+(BOARD_WIDTH/3)-1;
 class PlayerPiece
@@ -56,7 +56,7 @@ private:
 	sf::Vector2i m_spawnPointTwo; //For piece two
 	int m_pieceOneNextColor;
 	int m_pieceTwoNextColor;
-
+	int randNum;
 	void ConvertPieceToPassive();
 };
 

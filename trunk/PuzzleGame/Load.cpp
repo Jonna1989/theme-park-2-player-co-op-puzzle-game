@@ -103,3 +103,20 @@ std::string ConvertIntToStdString(int intToConvert)
 	std::string i_as_string(s.str());
 	return i_as_string;
 }
+std::string ConvertCharToStdString(char charToConvert)
+{
+	std::stringstream ss;
+	std::string s;
+	char c = charToConvert;
+	ss << c;
+	ss >> s;
+	return s;
+}
+int RandomNumber()
+{
+	return rand();
+}
+int RandomNumber(int lowRange, int highRange)
+{
+	return (rand() % ((highRange-lowRange) - 1) + lowRange +1);
+}
