@@ -1076,7 +1076,7 @@ void Board::DrawGlow()
 							&& !(PositionsOfConnectedSameColor(x,y)[1].x == x && PositionsOfConnectedSameColor(x,y)[1].y == y
 							&& GetTile(PositionsOfConnectedSameColor(x,y)[1].x,PositionsOfConnectedSameColor(x,y)[1].y)->GetOwner() == 0))
 						{
-							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 							{
 								if (PositionsOfConnectedSameColor(x,y)[i].x > 1
 									&& PositionsOfConnectedSameColor(x,y)[i].x < BOARD_WIDTH-2
@@ -1096,7 +1096,7 @@ void Board::DrawGlow()
 									preventDraw = true;
 								}
 							}
-							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 							{
 								if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling()
 									|| GetTile(x,y)->GetFalling()
@@ -1107,11 +1107,11 @@ void Board::DrawGlow()
 							}
 							if (!preventDraw)
 							{
-								m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+								m_glowAnimation->getSprite()->setPosition(x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,y*(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y);
 								Window->draw(*m_glowAnimation->getSprite());
-								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+								for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 								{
-									m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+									m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y);
 									Window->draw(*m_glowAnimation->getSprite());
 								}
 							}
@@ -1128,7 +1128,7 @@ void Board::DrawGlow()
 								&& !(PositionsOfConnectedSameColor(x,y)[1].x == x && PositionsOfConnectedSameColor(x,y)[1].y == y
 								&& GetTile(PositionsOfConnectedSameColor(x,y)[1].x,PositionsOfConnectedSameColor(x,y)[1].y)->GetOwner() == 0))
 							{
-								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+								for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 								{
 									if (PositionsOfConnectedSameColor(x,y)[i].x > 1
 										&& PositionsOfConnectedSameColor(x,y)[i].x < BOARD_WIDTH-2
@@ -1148,7 +1148,7 @@ void Board::DrawGlow()
 										preventDraw = true;
 									}
 								}
-								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+								for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 								{
 									if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling()
 										|| GetTile(x,y)->GetFalling()
@@ -1159,11 +1159,11 @@ void Board::DrawGlow()
 								}
 								if (!preventDraw)
 								{
-									m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+									m_glowAnimation->getSprite()->setPosition(x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,y*(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y);
 									Window->draw(*m_glowAnimation->getSprite());
-									for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+									for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 									{
-										m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+										m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y);
 										Window->draw(*m_glowAnimation->getSprite());
 									}
 								}
@@ -1182,7 +1182,7 @@ void Board::DrawGlow()
 							&& !(PositionsOfConnectedSameColor(x,y)[1].x == x && PositionsOfConnectedSameColor(x,y)[1].y == y
 							&& GetTile(PositionsOfConnectedSameColor(x,y)[1].x,PositionsOfConnectedSameColor(x,y)[1].y)->GetOwner() == 0))
 						{
-							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 							{
 								if (PositionsOfConnectedSameColor(x,y)[i].x > 1
 									&& PositionsOfConnectedSameColor(x,y)[i].x < BOARD_WIDTH-2
@@ -1202,7 +1202,7 @@ void Board::DrawGlow()
 									preventDraw = true;
 								}
 							}
-							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+							for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 							{
 								if (GetTile(PositionsOfConnectedSameColor(x,y)[i].x,PositionsOfConnectedSameColor(x,y)[i].y)->GetFalling()
 									|| GetTile(x,y)->GetFalling()
@@ -1213,11 +1213,11 @@ void Board::DrawGlow()
 							}
 							if (!preventDraw)
 							{
-								m_glowAnimation->getSprite()->setPosition(x*TILE_SIZE_X+BOARD_OFFSET_X,y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+								m_glowAnimation->getSprite()->setPosition(x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,y*(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y);
 								Window->draw(*m_glowAnimation->getSprite());
-								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
+								for (unsigned int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 								{
-									m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*TILE_SIZE_X+BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*TILE_SIZE_Y+BOARD_OFFSET_Y);
+									m_glowAnimation->getSprite()->setPosition(PositionsOfConnectedSameColor(x,y)[i].x*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,PositionsOfConnectedSameColor(x,y)[i].y*(float)TILE_SIZE_Y+BOARD_OFFSET_Y);
 									Window->draw(*m_glowAnimation->getSprite());
 								}
 							}
