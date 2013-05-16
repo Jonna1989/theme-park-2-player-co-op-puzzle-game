@@ -44,11 +44,11 @@ void Music::Initialize(int TrackNumber)
 		break;
 	case LevelMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/forest.ogg");
+		m_music->setVolume(150);
 		m_music->play();
 		break;
 	case GameOverMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/canLose.ogg");
-		m_music->play();
 		break;
 	}
 

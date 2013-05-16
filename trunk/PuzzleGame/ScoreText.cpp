@@ -22,11 +22,10 @@ void ScoreText::Initialize(unsigned int charSize, const sf::Color textColor)
 	m_scoreTextPosY = 0;
 	m_scaleFactorX = 1.0f;
 	m_scaleFactorY = 1.0f;
-
 }
 void ScoreText::Reset(sf::String scoreAsString, float positionX, float positionY)
 {
-	int textOffset = 0;
+	float textOffset = 0;
 	m_stringAsCharVector.clear();
 	for (unsigned int i = 0; i < scoreAsString.getSize(); i++)
 	{
@@ -41,7 +40,7 @@ void ScoreText::Reset(sf::String scoreAsString, float positionX, float positionY
 		m_numberSprites[j]->setPosition(positionX-textOffset,positionY);
 		if (j > 0)
 		{
-			m_numberSprites[j]->setPosition(m_numberSprites[j-1]->getPosition().x+m_numberSprites[j]->getGlobalBounds().width,positionY);
+			m_numberSprites[j]->setPosition(m_numberSprites[j-1]->getPosition().x+m_numberSprites[j-1]->getGlobalBounds().width,positionY);
 		}
 	}
 	m_textToDraw->setString(scoreAsString);

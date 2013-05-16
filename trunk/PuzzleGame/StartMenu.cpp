@@ -19,7 +19,6 @@ void StartMenu::Initialize()
 {
 	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/how.png");
 	Music::Instance()->Initialize(0);
-	Music::Instance()->StartMusic();
 }
 
 void StartMenu::Update()
