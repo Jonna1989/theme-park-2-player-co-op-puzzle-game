@@ -521,19 +521,11 @@ void PlayerPiece::RandomizeNewPiece()
 {
 	if (m_owner == 10 || m_owner == 11)
 	{
-		randNum = RandomNumber(2,12);
-		while(randNum % 2 == 0)
-		{
-			randNum = RandomNumber(2,12);
-		}
+		randNum = RandomNumber(0,7);
 	}
 	else if (m_owner == 20 || m_owner == 21)
 	{
-		randNum = RandomNumber(2,12);
-		while(randNum % 2 != 0)
-		{
-			randNum = RandomNumber(2,12);
-		}
+		randNum = RandomNumber(8,15);
 	}
 
 	m_pieceOne->SetPosition(randNum,m_pieceOne->GetPosition().y);
