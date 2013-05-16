@@ -58,7 +58,7 @@ void Soundeffects::Cleanup()
 	m_paths.clear();
 	for (int i = 0; i < NUMBER_OF_CATEGORIES; i++)
 	{
-		for (int k = 0; k < m_bufferCategories[i].size(); k++)
+		for (unsigned int k = 0; k < m_bufferCategories[i].size(); k++)
 		{
 			delete m_bufferCategories[i][k];
 		}
