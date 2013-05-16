@@ -91,8 +91,8 @@ void Board::Cleanup()
 	{
 		delete m_sprites[i];
 	}
-	delete m_glowAnimation;
 	m_sprites.clear();
+	delete m_glowAnimation;
 	Clean(m_backgroundSprite);
 	Clean(m_plateSprite);
 	Clean(m_frameSprite);
@@ -1091,6 +1091,10 @@ void Board::DrawGlow()
 										break;
 									}
 								}
+								else
+								{
+									preventDraw = true;
+								}
 							}
 							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
 							{
@@ -1138,6 +1142,10 @@ void Board::DrawGlow()
 											preventDraw = false;
 											break;
 										}
+									}
+									else
+									{
+										preventDraw = true;
 									}
 								}
 								for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
@@ -1188,6 +1196,10 @@ void Board::DrawGlow()
 										preventDraw = false;
 										break;
 									}
+								}
+								else
+								{
+									preventDraw = true;
 								}
 							}
 							for (int i = 0; i < PositionsOfConnectedSameColor(x,y).size(); i++)
