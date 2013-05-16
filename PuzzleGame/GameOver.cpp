@@ -17,7 +17,6 @@ void GameOver::Initialize()
 {
 	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/gameover.png");
 	Music::Instance()->Initialize(Music::GameOverMusic1);
-	Music::Instance()->StartMusic();
 	m_highscore = new HighScore();
 	m_highscore->InitializeForGameOver();
 }

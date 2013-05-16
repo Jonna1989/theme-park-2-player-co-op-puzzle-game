@@ -3,6 +3,7 @@
 #include "WindowManager.h"
 #include "FrameTime.h"
 #include "Load.h"
+#include "TextureProvider.h"
 class ScoreText
 {
 public:

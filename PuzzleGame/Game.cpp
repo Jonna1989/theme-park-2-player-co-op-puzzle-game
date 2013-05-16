@@ -24,7 +24,6 @@ void Game::Initialize()
 	m_player2Avatar->Initialize("rose",1780,500, sf::Vector2f(466/2,534), sf::Vector2i(0,0), 2, 6, 1);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	Music::Instance()->Initialize(Music::LevelMusic1);
-	Music::Instance()->StartMusic();
 	m_gravityClock = new sf::Clock();
 	m_gravityInterval = 300;
 	m_player1Clock = new sf::Clock();
@@ -34,8 +33,8 @@ void Game::Initialize()
 	m_increaseClock = new sf::Clock();
 	m_increaseInterval = 10000;
 
-	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/TempArt/speed.png");
-	m_speedUpSprite->setPosition(710,400);
+	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/Speedup/speed.png");
+	m_speedUpSprite->setPosition(((Window->getSize().x)-(m_speedUpSprite->getGlobalBounds().width))/2,400);
 	m_speedUpSpriteAlpha = 0.0f;
 	b = new Bomb();
 	cb = new ColorBomb();
