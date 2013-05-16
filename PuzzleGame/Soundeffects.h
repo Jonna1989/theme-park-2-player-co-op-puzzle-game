@@ -21,6 +21,8 @@ const int NUMBER_OF_CATEGORIES = 4; // Number of PATHS_
 
 const float DEFAULT_PITCH = 1.0f;
 
+const int NUMBER_OF_VECTOR_SOUNDS = 20;
+
 class Soundeffects
 {
 public:
@@ -50,9 +52,8 @@ private:
 	~Soundeffects();
 	static Soundeffects*	m_instance;
 
-	std::vector<std::vector<std::string>> m_paths;
-	std::vector<std::vector<sf::SoundBuffer*>> m_bufferCategories;
-	std::vector<sf::Sound*> m_soundCategories;
+	std::vector<std::pair< std::vector<sf::SoundBuffer*>,std::vector<std::string>>> m_buffersAndPaths;
+	std::vector<sf::Sound*> m_sounds;
 
 #pragma region declare Volume 
 	ConfigReader m_soundconfig;

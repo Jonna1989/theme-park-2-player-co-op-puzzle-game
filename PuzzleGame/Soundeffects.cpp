@@ -43,6 +43,11 @@ void Soundeffects::Initialize()
 	AddVectorsToVector(PATH_POP, NUMBER_OF_POP_SOUNDS);
 	AddVectorsToVector(PATH_DEATH, NUMBER_OF_DEATH_SOUNDS);
 	AddVectorsToVector(PATH_SPEEDUP, NUMBER_OF_SPEEDUP_SOUNDS);
+	for (int i = 0; i < NUMBER_OF_VECTOR_SOUNDS; i++)
+	{
+		m_sounds.push_back(new sf::Sound());
+	}
+
 }
 #pragma endregion
 
@@ -55,14 +60,20 @@ void Soundeffects::Update()
 #pragma region Cleanup
 void Soundeffects::Cleanup()
 {
-	m_paths.clear();
+	for (unsigned int i = 0; i < m_sounds.size(); i++)
+	{
+		delete m_sounds[i];
+	}
 	for (int i = 0; i < NUMBER_OF_CATEGORIES; i++)
 	{
-		for (unsigned int k = 0; k < m_bufferCategories[i].size(); k++)
+		for (unsigned int k = 0; k < m_buffersAndPaths[i].first.size(); k++)
 		{
-			delete m_bufferCategories[i][k];
+			delete m_buffersAndPaths[i].first[k];
 		}
+		m_buffersAndPaths[i].first.clear();
+		m_buffersAndPaths[i].second.clear();
 	}
+
 }
 #pragma endregion
 
@@ -99,9 +110,7 @@ void Soundeffects::AddVectorsToVector(const std::string path, int numberOfSounds
 		pathVectorToAddToVectorPathVector.push_back(PATH_TO_SOUND_EFFECTS+path+ConvertIntToStdString(i+1)+".wav");
 		LoadSoundFile(bufferVectorToAddToVectorBufferVector,i,pathVectorToAddToVectorPathVector);
 	}
-	m_bufferCategories.push_back(bufferVectorToAddToVectorBufferVector);
-	sf::Sound* categorySound = new sf::Sound();
-	m_soundCategories.push_back(categorySound);
+	m_buffersAndPaths.push_back(std::pair< std::vector<sf::SoundBuffer*>,std::vector<std::string>>(bufferVectorToAddToVectorBufferVector,pathVectorToAddToVectorPathVector));
 }
 void Soundeffects::CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean)
 {
@@ -166,10 +175,24 @@ void Soundeffects::SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Soun
 }
 void Soundeffects::SetBufferToSoundAndPlay(int BufferCategory, int BufferNumber, float Pitch, float Volume)
 {
-	m_soundCategories[BufferCategory]->stop();
-	m_soundCategories[BufferCategory]->setBuffer(*m_bufferCategories[BufferCategory][BufferNumber]);
-	m_soundCategories[BufferCategory]->setPitch(Pitch);
-	m_soundCategories[BufferCategory]->setVolume(Volume);
-	m_soundCategories[BufferCategory]->play();
+
+	unsigned int temp = m_sounds.size();
+	std::cout << temp << std::endl;
+	for (unsigned int i = 0; i < temp; i++)
+	{
+		if (!(m_sounds[i]->getStatus() == sf::Sound::Playing))
+		{
+			m_sounds[i]->setBuffer(*m_buffersAndPaths[BufferCategory].first[BufferNumber]);
+			m_sounds[i]->setPitch(Pitch);
+			m_sounds[i]->setVolume(Volume);
+			m_sounds[i]->play();
+			std::cout << m_buffersAndPaths[BufferCategory].second[BufferNumber] << std::endl;
+			break;
+		}
+		if (i == temp)
+		{
+			i = 0;
+		}
+	}
 }
 #pragma endregion
