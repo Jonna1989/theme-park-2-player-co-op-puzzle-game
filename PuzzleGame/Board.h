@@ -137,6 +137,7 @@ private:
 
 	void DrawBoard();
 	void DrawTile(int x, int y);
+	void DrawGlow();
 
 	void PlayComboSound(sf::Clock* &comboClock);
 
