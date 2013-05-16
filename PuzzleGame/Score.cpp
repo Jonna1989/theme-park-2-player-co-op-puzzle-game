@@ -112,16 +112,16 @@ void Score::AddScore(int scoreToAdd, float scoreTextPosX, float scoreTextPosY, i
 	{
 		if (m_scoreTexts[i]->GetBusy() == false)
 		{
-			if (m_friendBonus == true)
-			{
-				m_scoreTexts[i]->Reset("WOO FRIEND BONUS: "+m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
-				break;
-			}
-			else
-			{
+// 			if (m_friendBonus == true)
+// 			{
+// 				m_scoreTexts[i]->Reset("Buddy bonus: "+m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
+// 				break;
+// 			}
+// 			else
+// 			{
 				m_scoreTexts[i]->Reset(m_previousScoreAsSfString,scoreTextPosX,scoreTextPosY);
 				break;
-			}
+//			}
 		}
 	}
 	m_score += m_previousScore;

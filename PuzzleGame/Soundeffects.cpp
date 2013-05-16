@@ -39,15 +39,10 @@ void Soundeffects::Initialize()
 	m_soundvol = m_soundconfig.get("sound_options","soundvolume",m_soundvol) * 10;
 	m_soundon = m_soundconfig.get("sound_options","soundon",m_soundon);
 #pragma endregion
-
-	DeclarePathArray(m_pathVectorUi,NUMBER_OF_UI_SOUNDS,PATH_UI);
-	DeclarePathArray(m_pathVectorPop,NUMBER_OF_POP_SOUNDS,PATH_POP);
-	DeclarePathArray(m_pathVectorDeath,NUMBER_OF_DEATH_SOUNDS,PATH_DEATH);
-	DeclarePathArray(m_pathVectorSpeedup,NUMBER_OF_SPEEDUP_SOUNDS,PATH_SPEEDUP);
-	AddVectorsToVector(NUMBER_OF_UI_SOUNDS,m_uiBuffers,m_pathVectorUi,m_uiSound);
-	AddVectorsToVector(NUMBER_OF_POP_SOUNDS,m_popBuffers,m_pathVectorPop,m_popSound);
-	AddVectorsToVector(NUMBER_OF_DEATH_SOUNDS,m_deathBuffers,m_pathVectorDeath,m_deathSound);
-	AddVectorsToVector(NUMBER_OF_SPEEDUP_SOUNDS,m_speedupBuffers,m_pathVectorSpeedup,m_speedupSound);
+	AddVectorsToVector(PATH_UI, NUMBER_OF_UI_SOUNDS);
+	AddVectorsToVector(PATH_POP, NUMBER_OF_POP_SOUNDS);
+	AddVectorsToVector(PATH_DEATH, NUMBER_OF_DEATH_SOUNDS);
+	AddVectorsToVector(PATH_SPEEDUP, NUMBER_OF_SPEEDUP_SOUNDS);
 }
 #pragma endregion
 
@@ -60,10 +55,14 @@ void Soundeffects::Update()
 #pragma region Cleanup
 void Soundeffects::Cleanup()
 {
-	delete m_uiSound;
-	CleanupVector(m_uiBuffers);
-	delete m_popSound;
-	CleanupVector(m_popBuffers);
+	m_paths.clear();
+	for (int i = 0; i < NUMBER_OF_CATEGORIES; i++)
+	{
+		for (int k = 0; k < m_bufferCategories[i].size(); k++)
+		{
+			delete m_bufferCategories[i][k];
+		}
+	}
 }
 #pragma endregion
 
@@ -75,7 +74,7 @@ void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch, fl
 #pragma endregion
 void Soundeffects::PlayRandomSoundInCategory(int SoundCategory, int lowRange, int highRange)
 {
-	SetBufferToSoundAndPlay(SoundCategory,(rand() % ((highRange-lowRange) - 1) + lowRange +1),1,100);
+	SetBufferToSoundAndPlay(SoundCategory,RandomNumber(lowRange,highRange),1,100);
 }
 #pragma region SetSoundvol
 void Soundeffects::SetSoundvol()
@@ -91,30 +90,24 @@ void Soundeffects::SetSoundvol()
 #pragma endregion
 
 #pragma region Privates
-
-std::vector<std::string> Soundeffects::DeclarePathArray(std::vector<std::string> &m_pathVector, int NumberOfSoundsInArray, const std::string path)
+void Soundeffects::AddVectorsToVector(const std::string path, int numberOfSounds)
 {
-	for (int i = 1; i <= NumberOfSoundsInArray ; i++)
-	{
-		m_pathVector.push_back(PATH_TO_SOUND_EFFECTS+path+ConvertIntToStdString(i)+".wav");
-	}
-	return m_pathVector;
-}
-void Soundeffects::AddVectorsToVector(int numberOfSounds,std::vector<sf::SoundBuffer*> &vectorToLoadInto, std::vector<std::string> &pathVector, sf::Sound* &categorySound)
-{
+	std::vector<sf::SoundBuffer*> bufferVectorToAddToVectorBufferVector;
+	std::vector<std::string> pathVectorToAddToVectorPathVector;
 	for (int i = 0; i < numberOfSounds; i++)
 	{
-		LoadSoundFile(vectorToLoadInto,i,pathVector);
+		pathVectorToAddToVectorPathVector.push_back(PATH_TO_SOUND_EFFECTS+path+ConvertIntToStdString(i+1)+".wav");
+		LoadSoundFile(bufferVectorToAddToVectorBufferVector,i,pathVectorToAddToVectorPathVector);
 	}
-	m_bufferCategories.push_back(vectorToLoadInto);
-	categorySound = new sf::Sound();
+	m_bufferCategories.push_back(bufferVectorToAddToVectorBufferVector);
+	sf::Sound* categorySound = new sf::Sound();
 	m_soundCategories.push_back(categorySound);
 }
 void Soundeffects::CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean)
 {
-	for (unsigned int i = 0; i < vectorToClean.size() ; i++)
+	for (std::vector<sf::SoundBuffer*>::iterator it = vectorToClean.begin(); it != vectorToClean.end(); it++)
 	{
-		delete vectorToClean[i];
+		delete *it;
 	}
 	vectorToClean.clear();
 }

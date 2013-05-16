@@ -20,7 +20,7 @@ void Base::Initialize()
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
 	Soundeffects::Instance()->Initialize();
-	srand((int)time((0)));
+	srand( (int)time(0) );
 }
 
 void Base::Update()

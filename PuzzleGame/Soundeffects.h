@@ -48,25 +48,9 @@ public:
 private:
 	Soundeffects();
 	~Soundeffects();
-	std::vector<std::vector<std::string>> m_paths;
-	std::vector<std::string> m_pathVectorUi;
-	std::vector<std::string> m_pathVectorPop;
-	std::vector<std::string> m_pathVectorDeath;
-	std::vector<std::string> m_pathVectorSpeedup;
 	static Soundeffects*	m_instance;
 
-	sf::Sound* m_uiSound;
-	std::vector<sf::SoundBuffer*> m_uiBuffers;
-
-	sf::Sound* m_popSound;
-	std::vector<sf::SoundBuffer*> m_popBuffers;
-
-	sf::Sound* m_deathSound;
-	std::vector<sf::SoundBuffer*> m_deathBuffers;
-
-	sf::Sound* m_speedupSound;
-	std::vector<sf::SoundBuffer*> m_speedupBuffers;
-
+	std::vector<std::vector<std::string>> m_paths;
 	std::vector<std::vector<sf::SoundBuffer*>> m_bufferCategories;
 	std::vector<sf::Sound*> m_soundCategories;
 
@@ -76,8 +60,7 @@ private:
 	bool		 m_soundon;
 #pragma endregion
 
-std::vector<std::string> DeclarePathArray(std::vector<std::string> &m_pathVector, int NumberOfSoundsInArray, const std::string Path); 
-void AddVectorsToVector(int numberOfSounds,std::vector<sf::SoundBuffer*> &vectorToLoadInto, std::vector<std::string> &pathVector, sf::Sound* &categorySound);
+void AddVectorsToVector(const std::string path, int numberOfSounds);
 void CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean);
 void PlaySingleSound(sf::Sound* &soundToPlay);
 void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string filename, float initialPitch);
