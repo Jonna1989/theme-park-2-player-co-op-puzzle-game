@@ -54,6 +54,13 @@ void Board::Initialize()
 	m_comboSoundThreshold = 5000;
 	m_score = new Score;
 	m_score->Initialize(400,75,10,1,20);
+
+	m_fallGlowAnimationP1 = new Animation();
+	m_fallGlowAnimationP2 = new Animation();
+	m_fallGlowAnimationP1->Initialize("Assets/GraphicalAssets/TempArt/fallDownGreen.png",sf::Vector2f(75,28),sf::Vector2i(0,0),1,6,12);
+	m_fallGlowAnimationP2->Initialize("Assets/GraphicalAssets/TempArt/fallDownBlue.png",sf::Vector2f(75,28),sf::Vector2i(0,0),1,6,12);
+	m_fallPosP1 = 0;
+	m_fallPosP2 = 0;
 }
 
 void Board::Update()
@@ -64,6 +71,13 @@ void Board::Update()
 	DrawBoard();
 	Window->draw(*m_frameSprite);
 	DrawNewPieceSpawn();
+
+	m_fallGlowAnimationP1->Update();
+	m_fallGlowAnimationP2->Update();
+	m_fallGlowAnimationP1->getSprite()->setPosition(sf::Vector2f(m_fallPosP1*TILE_SIZE_X+BOARD_OFFSET_X,TILE_SIZE_Y*2+BOARD_OFFSET_Y));
+	m_fallGlowAnimationP2->getSprite()->setPosition(sf::Vector2f(m_fallPosP2*TILE_SIZE_X+BOARD_OFFSET_X,TILE_SIZE_Y*2+BOARD_OFFSET_Y));
+	Window->draw(*m_fallGlowAnimationP1->getSprite());
+	Window->draw(*m_fallGlowAnimationP2->getSprite());
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
 	{
 		if (m_particleEffects[i]->IsBusy())
@@ -93,6 +107,8 @@ void Board::Cleanup()
 	}
 	m_sprites.clear();
 	delete m_glowAnimation;
+	delete m_fallGlowAnimationP1;
+	delete m_fallGlowAnimationP2;
 	Clean(m_backgroundSprite);
 	Clean(m_plateSprite);
 	Clean(m_frameSprite);
@@ -290,6 +306,16 @@ void Board::SetPlayer1HalfStep(int halfStep)
 void Board::SetPlayer2HalfStep(int halfStep)
 {
 	m_player2HalfStep = halfStep;
+}
+
+void Board::SetFallPositionP1(int pos)
+{
+	m_fallPosP1 = pos;
+}
+
+void Board::SetFallPositionP2(int pos)
+{
+	m_fallPosP2 = pos;
 }
 
 #pragma endregion
