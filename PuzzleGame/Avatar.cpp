@@ -3,6 +3,7 @@
 #pragma region Base
 Avatar::Avatar()
 {
+	m_avatarAnimation = nullptr;
 }
 Avatar::~Avatar()
 {
@@ -11,7 +12,7 @@ Avatar::~Avatar()
 
 #pragma region Publics
 
-void Avatar::Initialize(const std::string avatarName, float avatarPositionX, float avatarPositionY, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
+void Avatar::Initialize(const std::string &avatarName, float avatarPositionX, float avatarPositionY, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
 {
 	m_avatarAnimation = new Animation();
 	m_avatarAnimation->Initialize(PATH_AVATAR_FOLDER+avatarName+PATH_ENDING, cellSize, startPlace, cellCount, cellPerRow, fps);

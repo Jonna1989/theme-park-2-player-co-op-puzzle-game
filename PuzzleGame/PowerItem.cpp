@@ -4,6 +4,13 @@
 
 PowerItem::PowerItem()
 {
+	m_position.x = NULL;
+	m_position.y = NULL;
+	m_isFalling = NULL;
+	m_goodItem = NULL;
+	m_contentID = NULL;
+	m_isInitialized = NULL;
+	m_hasActivated = NULL;
 }
 
 

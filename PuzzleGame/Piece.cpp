@@ -4,6 +4,11 @@
 
 Piece::Piece()
 {
+	m_color = NULL;
+	m_owner = NULL;
+	m_marker = NULL;
+	m_position.x = NULL;
+	m_position.y = NULL;
 }
 
 

@@ -184,7 +184,7 @@ void ConfigReader::save(const std::string& filename)
 			{
 				out << "\t" << (*it2).first << " = " << (*it2).second << "\n";
 
-				it2++;
+				++it2;
 			}
 		}
 
@@ -194,7 +194,7 @@ void ConfigReader::save(const std::string& filename)
 		{
 			if ( it_spec != _container->data.end() && it_spec == it )
 			{
-				it++;
+				++it;
 				continue;
 			}
 
@@ -206,10 +206,10 @@ void ConfigReader::save(const std::string& filename)
 			{
 				out << "\t" << (*it2).first << " = " << (*it2).second << "\n";
 
-				it2++;
+				++it2;
 			}
 
-			it++;
+			++it;
 		}
 
 		out.close();
@@ -315,7 +315,7 @@ void ConfigReader::clear()
 	while ( it != _container->data.end() )
 	{
 		(*it).second.clear();
-		it++;
+		++it;
 	}
 
 	_container->data.clear();

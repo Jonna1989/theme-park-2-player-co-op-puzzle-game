@@ -15,7 +15,7 @@ public:
 	~Animation();
 
 	//Base
-	void Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps);
+	void Initialize(const std::string &sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps);
 	void Update();
 	void CleanUp();
 

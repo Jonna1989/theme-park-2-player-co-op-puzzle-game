@@ -3,6 +3,16 @@
 #pragma region Base
 ScoreText::ScoreText()
 {
+	m_offsetY = NULL;
+	m_textToDraw = nullptr;
+	m_alpha = NULL;
+	m_defaultTextSize = NULL;
+	m_textSize = NULL;
+	m_scaleFactorX = NULL;
+	m_scaleFactorY = NULL;
+	m_isBusy = NULL;
+	m_scoreTextPosX = NULL;
+	m_scoreTextPosY = NULL;
 }
 
 

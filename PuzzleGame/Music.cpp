@@ -138,7 +138,7 @@ void Music::SetAllVolume()
 	}
 }
 
-void Music::LoadMusic(sf::Music*& musicToLoad, const std::string filename)
+void Music::LoadMusic(sf::Music*& musicToLoad, const std::string &filename)
 {
 	musicToLoad = new sf::Music();
 	if (musicToLoad->openFromFile(filename))

@@ -4,6 +4,14 @@
 
 ParticleEffect::ParticleEffect()
 {
+	m_clock = nullptr;
+
+	m_version = NULL;
+
+	m_xPos = NULL;
+	m_yPos = NULL;
+
+	m_isBusy = NULL;
 }
 
 

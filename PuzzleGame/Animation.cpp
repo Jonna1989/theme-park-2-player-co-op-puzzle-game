@@ -3,8 +3,23 @@
 #pragma region Constructors
 
 Animation::Animation()
-{
-
+{	
+	m_cellSize.x = NULL;
+	m_cellSize.y = NULL;
+	m_cellPlace = NULL;
+	m_startRow = NULL;
+	m_rowChange = NULL;
+	m_cellCount = NULL;
+	m_cellPerRow = NULL;	
+	m_nextStartRow	= NULL;
+	m_nextCellPlace = NULL;
+	m_nextCellCount = NULL;
+	m_cellSizeCountY = NULL; 
+	m_nextCellSizeCountY = NULL;
+	m_updateRate = NULL; 
+	m_currentCell = NULL;
+	m_timeSinceUpdate = NULL;
+	m_sprite = nullptr;
 }
 
 Animation::~Animation()
@@ -16,7 +31,7 @@ Animation::~Animation()
 
 #pragma region Base
 
-void Animation::Initialize(std::string sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
+void Animation::Initialize(const std::string &sheetPath, sf::Vector2f cellSize, sf::Vector2i startPlace, int cellCount, int cellPerRow, float fps)
 {
 	CreateSprite(m_sprite,sheetPath);
 

@@ -6,6 +6,15 @@
 
 Particle::Particle()
 {
+	m_sprite = nullptr;
+	m_scale = NULL;
+	m_value = NULL;
+	m_alpha = NULL;
+	m_rotation = NULL;
+	m_busy = NULL;
+	m_version = NULL;
+
+	m_fly = NULL;
 }
 
 

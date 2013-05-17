@@ -1,6 +1,6 @@
 #include "Load.h"
 
-void LoadTexture(sf::Texture* &TextureToUse, const std::string FileName)
+void LoadTexture(sf::Texture* &TextureToUse, const std::string &FileName)
 {
 	TextureToUse = new sf::Texture();
 	if (TextureToUse->loadFromFile(FileName))
@@ -26,7 +26,7 @@ void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, floa
 	CreateSprite(SpriteToUse,TextureToSetFrom);
 	SpriteToUse->setPosition(x,y);
 }
-void CreateSprite(sf::Sprite* &SpriteToUse, const std::string PathToTexture)
+void CreateSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture)
 {
 	CreateSprite(SpriteToUse);
 	SpriteToUse->setTexture(*TextureProvider::Instance()->GetTexture(PathToTexture));

@@ -7,6 +7,7 @@ Bomb::Bomb()
 	m_isFalling = true;
 	m_isInitialized = false;
 	m_hasActivated = false;
+	m_blastRadius = NULL;
 }
 
 

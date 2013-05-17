@@ -647,14 +647,7 @@ void Board::DrawBoard()
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
-			if(x == 8 && y == 2 && GetTile(8,2)->GetContent() == 11)
-			{
-				DrawTile(x, y);
-			}
-			else
-			{
-				DrawTile(x, y);
-			}
+			DrawTile(x, y);
 		}
 	}
 	DrawGlow();
