@@ -2,6 +2,29 @@
 #pragma region base
 Score::Score()
 {
+	m_scoreTextPos.x = NULL;
+	m_scoreTextPos.y = NULL;
+	m_score = NULL;
+	m_previousScore = NULL;
+	m_scoreMultiplier = NULL;
+	m_defaultScoreMultiplier = NULL;
+	m_comboMultiplier = NULL;
+	m_defaultComboMultiplier = NULL;
+	m_friendBonusMultiplier = NULL;
+	m_scoreAsSfString = "";
+	m_comboMultiplierAsSfString = "";
+	m_previousScoreAsSfString = "";
+	m_scoreLastUpdate = NULL;
+	m_comboMultiplierLastUpdate = NULL;
+	m_scoreAsText = nullptr;
+	m_comboMultiplierAsText = nullptr;
+	m_comboAlpha = NULL;
+	m_comboAlphaLastUpdate = NULL;
+	scoreTextAlternation = NULL;
+
+	m_friendBonus = false;
+
+	m_highscore = nullptr;
 }
 Score::~Score()
 {

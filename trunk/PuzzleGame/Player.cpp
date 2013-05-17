@@ -3,6 +3,13 @@
 #pragma region Base
 Player::Player()
 {
+	m_piece = nullptr;
+	m_nextPieceOnePosition.x = NULL;
+	m_nextPieceOnePosition.y = NULL;
+	m_nextPieceTwoPosition.x = NULL;
+	m_nextPieceTwoPosition.y = NULL;
+
+	m_score = NULL;
 }
 
 

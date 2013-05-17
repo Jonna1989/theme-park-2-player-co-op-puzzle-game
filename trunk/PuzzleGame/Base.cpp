@@ -4,6 +4,8 @@
 
 Base::Base()
 {
+	m_runtime = nullptr;
+	m_timePassed = NULL;
 }
 
 Base::~Base()

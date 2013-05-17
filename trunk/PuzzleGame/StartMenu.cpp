@@ -4,6 +4,7 @@
 
 StartMenu::StartMenu()
 {
+	m_backgroundSprite = nullptr;
 }
 
 

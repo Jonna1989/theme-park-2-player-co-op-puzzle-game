@@ -101,7 +101,7 @@ void Soundeffects::SetSoundvol()
 #pragma endregion
 
 #pragma region Privates
-void Soundeffects::AddVectorsToVector(const std::string path, int numberOfSounds)
+void Soundeffects::AddVectorsToVector(const std::string &path, int numberOfSounds)
 {
 	std::vector<sf::SoundBuffer*> bufferVectorToAddToVectorBufferVector;
 	std::vector<std::string> pathVectorToAddToVectorPathVector;
@@ -112,22 +112,7 @@ void Soundeffects::AddVectorsToVector(const std::string path, int numberOfSounds
 	}
 	m_buffersAndPaths.push_back(std::pair< std::vector<sf::SoundBuffer*>,std::vector<std::string>>(bufferVectorToAddToVectorBufferVector,pathVectorToAddToVectorPathVector));
 }
-void Soundeffects::CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean)
-{
-	for (std::vector<sf::SoundBuffer*>::iterator it = vectorToClean.begin(); it != vectorToClean.end(); it++)
-	{
-		delete *it;
-	}
-	vectorToClean.clear();
-}
-void Soundeffects::PlaySingleSound(sf::Sound* &soundToPlay)
-{
-	if (!soundToPlay->getStatus())
-	{
-		soundToPlay->play();
-	}
-}
-void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string filename, float initialPitch)
+void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string &filename, float initialPitch)
 {
 	Buffer = new sf::SoundBuffer();
 	if (Buffer->loadFromFile(filename))
@@ -155,7 +140,7 @@ void Soundeffects::LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, in
 		std::cout << "Failed to load sound: " << filenameVector[vectorPosition] << std::endl;
 	}
 }
-void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename)
+void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string &filename)
 {
 	Buffer = new sf::SoundBuffer();
 	if (Buffer->loadFromFile(filename))
@@ -167,17 +152,10 @@ void Soundeffects::LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string fil
 		std::cout << "Failed to load soundbuffer: " << filename << std::endl;
 	}
 }
-void Soundeffects::SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, float initialPitch)
-{
-	Sound = new sf::Sound();
-	Sound->setBuffer(*Buffer);
-	Sound->setPitch(initialPitch);
-}
 void Soundeffects::SetBufferToSoundAndPlay(int BufferCategory, int BufferNumber, float Pitch, float Volume)
 {
 
 	unsigned int temp = m_sounds.size();
-	std::cout << temp << std::endl;
 	for (unsigned int i = 0; i < temp; i++)
 	{
 		if (!(m_sounds[i]->getStatus() == sf::Sound::Playing))
@@ -186,7 +164,6 @@ void Soundeffects::SetBufferToSoundAndPlay(int BufferCategory, int BufferNumber,
 			m_sounds[i]->setPitch(Pitch);
 			m_sounds[i]->setVolume(Volume);
 			m_sounds[i]->play();
-			std::cout << m_buffersAndPaths[BufferCategory].second[BufferNumber] << std::endl;
 			break;
 		}
 		if (i == temp)

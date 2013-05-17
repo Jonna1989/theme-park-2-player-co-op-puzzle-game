@@ -4,6 +4,16 @@
 
 PlayerPiece::PlayerPiece()
 {
+	m_pieceOne = nullptr;
+	m_pieceTwo = nullptr;
+	m_owner = NULL;
+	m_spawnPointOne.x = NULL;
+	m_spawnPointTwo.x = NULL;
+	m_spawnPointOne.y = NULL;
+	m_spawnPointTwo.y = NULL;
+	m_pieceOneNextColor = NULL;
+	m_pieceTwoNextColor = NULL;
+	randNum = NULL;
 }
 
 
@@ -425,10 +435,6 @@ void PlayerPiece::MovePiece(int xDirection)
 bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 {
 	bool dropped = false;
-	
-	bool pieceOneDropped = false;
-	bool pieceTwoDropped = false;
-
 	if(m_pieceOne->GetPosition().x != m_pieceTwo->GetPosition().x) //Piece aligned horizontally
 	{
 		if((0 <= m_pieceOne->GetPosition().y + 1 && m_pieceOne->GetPosition().y + 1 < BOARD_HEIGHT)
@@ -440,8 +446,6 @@ bool PlayerPiece::DropPiece() //Returns false if no piece dropped
 				m_pieceOne->SetPosition(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1);
 				m_pieceTwo->SetPosition(m_pieceTwo->GetPosition().x, m_pieceTwo->GetPosition().y + 1);
 				dropped = true;
-				pieceOneDropped = true;
-				pieceTwoDropped = true;
 			}
 			else if((Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetOwner() == 0
 				&& Board::Instance()->GetTile(m_pieceOne->GetPosition().x, m_pieceOne->GetPosition().y + 1)->GetContent() != 0)

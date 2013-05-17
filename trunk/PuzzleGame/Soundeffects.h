@@ -61,13 +61,10 @@ private:
 	bool		 m_soundon;
 #pragma endregion
 
-void AddVectorsToVector(const std::string path, int numberOfSounds);
-void CleanupVector(std::vector<sf::SoundBuffer*> &vectorToClean);
-void PlaySingleSound(sf::Sound* &soundToPlay);
-void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string filename, float initialPitch);
-void LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string filename);
+void AddVectorsToVector(const std::string &path, int numberOfSounds);
+void LoadSoundFile(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, const std::string &filename, float initialPitch);
+void LoadSoundFile(sf::SoundBuffer* &Buffer, const std::string &filename);
 void LoadSoundFile(std::vector<sf::SoundBuffer*> &BufferVector, int vectorPosition, std::vector<std::string> filenameVector);
-void SetSoundFromMemory(sf::SoundBuffer* &Buffer, sf::Sound* &Sound, float initialPitch);
 void SetBufferToSoundAndPlay(int BufferCategory, int BufferNumber, float Pitch, float Volume);
 };
 

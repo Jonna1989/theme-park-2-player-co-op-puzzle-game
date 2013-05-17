@@ -42,6 +42,6 @@ private:
 	bool m_musicon;
 	float m_musicvol;
 
-	void LoadMusic(sf::Music*& musicToLoad, const std::string filename);
+	void LoadMusic(sf::Music*& musicToLoad, const std::string &filename);
 };
 

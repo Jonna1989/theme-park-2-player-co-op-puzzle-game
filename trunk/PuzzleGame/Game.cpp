@@ -4,6 +4,21 @@
 
 Game::Game()
 {
+	m_player1 = nullptr;
+	m_player2 = nullptr;
+	m_player1Avatar = nullptr;
+	m_player2Avatar = nullptr;
+	m_gravityClock = nullptr;
+	m_gravityInterval = NULL;
+	m_increaseClock = nullptr;
+	m_player1Clock = nullptr;
+	m_player2Clock = nullptr;
+	m_printBoardInterval = nullptr;
+	m_speedUpSprite = nullptr;
+	m_speedUpSpriteAlpha = NULL;
+	m_increaseInterval = NULL;
+	b = nullptr;
+	cb = nullptr;
 }
 
 

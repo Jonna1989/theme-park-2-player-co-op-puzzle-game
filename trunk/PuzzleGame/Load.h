@@ -6,12 +6,12 @@
 #include <sstream>
 #include <fstream>
 #include "TextureProvider.h"
-void LoadTexture(sf::Texture* &TextureToUse, const std::string FileName);
+void LoadTexture(sf::Texture* &TextureToUse, const std::string &FileName);
 
 void CreateSprite(sf::Sprite* &SpriteToUse);
 void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom);
 void CreateSprite(sf::Sprite* &SpriteToUse, sf::Texture* &TextureToSetFrom, float x, float y);
-void CreateSprite(sf::Sprite* &SpriteToUse, const std::string PathToTexture);
+void CreateSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture);
 
 void Clean(sf::Texture* &TextureToDelete);
 void Clean(sf::Sprite* &SpriteToDelete);

@@ -15,7 +15,7 @@ public:
 
 	void GetSubRect(sf::Vector2i cellPos, sf::Vector2i cellSize, std::string sheetPath, sf::Sprite* sprite);
 
-	sf::Texture* GetTexture(std::string sheetPath);
+	sf::Texture* GetTexture(const std::string &sheetPath);
 	std::map<std::string, sf::Texture*> m_textures;
 
 private:

@@ -4,6 +4,8 @@
 
 GameOver::GameOver()
 {
+	m_highscore = nullptr;
+	m_backgroundSprite = nullptr;
 }
 GameOver::~GameOver()
 {

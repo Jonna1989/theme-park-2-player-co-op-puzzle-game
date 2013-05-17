@@ -7,7 +7,7 @@ TextureProvider::TextureProvider()
 
 TextureProvider::~TextureProvider()
 {
-	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); ++it)
 	{
 		 delete it->second;
 	}
@@ -33,13 +33,13 @@ void TextureProvider::Initialize()
 }
 void TextureProvider::Cleanup()
 {
-	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+	for(std::map<std::string, sf::Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); ++it)
 	{
 		 delete it->second;
 	}
 }
 
-sf::Texture* TextureProvider::GetTexture(std::string sheetPath)
+sf::Texture* TextureProvider::GetTexture(const std::string &sheetPath)
 {
 	std::map<std::string,  sf::Texture* > ::iterator m_interator = m_textures.find(sheetPath);
 
