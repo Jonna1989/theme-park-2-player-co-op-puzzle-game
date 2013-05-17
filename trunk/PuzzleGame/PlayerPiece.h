@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "Soundeffects.h"
 #include "Load.h"
+#include "Animation.h"
 const int SPAWN_PLAYER_1X = BOARD_WIDTH/2-(BOARD_WIDTH/3);
 const int SPAWN_PLAYER_2X = BOARD_WIDTH/2+(BOARD_WIDTH/3)-1;
 class PlayerPiece

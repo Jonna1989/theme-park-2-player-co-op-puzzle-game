@@ -98,6 +98,8 @@ public:
 
 	void PrintBoardToConsole();
 	
+	void SetFallPositionP1(int pos);
+	void SetFallPositionP2(int pos);
 
 private:
 	Board();
@@ -143,7 +145,10 @@ private:
 	void DrawNewPieceSpawn();
 	void PlayComboSound(sf::Clock* &comboClock);
 
-
+	Animation* m_fallGlowAnimationP1;
+	Animation* m_fallGlowAnimationP2;
+	int m_fallPosP1;
+	int m_fallPosP2;
 };
 
 #endif

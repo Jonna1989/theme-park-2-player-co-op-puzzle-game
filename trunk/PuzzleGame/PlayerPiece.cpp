@@ -36,8 +36,9 @@ void PlayerPiece::Initialize(int owner)
 					
 		m_spawnPointTwo.x = SPAWN_PLAYER_1X;
 		m_spawnPointTwo.y = 0;
-		
-		
+
+		randNum = RandomNumber(0,7);
+		Board::Instance()->SetFallPositionP1(randNum);
 	}
 	else if(m_owner == 20)
 	{
@@ -46,6 +47,9 @@ void PlayerPiece::Initialize(int owner)
 
 		m_spawnPointTwo.x = SPAWN_PLAYER_2X;
 		m_spawnPointTwo.y = 0;
+
+		randNum = RandomNumber(8,15);
+		Board::Instance()->SetFallPositionP2(randNum);
 	}
 
 	SetPositionToSpawn();
@@ -523,19 +527,21 @@ void PlayerPiece::DropPieceQuickly()
 
 void PlayerPiece::RandomizeNewPiece()
 {
-	if (m_owner == 10 || m_owner == 11)
-	{
-		randNum = RandomNumber(0,7);
-	}
-	else if (m_owner == 20 || m_owner == 21)
-	{
-		randNum = RandomNumber(8,15);
-	}
-
 	m_pieceOne->SetPosition(randNum,m_pieceOne->GetPosition().y);
 	m_pieceTwo->SetPosition(randNum,m_pieceTwo->GetPosition().y);
 	m_pieceOneNextColor = m_pieceOne->RandomizeColor();
 	m_pieceTwoNextColor = m_pieceTwo->RandomizeColor();
+
+	if (m_owner == 10 || m_owner == 11)
+	{
+		randNum = RandomNumber(0,7);
+		Board::Instance()->SetFallPositionP1(randNum);
+	}
+	else if (m_owner == 20 || m_owner == 21)
+	{
+		randNum = RandomNumber(8,15);
+		Board::Instance()->SetFallPositionP2(randNum);
+	}
 }
 
 #pragma endregion
