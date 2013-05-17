@@ -51,7 +51,7 @@ void Base::Update()
 			}
 		}
 		StateManager::Instance()->Update();
-		InputManager::Instance()->Update(false, StateManager::Instance()->GetState());
+		InputManager::Instance()->Update(StateManager::Instance()->GetState());
 		FrameTime::Instance()->Update();
 	}
 }

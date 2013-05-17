@@ -598,11 +598,11 @@ void Board::ReadTextLevels(std::string sheetPath)
 
 	while(iStream.good())
 	{
-		nextChar = iStream.peek();
+		nextChar = (char)iStream.peek();
 
 		if(nextChar != " " && nextChar != "\n")
 		{
-			currentChar = iStream.get();
+			currentChar = (char)iStream.get();
 			color = atoi(currentChar.c_str());
 			levelColors.push_back(color);
 		}
@@ -614,7 +614,7 @@ void Board::ReadTextLevels(std::string sheetPath)
 
 	levelColors.pop_back();
 
-	if (levelColors.size() == BOARD_HEIGHT * BOARD_WIDTH)
+	if (levelColors.size() == (unsigned int)BOARD_HEIGHT * (unsigned int)BOARD_WIDTH)
 	{
 		m_levels.push_back(levelColors);
 		levelColors.clear();

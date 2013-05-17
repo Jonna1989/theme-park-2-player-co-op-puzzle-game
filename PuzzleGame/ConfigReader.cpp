@@ -260,7 +260,7 @@ bool ConfigReader::load(const std::string& filename)
 					int eq_pos = current_line.find('=');
 
 					// We found some syntax-error in the config-file
-					if ( eq_pos == std::string::npos )
+					if ((unsigned int) eq_pos == std::string::npos )
 					{
 						error_text << "(" << line_number << "): Failed to find the equals-sign in the KeyValue-pair";
 						_container->add_error(error_text.str());

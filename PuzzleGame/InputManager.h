@@ -15,7 +15,7 @@ public:
 	static InputManager* Instance();
 
 	void Initialize();
-	void Update(bool singlePlayer, int state);
+	void Update(int state);
 	void Cleanup();
 	
 	sf::Keyboard* GetKeyboard();

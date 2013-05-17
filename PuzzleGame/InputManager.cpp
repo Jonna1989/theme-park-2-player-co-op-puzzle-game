@@ -41,7 +41,7 @@ void InputManager::Initialize()
 	}
 }
 
-void InputManager::Update(bool singlePlayer, int state)
+void InputManager::Update( int state)
 {
 	sf::Event event;
 	switch(state)
