@@ -3,6 +3,12 @@
 #pragma region Base
 Tile::Tile()
 {
+	m_content = NULL;
+	m_owner = NULL;
+	m_previousOwner = NULL;
+	m_isFalling = NULL;
+	m_halfStep = NULL;
+	m_marker = NULL;
 }
 
 

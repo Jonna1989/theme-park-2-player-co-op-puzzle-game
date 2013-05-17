@@ -33,7 +33,7 @@ Score::~Score()
 #pragma region Publics
 void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultiplier, int defaultComboMultiplier, int defaultFriendBonusMultiplier)
 {
-	m_comboAlpha = 255;
+	m_comboAlpha = 0;
 	m_scoreTextPos.x = scorePosX;
 	m_scoreTextPos.y = scorePosY;
 	m_defaultScoreMultiplier = defaultScoreMultiplier;
