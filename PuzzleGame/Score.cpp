@@ -97,7 +97,7 @@ void Score::Update()
 }
 void Score::Cleanup()
 {
-	m_highscore->SetHighscore(m_score);
+	m_highscore->SetHighscore(m_score,TextManager::Instance()->GetTeamName());
 	m_highscore->Cleanup();
 	for( int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{

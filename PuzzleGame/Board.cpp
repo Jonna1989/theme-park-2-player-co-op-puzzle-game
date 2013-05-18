@@ -74,8 +74,8 @@ void Board::Update()
 
 	m_fallGlowAnimationP1->Update();
 	m_fallGlowAnimationP2->Update();
-	m_fallGlowAnimationP1->getSprite()->setPosition(sf::Vector2f(m_fallPosP1*TILE_SIZE_X+BOARD_OFFSET_X,TILE_SIZE_Y*2+BOARD_OFFSET_Y));
-	m_fallGlowAnimationP2->getSprite()->setPosition(sf::Vector2f(m_fallPosP2*TILE_SIZE_X+BOARD_OFFSET_X,TILE_SIZE_Y*2+BOARD_OFFSET_Y));
+	m_fallGlowAnimationP1->getSprite()->setPosition(sf::Vector2f(m_fallPosP1*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y*2+(float)BOARD_OFFSET_Y));
+	m_fallGlowAnimationP2->getSprite()->setPosition(sf::Vector2f(m_fallPosP2*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y*2+(float)BOARD_OFFSET_Y));
 	Window->draw(*m_fallGlowAnimationP1->getSprite());
 	Window->draw(*m_fallGlowAnimationP2->getSprite());
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)

@@ -6,11 +6,12 @@
 #include "Game.h"
 #include "StartMenu.h"
 #include "GameOver.h"
+#include "SetTeamName.h"
 
 class StateManager
 {
 public:	
-	enum TypeOfState {MainMenu, InGame, GameLost};
+	enum TypeOfState {MainMenu, InGame, GameLost, SetName};
 	static StateManager* Instance();
 
 	void Initialize();

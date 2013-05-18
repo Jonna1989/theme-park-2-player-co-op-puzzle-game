@@ -41,6 +41,8 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
+	TextManager::Instance()->Update();
+	LoadHighscoresToVectors();
 }
 void HighScore::Cleanup()
 {
@@ -58,7 +60,7 @@ int HighScore::GetHighscore(int highscorePosition)
 	return m_highscore[highscorePosition+1];
 }
 
-void HighScore::SetHighscore(int highscore)
+void HighScore::SetHighscore(int highscore, std::string teamName)
 {
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
@@ -66,20 +68,21 @@ void HighScore::SetHighscore(int highscore)
 		{
 			if (m_configReader.load(HIGHSCORE_FILENAME))
 			{
-				std::vector<int> temp;
+				std::vector<int> temphighscores;
 				for (int x = i; x < NUMBER_OF_HIGHSCORES ; x++)
 				{
 					int temp2 = 0;
 					temp2 = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(x),temp2);
-					temp.push_back(temp2);
+					temphighscores.push_back(temp2);
 				}
 				int temp3 = 1;
-				for (unsigned int y = 0; y < temp.size(); y++)
+				for (unsigned int y = 0; y < temphighscores.size(); y++)
 				{
-					m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i+temp3),temp[y]); 
+					m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i+temp3),temphighscores[y]); 
 					temp3++;
 				}
 				m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i),highscore);
+				m_configReader.add("HighscoreName","highscoreName"+ConvertIntToStdString(i),teamName);
 				m_configReader.save(HIGHSCORE_FILENAME);
 				break;
 			}
@@ -96,6 +99,8 @@ void HighScore::SetHighscore(int highscore)
 }
 void HighScore::LoadHighscoresToVectors()
 {
+	m_highscoreName.clear();
+	m_highscore.clear();
 	m_wordHighscore = "Highscore: ";
 	if (m_configReader.load(HIGHSCORE_FILENAME))
 	{

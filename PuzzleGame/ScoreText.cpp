@@ -41,7 +41,7 @@ void ScoreText::Reset(sf::String scoreAsString, float positionX, float positionY
 	{
 		m_numberSprites.push_back(new sf::Sprite());
 		m_stringAsCharVector.push_back((const char)scoreAsString[i]);
-		CreateSprite(m_numberSprites[i],"Assets/Numbers/"+ConvertCharToStdString(m_stringAsCharVector[i])+".png");
+		CreateSprite(m_numberSprites[i],"Assets/GraphicalAssets/Numbers/"+ConvertCharToStdString(m_stringAsCharVector[i])+".png");
 		textOffset+= m_numberSprites[i]->getGlobalBounds().width;
 	}
 	textOffset = textOffset/2;
