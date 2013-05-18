@@ -41,7 +41,6 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
-	TextManager::Instance()->Update();
 	LoadHighscoresToVectors();
 }
 void HighScore::Cleanup()
