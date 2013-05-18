@@ -8,6 +8,8 @@
 #include "StateManager.h"
 #include "Player.h"
 #include "Soundeffects.h"
+#include "TextManager.h"
+#include "HighScore.h"
 
 class InputManager
 {
@@ -31,6 +33,7 @@ public:
 	void CheckPlayer1Input();
 	void CheckPlayer2Input();
 
+	void CheckInputsForTextmanager();
 private:
 	InputManager();
 	~InputManager();
@@ -53,7 +56,8 @@ private:
 	std::vector<sf::Clock*> m_moveFastClocks;
 
 	void CheckMusicKeys();
-	void CheckInputs(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate);
+	void CheckInputsGame(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate);
+	void CheckInputsText(bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool letterChange);
 };
 
 #endif

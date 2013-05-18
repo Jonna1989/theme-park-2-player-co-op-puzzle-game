@@ -18,7 +18,8 @@ void StateManager::Initialize()
 	m_listOfStates.push_back(newState);
 	newState = new GameOver();
 	m_listOfStates.push_back(newState);
-
+	newState = new SetTeamName();
+	m_listOfStates.push_back(newState);
 	m_currentState = MainMenu;
 	m_listOfStates[m_currentState]->Initialize();
 }
@@ -77,6 +78,8 @@ std::string StateManager::GetName()
 	case GameLost:
 		answer = "GameLost";
 		break;
+	case SetName:
+		answer = "SetName";
 	}
 	return answer;
 }

@@ -4,7 +4,7 @@
 #include "Load.h"
 #include "WindowManager.h"
 #include "ConfigReader.h"
-
+#include "TextManager.h"
 static const std::string HIGHSCORE_FILENAME = "Assets/Highscore/Highscore.txt";
 static const int NUMBER_OF_HIGHSCORES = 5;
 class HighScore
@@ -20,7 +20,7 @@ public:
 	void Cleanup();
 
 	int GetHighscore(int highscorePosition);
-	void SetHighscore(int highscore);
+	void SetHighscore(int highscore, std::string teamName);
 private:
 
 	void LoadHighscoresToVectors();

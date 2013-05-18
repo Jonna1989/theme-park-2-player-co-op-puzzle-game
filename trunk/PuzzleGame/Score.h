@@ -3,6 +3,7 @@
 #include "ScoreText.h"
 #include "HighScore.h"
 #include "Soundeffects.h"
+#include "TextManager.h"
 static const int NUMBER_OF_SCORE_POPUPS = 10;
 class Score
 {

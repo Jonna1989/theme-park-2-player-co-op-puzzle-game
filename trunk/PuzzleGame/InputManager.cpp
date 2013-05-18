@@ -52,7 +52,7 @@ void InputManager::Update( int state)
 			if (event.key.code == sf::Keyboard::Return)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
-				StateManager::Instance()->SetState(StateManager::InGame);
+				StateManager::Instance()->SetState(StateManager::SetName);
 				break;
 			}
 			else
@@ -64,6 +64,27 @@ void InputManager::Update( int state)
 				Window->close();
 			}
 		}
+		break;
+	case StateManager::SetName:
+		while (Window->pollEvent(event))
+		{
+			if (event.key.code == sf::Keyboard::L)
+			{
+				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
+				StateManager::Instance()->SetState(StateManager::InGame);
+				break;
+			}
+			else
+			{
+				CheckInputsForTextmanager();
+				CheckMusicKeys();
+			}
+			if(event.type == sf::Event::Closed)
+			{
+				Window->close();
+			}
+		}
+
 		break;
 	case StateManager::InGame: //Game
 		CheckPlayer1Input();
@@ -98,7 +119,6 @@ void InputManager::Cleanup()
 
 void InputManager::SetPlayers(Player* player)
 {
-
 	m_player1 = player;
 }
 
@@ -107,13 +127,12 @@ void InputManager::SetPlayers(Player* player1, Player* player2)
 	m_player1 = player1;
 	m_player2 = player2;
 }
-
 void InputManager::CheckPlayer1Input()
 {
-	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::A,-1,0,false);
-	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
-	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,-1,0,true);
-	CheckInputs(m_player1,m_keyPressedPlayer1,sf::Keyboard::E,1,0,true);
+	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::A,-1,0,false);
+	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
+	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,-1,0,true);
+	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::E,1,0,true);
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
@@ -141,10 +160,10 @@ void InputManager::CheckPlayer1Input()
 
 void InputManager::CheckPlayer2Input()
 {
-	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::J,-1,2,false);
-	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::L, 1,2,false);
-	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::U,-1,2,true);
-	CheckInputs(m_player2,m_keyPressedPlayer2,sf::Keyboard::O, 1,2,true);
+	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::J,-1,2,false);
+	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::L, 1,2,false);
+	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::U,-1,2,true);
+	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::O, 1,2,true);
 	if((m_keyboard->isKeyPressed(sf::Keyboard::K)) && (!m_keyPressedPlayer2))
 	{
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
@@ -169,7 +188,21 @@ void InputManager::CheckPlayer2Input()
 		m_moveFastClocks[2]->restart();
 	}
 }
-
+void InputManager::CheckInputsForTextmanager()
+{
+	CheckInputsText(m_keyPressedPlayer1,sf::Keyboard::A,-1,0,false);
+	CheckInputsText(m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
+	CheckInputsText(m_keyPressedPlayer1,sf::Keyboard::W,-1,0,true);
+	CheckInputsText(m_keyPressedPlayer1,sf::Keyboard::S,1,0,true);
+	if((!m_keyboard->isKeyPressed(sf::Keyboard::A)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::D)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::W)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::S))) 
+	{
+		m_keyPressedPlayer1 = false;
+		m_moveFastClocks[0]->restart();
+	}
+}
 void InputManager::SetGravity(int gravity)
 {
 	m_gravity = gravity;
@@ -210,7 +243,7 @@ void InputManager::CheckMusicKeys()
 		Music::Instance()->GetMusic()->setPitch(Music::Instance()->GetPitchVariable());
 	}
 }
-void InputManager::CheckInputs(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate)
+void InputManager::CheckInputsGame(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate)
 {
 	if( ( (m_keyboard->isKeyPressed(key)) && (!playerPressedKey))
 		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > 500) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
@@ -227,6 +260,24 @@ void InputManager::CheckInputs(Player* &player,bool &playerPressedKey, sf::Keybo
 				player->GetPlayerPiece()->MovePiece(dir);
 				playerPressedKey = true;
 			}
+		}
+		m_moveFastClocks[clock+1]->restart();
+	}
+}
+void InputManager::CheckInputsText(bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool letterChange)
+{
+	if( ( (m_keyboard->isKeyPressed(key)) && (!playerPressedKey))
+		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > 500) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
+	{
+		if (letterChange)
+		{
+			TextManager::Instance()->ChangeLetter(dir);
+			playerPressedKey = true;
+		}
+		else
+		{
+			TextManager::Instance()->ChangeSelection(dir);
+			playerPressedKey = true;
 		}
 		m_moveFastClocks[clock+1]->restart();
 	}
