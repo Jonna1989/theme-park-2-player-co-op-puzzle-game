@@ -15,6 +15,9 @@ public:
 	void ChangeLetter(int change);
 	void ChangeSelection(int change);
 	std::string GetTeamName();
+
+	sf::Font* GetFont();
+	sf::Color GetColor();
 private:
 	TextManager();
 	~TextManager();
@@ -22,13 +25,15 @@ private:
 	static TextManager* m_instance;
 
 	std::vector<int> m_textNumbers;
+	std::vector<sf::Text*> m_textNumbersAsSfText;
+	sf::Font* m_font;
 	int m_position;
 	int m_char;
 	int m_numberOfLetters;
 	int m_numberOfCharsToEnter;
 	int m_teamName;
 	sf::Vector2f m_firstCharPos;
-	
+	sf::Color m_color;
 	sf::Sprite* m_charSprite;
 };
 

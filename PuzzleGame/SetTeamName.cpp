@@ -11,7 +11,7 @@ SetTeamName::~SetTeamName(void)
 }
 void SetTeamName::Initialize()
 {
-	TextManager::Instance()->Initialize(3,3,500,500);
+	TextManager::Instance()->Initialize(5,26,500,500);
 }
 void SetTeamName::Update()
 {

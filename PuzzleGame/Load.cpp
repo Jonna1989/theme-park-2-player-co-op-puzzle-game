@@ -31,6 +31,20 @@ void CreateSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture)
 	CreateSprite(SpriteToUse);
 	SpriteToUse->setTexture(*TextureProvider::Instance()->GetTexture(PathToTexture));
 }
+void CreateSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture, float x, float y)
+{
+	CreateSprite(SpriteToUse,PathToTexture);
+	SpriteToUse->setPosition(x,y);
+}
+void SetSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture)
+{
+	SpriteToUse->setTexture(*TextureProvider::Instance()->GetTexture(PathToTexture));
+}
+void SetSprite(sf::Sprite* &SpriteToUse, const std::string &PathToTexture, float x, float y)
+{
+	SetSprite(SpriteToUse,PathToTexture);
+	SpriteToUse->move(x,y);
+}
 void Clean(sf::Texture* &TextureToDelete)
 {
 	delete TextureToDelete;
@@ -60,6 +74,11 @@ void DeclareSfText(sf::Text* &textToDeclare, unsigned int charSize, const sf::Co
 	DeclareSfText(textToDeclare,charSize,textColor);
 	textToDeclare->setPosition(textPositionX,textPositionY);
 }
+void DeclareSfText(sf::Text* &textToDeclare, sf::Font* font, unsigned int charSize, const sf::Color textColor, float textPositionX, float textPositionY)
+{
+	DeclareSfText(textToDeclare,charSize,textColor,textPositionX,textPositionY);
+	textToDeclare->setFont(*font);
+}
 void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsInVector, unsigned int charSize, const sf::Color textColor)
 {
 	for (int i = 0; i < NumberOfSfTextsInVector; i++)
@@ -69,7 +88,16 @@ void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, int NumberOfSfTextsI
 		vectorToDeclare[i]->setColor(textColor);
 	}
 }
-
+void DeclareSfText(std::vector<sf::Text*> &vectorToDeclare, sf::Font* font, int NumberOfSfTextsInVector, unsigned int charSize, const sf::Color textColor)
+{
+	for (int i = 0; i < NumberOfSfTextsInVector; i++)
+	{
+		vectorToDeclare.push_back(new sf::Text());
+		vectorToDeclare[i]->setFont(*font);
+		vectorToDeclare[i]->setCharacterSize(charSize);
+		vectorToDeclare[i]->setColor(textColor);
+	}
+}
 void ConvertIntToSfString(int intToGetStringFrom,sf::String &sfStringToUpdateFrom)
 {
 	std::ostringstream convert;
@@ -112,6 +140,12 @@ std::string ConvertCharToStdString(char charToConvert)
 	ss >> s;
 	return s;
 }
+char ConvertIntToChar(int intToConvert)
+{
+	char tempChar = 0;
+	tempChar = (char)intToConvert;
+	return tempChar;
+}
 int RandomNumber()
 {
 	return rand();
@@ -119,4 +153,8 @@ int RandomNumber()
 int RandomNumber(int lowRange, int highRange)
 {
 	return (rand() % ((highRange-lowRange) - 1) + lowRange +1);
+}
+unsigned GetNumberOfDigits (unsigned i)
+{
+	return i > 0 ? (int) log10 ((double) i) + 1 : 1;
 }
