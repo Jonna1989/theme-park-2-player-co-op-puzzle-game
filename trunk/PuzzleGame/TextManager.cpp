@@ -29,9 +29,16 @@ void TextManager::Initialize(unsigned int numberOfCharsToEnter, unsigned int num
 {
 	m_numberOfCharsToEnter = numberOfCharsToEnter;
 	m_numberOfLetters = numberOfLetters;
+	m_font = new sf::Font();
+	m_font->loadFromFile("Assets/GraphicalAssets/Font/Bubblegum.ttf");
+	m_color = sf::Color(168,214,81);
 	for (unsigned int i = 0; i < numberOfCharsToEnter; i++)
 	{
 		m_textNumbers.push_back(0);
+		m_textNumbersAsSfText.push_back(new sf::Text());
+		m_textNumbersAsSfText[i]->setFont(*m_font);
+		m_textNumbersAsSfText[i]->setCharacterSize(100);
+		m_textNumbersAsSfText[i]->setColor(m_color);
 	}
 	m_position = 0;
 	m_char = 0;
@@ -40,23 +47,19 @@ void TextManager::Initialize(unsigned int numberOfCharsToEnter, unsigned int num
 
 void TextManager::Update()
 {
-	for (int i = 0; i < m_numberOfCharsToEnter ; i++)
+	for (unsigned int i = 0; i < m_textNumbersAsSfText.size(); i++)
 	{
+		m_textNumbersAsSfText[i]->setString(ConvertIntToChar(m_textNumbers[i]+65));
 		if (i == 0)
 		{
-			CreateSprite(m_charSprite,("Assets/GraphicalAssets/Letters/"+ConvertIntToStdString(m_textNumbers[i])+".png"));
-			m_charSprite->setPosition(m_firstCharPos);
+			m_textNumbersAsSfText[i]->setPosition(100,100);
 		}
 		else
 		{
-			m_charSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Letters/"+ConvertIntToStdString(m_textNumbers[i])+".png"));
-			m_charSprite->move(m_charSprite->getGlobalBounds().width,0);
+			m_textNumbersAsSfText[i]->setPosition((m_textNumbersAsSfText[i-1]->getPosition().x)+(m_textNumbersAsSfText[i-1]->getGlobalBounds().width),m_textNumbersAsSfText[i-1]->getPosition().y);
 		}
-		Window->draw(*m_charSprite);
+		Window->draw(*m_textNumbersAsSfText[i]);
 	}
-	m_charSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Letters/marking.png"));
-	m_charSprite->setPosition(m_firstCharPos.x+(100*m_char),m_firstCharPos.y);
-	Window->draw(*m_charSprite);
 }
 void TextManager::Cleanup()
 {
@@ -91,7 +94,15 @@ std::string TextManager::GetTeamName()
 	std::string tempString;
 	for (int i = 0; i < m_numberOfCharsToEnter; i++)
 	{
-		tempString.append(ConvertIntToStdString(m_textNumbers[i]));
+		tempString.append(ConvertCharToStdString(ConvertIntToChar((m_textNumbers[i])+65)));
 	}
 	return tempString;
+}
+sf::Font* TextManager::GetFont()
+{
+	return  m_font;
+}
+sf::Color TextManager::GetColor()
+{
+	return m_color;
 }

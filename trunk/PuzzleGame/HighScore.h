@@ -7,6 +7,10 @@
 #include "TextManager.h"
 static const std::string HIGHSCORE_FILENAME = "Assets/Highscore/Highscore.txt";
 static const int NUMBER_OF_HIGHSCORES = 5;
+
+static const float HIGHSCORE_POS_X = 10.0f;
+static const float HIGHSCORE_POS_Y = 10.0f;
+
 class HighScore
 {
 public:
@@ -28,6 +32,8 @@ private:
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;
 	std::vector<sf::Text*> m_highscoresAsText;
+
+	std::vector<std::vector<sf::Sprite*>> m_highscoreSprites;
 
 	ConfigReader m_configReader;
 

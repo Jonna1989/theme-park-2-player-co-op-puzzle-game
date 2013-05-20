@@ -42,8 +42,8 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 	m_scoreMultiplier = m_defaultScoreMultiplier;
 	m_comboMultiplier = m_defaultComboMultiplier;
 	m_friendBonusMultiplier = defaultFriendBonusMultiplier;
-	DeclareSfText(m_scoreAsText,50,sf::Color::White,m_scoreTextPos);
-	DeclareSfText(m_comboMultiplierAsText,40,sf::Color::White,scorePosX+500,scorePosY+10);
+	DeclareSfText(m_scoreAsText,TextManager::Instance()->GetFont(),50,TextManager::Instance()->GetColor(),m_scoreTextPos.x,m_scoreTextPos.y);
+	DeclareSfText(m_comboMultiplierAsText,TextManager::Instance()->GetFont(),40,TextManager::Instance()->GetColor(),scorePosX+500,scorePosY+10);
 	m_friendBonus = true;
 	for (int i = 0; i < NUMBER_OF_SCORE_POPUPS; i++)
 	{
