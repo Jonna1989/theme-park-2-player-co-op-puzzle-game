@@ -38,19 +38,6 @@ void HighScore::UpdateGameOver()
 {
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
-// 		std::string tempString;
-// 		tempString.append(ConvertIntToStdString(m_highscore[i]));
-// 		std::vector<char> tempChars;
-// 		for(unsigned int j = 0; j < tempString.size(); j++)
-// 		{
-// 			tempChars.push_back(tempString[j]);
-// 		}
-// 		for (unsigned int j = 0; j < GetNumberOfDigits(m_highscore[i]);j++)
-// 		{
-// 			m_highscoreSprites[i].push_back(new sf::Sprite());
-// 			SetSprite(m_highscoreSprites[i][j],"Assets/GraphicalAssets/Numbers/"+ConvertCharToStdString(tempChars[j])+".png",HIGHSCORE_POS_X,HIGHSCORE_POS_Y);
-// 			Window->draw(*m_highscoreSprites[i][j]);
-// 		}
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
