@@ -40,7 +40,6 @@ void Music::Initialize(int TrackNumber)
 	{
 	case MenuMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/can.ogg");
-		m_music->play();
 		break;
 	case LevelMusic1:
 		LoadMusic(m_music,"Assets/AudioAssets/Music/forest.ogg");
