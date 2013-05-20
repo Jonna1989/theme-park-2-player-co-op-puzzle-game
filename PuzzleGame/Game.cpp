@@ -51,8 +51,13 @@ void Game::Initialize()
 	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/Speedup/speed.png");
 	m_speedUpSprite->setPosition(((Window->getSize().x)-(m_speedUpSprite->getGlobalBounds().width))/2,400);
 	m_speedUpSpriteAlpha = 0.0f;
-	b = new Bomb();
-	cb = new ColorBomb();
+
+	b = nullptr;
+	cb = nullptr;
+	t = nullptr;
+	keyPressedBomb = false;
+	keyPressedColorBomb = false;
+	keyPressedThorn = false;
 }
 
 void Game::Update()
@@ -65,22 +70,29 @@ void Game::Update()
 	m_player1Avatar->Update();
 	//m_player2Avatar->Update();
 
-	if(b->GetIsInitialized())
+	if(b != nullptr && !b->HasActivated())
 	{
 		b->Update();
 	}
 
-	if(cb->GetIsInitialized())
+	if(cb != nullptr && !cb->HasActivated())
 	{
 		cb->Update();
 	}
 
+	if(t != nullptr && !t->HasActivated())
+	{
+		t->Update();
+	}
+
 	m_speedUpSprite->setColor(sf::Color(255,255,225,(sf::Uint8)m_speedUpSpriteAlpha));
+
 	if (m_speedUpSpriteAlpha > 5)
 	{
 		Window->draw(*m_speedUpSprite);
 		m_speedUpSpriteAlpha -= 100*DeltaTime;
 	}
+
 	Window->display();	
 	KeyCommands();
 	Board::Instance()->CheckForGameOver();
@@ -102,11 +114,25 @@ void Game::Cleanup()
 	m_player2Avatar->Cleanup();
 	delete m_player2Avatar;
 	Board::Instance()->Cleanup();
-	b->Cleanup();
-	cb->Cleanup();
 	Clean(m_speedUpSprite);
-	delete b;
-	delete cb;
+	
+	if(b != nullptr)
+	{
+		b->Cleanup();
+		delete b;
+	}
+
+	if(cb != nullptr)
+	{
+		cb->Cleanup();
+		delete cb;
+	}
+
+	if(t != nullptr)
+	{
+		t->Cleanup();
+		delete t;
+	}
 }
 
 #pragma endregion
@@ -199,6 +225,7 @@ void Game::KeyCommands()
 	KeyCommand_ClearBottomRow();
 	KeyCommand_DropBomb();
 	KeyCommand_DropColorBomb();
+	KeyCommand_DropThorn();
 }
 void Game::KeyCommand_PrintBoardToConsole()
 {
@@ -221,39 +248,81 @@ void Game::KeyCommand_ClearBottomRow()
 
 void Game::KeyCommand_DropBomb()
 {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::V) && !keyPressedBomb)
 	{
-		if(!b->GetIsInitialized())
-		{
-			b->Initialize();
-		}
-		else
-		{
-			b->SetFalling(true);
-			b->SetHasActivated(false);
-		}
+		keyPressedBomb = true;
 
-		b->SetPosition(BOARD_WIDTH / 2, 2);
+		if(b == nullptr)
+		{
+			b = new Bomb();
+			b->Initialize();
+			b->SetPosition(BOARD_WIDTH / 2, 2);
+		}
+		else if(b->HasActivated())
+		{
+			b->Cleanup();
+			delete b;
+			b = nullptr;
+		}		
+	}
+
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	{
+		keyPressedBomb = false;
 	}
 }
 
 void Game::KeyCommand_DropColorBomb()
 {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C) && !keyPressedColorBomb)
 	{
-		if(!cb->GetIsInitialized())
-		{
-			cb->Initialize();
-		}
-		else
-		{
-			cb->SetFalling(true);
-			cb->SetHasActivated(false);
-		}
+		keyPressedColorBomb = true;
 
-		int color = (rand() % 7) + 1;
-		cb->SetColorToRemove(color);
-		cb->SetPosition(BOARD_WIDTH / 2, 2);
+		if(cb == nullptr)
+		{
+			cb = new ColorBomb();
+			cb->Initialize();
+			int color = (rand() % 7) + 1;
+			cb->SetColorToRemove(color);
+			cb->SetPosition(BOARD_WIDTH / 2, 2);
+		}
+		else if(cb->HasActivated())
+		{
+			cb->Cleanup();
+			delete cb;
+			cb = nullptr;
+		}
+	}
+
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	{
+		keyPressedColorBomb = false;
+	}
+}
+
+void Game::KeyCommand_DropThorn()
+{
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::X) && !keyPressedThorn)
+	{
+		keyPressedThorn = true;
+
+		if(t == nullptr)
+		{
+			t = new Thorn();
+			t->Initialize();
+			t->SetPosition(BOARD_WIDTH / 2, 2);
+		}
+		else if(t->HasActivated())
+		{
+			t->Cleanup();
+			delete t;
+			t = nullptr;
+		}
+	}
+
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+	{
+		keyPressedThorn = false;
 	}
 }
 
