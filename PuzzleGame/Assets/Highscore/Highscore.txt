@@ -1,14 +1,14 @@
 [Highscore]
 	highscore0 = 1260
 	highscore1 = 1120
-	highscore2 = 980
-	highscore3 = 440
-	highscore4 = 400
-	highscore5 = 280
+	highscore2 = 1010
+	highscore3 = 980
+	highscore4 = 480
+	highscore5 = 440
 [HighscoreName]
 	highscoreName0 = BAZZZ
 	highscoreName1 = AAAAA
-	highscoreName2 = CETCA
-	highscoreName3 = AAAAA
+	highscoreName2 = BAABA
+	highscoreName3 = CETCA
 	highscoreName4 = AAAAA
-	highscoreName5 = CFADA
+	highscoreName5 = AAAAA
