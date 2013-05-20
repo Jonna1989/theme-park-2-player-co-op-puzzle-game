@@ -18,6 +18,9 @@ public:
 
 	sf::Font* GetFont();
 	sf::Color GetColor();
+
+	int GetScore();
+	void SetScore(int score);
 private:
 	TextManager();
 	~TextManager();
@@ -32,6 +35,8 @@ private:
 	int m_numberOfLetters;
 	int m_numberOfCharsToEnter;
 	int m_teamName;
+
+	int m_transferScore;
 	sf::Vector2f m_firstCharPos;
 	sf::Color m_color;
 	sf::Sprite* m_charSprite;

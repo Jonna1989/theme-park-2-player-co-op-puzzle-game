@@ -106,3 +106,7 @@ sf::Color TextManager::GetColor()
 {
 	return m_color;
 }
+int TextManager::GetScore()
+{
+	return m_transferScore;
+}
