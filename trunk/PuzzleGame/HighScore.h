@@ -24,10 +24,14 @@ public:
 	void Cleanup();
 
 	int GetHighscore(int highscorePosition);
-	void SetHighscore(int highscore, std::string teamName);
-private:
+	bool SetHighscore(int highscore, std::string teamName);
+
+	void WriteHighscoreToFile(int highscore, std::string teamName);
 
 	void LoadHighscoresToVectors();
+private:
+
+
 
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;

@@ -21,4 +21,5 @@ public:
 private:
 	HighScore* m_highscore;
 	sf::Sprite* m_backgroundSprite;
+	bool m_buttonPressed;
 };

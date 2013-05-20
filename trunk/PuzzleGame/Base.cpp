@@ -22,6 +22,7 @@ void Base::Initialize()
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
 	Soundeffects::Instance()->Initialize();
+	TextManager::Instance()->Initialize(5,26,600,600);
 	srand( (int)time(0) );
 }
 

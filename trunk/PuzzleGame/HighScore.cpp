@@ -24,9 +24,18 @@ void HighScore::InitializeForGameOver()
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
 		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);
-		m_highscoresAsText[i]->setPosition(500.0f,40.0f*(float)i);
+		if (i == 0)
+		{
+			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f);
+			m_highscoresAsText[i]->setPosition(500.0f,300.0f);
+		}
+		else
+		{
+			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f+(50*i));
+			m_highscoresAsText[i]->setPosition(500.0f,300.0f+(50*i));
+		}
 		m_highscoreNamesAsText[i]->setString("Team Name: "+m_highscoreName[i]);
-		m_highscoreNamesAsText[i]->setPosition(1000.0f,40.0f*(float)i);
+
 	}
 }
 void HighScore::UpdateInGame()
@@ -41,7 +50,6 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
-	//LoadHighscoresToVectors();
 }
 void HighScore::Cleanup()
 {
@@ -59,7 +67,43 @@ int HighScore::GetHighscore(int highscorePosition)
 	return m_highscore[highscorePosition+1];
 }
 
-void HighScore::SetHighscore(int highscore, std::string teamName)
+bool HighScore::SetHighscore(int highscore, std::string teamName)
+{
+	bool boolToReturn = false;
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		if (highscore >= m_highscore[i])
+		{
+			boolToReturn = true;
+		}
+	}
+	return boolToReturn;
+}
+void HighScore::LoadHighscoresToVectors()
+{
+	m_highscoreName.clear();
+	m_highscore.clear();
+	m_wordHighscore = "Highscore: ";
+	if (m_configReader.load(HIGHSCORE_FILENAME))
+	{
+		for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+		{
+			int temp = 0;
+			temp = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(i),temp);
+			m_highscore.push_back(temp);
+
+			std::string tempstring;
+			tempstring = m_configReader.get("HighscoreName","highscoreName"+ConvertIntToStdString(i),tempstring);
+			m_highscoreName.push_back(tempstring);
+		}
+		std::cout << "File has been read: " << HIGHSCORE_FILENAME << std::endl;
+	}
+	else
+	{
+		std::cout << "Failed to read file" << std::endl;
+	}
+}
+void HighScore::WriteHighscoreToFile(int highscore, std::string teamName)
 {
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
@@ -86,6 +130,7 @@ void HighScore::SetHighscore(int highscore, std::string teamName)
 				m_configReader.add("Highscore","highscore"+ConvertIntToStdString(i),highscore);
 				m_configReader.add("HighscoreName","highscoreName"+ConvertIntToStdString(i),teamName);
 				m_configReader.save(HIGHSCORE_FILENAME);
+				m_configReader.clear();
 				break;
 			}
 			else
@@ -98,28 +143,21 @@ void HighScore::SetHighscore(int highscore, std::string teamName)
 			std::cout << "You did not beat highscore "<<i<<" :(" << std::endl;
 		}
 	}
-}
-void HighScore::LoadHighscoresToVectors()
-{
-	m_highscoreName.clear();
-	m_highscore.clear();
-	m_wordHighscore = "Highscore: ";
-	if (m_configReader.load(HIGHSCORE_FILENAME))
+	LoadHighscoresToVectors();
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
-		for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);
+		if (i == 0)
 		{
-			int temp = 0;
-			temp = m_configReader.get("Highscore","highscore"+ConvertIntToStdString(i),temp);
-			m_highscore.push_back(temp);
-
-			std::string tempstring;
-			tempstring = m_configReader.get("HighscoreName","highscoreName"+ConvertIntToStdString(i),tempstring);
-			m_highscoreName.push_back(tempstring);
+			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f);
+			m_highscoresAsText[i]->setPosition(500.0f,300.0f);
 		}
-		std::cout << "File has been read: " << HIGHSCORE_FILENAME << std::endl;
-	}
-	else
-	{
-		std::cout << "Failed to read file" << std::endl;
+		else
+		{
+			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f+(50*i));
+			m_highscoresAsText[i]->setPosition(500.0f,300.0f+(50*i));
+		}
+		m_highscoreNamesAsText[i]->setString("Team Name: "+m_highscoreName[i]);
+
 	}
 }
