@@ -52,11 +52,19 @@ void TextManager::Update()
 		m_textNumbersAsSfText[i]->setString(ConvertIntToChar(m_textNumbers[i]+65));
 		if (i == 0)
 		{
-			m_textNumbersAsSfText[i]->setPosition(100,100);
+			m_textNumbersAsSfText[i]->setPosition(m_firstCharPos);
 		}
 		else
 		{
 			m_textNumbersAsSfText[i]->setPosition((m_textNumbersAsSfText[i-1]->getPosition().x)+(m_textNumbersAsSfText[i-1]->getGlobalBounds().width),m_textNumbersAsSfText[i-1]->getPosition().y);
+		}
+		if ((unsigned)m_char == i)
+		{
+			m_textNumbersAsSfText[i]->setColor(sf::Color(((sf::Uint8)(255)),((sf::Uint8)(255)),((sf::Uint8)(255))));
+		}
+		else
+		{
+			m_textNumbersAsSfText[i]->setColor(m_color);
 		}
 		Window->draw(*m_textNumbersAsSfText[i]);
 	}
@@ -109,4 +117,8 @@ sf::Color TextManager::GetColor()
 int TextManager::GetScore()
 {
 	return m_transferScore;
+}
+void TextManager::SetScore(int score)
+{
+	m_transferScore = score;
 }

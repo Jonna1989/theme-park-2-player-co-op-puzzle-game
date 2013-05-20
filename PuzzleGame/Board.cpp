@@ -23,7 +23,7 @@ Board* Board::Instance()
 }
 
 void Board::Initialize()
-{
+{	
 	InitializeSprites();
 	InitializeLevels();
 	CreateBoard();

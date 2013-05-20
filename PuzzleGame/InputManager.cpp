@@ -52,7 +52,7 @@ void InputManager::Update( int state)
 			if (event.key.code == sf::Keyboard::Return)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
-				StateManager::Instance()->SetState(StateManager::SetName);
+				StateManager::Instance()->SetState(StateManager::InGame);
 				break;
 			}
 			else
@@ -103,6 +103,7 @@ void InputManager::Update( int state)
 			else
 			{
 				CheckMusicKeys();
+				CheckInputsForTextmanager();
 			}
 			if(event.type == sf::Event::Closed)
 			{
