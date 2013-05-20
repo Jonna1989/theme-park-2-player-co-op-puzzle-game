@@ -29,10 +29,12 @@ public:
 	void SetContent(int content);
 	void SetOwner(int owner);
 	void SetPreviousOwner(int owner);
-	void ClearTile();
 	void SetFalling(bool isfalling);
 	void SetHalfStep(int halfStep);
 	void SetMarker(int marker);
+
+	void ClearTile();
+	bool IsPowerItem();
 
 private:
 	sf::Vector2i m_tileSize;
@@ -44,6 +46,7 @@ private:
 	bool m_isFalling;
 	int m_halfStep;
 	int m_marker;
+	bool m_isPowerItem;
 };
 
 #endif

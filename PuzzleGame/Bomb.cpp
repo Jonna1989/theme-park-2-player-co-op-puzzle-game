@@ -31,9 +31,12 @@ void Bomb::Update()
 {
 	Drop();
 
-	if(!m_isFalling && !m_hasActivated)
+	if(!m_isFalling && !m_hasActivated && m_position.y - 1 >= 2 )
 	{
-		Activate();
+		if(Board::Instance()->GetTile(m_position.x, m_position.y - 1)->GetContent() == NUMBER_OF_BUBBLES + 3)
+		{
+			Activate();
+		}
 	}
 }
 
@@ -54,7 +57,7 @@ void Bomb::Activate()
 	{
 		for(int x = m_position.x - m_blastRadius; x <= m_position.x + m_blastRadius; x++)
 		{
-			if((y > 0 && y < BOARD_HEIGHT) && (x > 0 && x < BOARD_WIDTH))
+			if((y > 0 && y < BOARD_HEIGHT) && (x > 0 && x < BOARD_WIDTH) && Board::Instance()->GetOwner(x, y) == 0)
 			{
 				tilesToClear.push_back(sf::Vector2i(x, y));
 			}

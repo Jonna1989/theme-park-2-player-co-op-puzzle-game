@@ -31,9 +31,12 @@ void ColorBomb::Update()
 {
 	Drop();
 
-	if(!m_isFalling && !m_hasActivated)
+	if(!m_isFalling && !m_hasActivated && m_position.y - 1 >= 2 )
 	{
-		Activate();
+		if(Board::Instance()->GetTile(m_position.x, m_position.y - 1)->GetContent() == NUMBER_OF_BUBBLES + 3)
+		{
+			Activate();
+		}
 	}
 }
 
@@ -54,7 +57,7 @@ void ColorBomb::Activate()
 	{
 		for(int x = 0; x < BOARD_WIDTH; x++)
 		{
-			if(Board::Instance()->GetColor(x, y) == m_colorToRemove)
+			if(Board::Instance()->GetColor(x, y) == m_colorToRemove && Board::Instance()->GetOwner(x, y) == 0)
 			{
 				tilesToRemove.push_back(sf::Vector2i(x, y));
 			}
