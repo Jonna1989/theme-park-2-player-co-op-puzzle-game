@@ -9,6 +9,7 @@
 #include "PowerItem.h"
 #include "ColorBomb.h"
 #include "Bomb.h"
+#include "Thorn.h"
 #include "ScoreText.h"
 
 #include <stdlib.h>
@@ -56,11 +57,17 @@ private:
 	void KeyCommand_ClearBottomRow();
 	void KeyCommand_DropBomb();
 	void KeyCommand_DropColorBomb();
+	void KeyCommand_DropThorn();
 
 	sf::Sprite* m_speedUpSprite;
 	float m_speedUpSpriteAlpha;
+
 	Bomb* b;
 	ColorBomb* cb;
+	Thorn* t;
+	bool keyPressedThorn;
+	bool keyPressedBomb;
+	bool keyPressedColorBomb;
 };
 
 #endif

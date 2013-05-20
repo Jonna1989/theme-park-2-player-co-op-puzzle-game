@@ -21,7 +21,7 @@ void ColorBomb::Initialize()
 	m_position.y = 0;
 	m_isFalling = true;
 	m_goodItem = true;
-	m_contentID = 12;
+	m_contentID = NUMBER_OF_BUBBLES + 2;
 	m_colorToRemove = 0;
 	m_isInitialized = true;
 	m_hasActivated = false;
@@ -39,7 +39,7 @@ void ColorBomb::Update()
 
 void ColorBomb::Cleanup()
 {
-	
+	Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 }
 
 #pragma endregion

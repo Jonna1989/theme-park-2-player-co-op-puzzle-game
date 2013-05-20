@@ -22,7 +22,7 @@ void Bomb::Initialize()
 	m_isFalling = true;
 	m_goodItem = true;
 	m_blastRadius = 2;
-	m_contentID = 11;
+	m_contentID = NUMBER_OF_BUBBLES + 1;
 	m_isInitialized = true;
 	m_hasActivated = false;
 }
@@ -39,7 +39,7 @@ void Bomb::Update()
 
 void Bomb::Cleanup()
 {
-
+	Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 }
 
 #pragma endregion

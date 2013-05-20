@@ -15,16 +15,24 @@
 
 static int BOARD_HEIGHT = 12;
 static int BOARD_WIDTH	= 16;
+
 static unsigned int TILE_SIZE_X = 75;
 static unsigned int TILE_SIZE_Y = 75;
+
 static unsigned int BOARD_OFFSET_X = 360;
 static unsigned int BOARD_OFFSET_Y = 165-(TILE_SIZE_Y*2);
+
 static const int NUMBER_OF_BUBBLES = 7;
+static const int NUMBER_OF_POWERITEMS = 3;
+static const int NUMBER_OF_MISC_SPRITES = 4;
+
 static const std::string PATH_TO_BUBBLES = "Assets/GraphicalAssets/Bubbles/";
+
 static const std::string PATH_LEVEL_1 = "Assets/Levels/Level1.txt";
 static const std::string PATH_LEVEL_2 = "Assets/Levels/Level2.txt";
 static const std::string PATH_LEVEL_3 = "Assets/Levels/Level3.txt";
 static const std::string PATH_LEVEL_4 = "Assets/Levels/Level4.txt";
+
 static unsigned int NUMBER_OF_PARTICLES = 20;
 
 class Board
@@ -47,6 +55,24 @@ public:
 		PASSIVE		= 0,
 		PLAYER_ONE	= 10,
 		PLAYER_TWO	= 20
+	};
+
+	enum SPRITEINDEX
+	{
+		BLUE_INDEX, //Bubbles, 0
+		GREEN_INDEX,
+		PURPLE_INDEX,
+		RED_INDEX,
+		YELLOW_INDEX,
+		ORANGE_INDEX,
+		CYAN_INDEX,
+		CHESTNUT_INDEX, //PowerItems, 7
+		MUSHROOM_INDEX,
+		THORN_INDEX,
+		AURA1_INDEX, //Auras, 10
+		AURA2_INDEX,
+		AURA1_TRANSPARENT_INDEX,
+		AURA2_TRANSPARENT_INDEX
 	};
 
 	static Board* Instance();
