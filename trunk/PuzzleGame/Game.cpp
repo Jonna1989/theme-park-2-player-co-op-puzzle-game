@@ -19,6 +19,7 @@ Game::Game()
 	m_increaseInterval = NULL;
 	b = nullptr;
 	cb = nullptr;
+	t = nullptr;
 }
 
 

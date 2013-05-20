@@ -47,12 +47,21 @@ void Thorn::Activate()
 {
 	if(m_position.y + 1 < BOARD_HEIGHT)
 	{
-		Board::Instance()->GetTile(m_position.x, m_position.y + 1)->ClearTile();
-		m_position.y = m_position.y + 1;
+		if(Board::Instance()->GetTile(m_position.x, m_position.y + 1)->GetContent() <= NUMBER_OF_BUBBLES)
+		{
+			Board::Instance()->GetTile(m_position.x, m_position.y + 1)->ClearTile();
+			m_position.y = m_position.y + 1;
+		}
+		else if(Board::Instance()->GetTile(m_position.x, m_position.y + 1)->GetContent() <= NUMBER_OF_BUBBLES + NUMBER_OF_POWERITEMS)
+		{
+			m_hasActivated = true;
+			Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
+		}
 	}
 	else
 	{
 		m_hasActivated = true;
+		Board::Instance()->GetTile(m_position.x, m_position.y)->ClearTile();
 	}	
 }
 

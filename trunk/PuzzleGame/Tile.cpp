@@ -9,6 +9,7 @@ Tile::Tile()
 	m_isFalling = NULL;
 	m_halfStep = NULL;
 	m_marker = NULL;
+	m_isPowerItem = NULL;
 }
 
 
@@ -29,6 +30,7 @@ void Tile::Initialize(int tileSizeX, int tileSizeY, int vectorPosX, int vectorPo
 	m_isFalling = false;
 	m_halfStep = 0;
 	m_marker = 0;
+	m_isPowerItem = false;
 }
 
 void Tile::Update()
@@ -75,6 +77,17 @@ int Tile::GetMarker()
 {
 	return m_marker;
 }
+
+bool Tile::GetFalling()
+{
+	return m_isFalling;
+}
+
+int Tile::GetHalfStep()
+{
+	return m_halfStep;
+}
+
 #pragma endregion
 
 #pragma region Setters
@@ -101,6 +114,15 @@ void Tile::SetPositionVector(int x, int y)
 void Tile::SetContent(int content)
 {
 	m_content = content;
+
+	if(content <= 7) //NUMBER_OF_BUBBLES
+	{
+		m_isPowerItem = false;
+	}
+	else if(content <= 10) //NUMBER_OF_BUBBLES + NUMBER_OF_POWERITEMS
+	{
+		m_isPowerItem = true;
+	}
 }
 
 void Tile::SetOwner(int owner)
@@ -116,26 +138,30 @@ void Tile::SetMarker(int marker)
 {
 	m_marker = marker;
 }
+
+void Tile::SetFalling(bool isfalling)
+{
+	m_isFalling = isfalling;
+}
+
+void Tile::SetHalfStep(int halfStep)
+{
+	m_halfStep = halfStep;
+}
+
 #pragma endregion
+
+#pragma region Misc
 
 void Tile::ClearTile()
 {
 	SetContent(0);
 	SetOwner(0);
 }
-void Tile::SetFalling(bool isfalling)
+
+bool Tile::IsPowerItem()
 {
-	m_isFalling = isfalling;
+	return m_isPowerItem;
 }
-bool Tile::GetFalling()
-{
-	return m_isFalling;
-}
-void Tile::SetHalfStep(int halfStep)
-{
-	m_halfStep = halfStep;
-}
-int Tile::GetHalfStep()
-{
-	return m_halfStep;
-}
+
+#pragma endregion
