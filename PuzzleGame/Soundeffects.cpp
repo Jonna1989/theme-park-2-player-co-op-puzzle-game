@@ -85,7 +85,7 @@ void Soundeffects::PlaySound(int SoundCategory, int SoundNumber, float Pitch, fl
 #pragma endregion
 void Soundeffects::PlayRandomSoundInCategory(int SoundCategory, int lowRange, int highRange)
 {
-	SetBufferToSoundAndPlay(SoundCategory,RandomNumber(lowRange,highRange),1,100);
+	SetBufferToSoundAndPlay(SoundCategory,RandomNumber(lowRange,highRange),1,70);
 }
 #pragma region SetSoundvol
 void Soundeffects::SetSoundvol()
