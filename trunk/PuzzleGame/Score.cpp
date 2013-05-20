@@ -4,7 +4,7 @@ Score::Score()
 {
 	m_scoreTextPos.x = NULL;
 	m_scoreTextPos.y = NULL;
-	m_score = NULL;
+	m_score = 0;
 	m_previousScore = NULL;
 	m_scoreMultiplier = NULL;
 	m_defaultScoreMultiplier = NULL;
@@ -56,7 +56,7 @@ void Score::Initialize(float scorePosX, float scorePosY, int defaultScoreMultipl
 void Score::Update()
 {
 	m_comboAlphaLastUpdate = m_comboAlpha;
- 	if (m_score != m_scoreLastUpdate)
+ 	if ((m_score != m_scoreLastUpdate) || m_score == 0)
  	{
 		ConvertIntToSfStringToSfText(m_score,m_scoreAsSfString,m_scoreAsText, "Score: ",false);
  	}
