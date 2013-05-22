@@ -8,6 +8,8 @@ TextManager::TextManager(void)
 	m_numberOfLetters = NULL;
 	m_numberOfCharsToEnter = NULL;
 	m_charSprite = nullptr;
+	m_defaultASCII = 65;
+	m_transferScore = NULL;
 }
 TextManager::~TextManager(void)
 {
@@ -34,7 +36,7 @@ void TextManager::Initialize(unsigned int numberOfCharsToEnter, unsigned int num
 	m_color = sf::Color(168,214,81);
 	for (unsigned int i = 0; i < numberOfCharsToEnter; i++)
 	{
-		m_textNumbers.push_back(0);
+		m_textNumbers.push_back(m_defaultASCII);
 		m_textNumbersAsSfText.push_back(new sf::Text());
 		m_textNumbersAsSfText[i]->setFont(*m_font);
 		m_textNumbersAsSfText[i]->setCharacterSize(100);
@@ -49,7 +51,7 @@ void TextManager::Update()
 {
 	for (unsigned int i = 0; i < m_textNumbersAsSfText.size(); i++)
 	{
-		m_textNumbersAsSfText[i]->setString(ConvertIntToChar(m_textNumbers[i]+65));
+		m_textNumbersAsSfText[i]->setString(ConvertIntToChar(m_textNumbers[i]));
 		if (i == 0)
 		{
 			m_textNumbersAsSfText[i]->setPosition(m_firstCharPos);
@@ -76,13 +78,13 @@ void TextManager::Cleanup()
 void TextManager::ChangeLetter(int change)
 {
 	m_textNumbers[m_char] += change;
-	if (m_textNumbers[m_char] >= m_numberOfLetters)
+	if (m_textNumbers[m_char] >= m_numberOfLetters+m_defaultASCII-1)
 	{
-		m_textNumbers[m_char] = 0;
+		m_textNumbers[m_char] = m_defaultASCII;
 	}
-	else if (m_textNumbers[m_char] == -1)
+	else if (m_textNumbers[m_char] == m_defaultASCII-1)
 	{
-		m_textNumbers[m_char] = m_numberOfLetters-1;
+		m_textNumbers[m_char] = m_defaultASCII+m_numberOfLetters-2;
 	}
 }
 void TextManager::ChangeSelection(int change)
@@ -102,7 +104,7 @@ std::string TextManager::GetTeamName()
 	std::string tempString;
 	for (int i = 0; i < m_numberOfCharsToEnter; i++)
 	{
-		tempString.append(ConvertCharToStdString(ConvertIntToChar((m_textNumbers[i])+65)));
+		tempString.append(ConvertCharToStdString(ConvertIntToChar((m_textNumbers[i]))));
 	}
 	return tempString;
 }
@@ -121,4 +123,11 @@ int TextManager::GetScore()
 void TextManager::SetScore(int score)
 {
 	m_transferScore = score;
+}
+void TextManager::ResetLetters()
+{
+	for (int i = 0; i < m_numberOfCharsToEnter ; i++)
+	{
+		m_textNumbers[i] = m_defaultASCII;
+	}
 }
