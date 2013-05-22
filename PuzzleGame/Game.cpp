@@ -20,6 +20,9 @@ Game::Game()
 	b = nullptr;
 	cb = nullptr;
 	t = nullptr;
+	keyPressedColorBomb = NULL;
+	keyPressedBomb = NULL;
+	keyPressedThorn = NULL;
 }
 
 

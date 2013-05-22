@@ -29,6 +29,8 @@ public:
 	void WriteHighscoreToFile(int highscore, std::string teamName);
 
 	void LoadHighscoresToVectors();
+
+	void ReloadHighScoreTexts();
 private:
 
 
@@ -46,5 +48,7 @@ private:
 	std::vector<std::string> m_highscoreName;
 	sf::String m_HighscoreNameAsSfString;
 	std::vector<sf::Text*> m_highscoreNamesAsText;
+
+	bool isGameOver;
 };
 

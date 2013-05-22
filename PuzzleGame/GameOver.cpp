@@ -23,6 +23,7 @@ void GameOver::Initialize()
 	m_highscore = new HighScore();
 	m_highscore->InitializeForGameOver();
 	m_buttonPressed = false;
+	TextManager::Instance()->ResetLetters();
 }
 
 void GameOver::Update()
@@ -38,6 +39,7 @@ void GameOver::Update()
 				m_highscore->WriteHighscoreToFile(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName());
 				m_buttonPressed = true;
 				m_highscore->LoadHighscoresToVectors();
+				m_highscore->ReloadHighScoreTexts();
 			}
 		}
 

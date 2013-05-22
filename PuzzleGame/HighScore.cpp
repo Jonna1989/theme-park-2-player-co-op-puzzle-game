@@ -9,6 +9,7 @@ HighScore::~HighScore()
 }
 void HighScore::InitializeForIngame()
 {
+	isGameOver = false;
 	LoadHighscoresToVectors();
 	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40,TextManager::Instance()->GetColor());
@@ -18,25 +19,11 @@ void HighScore::InitializeForIngame()
 }
 void HighScore::InitializeForGameOver()
 {
+	isGameOver = true;
 	LoadHighscoresToVectors();
 	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
-	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
-	{
-		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);
-		if (i == 0)
-		{
-			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f);
-			m_highscoresAsText[i]->setPosition(500.0f,300.0f);
-		}
-		else
-		{
-			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f+(50*i));
-			m_highscoresAsText[i]->setPosition(500.0f,300.0f+(50*i));
-		}
-		m_highscoreNamesAsText[i]->setString("Team Name: "+m_highscoreName[i]);
-
-	}
+	ReloadHighScoreTexts();
 }
 void HighScore::UpdateInGame()
 {
@@ -83,7 +70,7 @@ void HighScore::LoadHighscoresToVectors()
 {
 	m_highscoreName.clear();
 	m_highscore.clear();
-	m_wordHighscore = "Highscore: ";
+	m_wordHighscore = "";
 	if (m_configReader.load(HIGHSCORE_FILENAME))
 	{
 		for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
@@ -94,7 +81,14 @@ void HighScore::LoadHighscoresToVectors()
 
 			std::string tempstring;
 			tempstring = m_configReader.get("HighscoreName","highscoreName"+ConvertIntToStdString(i),tempstring);
-			m_highscoreName.push_back(tempstring);
+			if (isGameOver == true)
+			{
+				m_highscoreName.push_back(ConvertIntToStdString(i+1)+": "+(tempstring));
+			}
+			else
+			{
+				m_highscoreName.push_back(tempstring);
+			}
 		}
 		std::cout << "File has been read: " << HIGHSCORE_FILENAME << std::endl;
 	}
@@ -144,20 +138,23 @@ void HighScore::WriteHighscoreToFile(int highscore, std::string teamName)
 		}
 	}
 	LoadHighscoresToVectors();
+}
+void HighScore::ReloadHighScoreTexts()
+{
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
 		ConvertIntToSfStringToSfText(m_highscore[i],m_HighscoreAsSfString,m_highscoresAsText[i],m_wordHighscore,false);
 		if (i == 0)
 		{
-			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f);
-			m_highscoresAsText[i]->setPosition(500.0f,300.0f);
+			m_highscoreNamesAsText[i]->setPosition(700.0f,300.0f);
+			m_highscoresAsText[i]->setPosition(1000.0f,300.0f);
 		}
 		else
 		{
-			m_highscoreNamesAsText[i]->setPosition(1000.0f,300.0f+(50*i));
-			m_highscoresAsText[i]->setPosition(500.0f,300.0f+(50*i));
+			m_highscoreNamesAsText[i]->setPosition(m_highscoreNamesAsText[i-1]->getPosition().x,300.0f+(50*i));
+			m_highscoresAsText[i]->setPosition(m_highscoresAsText[i-1]->getPosition().x,300.0f+(50*i));
 		}
-		m_highscoreNamesAsText[i]->setString("Team Name: "+m_highscoreName[i]);
+		m_highscoreNamesAsText[i]->setString(m_highscoreName[i]);
 
 	}
 }
