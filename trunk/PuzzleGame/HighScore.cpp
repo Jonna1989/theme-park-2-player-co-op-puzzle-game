@@ -3,6 +3,8 @@
 
 HighScore::HighScore()
 {
+m_teamNameTextGameover = nullptr;
+isGameOver = NULL;
 }
 HighScore::~HighScore()
 {
@@ -14,8 +16,10 @@ void HighScore::InitializeForIngame()
 	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40,TextManager::Instance()->GetColor());
 	ConvertIntToSfStringToSfText(m_highscore[0],m_HighscoreAsSfString,m_highscoresAsText[0],m_wordHighscore,false);
-	m_highscoreNamesAsText[0]->setString("Team Name: "+m_highscoreName[0]);
-	m_highscoreNamesAsText[0]->setPosition(0,40);
+	m_highscoreNamesAsText[0]->setString("Top Team: "+m_highscoreName[0]);
+	m_highscoreNamesAsText[0]->setPosition(0,0);
+	m_highscoresAsText[0]->setString("Score: "+ConvertIntToStdString(m_highscore[0]));
+	m_highscoresAsText[0]->setPosition(0,40);
 }
 void HighScore::InitializeForGameOver()
 {
@@ -24,10 +28,9 @@ void HighScore::InitializeForGameOver()
 	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	ReloadHighScoreTexts();
-	DeclareSfText(m_highScoreTextGameOver, TextManager::Instance()->GetFont(),50,TextManager::Instance()->GetColor(),m_highscoresAsText[0]->getPosition().x,m_highscoresAsText[0]->getPosition().y-60);
 	DeclareSfText(m_teamNameTextGameover, TextManager::Instance()->GetFont(), 50, TextManager::Instance()->GetColor(),m_highscoreNamesAsText[0]->getPosition().x,m_highscoreNamesAsText[0]->getPosition().y-60);
-	m_highScoreTextGameOver->setString("Score");
-	m_teamNameTextGameover->setString("Teamname");
+	m_teamNameTextGameover->setString("Teamname   Score");
+	m_teamNameTextGameover->setStyle(sf::Text::Underlined);
 }
 void HighScore::UpdateInGame()
 {
@@ -42,7 +45,6 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
 	Window->draw(*m_teamNameTextGameover);
-	Window->draw(*m_highScoreTextGameOver);
 }
 void HighScore::Cleanup()
 {

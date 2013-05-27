@@ -59,7 +59,7 @@ void Board::Initialize()
 	m_comboVolume = 200.0f;
 	m_comboSoundThreshold = 5000;
 	m_score = new Score;
-	m_score->Initialize(400,75,10,1,20);
+	m_score->Initialize(400,80,10,1,20);
 
 	m_fallGlowAnimationP1 = new Animation();
 	m_fallGlowAnimationP2 = new Animation();
