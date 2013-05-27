@@ -11,6 +11,7 @@
 #include "Animation.h"
 const int SPAWN_PLAYER_1X = BOARD_WIDTH/2-(BOARD_WIDTH/3);
 const int SPAWN_PLAYER_2X = BOARD_WIDTH/2+(BOARD_WIDTH/3)-1;
+
 class PlayerPiece
 {
 public:
@@ -58,6 +59,10 @@ private:
 	int m_pieceOneNextColor;
 	int m_pieceTwoNextColor;
 	int randNum;
+	bool m_pieceTwoInactive;
+
+
+
 	void ConvertPieceToPassive();
 };
 

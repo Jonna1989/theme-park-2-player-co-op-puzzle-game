@@ -69,10 +69,10 @@ void Game::Update()
 	UseTimedFunctions();
 	Window->clear();
 	Board::Instance()->Update();
-	m_player1->Update();
-	m_player2->Update();
 	m_player1Avatar->Update();
 	m_player2Avatar->Update();
+	m_player1->Update();
+	m_player2->Update();
 
 	if(b != nullptr && !b->HasActivated())
 	{
