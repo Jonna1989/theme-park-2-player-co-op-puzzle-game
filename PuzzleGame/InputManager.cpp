@@ -57,6 +57,7 @@ void InputManager::Update( int state)
 			}
 			else
 			{
+				CheckInputsForTextmanager();
 				CheckMusicKeys();
 			}
 			if(event.type == sf::Event::Closed)

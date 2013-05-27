@@ -19,6 +19,7 @@ StartMenu::~StartMenu()
 void StartMenu::Initialize()
 {
 	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/how.png");
+	TextManager::Instance()->ResetLetters();
 	Music::Instance()->Initialize(0);
 }
 
@@ -26,6 +27,7 @@ void StartMenu::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
+		TextManager::Instance()->Update();
 	Window->display();
 }
 
