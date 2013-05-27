@@ -14,6 +14,8 @@ PlayerPiece::PlayerPiece()
 	m_pieceOneNextColor = NULL;
 	m_pieceTwoNextColor = NULL;
 	randNum = NULL;
+	m_pieceTwoInactive = NULL;
+	m_pieceTwoInactive = NULL;
 }
 
 

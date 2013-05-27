@@ -4,6 +4,9 @@
 Avatar::Avatar()
 {
 	m_avatarAnimation = nullptr;
+	m_clock = nullptr;
+	m_animationCount = NULL;
+	m_animationDelay = NULL;
 }
 Avatar::~Avatar()
 {
