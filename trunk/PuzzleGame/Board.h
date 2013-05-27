@@ -13,8 +13,8 @@
 #include "Load.h"
 #include "Animation.h"
 
-static int BOARD_HEIGHT = 12;
-static int BOARD_WIDTH	= 16;
+static int BOARD_HEIGHT = 14;
+static int BOARD_WIDTH	= 14;
 
 static unsigned int TILE_SIZE_X = 75;
 static unsigned int TILE_SIZE_Y = 75;
