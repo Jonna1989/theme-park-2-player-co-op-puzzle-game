@@ -19,7 +19,7 @@ static int BOARD_WIDTH	= 14;
 static unsigned int TILE_SIZE_X = 75;
 static unsigned int TILE_SIZE_Y = 75;
 
-static unsigned int BOARD_OFFSET_X = 360;
+static unsigned int BOARD_OFFSET_X = 435;
 static unsigned int BOARD_OFFSET_Y = 165-(TILE_SIZE_Y*2);
 
 static const int NUMBER_OF_BUBBLES = 7;
