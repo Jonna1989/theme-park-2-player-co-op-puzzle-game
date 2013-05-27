@@ -24,6 +24,10 @@ void HighScore::InitializeForGameOver()
 	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
 	ReloadHighScoreTexts();
+	DeclareSfText(m_highScoreTextGameOver, TextManager::Instance()->GetFont(),50,TextManager::Instance()->GetColor(),m_highscoresAsText[0]->getPosition().x,m_highscoresAsText[0]->getPosition().y-60);
+	DeclareSfText(m_teamNameTextGameover, TextManager::Instance()->GetFont(), 50, TextManager::Instance()->GetColor(),m_highscoreNamesAsText[0]->getPosition().x,m_highscoreNamesAsText[0]->getPosition().y-60);
+	m_highScoreTextGameOver->setString("Score");
+	m_teamNameTextGameover->setString("Teamname");
 }
 void HighScore::UpdateInGame()
 {
@@ -37,6 +41,8 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
+	Window->draw(*m_teamNameTextGameover);
+	Window->draw(*m_highScoreTextGameOver);
 }
 void HighScore::Cleanup()
 {
