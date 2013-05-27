@@ -535,12 +535,12 @@ void PlayerPiece::RandomizeNewPiece()
 
 	if (m_owner == 10 || m_owner == 11)
 	{
-		randNum = RandomNumber(0,7);
+		randNum = RandomNumber(0,6);
 		Board::Instance()->SetFallPositionP1(randNum);
 	}
 	else if (m_owner == 20 || m_owner == 21)
 	{
-		randNum = RandomNumber(8,15);
+		randNum = RandomNumber(7,14);
 		Board::Instance()->SetFallPositionP2(randNum);
 	}
 }
