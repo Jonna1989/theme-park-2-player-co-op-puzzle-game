@@ -37,8 +37,14 @@ void Board::Initialize()
 
 	soundClock = new sf::Clock();
 	soundClock->restart();
-
-	CreateSprite(m_backgroundSprite, "Assets/GraphicalAssets/Backgrounds/background.png");
+	if (TextManager::Instance()->GetTeamName() == "ACDFS")
+	{
+		CreateSprite(m_backgroundSprite, "Assets/GraphicalAssets/Backgrounds/background2.png");
+	}
+	else
+	{
+		CreateSprite(m_backgroundSprite, "Assets/GraphicalAssets/Backgrounds/background.png");
+	}
 	CreateSprite(m_plateSprite, "Assets/GraphicalAssets/Backgrounds/plate.png");
 	CreateSprite(m_frameSprite, "Assets/GraphicalAssets/Backgrounds/frame.png");
 

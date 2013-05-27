@@ -6,7 +6,7 @@
 #include "WindowManager.h"
 #include "StateManager.h"
 #include "Music.h"
-
+#include "TextManager.h"
 class StateManager;
 class StartMenu:public State
 {
