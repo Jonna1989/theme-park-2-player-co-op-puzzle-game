@@ -37,7 +37,7 @@ void PlayerPiece::Initialize(int owner)
 		m_spawnPointTwo.x = SPAWN_PLAYER_1X;
 		m_spawnPointTwo.y = 0;
 
-		randNum = RandomNumber(0,7);
+		randNum = RandomNumber(0,6);
 		Board::Instance()->SetFallPositionP1(randNum);
 	}
 	else if(m_owner == 20)
@@ -48,7 +48,7 @@ void PlayerPiece::Initialize(int owner)
 		m_spawnPointTwo.x = SPAWN_PLAYER_2X;
 		m_spawnPointTwo.y = 0;
 
-		randNum = RandomNumber(8,15);
+		randNum = RandomNumber(7,14);
 		Board::Instance()->SetFallPositionP2(randNum);
 	}
 
