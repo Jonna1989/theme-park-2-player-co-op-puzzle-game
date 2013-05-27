@@ -33,7 +33,8 @@ public:
 	void ReloadHighScoreTexts();
 private:
 
-
+	sf::Text* m_highScoreTextGameOver;
+	sf::Text* m_teamNameTextGameover;
 
 	std::vector<int> m_highscore;
 	sf::String m_HighscoreAsSfString;
