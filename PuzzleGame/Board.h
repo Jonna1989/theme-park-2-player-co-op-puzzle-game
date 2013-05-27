@@ -20,7 +20,7 @@ static unsigned int TILE_SIZE_X = 75;
 static unsigned int TILE_SIZE_Y = 75;
 
 static unsigned int BOARD_OFFSET_X = 435;
-static unsigned int BOARD_OFFSET_Y = 165-(TILE_SIZE_Y*2);
+static int BOARD_OFFSET_Y = -100;
 
 static const int NUMBER_OF_BUBBLES = 7;
 static const int NUMBER_OF_POWERITEMS = 3;
