@@ -350,6 +350,11 @@ void Board::DropTile(int x, int y)
 	}
 }
 
+bool Board::IsTilePowerItem(int x, int y)
+{
+	return GetTile(x, y)->IsPowerItem();
+}
+
 int Board::NrOfAdjacentSameColor(int x, int y)
 {
 	return PositionsOfAdjacentSameColor(x, y).size();
@@ -1306,18 +1311,19 @@ void Board::DrawGlow()
 }
 
 #pragma endregion
+
 void Board::DrawNewPieceSpawn()
 {
-	if (GetSpecifiedTile(10)->GetPositionVector().y < 2)
+	if (GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y < 2 && GetTile(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().x, GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y)->GetContent() <= NUMBER_OF_BUBBLES)
 	{
 		CreateSprite(m_newPieceSpawnSprite,"Assets/GraphicalAssets/Bubbles/ros.png");
-		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(10)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(10)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
+		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
 		Window->draw(*m_newPieceSpawnSprite);
 	}
-	if (GetSpecifiedTile(20)->GetPositionVector().y < 2)
+	if (GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y < 2 && GetTile(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().x, GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y)->GetContent() <= NUMBER_OF_BUBBLES)
 	{
 		m_newPieceSpawnSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/lilja.png"));
-		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(20)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(20)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
+		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
 		Window->draw(*m_newPieceSpawnSprite);
 	}
 }

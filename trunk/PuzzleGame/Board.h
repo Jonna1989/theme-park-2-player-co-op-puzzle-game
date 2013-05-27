@@ -106,6 +106,7 @@ public:
 
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
+	bool IsTilePowerItem(int x, int y);
 
 	//Only the tiles above, below, to the right and to the left
 	int NrOfAdjacentSameColor(int x, int y);
