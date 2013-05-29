@@ -67,6 +67,11 @@ void Board::Initialize()
 	m_fallGlowAnimationP2->Initialize("Assets/GraphicalAssets/TempArt/fallDownBlue.png",sf::Vector2f(75,28),sf::Vector2i(0,0),1,6,12);
 	m_fallPosP1 = 0;
 	m_fallPosP2 = 0;
+
+	m_happyP1 = false;
+	m_happyP2 = false;
+	m_sadP1 = false;
+	m_sadP2 = false;
 }
 
 void Board::Update()
@@ -217,6 +222,26 @@ bool Board::GetPlayer2HalfStep()
 	}
 }
 
+bool Board::IsPlayer1Happy()
+{
+	return m_happyP1;
+}
+
+bool Board::IsPlayer2Happy()
+{
+	return m_happyP2;
+}
+
+bool Board::IsPlayer1Sad()
+{
+	return m_sadP1;
+}
+
+bool Board::IsPlayer2Sad()
+{
+	return m_sadP2;
+}
+
 #pragma endregion
 
 #pragma region Setters
@@ -322,6 +347,26 @@ void Board::SetFallPositionP1(int pos)
 void Board::SetFallPositionP2(int pos)
 {
 	m_fallPosP2 = pos;
+}
+
+void Board::SetHappyP1(bool happy)
+{
+	m_happyP1 = happy;
+}
+
+void Board::SetHappyP2(bool happy)
+{
+	m_happyP2 = happy;
+}
+
+void Board::SetSadP1(bool sad)
+{
+	m_sadP1 = sad;
+}
+
+void Board::SetSadP2(bool sad)
+{
+	m_sadP2 = sad;
 }
 
 #pragma endregion
@@ -540,6 +585,14 @@ void Board::CheckForMatch()
 					avragePosY /= temp2;
 					m_score->AddScore(temp2, avragePosX, avragePosY, markerP1, markerP2);
 					m_score->ResetScoreMultiplier();
+					if (previousOwnerP1 > 0)
+					{
+						SetHappyP1(true);
+					}
+					if (previousOwnerP2 > 0)
+					{
+						SetHappyP2(true);
+					}
 				}
 			}
 		}

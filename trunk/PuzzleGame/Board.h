@@ -96,6 +96,11 @@ public:
 	bool GetPlayer1HalfStep();
 	bool GetPlayer2HalfStep();
 
+	bool IsPlayer1Happy();
+	bool IsPlayer2Happy();
+	bool IsPlayer1Sad();
+	bool IsPlayer2Sad();
+
 	void SetColor(int x, int y, int color);
 	void SetOwner(int x, int y, int owner);
 	void SetPreviousOwner(int x, int y, int previousOwner);
@@ -103,6 +108,11 @@ public:
 	void SetBoardHalfStep(int halfStep);
 	void SetPlayer1HalfStep(int halfStep);
 	void SetPlayer2HalfStep(int halfStep);
+
+	void SetHappyP1(bool happy);
+	void SetHappyP2(bool happy);
+	void SetSadP1(bool sad);
+	void SetSadP2(bool sad);
 
 	bool IsTileVacant(int x, int y);
 	void DropTile(int x, int y);
@@ -176,6 +186,11 @@ private:
 	Animation* m_fallGlowAnimationP2;
 	int m_fallPosP1;
 	int m_fallPosP2;
+
+	bool m_happyP1;
+	bool m_happyP2;
+	bool m_sadP1;
+	bool m_sadP2;
 };
 
 #endif
