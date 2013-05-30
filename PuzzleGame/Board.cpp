@@ -81,7 +81,7 @@ void Board::Update()
 	m_glowAnimation->Update();
 	DrawBoard();
 	Window->draw(*m_frameSprite);
-	DrawNewPieceSpawn();
+	//DrawNewPieceSpawn();
 
 	m_fallGlowAnimationP1->Update();
 	m_fallGlowAnimationP2->Update();
@@ -912,7 +912,7 @@ void Board::DrawTile(int x, int y)
 			}
 			if (GetSpecifiedTile(PLAYER_ONE) != nullptr && GetSpecifiedTile(PLAYER_ONE + 1) != nullptr)
 			{
-				if (GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y < 2 || GetSpecifiedTile(PLAYER_ONE + 1)->GetPositionVector().y < 2)
+				if (GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y < 1 || GetSpecifiedTile(PLAYER_ONE + 1)->GetPositionVector().y < 1)
 				{
 					SetPlayer1HalfStep(0);
 				}
@@ -1001,7 +1001,7 @@ void Board::DrawTile(int x, int y)
 			}
 			if (GetSpecifiedTile(PLAYER_TWO) != nullptr && GetSpecifiedTile(PLAYER_TWO + 1) != nullptr)
 			{
-				if (GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y < 2 || GetSpecifiedTile(PLAYER_TWO + 1)->GetPositionVector().y < 2)
+				if (GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y < 0 || GetSpecifiedTile(PLAYER_TWO + 1)->GetPositionVector().y < 0)
 				{
 					SetPlayer2HalfStep(0);
 				}
@@ -1156,7 +1156,7 @@ void Board::DrawTile(int x, int y)
 			m_sprites.at(color - 1)->setPosition(GetTile(x, y)->GetPositionPixels().x + BOARD_OFFSET_X, GetTile(x, y)->GetPositionPixels().y + BOARD_OFFSET_Y + m_player2HalfStep);
 		}
 
-		if (y >= 2)
+		if (y >= 1)
 		{
 			WindowManager::Instance()->GetWindow()->draw(*m_sprites.at(color - 1));
 			if (owner == PLAYER_ONE)
@@ -1375,13 +1375,13 @@ void Board::DrawNewPieceSpawn()
 {
 	if (GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y < 2 && GetTile(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().x, GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y)->GetContent() <= NUMBER_OF_BUBBLES)
 	{
-		CreateSprite(m_newPieceSpawnSprite,"Assets/GraphicalAssets/Bubbles/ros.png");
+		CreateSprite(m_newPieceSpawnSprite,"Assets/GraphicalAssets/Bubbles/lilja.png");
 		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(PLAYER_ONE)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
 		Window->draw(*m_newPieceSpawnSprite);
 	}
 	if (GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y < 2 && GetTile(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().x, GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y)->GetContent() <= NUMBER_OF_BUBBLES)
 	{
-		m_newPieceSpawnSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/lilja.png"));
+		m_newPieceSpawnSprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Bubbles/ros.png"));
 		m_newPieceSpawnSprite->setPosition((float)BOARD_OFFSET_X+(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().x)*(float)TILE_SIZE_X,(GetSpecifiedTile(PLAYER_TWO)->GetPositionVector().y)*(float)TILE_SIZE_Y+15);
 		Window->draw(*m_newPieceSpawnSprite);
 	}
