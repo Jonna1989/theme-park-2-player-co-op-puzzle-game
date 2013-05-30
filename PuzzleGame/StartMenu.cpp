@@ -27,7 +27,7 @@ void StartMenu::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
-		TextManager::Instance()->Update();
+//	TextManager::Instance()->Update();
 	Window->display();
 }
 

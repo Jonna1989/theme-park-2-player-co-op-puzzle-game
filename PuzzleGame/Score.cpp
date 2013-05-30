@@ -77,7 +77,7 @@ void Score::Update()
 		m_comboMultiplierAsText->setColor(sf::Color(m_comboMultiplierAsText->getColor().r,m_comboMultiplierAsText->getColor().g,m_comboMultiplierAsText->getColor().b,(sf::Uint8)m_comboAlpha));
 		if (m_comboAlpha <= 0 && m_comboAlphaLastUpdate > 0)
 		{
-			Soundeffects::Instance()->PlaySound(0,3,1,100);
+			Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,3,1,100);
 		}
 	}
 	m_comboMultiplierLastUpdate = m_comboMultiplier;

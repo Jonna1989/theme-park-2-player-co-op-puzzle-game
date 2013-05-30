@@ -1,14 +1,14 @@
 [Highscore]
 	highscore0 = 12020
-	highscore1 = 8090
-	highscore2 = 6760
-	highscore3 = 4990
-	highscore4 = 4130
-	highscore5 = 3120
+	highscore1 = 11630
+	highscore2 = 8090
+	highscore3 = 6760
+	highscore4 = 4990
+	highscore5 = 4130
 [HighscoreName]
 	highscoreName0 = FANTA
-	highscoreName1 = VORTX
-	highscoreName2 = HUBBA
-	highscoreName3 = BOAXX
-	highscoreName4 = AAAAA
-	highscoreName5 = ANKAA
+	highscoreName1 = VOXEL
+	highscoreName2 = VORTX
+	highscoreName3 = HUBBA
+	highscoreName4 = BOAXX
+	highscoreName5 = AAAAA
