@@ -49,7 +49,7 @@ void InputManager::Update( int state)
 	case StateManager::MainMenu: //Menu
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Q)
+			if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::E || event.key.code == sf::Keyboard::U || event.key.code == sf::Keyboard::O)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
