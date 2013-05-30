@@ -49,7 +49,7 @@ void InputManager::Update( int state)
 	case StateManager::MainMenu: //Menu
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Return)
+			if (event.key.code == sf::Keyboard::Q)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
@@ -95,7 +95,7 @@ void InputManager::Update( int state)
 	case StateManager::GameLost: //GameOver
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Return)
+			if (event.key.code == sf::Keyboard::Q)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::MainMenu);
