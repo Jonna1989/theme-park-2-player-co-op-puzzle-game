@@ -1,14 +1,14 @@
 [Highscore]
-	highscore0 = 12020
-	highscore1 = 11630
-	highscore2 = 8090
-	highscore3 = 6920
-	highscore4 = 2000
-	highscore5 = 440
+	highscore0 = 0
+	highscore1 = 0
+	highscore2 = 0
+	highscore3 = 0
+	highscore4 = 0
+	highscore5 = 0
 [HighscoreName]
-	highscoreName0 = FANTA
-	highscoreName1 = VOXEL
-	highscoreName2 = VORTX
+	highscoreName0 = AAAAA
+	highscoreName1 = AAAAA
+	highscoreName2 = AAAAA
 	highscoreName3 = AAAAA
-	highscoreName4 = DCYFZ
-	highscoreName5 = YYYYY
+	highscoreName4 = AAAAA
+	highscoreName5 = AAAAA
