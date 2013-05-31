@@ -39,6 +39,9 @@ void InputManager::Initialize()
 
 	m_moveFastDelayMs = 200;
 
+	m_stateSwap = false;
+	m_stateSwapClock = new sf::Clock();
+	m_stateSwapClock->restart();
 	for (int i = 0; i < 4; i++)
 	{
 		m_moveFastClocks.push_back(new sf::Clock);
@@ -46,7 +49,7 @@ void InputManager::Initialize()
 	}
 }
 
-void InputManager::Update( int state)
+void InputManager::Update(int state)
 {
 	sf::Event event;
 	switch(state)
@@ -54,14 +57,16 @@ void InputManager::Update( int state)
 	case StateManager::MainMenu: //Menu
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::U)
+			if ( (event.key.code == sf::Keyboard::E || event.key.code == sf::Keyboard::O) && m_stateSwap == true)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
+				m_stateSwapClock->restart();
 				break;
 			}
 			else
 			{
+				StateSwapFunction();
 				CheckInputsForTextmanager();
 				CheckMusicKeys();
 			}
@@ -78,6 +83,7 @@ void InputManager::Update( int state)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
+				m_stateSwapClock->restart();
 				break;
 			}
 			else
@@ -93,6 +99,8 @@ void InputManager::Update( int state)
 
 		break;
 	case StateManager::InGame: //Game
+		m_stateSwapClock->restart();
+		StateSwapFunction();
 		CheckPlayer1Input();
 		CheckPlayer2Input();
 		CheckMusicKeys();
@@ -100,14 +108,17 @@ void InputManager::Update( int state)
 	case StateManager::GameLost: //GameOver
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Q)
+			if ((event.key.code == sf::Keyboard::E || event.key.code == sf::Keyboard::O) && m_stateSwap == true)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::MainMenu);
+				m_stateSwapClock->restart();
+				m_stateSwap = false;
 				break;
 			}
 			else
 			{
+				StateSwapFunction();
 				CheckMusicKeys();
 				CheckInputsForTextmanager();
 			}
@@ -308,5 +319,16 @@ void InputManager::CheckInputsText(bool &playerPressedKey, sf::Keyboard::Key key
 			playerPressedKey = true;
 		}
 		m_moveFastClocks[clock+1]->restart();
+	}
+}
+void InputManager::StateSwapFunction()
+{
+	if (m_stateSwapClock->getElapsedTime().asSeconds() > 3)
+	{
+		m_stateSwap = true;
+	}
+	else
+	{
+		m_stateSwap = false;
 	}
 }
