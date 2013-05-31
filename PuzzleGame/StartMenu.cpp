@@ -37,7 +37,7 @@ void StartMenu::Update()
 	{
 		Window->draw(*m_backgroundSprite);
 	}
-	if (m_keyboard.isKeyPressed(sf::Keyboard::E) || m_keyboard.isKeyPressed(sf::Keyboard::O))
+	if (m_keyboard.isKeyPressed(sf::Keyboard::Q) || m_keyboard.isKeyPressed(sf::Keyboard::U))
 	{
 		SetHelp(true);
 	}

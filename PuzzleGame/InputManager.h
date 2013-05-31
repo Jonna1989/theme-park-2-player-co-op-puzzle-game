@@ -52,7 +52,7 @@ private:
 	sf::Event event1;
 	sf::Event event2;
 	bool m_keyPressedPlayer2;
-
+	bool m_stateSwap;
 	bool m_pieceDroppingPlayer1;
 	bool m_pieceDroppingPlayer2;
 	int m_lastPosPlayer1;
@@ -60,7 +60,8 @@ private:
 
 	std::vector<sf::Clock*> m_moveFastClocks;
 	int m_moveFastDelayMs;
-
+	sf::Clock* m_stateSwapClock;
+	void StateSwapFunction();
 	void CheckMusicKeys();
 	void CheckInputsGame(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate);
 	void CheckInputsText(bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool letterChange);
