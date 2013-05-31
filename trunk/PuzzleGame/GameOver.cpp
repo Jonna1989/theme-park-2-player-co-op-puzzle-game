@@ -25,7 +25,7 @@ void GameOver::Initialize()
 	TextManager::Instance()->ResetLetters();
 	DeclareSfText(m_beatHighscoreTexts,TextManager::Instance()->GetFont(),2,60,TextManager::Instance()->GetColor());
 	m_beatHighscoreTexts[0]->setString("You beat one of the highscores!");
-	m_beatHighscoreTexts[0]->setPosition(400,610);
+	m_beatHighscoreTexts[0]->setPosition(425,610);
 	m_beatHighscoreTexts[1]->setCharacterSize(20);
 	m_beatHighscoreTexts[1]->setString("Enter your teamname above,\npress the left button when you are done.");
 	m_beatHighscoreTexts[1]->setPosition(715,800);
@@ -40,7 +40,7 @@ void GameOver::Update()
 			TextManager::Instance()->Update();
 			Window->draw(*m_beatHighscoreTexts[0]);
 			Window->draw(*m_beatHighscoreTexts[1]);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)||sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::U) || sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 			{
 				m_highscore->WriteHighscoreToFile(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName());
 				m_buttonPressed = true;

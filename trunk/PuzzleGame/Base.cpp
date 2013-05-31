@@ -17,12 +17,12 @@ void Base::Initialize()
 	m_runtime = new sf::Clock();
 	m_timePassed = 0;
 	m_runtime->restart();
+	TextManager::Instance()->Initialize(5,27,750,680);
 	FrameTime::Instance()->Initialize();
 	WindowManager::Instance()->Initialize();
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
 	Soundeffects::Instance()->Initialize();
-	TextManager::Instance()->Initialize(5,27,750,680);
 	Music::Instance()->Initialize(Music::LevelMusic1);
 	srand( (int)time(0) );
 }

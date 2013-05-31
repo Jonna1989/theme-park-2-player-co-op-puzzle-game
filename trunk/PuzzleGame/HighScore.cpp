@@ -36,23 +36,24 @@ void HighScore::InitializeForStartMenu()
 {
 	isGameOver = false;
 	LoadHighscoresToVectors();
-	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
-	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
+	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 50, TextManager::Instance()->GetColor());
+	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 50, TextManager::Instance()->GetColor());
 	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
 	{
+		int textOffset = 70;
 		m_highscoreNamesAsText[i]->setString(m_highscoreName[i]);
 		std::string temp = "";
 		temp = (ConvertIntToStdString(m_highscore[i]));
-		m_highscoresAsText[i]->setString("123");
+		m_highscoresAsText[i]->setString(temp);
 		if (i == 0)
 		{
-			m_highscoreNamesAsText[i]->setPosition(700.0f,300.0f);
-			m_highscoresAsText[i]->setPosition(1000.0f,300.0f);
+			m_highscoreNamesAsText[i]->setPosition(750.0f,615.0f);
+			m_highscoresAsText[i]->setPosition(1000.0f,615.0f);
 		}
 		else
 		{
-			m_highscoreNamesAsText[i]->setPosition(m_highscoreNamesAsText[i-1]->getPosition().x,300.0f+(50*i));
-			m_highscoresAsText[i]->setPosition(m_highscoresAsText[i-1]->getPosition().x,300.0f+(50*i));
+			m_highscoreNamesAsText[i]->setPosition(m_highscoreNamesAsText[i-1]->getPosition().x,m_highscoreNamesAsText[i-1]->getPosition().y+textOffset);
+			m_highscoresAsText[i]->setPosition(m_highscoresAsText[i-1]->getPosition().x,m_highscoresAsText[i-1]->getPosition().y+textOffset);
 		}
 
 	}

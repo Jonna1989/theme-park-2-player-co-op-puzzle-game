@@ -18,10 +18,13 @@ public:
 	void Initialize();
 	void Update();
 	void Cleanup();
-
+	bool GetHelp();
+	void SetHelp(bool help);
 private:
 	sf::Sprite* m_backgroundSprite;
 	HighScore* m_highscore;
+	bool m_showHelp;
+	sf::Keyboard m_keyboard;
 };
 
 #endif
