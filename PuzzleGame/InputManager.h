@@ -54,6 +54,7 @@ private:
 	bool m_keyPressedPlayer2;
 
 	std::vector<sf::Clock*> m_moveFastClocks;
+	int m_moveFastDelayMs;
 
 	void CheckMusicKeys();
 	void CheckInputsGame(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate);

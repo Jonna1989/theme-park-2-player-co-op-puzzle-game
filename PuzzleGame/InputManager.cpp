@@ -34,6 +34,7 @@ void InputManager::Initialize()
 	m_keyPressedPlayer2 = true;
 	m_player1 = new Player();
 	m_player2 = new Player();
+	m_moveFastDelayMs = 200;
 	for (int i = 0; i < 4; i++)
 	{
 		m_moveFastClocks.push_back(new sf::Clock);
@@ -49,7 +50,7 @@ void InputManager::Update( int state)
 	case StateManager::MainMenu: //Menu
 		while (Window->pollEvent(event))
 		{
-			if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::E || event.key.code == sf::Keyboard::U || event.key.code == sf::Keyboard::O)
+			if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::U)
 			{
 				Soundeffects::Instance()->PlaySound(Soundeffects::UISOUND,1, DEFAULT_PITCH,100);
 				StateManager::Instance()->SetState(StateManager::InGame);
@@ -204,6 +205,18 @@ void InputManager::CheckInputsForTextmanager()
 		m_keyPressedPlayer1 = false;
 		m_moveFastClocks[0]->restart();
 	}
+	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::J,-1,0,false);
+	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::L,1,0,false);
+	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::I,-1,0,true);
+	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::K,1,0,true);
+	if((!m_keyboard->isKeyPressed(sf::Keyboard::J)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::L)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::I)) 
+		&& (!m_keyboard->isKeyPressed(sf::Keyboard::K))) 
+	{
+		m_keyPressedPlayer2 = false;
+		m_moveFastClocks[2]->restart();
+	}
 }
 void InputManager::SetGravity(int gravity)
 {
@@ -248,7 +261,7 @@ void InputManager::CheckMusicKeys()
 void InputManager::CheckInputsGame(Player* &player,bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool rotate)
 {
 	if( ( (m_keyboard->isKeyPressed(key)) && (!playerPressedKey))
-		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > 500) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
+		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > m_moveFastDelayMs) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
 	{
 		if (player->GetPlayerPiece()->GetOwner() != 0)
 		{
@@ -269,7 +282,7 @@ void InputManager::CheckInputsGame(Player* &player,bool &playerPressedKey, sf::K
 void InputManager::CheckInputsText(bool &playerPressedKey, sf::Keyboard::Key key, int dir, int clock, bool letterChange)
 {
 	if( ( (m_keyboard->isKeyPressed(key)) && (!playerPressedKey))
-		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > 500) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
+		||((m_keyboard->isKeyPressed(key)) && ( m_moveFastClocks[clock]->getElapsedTime().asMilliseconds() > m_moveFastDelayMs) && (m_moveFastClocks[clock+1]->getElapsedTime().asMilliseconds() > 100)))
 	{
 		if (letterChange)
 		{
