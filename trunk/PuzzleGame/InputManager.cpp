@@ -32,9 +32,13 @@ void InputManager::Initialize()
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
+	m_pieceDroppingPlayer1 = false;
+	m_pieceDroppingPlayer2 = false;
 	m_player1 = new Player();
 	m_player2 = new Player();
+
 	m_moveFastDelayMs = 200;
+
 	for (int i = 0; i < 4; i++)
 	{
 		m_moveFastClocks.push_back(new sf::Clock);
@@ -136,6 +140,7 @@ void InputManager::CheckPlayer1Input()
 	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::D,1,0,false);
 	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::Q,-1,0,true);
 	CheckInputsGame(m_player1,m_keyPressedPlayer1,sf::Keyboard::E,1,0,true);
+
 	if((m_keyboard->isKeyPressed(sf::Keyboard::S)) && (!m_keyPressedPlayer1))
 	{
 		if (m_player1->GetPlayerPiece()->GetOwner() != 0)
@@ -149,6 +154,10 @@ void InputManager::CheckPlayer1Input()
 	{
 		m_player1Gravity = m_gravityBase;
 	}
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::S) && m_lastPosPlayer1 > 1 && m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x == 1)
+	{
+		m_player1Gravity = m_gravityBase;
+	}
 
 	if((!m_keyboard->isKeyPressed(sf::Keyboard::A)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::D)) 
@@ -159,6 +168,8 @@ void InputManager::CheckPlayer1Input()
 		m_keyPressedPlayer1 = false;
 		m_moveFastClocks[0]->restart();
 	}
+
+	m_lastPosPlayer1 = m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x;
 }
 
 void InputManager::CheckPlayer2Input()
@@ -167,6 +178,7 @@ void InputManager::CheckPlayer2Input()
 	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::L, 1,2,false);
 	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::U,-1,2,true);
 	CheckInputsGame(m_player2,m_keyPressedPlayer2,sf::Keyboard::O, 1,2,true);
+
 	if((m_keyboard->isKeyPressed(sf::Keyboard::K)) && (!m_keyPressedPlayer2))
 	{
 		if (m_player2->GetPlayerPiece()->GetOwner() != 0)
@@ -209,6 +221,7 @@ void InputManager::CheckInputsForTextmanager()
 	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::L,1,0,false);
 	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::I,-1,0,true);
 	CheckInputsText(m_keyPressedPlayer2,sf::Keyboard::K,1,0,true);
+
 	if((!m_keyboard->isKeyPressed(sf::Keyboard::J)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::L)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::I)) 
