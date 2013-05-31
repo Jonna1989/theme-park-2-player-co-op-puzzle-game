@@ -53,8 +53,6 @@ private:
 	sf::Event event2;
 	bool m_keyPressedPlayer2;
 	bool m_stateSwap;
-	bool m_pieceDroppingPlayer1;
-	bool m_pieceDroppingPlayer2;
 	int m_lastPosPlayer1;
 	int m_lastPosPlayer2;
 
