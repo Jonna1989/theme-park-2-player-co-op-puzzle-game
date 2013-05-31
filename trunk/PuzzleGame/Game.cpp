@@ -42,7 +42,6 @@ void Game::Initialize()
 	m_player2Avatar = new Avatar();
 	m_player2Avatar->Initialize("rose_idle",1550,400, sf::Vector2f(1108/4,534), sf::Vector2i(0,0), 4, 6, 8,rand () % (10 - 5) + 5, 2);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
-	Music::Instance()->Initialize(Music::LevelMusic1);
 	m_gravityClock = new sf::Clock();
 	m_gravityInterval = 300;
 	m_player1Clock = new sf::Clock();

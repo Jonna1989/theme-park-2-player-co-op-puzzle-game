@@ -11,6 +11,7 @@
 #include "Soundeffects.h"
 #include "TextureProvider.h"
 #include "Board.h"
+#include "Music.h"
 
 class Base
 {

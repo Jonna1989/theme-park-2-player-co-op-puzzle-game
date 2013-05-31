@@ -19,31 +19,33 @@ GameOver::~GameOver()
 void GameOver::Initialize()
 {
 	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/gameover.png");
-	Music::Instance()->Initialize(Music::GameOverMusic1);
 	m_highscore = new HighScore();
 	m_highscore->InitializeForGameOver();
 	m_buttonPressed = false;
 	TextManager::Instance()->ResetLetters();
-	DeclareSfText(m_beatHighscoreText,TextManager::Instance()->GetFont(),60,TextManager::Instance()->GetColor(),400,400);
-	m_beatHighscoreText->setString("You beat one of the highscores! Enter your teamname below, press the left button when you are done.");
+	DeclareSfText(m_beatHighscoreTexts,TextManager::Instance()->GetFont(),2,60,TextManager::Instance()->GetColor());
+	m_beatHighscoreTexts[0]->setString("You beat one of the highscores!");
+	m_beatHighscoreTexts[0]->setPosition(400,610);
+	m_beatHighscoreTexts[1]->setCharacterSize(20);
+	m_beatHighscoreTexts[1]->setString("Enter your teamname above,\npress the left button when you are done.");
+	m_beatHighscoreTexts[1]->setPosition(715,800);
 }
 
 void GameOver::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
-
 		if ((m_highscore->SetHighscore(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName()) == true) && (m_buttonPressed == false))
 		{
 			TextManager::Instance()->Update();
-			Window->draw(*m_beatHighscoreText);
+			Window->draw(*m_beatHighscoreTexts[0]);
+			Window->draw(*m_beatHighscoreTexts[1]);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			{
 				m_highscore->WriteHighscoreToFile(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName());
 				m_buttonPressed = true;
 				m_highscore->LoadHighscoresToVectors();
 				m_highscore->ReloadHighScoreTexts();
-
 			}
 		}
 
@@ -53,7 +55,6 @@ void GameOver::Update()
 void GameOver::Cleanup()
 {
 	Clean(m_backgroundSprite);
-	Music::Instance()->Cleanup();
 	m_highscore->Cleanup();
 }
 #pragma endregion

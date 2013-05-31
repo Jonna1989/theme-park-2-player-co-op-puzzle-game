@@ -7,6 +7,7 @@
 #include "StateManager.h"
 #include "Music.h"
 #include "TextManager.h"
+#include "HighScore.h"
 class StateManager;
 class StartMenu:public State
 {
@@ -20,6 +21,7 @@ public:
 
 private:
 	sf::Sprite* m_backgroundSprite;
+	HighScore* m_highscore;
 };
 
 #endif

@@ -22,7 +22,8 @@ void Base::Initialize()
 	StateManager::Instance()->Initialize();
 	InputManager::Instance()->Initialize();
 	Soundeffects::Instance()->Initialize();
-	TextManager::Instance()->Initialize(5,27,600,600);
+	TextManager::Instance()->Initialize(5,27,750,680);
+	Music::Instance()->Initialize(Music::LevelMusic1);
 	srand( (int)time(0) );
 }
 
@@ -65,6 +66,7 @@ void Base::Cleanup()
 	FrameTime		::Instance()->Cleanup();
 	TextureProvider	::Instance()->Cleanup();
 	TextManager		::Instance()->Cleanup();
+	Music			::Instance()->Cleanup();
 	delete m_runtime;
 }
 
