@@ -3,7 +3,7 @@
 	highscore1 = 11630
 	highscore2 = 8090
 	highscore3 = 6920
-	highscore4 = 6760
+	highscore4 = 10
 	highscore5 = 640
 [HighscoreName]
 	highscoreName0 = FANTA
