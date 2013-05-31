@@ -54,6 +54,12 @@ void GameOver::Update()
 }
 void GameOver::Cleanup()
 {
+	if((m_highscore->SetHighscore(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName()) == true) && (m_buttonPressed == false))
+	{
+		m_highscore->WriteHighscoreToFile(TextManager::Instance()->GetScore(),TextManager::Instance()->GetTeamName());
+		m_highscore->LoadHighscoresToVectors();
+		m_highscore->ReloadHighScoreTexts();
+	}
 	Clean(m_backgroundSprite);
 	m_highscore->Cleanup();
 }
