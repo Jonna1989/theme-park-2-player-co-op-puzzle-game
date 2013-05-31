@@ -49,7 +49,7 @@ void Game::Initialize()
 	InputManager::Instance()->SetGravity(m_gravityInterval);
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
-	m_increaseInterval = 10000;
+	m_increaseInterval = 16000;
 
 	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/Speedup/speed.png");
 	m_speedUpSprite->setPosition(((Window->getSize().x)-(m_speedUpSprite->getGlobalBounds().width))/2,400);
