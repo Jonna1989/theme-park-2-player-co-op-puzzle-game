@@ -49,7 +49,7 @@ void Game::Initialize()
 	InputManager::Instance()->SetGravity(m_gravityInterval);
 	m_printBoardInterval = new sf::Clock();
 	m_increaseClock = new sf::Clock();
-	m_increaseInterval = 16000;
+	m_increaseInterval = 30000;
 
 	CreateSprite(m_speedUpSprite,"Assets/GraphicalAssets/Speedup/speed.png");
 	m_speedUpSprite->setPosition(((Window->getSize().x)-(m_speedUpSprite->getGlobalBounds().width))/2,400);
@@ -207,13 +207,20 @@ void Game::UseTimedFunctions()
 		m_player2->GetPlayerPiece()->DropPiece();
 		m_player2Clock->restart();
 	}
-	if (m_increaseClock->getElapsedTime().asMilliseconds() > m_increaseInterval && m_gravityInterval > 50)
+	if (m_increaseClock->getElapsedTime().asMilliseconds() > m_increaseInterval && m_gravityInterval > 300)
 	{
-		m_increaseInterval += 4000;
-		SetGravityInterval(m_gravityInterval-25);
+		if (m_increaseInterval > 15000)
+		{
+			m_increaseInterval -= 3000;
+		}
+		SetGravityInterval(m_gravityInterval-150);
 		InputManager::Instance()->SetGravity(m_gravityInterval);
 		m_speedUpSpriteAlpha = 255;
 		Soundeffects::Instance()->PlayRandomSoundInCategory(Soundeffects::SPEEDUPSOUND,0,4);
+		m_increaseClock->restart();
+	}
+	else if (m_gravityInterval <= 150)
+	{
 		m_increaseClock->restart();
 	}
 }
