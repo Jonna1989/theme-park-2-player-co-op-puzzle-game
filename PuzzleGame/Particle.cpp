@@ -98,7 +98,14 @@ void Particle::StartParticle(float xPos, float yPos, int value, float scale, int
 	}
 	else if (m_version == FRIEND)
 	{
-		m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particleFriend.png"));
+		if (m_value < 100)
+		{
+			m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particle0"+ConvertIntToStdString(m_value)+".png"));
+		}
+		else
+		{
+			m_sprite->setTexture(*TextureProvider::Instance()->GetTexture("Assets/GraphicalAssets/Particles/particle"+ConvertIntToStdString(m_value)+".png"));
+		}
 	}
 }
 

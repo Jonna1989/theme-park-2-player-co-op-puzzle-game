@@ -74,7 +74,22 @@ void ParticleEffect::StartEffect(float xPos, float yPos, int value, int version)
 	m_yPos = yPos;
 	for (int i = 0; i < PARTICLE_COUNT; i++)
 	{
-		m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10), m_version);
+		if (m_version == 1)
+		{
+			m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10), m_version);
+		}
+		else if (m_version == 2)
+		{
+			std::cout << value << std::endl;
+			if (i < PARTICLE_COUNT/2)
+			{
+				m_particles[i].StartParticle(m_xPos, m_yPos, RandomNumber(101,107), (float)((rand () % (20 - 1) + 5)/10), m_version);
+			}
+			else
+			{
+				m_particles[i].StartParticle(m_xPos, m_yPos, value, (float)((rand () % (20 - 1) + 5)/10), m_version);
+			}
+		}
 	}
 	m_isBusy = true;
 }

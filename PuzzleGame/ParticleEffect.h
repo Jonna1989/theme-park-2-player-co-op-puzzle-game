@@ -2,6 +2,7 @@
 
 #include "Particle.h"
 #include <vector>
+#include "Load.h"
 
 const int PARTICLE_COUNT = 8;
 

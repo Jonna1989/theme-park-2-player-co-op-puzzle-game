@@ -25,7 +25,7 @@ InputManager* InputManager::Instance()
 
 void InputManager::Initialize()
 {
-	m_gravityBase = 2000;
+	m_gravityBase = 10000;
 	m_gravity = m_gravityBase;
 	m_player1Gravity = m_gravityBase;
 	m_player2Gravity = m_gravityBase;
@@ -208,7 +208,7 @@ void InputManager::CheckInputsForTextmanager()
 void InputManager::SetGravity(int gravity)
 {
 	m_gravity = gravity;
-	m_gravityBase = gravity*5;
+	m_gravityBase = gravity;
 }
 
 int InputManager::GetGravity()
