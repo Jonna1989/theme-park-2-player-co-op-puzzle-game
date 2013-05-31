@@ -20,21 +20,23 @@ void StartMenu::Initialize()
 {
 	CreateSprite(m_backgroundSprite,"Assets/GraphicalAssets/TempArt/how.png");
 	TextManager::Instance()->ResetLetters();
-	Music::Instance()->Initialize(0);
+	//m_highscore = new HighScore();
+	//m_highscore->InitializeForStartMenu();
 }
 
 void StartMenu::Update()
 {
 	Window->clear();
 	Window->draw(*m_backgroundSprite);
-//	TextManager::Instance()->Update();
+	//m_highscore->UpdateStartMenu();
 	Window->display();
 }
 
 void StartMenu::Cleanup()
 {
 	Clean(m_backgroundSprite);
-	Music::Instance()->Cleanup();
+	//m_highscore->Cleanup();
+	//delete m_highscore;
 }
 
 #pragma endregion

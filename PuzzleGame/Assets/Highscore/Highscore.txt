@@ -3,12 +3,12 @@
 	highscore1 = 11630
 	highscore2 = 8090
 	highscore3 = 6760
-	highscore4 = 4990
-	highscore5 = 4130
+	highscore4 = 3200
+	highscore5 = 100
 [HighscoreName]
 	highscoreName0 = FANTA
 	highscoreName1 = VOXEL
 	highscoreName2 = VORTX
 	highscoreName3 = HUBBA
-	highscoreName4 = BOAXX
-	highscoreName5 = AAAAA
+	highscoreName4 = AYAYA
+	highscoreName5 = AAZAA

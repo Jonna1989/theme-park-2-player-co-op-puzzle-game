@@ -32,6 +32,32 @@ void HighScore::InitializeForGameOver()
 	m_teamNameTextGameover->setString("Teamname   Score");
 	m_teamNameTextGameover->setStyle(sf::Text::Underlined);
 }
+void HighScore::InitializeForStartMenu()
+{
+	isGameOver = false;
+	LoadHighscoresToVectors();
+	DeclareSfText(m_highscoresAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
+	DeclareSfText(m_highscoreNamesAsText,TextManager::Instance()->GetFont(),NUMBER_OF_HIGHSCORES, 40, TextManager::Instance()->GetColor());
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		m_highscoreNamesAsText[i]->setString(m_highscoreName[i]);
+		std::string temp = "";
+		temp = (ConvertIntToStdString(m_highscore[i]));
+		m_highscoresAsText[i]->setString("123");
+		if (i == 0)
+		{
+			m_highscoreNamesAsText[i]->setPosition(700.0f,300.0f);
+			m_highscoresAsText[i]->setPosition(1000.0f,300.0f);
+		}
+		else
+		{
+			m_highscoreNamesAsText[i]->setPosition(m_highscoreNamesAsText[i-1]->getPosition().x,300.0f+(50*i));
+			m_highscoresAsText[i]->setPosition(m_highscoresAsText[i-1]->getPosition().x,300.0f+(50*i));
+		}
+
+	}
+
+}
 void HighScore::UpdateInGame()
 {
 	Window->draw(*m_highscoresAsText[0]);
@@ -44,7 +70,15 @@ void HighScore::UpdateGameOver()
 		Window->draw(*m_highscoresAsText[i]);
 		Window->draw(*m_highscoreNamesAsText[i]);
 	}
-	Window->draw(*m_teamNameTextGameover);
+	//Window->draw(*m_teamNameTextGameover);
+}
+void HighScore::UpdateStartMenu()
+{
+	for (int i = 0; i < NUMBER_OF_HIGHSCORES; i++)
+	{
+		Window->draw(*m_highscoresAsText[i]);
+		Window->draw(*m_highscoreNamesAsText[i]);
+	}
 }
 void HighScore::Cleanup()
 {

@@ -22,5 +22,5 @@ private:
 	HighScore* m_highscore;
 	sf::Sprite* m_backgroundSprite;
 	bool m_buttonPressed;
-	sf::Text* m_beatHighscoreText;
+	std::vector<sf::Text*> m_beatHighscoreTexts;
 };

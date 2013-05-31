@@ -19,8 +19,10 @@ public:
 
 	void InitializeForIngame();
 	void InitializeForGameOver();
+	void InitializeForStartMenu();
 	void UpdateInGame();
 	void UpdateGameOver();
+	void UpdateStartMenu();
 	void Cleanup();
 
 	int GetHighscore(int highscorePosition);
