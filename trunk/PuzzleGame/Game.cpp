@@ -43,7 +43,7 @@ void Game::Initialize()
 	m_player2Avatar->Initialize("rose_idle",1550,400, sf::Vector2f(1108/4,534), sf::Vector2i(0,0), 4, 6, 8,rand () % (10 - 5) + 5, 2);
 	InputManager::Instance()->SetPlayers(m_player1, m_player2);
 	m_gravityClock = new sf::Clock();
-	m_gravityInterval = 300;
+	m_gravityInterval = 1500;
 	m_player1Clock = new sf::Clock();
 	m_player2Clock = new sf::Clock();
 	InputManager::Instance()->SetGravity(m_gravityInterval);
@@ -209,7 +209,7 @@ void Game::UseTimedFunctions()
 	}
 	if (m_increaseClock->getElapsedTime().asMilliseconds() > m_increaseInterval && m_gravityInterval > 50)
 	{
-		m_increaseInterval += 2000;
+		m_increaseInterval += 4000;
 		SetGravityInterval(m_gravityInterval-25);
 		InputManager::Instance()->SetGravity(m_gravityInterval);
 		m_speedUpSpriteAlpha = 255;
