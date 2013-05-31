@@ -63,8 +63,8 @@ void Board::Initialize()
 
 	m_fallGlowAnimationP1 = new Animation();
 	m_fallGlowAnimationP2 = new Animation();
-	m_fallGlowAnimationP1->Initialize("Assets/GraphicalAssets/Bubbles/lilja.png",sf::Vector2f(75,75),sf::Vector2i(0,0),1,6,12);
-	m_fallGlowAnimationP2->Initialize("Assets/GraphicalAssets/Bubbles/ros.png",sf::Vector2f(75,75),sf::Vector2i(0,0),1,6,12);
+	m_fallGlowAnimationP1->Initialize("Assets/GraphicalAssets/Indicators/P1_marker.png",sf::Vector2f(75,35),sf::Vector2i(0,0),12,6,12);
+	m_fallGlowAnimationP2->Initialize("Assets/GraphicalAssets/Indicators/P2_marker.png",sf::Vector2f(75,35),sf::Vector2i(0,0),12,6,12);
 	m_fallPosP1 = 0;
 	m_fallPosP2 = 0;
 
@@ -80,15 +80,15 @@ void Board::Update()
 	Window->draw(*m_plateSprite);
 	m_glowAnimation->Update();
 	DrawBoard();
-	Window->draw(*m_frameSprite);
-	//DrawNewPieceSpawn();
 
 	m_fallGlowAnimationP1->Update();
 	m_fallGlowAnimationP2->Update();
-	m_fallGlowAnimationP1->getSprite()->setPosition(sf::Vector2f(m_fallPosP1*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y+22));
-	m_fallGlowAnimationP2->getSprite()->setPosition(sf::Vector2f(m_fallPosP2*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y+(float)BOARD_OFFSET_Y+22));
+	m_fallGlowAnimationP1->getSprite()->setPosition(sf::Vector2f(m_fallPosP1*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y*2+(float)BOARD_OFFSET_Y+15));
+	m_fallGlowAnimationP2->getSprite()->setPosition(sf::Vector2f(m_fallPosP2*(float)TILE_SIZE_X+(float)BOARD_OFFSET_X,(float)TILE_SIZE_Y*2+(float)BOARD_OFFSET_Y+15));
 	Window->draw(*m_fallGlowAnimationP1->getSprite());
 	Window->draw(*m_fallGlowAnimationP2->getSprite());
+	Window->draw(*m_frameSprite);
+	//DrawNewPieceSpawn();
 	for (unsigned int i = 0; i < NUMBER_OF_PARTICLES ; i++)
 	{
 		if (m_particleEffects[i]->IsBusy())
