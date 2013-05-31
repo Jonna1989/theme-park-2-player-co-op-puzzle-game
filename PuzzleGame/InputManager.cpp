@@ -250,7 +250,7 @@ void InputManager::SetGravity(int gravity)
 
 int InputManager::GetGravity()
 {
-	return 300;
+	return 200;
 }
 
 int InputManager::GetPlayer1Gravity()
