@@ -32,8 +32,9 @@ void InputManager::Initialize()
 	m_keyboard = new sf::Keyboard;
 	m_keyPressedPlayer1 = true;
 	m_keyPressedPlayer2 = true;
-	m_pieceDroppingPlayer1 = false;
-	m_pieceDroppingPlayer2 = false;
+	m_lastPosPlayer1 = 1;
+	m_lastPosPlayer2 = 1;
+
 	m_player1 = new Player();
 	m_player2 = new Player();
 
@@ -165,7 +166,7 @@ void InputManager::CheckPlayer1Input()
 	{
 		m_player1Gravity = m_gravityBase;
 	}
-	else if(m_keyboard->isKeyPressed(sf::Keyboard::S) && m_lastPosPlayer1 > 1 && m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x == 1)
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::S) && m_lastPosPlayer1 > 1 && m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().y == 1)
 	{
 		m_player1Gravity = m_gravityBase;
 	}
@@ -180,7 +181,7 @@ void InputManager::CheckPlayer1Input()
 		m_moveFastClocks[0]->restart();
 	}
 
-	m_lastPosPlayer1 = m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().x;
+	m_lastPosPlayer1 = m_player1->GetPlayerPiece()->GetPieceOne()->GetPosition().y;
 }
 
 void InputManager::CheckPlayer2Input()
@@ -203,6 +204,10 @@ void InputManager::CheckPlayer2Input()
 	{
 		m_player2Gravity = m_gravityBase;
 	}
+	else if(m_keyboard->isKeyPressed(sf::Keyboard::K) && m_lastPosPlayer2 > 1 && m_player2->GetPlayerPiece()->GetPieceOne()->GetPosition().y == 1)
+	{
+		m_player2Gravity = m_gravityBase;
+	}
 
 	if((!m_keyboard->isKeyPressed(sf::Keyboard::J)) 
 		&& (!m_keyboard->isKeyPressed(sf::Keyboard::L)) 
@@ -213,6 +218,8 @@ void InputManager::CheckPlayer2Input()
 		m_keyPressedPlayer2 = false;
 		m_moveFastClocks[2]->restart();
 	}
+
+	m_lastPosPlayer2 = m_player2->GetPlayerPiece()->GetPieceOne()->GetPosition().y;
 }
 void InputManager::CheckInputsForTextmanager()
 {
