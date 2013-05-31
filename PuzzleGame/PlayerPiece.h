@@ -59,9 +59,6 @@ private:
 	int m_pieceOneNextColor;
 	int m_pieceTwoNextColor;
 	int randNum;
-	bool m_pieceTwoInactive;
-
-
 
 	void ConvertPieceToPassive();
 };

@@ -14,8 +14,6 @@ PlayerPiece::PlayerPiece()
 	m_pieceOneNextColor = NULL;
 	m_pieceTwoNextColor = NULL;
 	randNum = NULL;
-	m_pieceTwoInactive = NULL;
-	m_pieceTwoInactive = NULL;
 }
 
 
@@ -57,7 +55,6 @@ void PlayerPiece::Initialize(int owner)
 	SetPositionToSpawn();
 	m_pieceOneNextColor = m_pieceOne->RandomizeColor();
 	m_pieceTwoNextColor = m_pieceTwo->RandomizeColor();
-	m_pieceTwoInactive = false;
 }
 
 void PlayerPiece::Update()
