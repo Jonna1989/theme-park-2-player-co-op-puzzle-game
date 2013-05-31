@@ -42,7 +42,7 @@ void HighScore::InitializeForStartMenu()
 	{
 		int textOffset = 70;
 		m_highscoreNamesAsText[i]->setString(m_highscoreName[i]);
-		std::string temp = "";
+		std::string temp;
 		temp = (ConvertIntToStdString(m_highscore[i]));
 		m_highscoresAsText[i]->setString(temp);
 		if (i == 0)
